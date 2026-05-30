@@ -1,0 +1,262 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<script>
+(function(){
+  window.addEventListener('error', function(e){
+    if (e && e.message && /ResizeObserver loop/.test(e.message)) {
+      e.stopImmediatePropagation(); e.preventDefault(); return false;
+    }
+  }, true);
+  const oc = console.error;
+  console.error = function(){
+    const m = String(arguments[0] || '');
+    if (/ResizeObserver loop/.test(m)) return;
+    return oc.apply(console, arguments);
+  };
+})();
+</script>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Why every hybrid office eventually fails — TDI Workspace Journal</title>
+<meta name="description" content="Three years into the great hybrid experiment, most Singapore offices look the same as 2019 — just less full. Post-occupancy data from twelve TDI hybrid fit-outs.">
+<link rel="stylesheet" href="styles.css">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<style>
+  .article-head { padding: 140px var(--gutter) 56px; max-width: 1080px; margin: 0 auto; }
+  .article-head .crumbs { font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted); display: flex; gap: 18px; }
+  .article-head .crumbs a { color: var(--ink); border-bottom: 1px solid var(--line); padding-bottom: 1px; }
+  .article-head h1 {
+    font-family: 'Instrument Serif', serif; font-weight: 400;
+    font-size: clamp(40px, 7vw, 92px); line-height: 0.98; letter-spacing: -0.02em;
+    margin: 28px 0 28px;
+    max-width: 22ch;
+  }
+  .article-head h1 em { font-style: italic; color: var(--muted); }
+  .article-head .lede { font-size: clamp(18px, 1.8vw, 22px); color: var(--muted); max-width: 60ch; line-height: 1.5; }
+  .article-head .byline {
+    margin-top: 36px;
+    display: flex; gap: 24px; align-items: center;
+    padding-top: 24px; border-top: 1px solid var(--line);
+    font-size: 13px; color: var(--muted);
+  }
+  .article-head .byline strong { color: var(--ink); font-weight: 500; }
+  .article-cover { padding: 0 var(--gutter); max-width: 1280px; margin: 0 auto; }
+  .article-cover img { width: 100%; aspect-ratio: 21/9; object-fit: cover; }
+  .article-cover figcaption { font-size: 12px; color: var(--muted); margin-top: 10px; letter-spacing: 0.04em; }
+
+  .article-body { padding: 80px var(--gutter); max-width: 1080px; margin: 0 auto; }
+  .article-body .prose { max-width: 64ch; margin: 0; }
+
+  .pullquote {
+    margin: 56px auto;
+    font-family: 'Instrument Serif', serif;
+    font-size: clamp(32px, 4vw, 56px);
+    line-height: 1.05; letter-spacing: -0.015em;
+    text-align: center;
+    max-width: 22ch;
+  }
+  .pullquote em { font-style: italic; color: var(--muted); }
+  .pullquote::before {
+    content: ""; display: block; width: 64px; height: 1px;
+    background: var(--ink); margin: 0 auto 28px;
+  }
+  .pullquote::after {
+    content: ""; display: block; width: 64px; height: 1px;
+    background: var(--ink); margin: 28px auto 0;
+  }
+
+  .article-figure {
+    margin: 48px 0;
+    border: 1px solid var(--line);
+    padding: 28px;
+    background: var(--bg-alt);
+  }
+  .article-figure h5 {
+    font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted);
+    margin: 0 0 18px; font-weight: 500;
+  }
+  .data-chart {
+    display: grid; grid-template-columns: 1fr; gap: 14px;
+  }
+  .data-row {
+    display: grid; grid-template-columns: 200px 1fr 60px; gap: 16px; align-items: center;
+  }
+  .data-row .lbl { font-size: 13px; color: var(--ink); }
+  .data-row .bar {
+    height: 24px; background: var(--bg);
+    position: relative; overflow: hidden;
+    border: 1px solid var(--line);
+  }
+  .data-row .bar span {
+    position: absolute; inset: 0;
+    background: var(--ink);
+    width: var(--w, 0%);
+  }
+  .data-row .num { font-family: 'Instrument Serif', serif; font-size: 22px; line-height: 1; text-align: right; }
+  .data-axis {
+    display: flex; justify-content: space-between;
+    font-size: 11px; color: var(--muted); letter-spacing: 0.1em; text-transform: uppercase;
+    margin-top: 10px; padding-left: 216px;
+  }
+  @media (max-width: 700px) {
+    .data-row { grid-template-columns: 1fr; gap: 6px; }
+    .data-axis { padding-left: 0; }
+  }
+
+  .article-end {
+    text-align: center; max-width: 540px; margin: 64px auto 0;
+    padding-top: 40px; border-top: 1px solid var(--line);
+    color: var(--muted); font-size: 13px;
+  }
+</style>
+</head>
+<body class="pal-cream voice-editorial hero-arch" data-screen-label="13 Journal Article">
+
+<header class="nav">
+  <a href="index.html" class="nav__brand"><span class="mark">T</span><span>TDI Workspace</span><small>· Singapore</small></a>
+  <nav class="nav__links">
+    <a href="index.html">Home</a><a href="about.html">About</a><a href="projects.html">Projects</a><a href="team.html">Team</a><a href="process.html">Process</a><a href="journal.html">Journal</a><a href="contact.html">Contact</a>
+  </nav>
+  <a href="inquiry.html" class="nav__cta">Start Your Project <span aria-hidden="true">→</span></a>
+  <button class="nav__menu-btn" aria-label="Menu"><span></span><span></span><span></span></button>
+  <div class="nav__panel"><a href="index.html">Home</a><a href="about.html">About</a><a href="projects.html">Projects</a><a href="team.html">Team</a><a href="process.html">Process</a><a href="journal.html">Journal</a><a href="contact.html">Contact</a><a href="inquiry.html">Start Your Project</a></div>
+</header>
+
+<article>
+
+  <div class="article-head reveal">
+    <div class="crumbs">
+      <a href="journal.html">← Journal</a>
+      <span>Workplace Strategy</span>
+      <span>14 min read · 9 May 2026</span>
+    </div>
+    <h1>Why every hybrid office eventually fails — <em>and the four moves that fix it.</em></h1>
+    <p class="lede">Three years into the great hybrid experiment, most Singapore offices look the same as they did in 2019 — just less full. Post‑occupancy data from twelve TDI hybrid fit‑outs, and why the firms that designed for ambiguity outperform the ones that designed for headcount.</p>
+    <div class="byline">
+      <div>By <strong>Lin Jiahao</strong> · Design Director, TDI Workspace</div>
+      <div>·</div>
+      <div>Data: <strong>Aiko Tanaka</strong>, Workplace Strategy</div>
+    </div>
+  </div>
+
+  <figure class="article-cover reveal">
+    <img src="https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=2400&q=85" alt="">
+    <figcaption>A 9,200 sqft hybrid floor at occupancy 38% — a typical Tuesday morning across our Singapore sample. · Photograph: TDI Workspace.</figcaption>
+  </figure>
+
+  <div class="article-body">
+    <div class="prose">
+      <p>The first thing you notice walking through a hybrid office on a Wednesday morning isn't the empty desks. It's the desks that are <em>almost</em> empty. A row of twelve workstations with three people at them, spaced as far apart as politeness allows. Headphones on. Cameras off. The room is laid out for forty‑eight; eleven are working. The space is not failing dramatically. It's failing quietly — by being exactly what it always was, only emptier.</p>
+
+      <p>For the past eighteen months we've been measuring twelve hybrid offices we built between 2022 and 2024, all in central Singapore, all between 5,000 and 14,000 sqft. We were curious about a specific question: <em>which design moves correlated with healthy daily occupancy</em>, and which didn't. The answer, when we ran the numbers, was not what we expected.</p>
+
+      <h3>The dimensions we measured</h3>
+
+      <p>For each space, we logged daily badge‑in data, surveyed staff at the 30, 60, 90 and 365‑day marks, and quantified six design variables: desk‑to‑seat ratio, focus‑room density, food &amp; beverage offer, daylight depth, acoustic isolation, and the "third‑space" share of the floor. Then we plotted each office against three outcome metrics: average daily occupancy, employee satisfaction (Net Promoter Score), and number of complaints filed in months 4–12.</p>
+
+      <div class="article-figure">
+        <h5>Daily occupancy vs. third-space share — 12 hybrid offices</h5>
+        <div class="data-chart">
+          <div class="data-row"><div class="lbl">Office A · 14% third-space</div><div class="bar"><span style="--w: 28%;"></span></div><div class="num">28%</div></div>
+          <div class="data-row"><div class="lbl">Office B · 18%</div><div class="bar"><span style="--w: 34%;"></span></div><div class="num">34%</div></div>
+          <div class="data-row"><div class="lbl">Office C · 22%</div><div class="bar"><span style="--w: 41%;"></span></div><div class="num">41%</div></div>
+          <div class="data-row"><div class="lbl">Office D · 26%</div><div class="bar"><span style="--w: 48%;"></span></div><div class="num">48%</div></div>
+          <div class="data-row"><div class="lbl">Office E · 30%</div><div class="bar"><span style="--w: 56%;"></span></div><div class="num">56%</div></div>
+          <div class="data-row"><div class="lbl">Office F · 34%</div><div class="bar"><span style="--w: 64%;"></span></div><div class="num">64%</div></div>
+          <div class="data-row"><div class="lbl">Office G · 38%</div><div class="bar"><span style="--w: 71%;"></span></div><div class="num">71%</div></div>
+        </div>
+        <div class="data-axis"><span>0% occupancy</span><span>50%</span><span>100%</span></div>
+        <p style="margin-top: 16px; color: var(--muted); font-size: 12.5px;">Each row is a single office. "Third-space" = the share of net rentable floor area that is neither a workstation nor a private meeting room. Correlation: r = 0.91.</p>
+      </div>
+
+      <p>The single strongest predictor of daily occupancy across our sample wasn't desk count, free food, dog policy, ergonomic chairs, or even commute — variables we had assumed would matter. It was a single metric: <em>the share of floor area that wasn't a desk and wasn't a meeting room</em>. The cafés, the soft seating, the library nooks, the "I'll just sit here for a minute" spots. We've started calling this the third‑space share, and the higher it is, the more often people choose to come in.</p>
+
+      <div class="pullquote">
+        The single strongest predictor of occupancy wasn't desks. It was <em>the share of the floor that wasn't desks.</em>
+      </div>
+
+      <h3>Why the typical hybrid floor fails</h3>
+
+      <p>Most hybrid floors are designed by subtracting desks from a pre‑pandemic plan. A 9,000 sqft, 100‑desk floor gets cut to 60 desks for 100 hybrid staff. The remaining 40 desks become "additional" meeting rooms. Almost no third space. Almost no reason to come in, unless you'd been told to. The floor is technically smaller, but it feels emptier than it did when it had 100 people in it — because it's now optimised for nothing in particular.</p>
+
+      <p>The offices in our sample that scored highest on daily occupancy did the opposite. They cut not just desks but entire <em>zones</em> of desks, then put something else in their place. A long worktable that doubles as a meeting room. A library wall. A coffee bar facing the daylight. The desk count fell but the variety of places to sit went up. People came in because there were more reasons to come in, not because anyone had told them to.</p>
+
+      <h3>The four moves that work</h3>
+
+      <p><strong>1. Cut desks by 35–45%, not 25%.</strong> The middle ground — taking out a quarter of the desks — is the worst place to land. You've lost density without gaining anything. The math only starts working when you free up enough floor to put something else there.</p>
+
+      <p><strong>2. Aim for a third‑space share of 30%+.</strong> Below this number, our data shows daily occupancy struggles to break 50%. Above it, the curve climbs sharply. Soft furniture is cheaper per sqm than desking, so this is usually a budget‑positive change.</p>
+
+      <p><strong>3. Put the daylight on the third space, not the workstations.</strong> The most universally‑loved spots in our sample were the soft seats nearest the windows. Workstations don't pull people in. Sunlight, coffee, and a soft chair do. Plan from the window inwards.</p>
+
+      <p><strong>4. Design for ambiguity, not headcount.</strong> The single biggest predictor of failure in months 4–12 is over‑specification. A "marketing zone" for 12 marketers when there are only 8 marketers on a Tuesday is wasted real estate. Plans that work give people fewer named places and more reusable places.</p>
+
+      <h3>Coda</h3>
+
+      <p>None of this is to say desks don't matter. Heads‑down focus work still requires a desk, a screen, and a chair. But the question modern offices have to answer is no longer "where do I sit to work?" — it's "why am I here today?" If the building can't answer that for the average employee on the average Tuesday, the building loses to the kitchen table. The buildings that win are the ones that have, quite literally, designed in a reason to show up.</p>
+
+      <p style="margin-top: 56px; font-size: 13px; color: var(--muted);">— Lin Jiahao &amp; Aiko Tanaka, May 2026. Singapore.</p>
+    </div>
+
+    <div class="article-end">
+      <p style="margin-bottom: 12px;">Working on a hybrid fit‑out? We'd love to talk.</p>
+      <a href="inquiry.html" class="btn btn--dark">Start the conversation <span class="arrow">→</span></a>
+    </div>
+  </div>
+</article>
+
+<!-- RELATED -->
+<section class="section section--tight" style="background: var(--bg-alt);">
+  <div class="shell">
+    <div class="section__head reveal">
+      <div><div class="eyebrow"><span style="color:var(--ink)">— Related</span></div></div>
+      <div><h2 class="display" style="max-width: 22ch;">More from <em class="italic">the studio.</em></h2></div>
+    </div>
+    <div class="journal-grid reveal-stagger">
+      <article class="journal-card">
+        <div class="journal-card__img"><img src="https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=1200&q=80" alt=""></div>
+        <div class="meta"><span>Materials</span><span>2 May 2026</span></div>
+        <h3>The case for honest acoustics: why we stopped specifying ceiling tiles.</h3>
+        <p>Acoustic plaster costs 4× more per sqm. It's also the only fix that survives a renovation without being torn out.</p>
+      </article>
+      <article class="journal-card">
+        <div class="journal-card__img"><img src="https://images.unsplash.com/photo-1531973576160-7125cd663d86?auto=format&fit=crop&w=1200&q=80" alt=""></div>
+        <div class="meta"><span>Post‑Occupancy</span><span>24 Apr 2026</span></div>
+        <h3>What 90 days in a new office actually changes.</h3>
+        <p>We tracked four 2025 TDI offices at the 30, 60 and 90‑day marks. The shifts are not what you'd expect.</p>
+      </article>
+      <article class="journal-card">
+        <div class="journal-card__img"><img src="https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=1200&q=80" alt=""></div>
+        <div class="meta"><span>Workplace Strategy</span><span>11 Apr 2026</span></div>
+        <h3>The 60% rule: density that respects the floor plate.</h3>
+        <p>Pack a Singapore tenancy beyond 60% workstation density and you start losing things that are very hard to design back in.</p>
+      </article>
+    </div>
+    <div style="text-align:center; margin-top: 56px;" class="reveal">
+      <a href="journal.html" class="btn btn--ghost btn--lg">All Journal Entries <span class="arrow">→</span></a>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="footer__inner">
+    <div class="footer__big">Commercial interiors,<br><em>built for performance.</em></div>
+    <div class="footer__grid">
+      <div class="footer__col"><h6>TDI Workspace Pte. Ltd.</h6><p>71 Ubi Crescent, #06‑02<br>Excalibur Centre, Singapore 408571</p><p style="margin-top:14px;">UEN 200312345R · BCA L4</p></div>
+      <div class="footer__col"><h6>Pages</h6><a href="index.html">Home</a><a href="about.html">About</a><a href="projects.html">Projects</a><a href="process.html">Process</a><a href="team.html">Team</a><a href="journal.html">Journal</a></div>
+      <div class="footer__col"><h6>Engage</h6><a href="inquiry.html">Start Your Project</a><a href="audit.html">Workspace Audit</a><a href="materials.html">Material Library</a><a href="contact.html">Contact</a><a href="#">Careers</a><a href="admin.html">Admin</a></div>
+      <div class="footer__col"><h6>Contact</h6><a href="tel:+6562000000">+65 6200 0000</a><a href="mailto:hello@tdiworkspace.sg">hello@tdiworkspace.sg</a><a href="https://wa.me/6580000000">WhatsApp →</a></div>
+    </div>
+    <div class="footer__bottom"><span>© 2026 TDI Workspace Pte. Ltd. All rights reserved.</span><div class="meta"><a href="#">Privacy</a><a href="#">Terms</a><a href="#">Cookies</a></div></div>
+  </div>
+</footer>
+
+<a class="wa" href="https://wa.me/6580000000?text=Hello%20TDI%20Workspace%2C%20I%E2%80%99m%20interested%20in%20discussing%20my%20project." target="_blank" rel="noopener">
+  <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.5 3.5A11.9 11.9 0 0 0 12 0 12 12 0 0 0 1.7 17.9L0 24l6.3-1.7A12 12 0 1 0 20.5 3.5ZM12 21.8a9.8 9.8 0 0 1-5-1.4l-.4-.2-3.7 1 1-3.6-.3-.4A9.8 9.8 0 1 1 12 21.8Zm5.6-7.3c-.3-.2-1.8-.9-2.1-1s-.5-.1-.7.2-.8 1-1 1.2-.4.2-.7 0a7.7 7.7 0 0 1-2.3-1.4 8.6 8.6 0 0 1-1.6-2c-.2-.3 0-.5.1-.6l.5-.6.3-.5a.6.6 0 0 0 0-.6c0-.2-.7-1.7-1-2.3s-.5-.5-.7-.5h-.6a1.1 1.1 0 0 0-.8.4 3.3 3.3 0 0 0-1 2.5c0 1.5 1 2.9 1.2 3.1s2.1 3.3 5.2 4.6a17.9 17.9 0 0 0 1.7.6 4.1 4.1 0 0 0 1.9.1c.6-.1 1.8-.7 2-1.4s.3-1.3.2-1.5-.2-.2-.5-.4Z"/></svg>
+  <span class="wa__label">WhatsApp Us</span>
+</a>
+
+<script src="app.js"></script>
+</body>
+</html>

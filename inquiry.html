@@ -1,0 +1,252 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<script>
+// Suppress benign ResizeObserver loop warning emitted during layout reflow.
+(function(){
+  const orig = window.onerror;
+  window.addEventListener('error', function(e){
+    if (e && e.message && /ResizeObserver loop/.test(e.message)) {
+      e.stopImmediatePropagation();
+      e.preventDefault();
+      return false;
+    }
+  }, true);
+  const origConsoleErr = console.error;
+  console.error = function(){
+    const m = String(arguments[0] || '');
+    if (/ResizeObserver loop/.test(m)) return;
+    return origConsoleErr.apply(console, arguments);
+  };
+})();
+</script>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Start Your Project — TDI Workspace</title>
+<meta name="description" content="Begin your TDI Workspace project consultation. Share your brief, layout and budget in a few short steps.">
+<link rel="stylesheet" href="styles.css">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+</head>
+<body class="pal-cream voice-editorial hero-arch" data-screen-label="05 Inquiry">
+
+<header class="nav">
+  <a href="index.html" class="nav__brand"><span class="mark">T</span><span>TDI Workspace</span><small>· Singapore</small></a>
+  <nav class="nav__links">
+    <a href="index.html">Home</a><a href="about.html">About</a><a href="projects.html">Projects</a><a href="team.html">Team</a><a href="process.html">Process</a>
+    <a href="journal.html">Journal</a>
+    <a href="contact.html">Contact</a>
+  </nav>
+  <a href="inquiry.html" class="nav__cta">Start Your Project <span aria-hidden="true">→</span></a>
+  <button class="nav__menu-btn" aria-label="Menu"><span></span><span></span><span></span></button>
+  <div class="nav__panel"><a href="index.html">Home</a><a href="about.html">About</a><a href="projects.html">Projects</a><a href="team.html">Team</a><a href="process.html">Process</a><a href="journal.html">Journal</a><a href="contact.html">Contact</a><a href="inquiry.html">Start Your Project</a></div>
+</header>
+
+<section class="inquiry">
+
+  <!-- LEFT RAIL -->
+  <aside class="inquiry__aside">
+    <div class="eyebrow">— Start Consultation</div>
+    <h2 style="margin-top:14px;">Tell us about <em class="italic">your space.</em></h2>
+    <p>Five short steps. Roughly three minutes. We respond within one business day with next steps and a fee proposal.</p>
+
+    <ol class="steps">
+      <li class="is-active"><span class="num">01</span><span>Client information</span><span class="check">✓</span></li>
+      <li><span class="num">02</span><span>Project details</span><span class="check">✓</span></li>
+      <li><span class="num">03</span><span>Budget range</span><span class="check">✓</span></li>
+      <li><span class="num">04</span><span>Goals &amp; layout</span><span class="check">✓</span></li>
+      <li><span class="num">05</span><span>Design preference</span><span class="check">✓</span></li>
+      <li><span class="num">06</span><span>Confirmation</span><span class="check">✓</span></li>
+    </ol>
+
+    <div style="margin-top: 40px; padding-top: 24px; border-top: 1px solid var(--line); color: var(--muted); font-size:13px;">
+      <p>Need to skip the form?</p>
+      <a href="mailto:hello@tdiworkspace.sg" style="color:var(--ink); border-bottom:1px solid var(--ink); padding-bottom: 2px; display:inline-block; margin-top:6px;">hello@tdiworkspace.sg</a>
+      <br>
+      <a href="https://wa.me/6580000000" style="color:var(--ink); border-bottom:1px solid var(--ink); padding-bottom: 2px; display:inline-block; margin-top:8px;">WhatsApp the studio →</a>
+    </div>
+  </aside>
+
+  <!-- FORM -->
+  <form class="form" novalidate>
+    <div class="progressbar"><span style="width: 16%;"></span></div>
+
+    <!-- STEP 01 -->
+    <div class="form__step is-active">
+      <h3>Step 01 — <em class="italic">Client information.</em></h3>
+      <p class="lead">A few details so we can get back to you. Everything stays confidential.</p>
+
+      <div class="field--row">
+        <div class="field"><label>Full Name</label><input name="client" type="text" placeholder="e.g. Aurelia Mok" required></div>
+        <div class="field"><label>Company Name</label><input name="company" type="text" placeholder="e.g. Helios Capital Pte. Ltd."></div>
+      </div>
+      <div class="field--row">
+        <div class="field"><label>Email</label><input name="email" type="email" placeholder="name@company.com" required></div>
+        <div class="field"><label>Mobile Number</label><input name="phone" type="tel" placeholder="+65 8000 0000"></div>
+      </div>
+
+      <div class="form__nav">
+        <span class="note"><span class="pip"></span> Step 1 of 5 · Estimated 3 mins</span>
+        <button class="btn btn--dark" data-next>Continue <span class="arrow">→</span></button>
+      </div>
+    </div>
+
+    <!-- STEP 02 -->
+    <div class="form__step">
+      <h3>Step 02 — <em class="italic">Project details.</em></h3>
+      <p class="lead">Help us understand the shape, size and timing of your space.</p>
+
+      <div class="field">
+        <label>Project Type</label>
+        <div class="chips" data-group="type">
+          <label class="chip"><input type="radio" name="ptype" value="Office"> Office</label>
+          <label class="chip"><input type="radio" name="ptype" value="Retail"> Retail</label>
+          <label class="chip"><input type="radio" name="ptype" value="F&amp;B"> F&amp;B</label>
+          <label class="chip"><input type="radio" name="ptype" value="Commercial Renovation"> Commercial Renovation</label>
+          <label class="chip"><input type="radio" name="ptype" value="Design &amp; Build"> Design &amp; Build</label>
+        </div>
+      </div>
+
+      <div class="field--row">
+        <div class="field"><label>Property Size (sqft)</label><input name="size" type="number" placeholder="e.g. 5,200"></div>
+        <div class="field"><label>Target Completion Date</label><input name="completion" type="date"></div>
+      </div>
+
+      <div class="field"><label>Project Address</label><input name="address" type="text" placeholder="Postal code or building name, Singapore"></div>
+
+      <div class="form__nav">
+        <button class="btn btn--ghost" data-prev>← Back</button>
+        <button class="btn btn--dark" data-next>Continue <span class="arrow">→</span></button>
+      </div>
+    </div>
+
+    <!-- STEP 03 -->
+    <div class="form__step">
+      <h3>Step 03 — <em class="italic">Budget range.</em></h3>
+      <p class="lead">An approximate budget helps us tailor the right scope. You can refine later in our consultation.</p>
+
+      <div class="budget">
+        <label><input type="radio" name="budget" value="&lt; $30k"><div class="b-amt">&lt; $30k</div><div class="b-sub">Light refresh</div></label>
+        <label><input type="radio" name="budget" value="$30 – 80k"><div class="b-amt">$30 – 80k</div><div class="b-sub">Small fit‑out</div></label>
+        <label><input type="radio" name="budget" value="$80 – 150k"><div class="b-amt">$80 – 150k</div><div class="b-sub">Medium fit‑out</div></label>
+        <label><input type="radio" name="budget" value="$150k +"><div class="b-amt">$150k +</div><div class="b-sub">Full design‑build</div></label>
+      </div>
+
+      <div class="form__nav">
+        <button class="btn btn--ghost" data-prev>← Back</button>
+        <button class="btn btn--dark" data-next>Continue <span class="arrow">→</span></button>
+      </div>
+    </div>
+
+    <!-- STEP 04 -->
+    <div class="form__step">
+      <h3>Step 04 — <em class="italic">Goals &amp; layout.</em></h3>
+      <p class="lead">Tell us what success looks like for the project, and share any layout files you already have.</p>
+
+      <div class="field">
+        <label>What would you like to achieve with this space?</label>
+        <textarea name="goals" placeholder="e.g. Consolidate two offices, support hybrid working, refresh client-facing zones, signal the new brand direction…"></textarea>
+      </div>
+
+      <div class="field">
+        <label>Upload Layout Plan</label>
+        <div class="dropzone">
+          <div class="icon">↑</div>
+          <p>Drop your file here, or <span style="color:var(--ink); border-bottom:1px solid var(--ink); padding-bottom:1px;">browse</span></p>
+          <p style="font-size:12px; margin-top:6px;">Accepted: PDF, DWG, JPG, PNG · max 25MB</p>
+          <input type="file" accept=".pdf,.dwg,.jpg,.jpeg,.png" hidden>
+          <div class="files"></div>
+        </div>
+      </div>
+
+      <div class="form__nav">
+        <button class="btn btn--ghost" data-prev>← Back</button>
+        <button class="btn btn--dark" data-next>Continue <span class="arrow">→</span></button>
+      </div>
+    </div>
+
+    <!-- STEP 05 -->
+    <div class="form__step">
+      <h3>Step 05 — <em class="italic">Design preference.</em></h3>
+      <p class="lead">Pick any that resonate — we'll explore directions in our first conversation.</p>
+
+      <div class="field">
+        <label>Design Style</label>
+        <div class="chips" data-group="style">
+          <label class="chip"><input type="checkbox" name="style" value="Modern Minimalist"> Modern Minimalist</label>
+          <label class="chip"><input type="checkbox" name="style" value="Corporate Luxury"> Corporate Luxury</label>
+          <label class="chip"><input type="checkbox" name="style" value="Industrial Contemporary"> Industrial Contemporary</label>
+          <label class="chip"><input type="checkbox" name="style" value="Warm Hospitality"> Warm Hospitality</label>
+          <label class="chip"><input type="checkbox" name="style" value="Open Collaborative"> Open Collaborative</label>
+          <label class="chip"><input type="checkbox" name="style" value="Not Sure Yet"> Not Sure Yet</label>
+        </div>
+      </div>
+
+      <div style="padding: 24px; border: 1px solid var(--line); background: var(--bg-alt); color: var(--muted); font-size: 14px;">
+        <strong style="color:var(--ink); display:block; margin-bottom: 6px;">Before you submit</strong>
+        By submitting this form you consent to TDI Workspace contacting you about your enquiry. We never share your information with third parties.
+      </div>
+
+      <div class="form__nav">
+        <button class="btn btn--ghost" data-prev>← Back</button>
+        <button type="submit" class="btn btn--dark">Request Consultation <span class="arrow">→</span></button>
+      </div>
+    </div>
+
+    <!-- STEP 06 — THANK YOU -->
+    <div class="form__step">
+      <div class="thanks">
+        <div class="seal">✓</div>
+        <h2>Thank you — your enquiry is with us.</h2>
+        <p>A confirmation has been emailed to you, and the studio has been notified. We'll be in touch within one business day to schedule a consultation.</p>
+
+        <div style="display:grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; max-width: 720px; margin: 40px auto 0; text-align: left;">
+          <div style="padding: 20px; border: 1px solid var(--line);">
+            <div class="eyebrow">Reference</div>
+            <p id="inq-ref" style="font-family:'Instrument Serif', serif; font-size: 22px; margin-top: 6px;">TDI‑2026‑0421</p>
+          </div>
+          <div style="padding: 20px; border: 1px solid var(--line);">
+            <div class="eyebrow">Reply Window</div>
+            <p style="font-family:'Instrument Serif', serif; font-size: 22px; margin-top: 6px;">&lt; 1 business day</p>
+          </div>
+          <div style="padding: 20px; border: 1px solid var(--line);">
+            <div class="eyebrow">Studio Hours</div>
+            <p style="font-family:'Instrument Serif', serif; font-size: 22px; margin-top: 6px;">Mon–Fri · 9–6 SGT</p>
+          </div>
+        </div>
+
+        <div style="margin-top: 40px; display:flex; gap: 12px; justify-content:center; flex-wrap: wrap;">
+          <a href="projects.html" class="btn btn--ghost">Browse Projects <span class="arrow">→</span></a>
+          <a href="index.html" class="btn btn--dark">Back to Home <span class="arrow">→</span></a>
+        </div>
+      </div>
+    </div>
+  </form>
+</section>
+
+<footer class="footer">
+  <div class="footer__inner">
+    <div class="footer__big">Commercial interiors,<br><em>built for performance.</em></div>
+    <div class="footer__grid">
+      <div class="footer__col"><h6>TDI Workspace Pte. Ltd.</h6><p>71 Ubi Crescent, #06‑02<br>Excalibur Centre, Singapore 408571</p><p style="margin-top:14px;">UEN 200312345R · BCA L4</p></div>
+      <div class="footer__col"><h6>Pages</h6><a href="index.html">Home</a><a href="about.html">About</a><a href="projects.html">Projects</a><a href="process.html">Process</a><a href="team.html">Team</a><a href="journal.html">Journal</a></div>
+      <div class="footer__col"><h6>Engage</h6><a href="inquiry.html">Start Your Project</a><a href="audit.html">Workspace Audit</a><a href="materials.html">Material Library</a><a href="contact.html">Contact</a><a href="#">Careers</a><a href="admin.html">Admin</a></div>
+      <div class="footer__col"><h6>Contact</h6><a href="tel:+6562000000">+65 6200 0000</a><a href="mailto:hello@tdiworkspace.sg">hello@tdiworkspace.sg</a><a href="https://wa.me/6580000000">WhatsApp →</a></div>
+    </div>
+    <div class="footer__bottom"><span>© 2026 TDI Workspace Pte. Ltd. All rights reserved.</span><div class="meta"><a href="#">Privacy</a><a href="#">Terms</a><a href="#">Cookies</a></div></div>
+  </div>
+</footer>
+
+<a class="wa" href="https://wa.me/6580000000?text=Hello%20TDI%20Workspace%2C%20I%E2%80%99m%20interested%20in%20discussing%20my%20project." target="_blank" rel="noopener">
+  <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.5 3.5A11.9 11.9 0 0 0 12 0 12 12 0 0 0 1.7 17.9L0 24l6.3-1.7A12 12 0 1 0 20.5 3.5ZM12 21.8a9.8 9.8 0 0 1-5-1.4l-.4-.2-3.7 1 1-3.6-.3-.4A9.8 9.8 0 1 1 12 21.8Zm5.6-7.3c-.3-.2-1.8-.9-2.1-1s-.5-.1-.7.2-.8 1-1 1.2-.4.2-.7 0a7.7 7.7 0 0 1-2.3-1.4 8.6 8.6 0 0 1-1.6-2c-.2-.3 0-.5.1-.6l.5-.6.3-.5a.6.6 0 0 0 0-.6c0-.2-.7-1.7-1-2.3s-.5-.5-.7-.5h-.6a1.1 1.1 0 0 0-.8.4 3.3 3.3 0 0 0-1 2.5c0 1.5 1 2.9 1.2 3.1s2.1 3.3 5.2 4.6a17.9 17.9 0 0 0 1.7.6 4.1 4.1 0 0 0 1.9.1c.6-.1 1.8-.7 2-1.4s.3-1.3.2-1.5-.2-.2-.5-.4Z"/></svg>
+  <span class="wa__label">WhatsApp Us</span>
+</a>
+
+<!-- Firebase (compat SDK) -->
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+<script src="firebase-config.js"></script>
+<script src="firebase-inquiry.js"></script>
+<script src="app.js"></script>
+</body>
+</html>

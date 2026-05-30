@@ -1,0 +1,194 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<script>
+// Suppress benign ResizeObserver loop warning emitted during layout reflow.
+(function(){
+  const orig = window.onerror;
+  window.addEventListener('error', function(e){
+    if (e && e.message && /ResizeObserver loop/.test(e.message)) {
+      e.stopImmediatePropagation();
+      e.preventDefault();
+      return false;
+    }
+  }, true);
+  const origConsoleErr = console.error;
+  console.error = function(){
+    const m = String(arguments[0] || '');
+    if (/ResizeObserver loop/.test(m)) return;
+    return origConsoleErr.apply(console, arguments);
+  };
+})();
+</script>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>About — TDI Workspace</title>
+<meta name="description" content="A Singapore commercial interior specialist creating spaces that work better — operationally, culturally, and commercially.">
+<link rel="stylesheet" href="styles.css">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+</head>
+<body class="pal-cream voice-editorial hero-arch" data-screen-label="02 About">
+
+<header class="nav">
+  <a href="index.html" class="nav__brand"><span class="mark">T</span><span>TDI Workspace</span><small>· Singapore</small></a>
+  <nav class="nav__links">
+    <a href="index.html">Home</a>
+    <a href="about.html">About</a>
+    <a href="projects.html">Projects</a>
+    <a href="team.html">Team</a>
+    <a href="process.html">Process</a>
+    <a href="journal.html">Journal</a>
+    <a href="contact.html">Contact</a>
+  </nav>
+  <a href="inquiry.html" class="nav__cta">Start Your Project <span aria-hidden="true">→</span></a>
+  <button class="nav__menu-btn" aria-label="Menu"><span></span><span></span><span></span></button>
+  <div class="nav__panel">
+    <a href="index.html">Home</a><a href="about.html">About</a><a href="projects.html">Projects</a><a href="team.html">Team</a><a href="process.html">Process</a><a href="journal.html">Journal</a><a href="contact.html">Contact</a><a href="inquiry.html">Start Your Project</a>
+  </div>
+</header>
+
+<!-- HEAD -->
+<section class="page-head reveal">
+  <div class="page-head__cap"><span class="line"></span><span>About / 01 — The Studio</span></div>
+  <h1>Creating spaces that <em>work better.</em></h1>
+  <p class="page-head__sub">TDI Workspace is a Singapore commercial interior specialist delivering high‑performance environments for modern businesses. Our strength lies in combining practical construction knowledge with design intelligence to create workspaces that are elegant, efficient, and built for long‑term performance.</p>
+</section>
+
+<!-- FULL BLEED IMAGE -->
+<section class="reveal" style="padding: 0 var(--gutter);">
+  <div style="max-width: var(--maxw); margin: 0 auto; aspect-ratio: 21/9; overflow: hidden;">
+    <img src="https://images.unsplash.com/photo-1604328698692-f76ea9498e76?auto=format&fit=crop&w=2400&q=80" alt="TDI Workspace project" style="width:100%; height:100%; object-fit:cover;">
+  </div>
+</section>
+
+<!-- PHILOSOPHY -->
+<section class="section">
+  <div class="shell">
+    <div class="section__head reveal">
+      <div><div class="eyebrow"><span style="color:var(--ink)">— 02</span> &nbsp; Philosophy</div></div>
+      <div><h2 class="display" style="max-width: 22ch;">Exceptional spaces are not just visually impressive — they <em class="italic">solve operational problems</em>.</h2></div>
+    </div>
+    <div class="two-col reveal">
+      <div></div>
+      <div style="display:grid; gap: 22px; color:var(--muted); font-size: 17px; max-width: 56ch;">
+        <p>We believe spaces should serve the businesses inside them. Every project begins with the way your people actually work — their rhythms, friction points, and the rituals that make culture tangible.</p>
+        <p>From there, we design backwards: material decisions are weighed against acoustic load, lighting plans against task focus, joinery against decade‑long wear. The result is interiors that are quietly intelligent — beautiful for visitors, indispensable for users.</p>
+        <p>And because TDI carries design, project management and construction under one roof, intent never gets lost in translation. The thing we draw is the thing we hand over.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MISSION + VISION -->
+<section class="section section--tight" style="background: var(--bg-alt);">
+  <div class="shell">
+    <div class="section__head reveal">
+      <div><div class="eyebrow"><span style="color:var(--ink)">— 03</span> &nbsp; What We Stand For</div></div>
+      <div></div>
+    </div>
+    <div class="values reveal">
+      <div class="values__item">
+        <div class="eyebrow">Mission</div>
+        <h3>To deliver intelligent commercial spaces that <em class="italic">empower businesses</em>.</h3>
+        <p>We measure success not by awards, but by the operational lift a space provides its occupants every day.</p>
+      </div>
+      <div class="values__item">
+        <div class="eyebrow">Vision</div>
+        <h3>To be Singapore's most trusted <em class="italic">commercial interior partner</em>.</h3>
+        <p>Trust is earned project by project — through clarity, accountability, and the discipline to do the unglamorous parts well.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TIMELINE -->
+<section class="section">
+  <div class="shell">
+    <div class="section__head reveal">
+      <div><div class="eyebrow"><span style="color:var(--ink)">— 04</span> &nbsp; Trajectory</div></div>
+      <div><h2 class="display" style="max-width: 22ch;">Two decades of <em class="italic">commercial practice</em>.</h2></div>
+    </div>
+    <div class="reveal" style="border-top:1px solid var(--line);">
+      <div style="display:grid; grid-template-columns: 100px 1fr 1fr; gap: 32px; padding: 28px 0; border-bottom: 1px solid var(--line);">
+        <div class="eyebrow">2003</div>
+        <div style="font-family:'Instrument Serif', serif; font-size: 26px; line-height:1.1;">Founded as a specialist office fit‑out practice</div>
+        <div style="color:var(--muted); max-width: 46ch;">Singapore HQ established with a six‑person team focused on corporate office interiors.</div>
+      </div>
+      <div style="display:grid; grid-template-columns: 100px 1fr 1fr; gap: 32px; padding: 28px 0; border-bottom: 1px solid var(--line);">
+        <div class="eyebrow">2009</div>
+        <div style="font-family:'Instrument Serif', serif; font-size: 26px; line-height:1.1;">In‑house carpentry workshop opens</div>
+        <div style="color:var(--muted); max-width: 46ch;">Bringing fabrication under our own roof to control quality, lead time and cost.</div>
+      </div>
+      <div style="display:grid; grid-template-columns: 100px 1fr 1fr; gap: 32px; padding: 28px 0; border-bottom: 1px solid var(--line);">
+        <div class="eyebrow">2014</div>
+        <div style="font-family:'Instrument Serif', serif; font-size: 26px; line-height:1.1;">Expansion into retail &amp; F&amp;B fit‑outs</div>
+        <div style="color:var(--muted); max-width: 46ch;">Discipline crossover into experiential spaces with the same engineering rigour.</div>
+      </div>
+      <div style="display:grid; grid-template-columns: 100px 1fr 1fr; gap: 32px; padding: 28px 0; border-bottom: 1px solid var(--line);">
+        <div class="eyebrow">2019</div>
+        <div style="font-family:'Instrument Serif', serif; font-size: 26px; line-height:1.1;">200th project completed</div>
+        <div style="color:var(--muted); max-width: 46ch;">A milestone delivered across nine industries and four continents of clients.</div>
+      </div>
+      <div style="display:grid; grid-template-columns: 100px 1fr 1fr; gap: 32px; padding: 28px 0;">
+        <div class="eyebrow">2026</div>
+        <div style="font-family:'Instrument Serif', serif; font-size: 26px; line-height:1.1;">Workspace performance practice launched</div>
+        <div style="color:var(--muted); max-width: 46ch;">A new in‑house research arm benchmarking the operational impact of every space we deliver.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DUAL IMAGE -->
+<section class="reveal" style="padding: 0 var(--gutter) var(--gutter);">
+  <div style="max-width: var(--maxw); margin: 0 auto; display:grid; grid-template-columns: 1.4fr 1fr; gap: 24px;">
+    <div style="aspect-ratio: 4/3; overflow:hidden;"><img src="https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=2000&q=80" alt="Office" style="width:100%;height:100%;object-fit:cover;"></div>
+    <div style="aspect-ratio: 4/3; overflow:hidden;"><img src="https://images.unsplash.com/photo-1531973576160-7125cd663d86?auto=format&fit=crop&w=1600&q=80" alt="Reception" style="width:100%;height:100%;object-fit:cover;"></div>
+  </div>
+</section>
+
+<!-- CAPABILITIES -->
+<section class="section">
+  <div class="shell">
+    <div class="section__head reveal">
+      <div><div class="eyebrow"><span style="color:var(--ink)">— 05</span> &nbsp; Capabilities</div></div>
+      <div><h2 class="display" style="max-width: 20ch;">A practice built for <em class="italic">commercial reality</em>.</h2></div>
+    </div>
+    <div class="why reveal-stagger">
+      <div class="why__item"><div class="n">/ A</div><h4>Strategy &amp; brief‑setting</h4><p>Workshops with leadership and end‑users to translate business goals into measurable spatial criteria.</p></div>
+      <div class="why__item"><div class="n">/ B</div><h4>Architectural drawings</h4><p>BCA‑compliant submission sets, M&amp;E coordination, and a complete tender package.</p></div>
+      <div class="why__item"><div class="n">/ C</div><h4>In‑house joinery</h4><p>A 12,000 sqft fabrication workshop for bespoke millwork, casework and feature installations.</p></div>
+      <div class="why__item"><div class="n">/ D</div><h4>Site delivery</h4><p>Directly employed site supervisors and a network of vetted trades — no surprise sub‑subcontracting.</p></div>
+      <div class="why__item"><div class="n">/ E</div><h4>Sustainability</h4><p>Green Mark targeted specifications, embodied carbon tracking and FSC‑certified material sourcing.</p></div>
+      <div class="why__item"><div class="n">/ F</div><h4>Post‑occupancy</h4><p>12‑month defects liability and a workspace audit at the six‑month mark, included on every project.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-band reveal">
+  <h2 class="cta-band__title">Two decades of practice.<br><em>One conversation away.</em></h2>
+  <p>Whether you're planning a fit‑out, a refresh, or weighing options, a discovery call costs nothing and clarifies everything.</p>
+  <a href="inquiry.html" class="btn btn--light btn--lg">Start Consultation <span class="arrow">→</span></a>
+</section>
+
+<footer class="footer">
+  <div class="footer__inner">
+    <div class="footer__big">Commercial interiors,<br><em>built for performance.</em></div>
+    <div class="footer__grid">
+      <div class="footer__col"><h6>TDI Workspace Pte. Ltd.</h6><p>71 Ubi Crescent, #06‑02<br>Excalibur Centre, Singapore 408571</p><p style="margin-top:14px;">UEN 200312345R · BCA L4</p></div>
+      <div class="footer__col"><h6>Pages</h6><a href="index.html">Home</a><a href="about.html">About</a><a href="projects.html">Projects</a><a href="process.html">Process</a><a href="team.html">Team</a><a href="journal.html">Journal</a></div>
+      <div class="footer__col"><h6>Engage</h6><a href="inquiry.html">Start Your Project</a><a href="audit.html">Workspace Audit</a><a href="materials.html">Material Library</a><a href="contact.html">Contact</a><a href="#">Careers</a><a href="admin.html">Admin</a></div>
+      <div class="footer__col"><h6>Contact</h6><a href="tel:+6562000000">+65 6200 0000</a><a href="mailto:hello@tdiworkspace.sg">hello@tdiworkspace.sg</a><a href="https://wa.me/6580000000">WhatsApp →</a></div>
+    </div>
+    <div class="footer__bottom"><span>© 2026 TDI Workspace Pte. Ltd. All rights reserved.</span><div class="meta"><a href="#">Privacy</a><a href="#">Terms</a><a href="#">Cookies</a></div></div>
+  </div>
+</footer>
+
+<a class="wa" href="https://wa.me/6580000000?text=Hello%20TDI%20Workspace%2C%20I%E2%80%99m%20interested%20in%20discussing%20my%20project." target="_blank" rel="noopener">
+  <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.5 3.5A11.9 11.9 0 0 0 12 0 12 12 0 0 0 1.7 17.9L0 24l6.3-1.7A12 12 0 1 0 20.5 3.5ZM12 21.8a9.8 9.8 0 0 1-5-1.4l-.4-.2-3.7 1 1-3.6-.3-.4A9.8 9.8 0 1 1 12 21.8Zm5.6-7.3c-.3-.2-1.8-.9-2.1-1s-.5-.1-.7.2-.8 1-1 1.2-.4.2-.7 0a7.7 7.7 0 0 1-2.3-1.4 8.6 8.6 0 0 1-1.6-2c-.2-.3 0-.5.1-.6l.5-.6.3-.5a.6.6 0 0 0 0-.6c0-.2-.7-1.7-1-2.3s-.5-.5-.7-.5h-.6a1.1 1.1 0 0 0-.8.4 3.3 3.3 0 0 0-1 2.5c0 1.5 1 2.9 1.2 3.1s2.1 3.3 5.2 4.6a17.9 17.9 0 0 0 1.7.6 4.1 4.1 0 0 0 1.9.1c.6-.1 1.8-.7 2-1.4s.3-1.3.2-1.5-.2-.2-.5-.4Z"/></svg>
+  <span class="wa__label">WhatsApp Us</span>
+</a>
+
+<script src="app.js"></script>
+</body>
+</html>

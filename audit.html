@@ -1,0 +1,225 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<script>
+// Suppress benign ResizeObserver loop warning emitted during layout reflow.
+(function(){
+  const orig = window.onerror;
+  window.addEventListener('error', function(e){
+    if (e && e.message && /ResizeObserver loop/.test(e.message)) {
+      e.stopImmediatePropagation();
+      e.preventDefault();
+      return false;
+    }
+  }, true);
+  const origConsoleErr = console.error;
+  console.error = function(){
+    const m = String(arguments[0] || '');
+    if (/ResizeObserver loop/.test(m)) return;
+    return origConsoleErr.apply(console, arguments);
+  };
+})();
+</script>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Workspace Audit — TDI Workspace</title>
+<meta name="description" content="A free three-minute workspace audit. Rate your current office on five dimensions and receive a one-page benchmark report.">
+<link rel="stylesheet" href="styles.css">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+</head>
+<body class="pal-cream voice-editorial hero-arch" data-screen-label="10 Audit">
+
+<header class="nav">
+  <a href="index.html" class="nav__brand"><span class="mark">T</span><span>TDI Workspace</span><small>· Singapore</small></a>
+  <nav class="nav__links">
+    <a href="index.html">Home</a><a href="about.html">About</a><a href="projects.html">Projects</a><a href="team.html">Team</a><a href="process.html">Process</a><a href="journal.html">Journal</a><a href="contact.html">Contact</a>
+  </nav>
+  <a href="inquiry.html" class="nav__cta">Start Your Project <span aria-hidden="true">→</span></a>
+  <button class="nav__menu-btn" aria-label="Menu"><span></span><span></span><span></span></button>
+  <div class="nav__panel"><a href="index.html">Home</a><a href="about.html">About</a><a href="projects.html">Projects</a><a href="team.html">Team</a><a href="process.html">Process</a><a href="journal.html">Journal</a><a href="contact.html">Contact</a><a href="inquiry.html">Start Your Project</a></div>
+</header>
+
+<section class="page-head reveal">
+  <div class="page-head__cap"><span class="line"></span><span>Workspace Audit / 01 — Free</span></div>
+  <h1>How is your workspace <em>actually performing?</em></h1>
+  <p class="page-head__sub">Five quick questions. Three minutes. You'll receive a score against 80+ Singapore offices we've audited, with the single most impactful upgrade flagged. We don't spam — one report, one follow‑up email (only if you want).</p>
+</section>
+
+<section style="padding: 0 var(--gutter) 120px;">
+  <div class="shell">
+    <div style="display:grid; grid-template-columns: 1fr 1.6fr; gap: clamp(40px, 6vw, 80px);">
+
+      <aside style="position: sticky; top: 96px; align-self: start;">
+        <div class="eyebrow">— Five Dimensions</div>
+        <ul style="list-style:none; padding: 0; margin: 24px 0 0; display:grid; gap: 4px; border-top: 1px solid var(--line);">
+          <li style="padding: 16px 0; border-bottom: 1px solid var(--line); display: grid; grid-template-columns: 32px 1fr; gap: 12px; color: var(--muted); font-size: 14px;"><span style="font-family:'Instrument Serif', serif; font-size: 22px;">01</span>Density &amp; Layout</li>
+          <li style="padding: 16px 0; border-bottom: 1px solid var(--line); display: grid; grid-template-columns: 32px 1fr; gap: 12px; color: var(--muted); font-size: 14px;"><span style="font-family:'Instrument Serif', serif; font-size: 22px;">02</span>Daylight &amp; Lighting</li>
+          <li style="padding: 16px 0; border-bottom: 1px solid var(--line); display: grid; grid-template-columns: 32px 1fr; gap: 12px; color: var(--muted); font-size: 14px;"><span style="font-family:'Instrument Serif', serif; font-size: 22px;">03</span>Acoustics &amp; Noise</li>
+          <li style="padding: 16px 0; border-bottom: 1px solid var(--line); display: grid; grid-template-columns: 32px 1fr; gap: 12px; color: var(--muted); font-size: 14px;"><span style="font-family:'Instrument Serif', serif; font-size: 22px;">04</span>Focus &amp; Privacy</li>
+          <li style="padding: 16px 0; border-bottom: 1px solid var(--line); display: grid; grid-template-columns: 32px 1fr; gap: 12px; color: var(--muted); font-size: 14px;"><span style="font-family:'Instrument Serif', serif; font-size: 22px;">05</span>Collaboration</li>
+        </ul>
+        <p style="margin-top: 28px; color: var(--muted); font-size: 13px;">All scores are blind‑benchmarked against our project database. We don't sell or share the data.</p>
+      </aside>
+
+      <div class="audit-card reveal">
+        <div>
+          <div class="eyebrow">— Workspace Audit</div>
+          <h2 style="margin-top: 8px;">Rate each one <em class="italic">1 to 5.</em></h2>
+        </div>
+
+        <div class="audit-q" data-q="density">
+          <div class="ql">Q1 / Density &amp; Layout</div>
+          <div class="qt">Does your floorplate support the number of people you have today — without it feeling cramped or wasteful?</div>
+          <div class="audit-scale">
+            <button data-v="1"><div class="n">1</div><div class="lbl">Cramped</div></button>
+            <button data-v="2"><div class="n">2</div><div class="lbl">Tight</div></button>
+            <button data-v="3"><div class="n">3</div><div class="lbl">OK</div></button>
+            <button data-v="4"><div class="n">4</div><div class="lbl">Good</div></button>
+            <button data-v="5"><div class="n">5</div><div class="lbl">Excellent</div></button>
+          </div>
+        </div>
+
+        <div class="audit-q" data-q="daylight">
+          <div class="ql">Q2 / Daylight &amp; Lighting</div>
+          <div class="qt">How much natural daylight reaches the desks — and does the artificial lighting support video calls cleanly?</div>
+          <div class="audit-scale">
+            <button data-v="1"><div class="n">1</div><div class="lbl">Dim</div></button>
+            <button data-v="2"><div class="n">2</div><div class="lbl">Patchy</div></button>
+            <button data-v="3"><div class="n">3</div><div class="lbl">Mixed</div></button>
+            <button data-v="4"><div class="n">4</div><div class="lbl">Bright</div></button>
+            <button data-v="5"><div class="n">5</div><div class="lbl">Optimal</div></button>
+          </div>
+        </div>
+
+        <div class="audit-q" data-q="acoustics">
+          <div class="ql">Q3 / Acoustics &amp; Noise</div>
+          <div class="qt">Can someone take a focused phone call from their desk without disturbing the people next to them?</div>
+          <div class="audit-scale">
+            <button data-v="1"><div class="n">1</div><div class="lbl">Loud</div></button>
+            <button data-v="2"><div class="n">2</div><div class="lbl">Noisy</div></button>
+            <button data-v="3"><div class="n">3</div><div class="lbl">Average</div></button>
+            <button data-v="4"><div class="n">4</div><div class="lbl">Quiet</div></button>
+            <button data-v="5"><div class="n">5</div><div class="lbl">Studio</div></button>
+          </div>
+        </div>
+
+        <div class="audit-q" data-q="focus">
+          <div class="ql">Q4 / Focus &amp; Privacy</div>
+          <div class="qt">When someone needs an hour of deep work, can they find a private, quiet, comfortable spot to do it?</div>
+          <div class="audit-scale">
+            <button data-v="1"><div class="n">1</div><div class="lbl">Nowhere</div></button>
+            <button data-v="2"><div class="n">2</div><div class="lbl">Rare</div></button>
+            <button data-v="3"><div class="n">3</div><div class="lbl">Sometimes</div></button>
+            <button data-v="4"><div class="n">4</div><div class="lbl">Usually</div></button>
+            <button data-v="5"><div class="n">5</div><div class="lbl">Always</div></button>
+          </div>
+        </div>
+
+        <div class="audit-q" data-q="collab">
+          <div class="ql">Q5 / Collaboration</div>
+          <div class="qt">Does the space invite spontaneous, small‑group conversation — without scheduling a room?</div>
+          <div class="audit-scale">
+            <button data-v="1"><div class="n">1</div><div class="lbl">Sterile</div></button>
+            <button data-v="2"><div class="n">2</div><div class="lbl">Stiff</div></button>
+            <button data-v="3"><div class="n">3</div><div class="lbl">Mixed</div></button>
+            <button data-v="4"><div class="n">4</div><div class="lbl">Active</div></button>
+            <button data-v="5"><div class="n">5</div><div class="lbl">Vibrant</div></button>
+          </div>
+        </div>
+
+        <div id="auditResult" style="display:none;">
+          <div class="audit-score">
+            <div class="audit-score__n"><span id="scoreN">—</span><span>/25</span></div>
+            <div class="audit-score__t">
+              <h3 id="scoreTitle">—</h3>
+              <p id="scoreBody">—</p>
+              <p style="font-size:11px; letter-spacing:0.16em; text-transform:uppercase; color:var(--muted); margin-top: 18px;">Send the full one‑page report to:</p>
+              <div class="form">
+                <input type="email" placeholder="name@company.com" id="auditEmail">
+                <button class="btn btn--dark" id="auditSend">Send Report <span class="arrow">→</span></button>
+              </div>
+            </div>
+          </div>
+          <p id="auditSent" style="display:none; margin-top: 20px; color: var(--muted); font-size: 14px;">— Sent. Check your inbox in the next 5 minutes.</p>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="footer__inner">
+    <div class="footer__big">Commercial interiors,<br><em>built for performance.</em></div>
+    <div class="footer__grid">
+      <div class="footer__col"><h6>TDI Workspace Pte. Ltd.</h6><p>71 Ubi Crescent, #06‑02<br>Excalibur Centre, Singapore 408571</p><p style="margin-top:14px;">UEN 200312345R · BCA L4</p></div>
+      <div class="footer__col"><h6>Pages</h6><a href="index.html">Home</a><a href="about.html">About</a><a href="projects.html">Projects</a><a href="process.html">Process</a><a href="team.html">Team</a><a href="journal.html">Journal</a></div>
+      <div class="footer__col"><h6>Engage</h6><a href="inquiry.html">Start Your Project</a><a href="audit.html">Workspace Audit</a><a href="materials.html">Material Library</a><a href="contact.html">Contact</a><a href="#">Careers</a><a href="admin.html">Admin</a></div>
+      <div class="footer__col"><h6>Contact</h6><a href="tel:+6562000000">+65 6200 0000</a><a href="mailto:hello@tdiworkspace.sg">hello@tdiworkspace.sg</a><a href="https://wa.me/6580000000">WhatsApp →</a></div>
+    </div>
+    <div class="footer__bottom"><span>© 2026 TDI Workspace Pte. Ltd. All rights reserved.</span><div class="meta"><a href="#">Privacy</a><a href="#">Terms</a><a href="#">Cookies</a></div></div>
+  </div>
+</footer>
+
+<a class="wa" href="https://wa.me/6580000000?text=Hello%20TDI%20Workspace%2C%20I%E2%80%99m%20interested%20in%20discussing%20my%20project." target="_blank" rel="noopener">
+  <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.5 3.5A11.9 11.9 0 0 0 12 0 12 12 0 0 0 1.7 17.9L0 24l6.3-1.7A12 12 0 1 0 20.5 3.5ZM12 21.8a9.8 9.8 0 0 1-5-1.4l-.4-.2-3.7 1 1-3.6-.3-.4A9.8 9.8 0 1 1 12 21.8Zm5.6-7.3c-.3-.2-1.8-.9-2.1-1s-.5-.1-.7.2-.8 1-1 1.2-.4.2-.7 0a7.7 7.7 0 0 1-2.3-1.4 8.6 8.6 0 0 1-1.6-2c-.2-.3 0-.5.1-.6l.5-.6.3-.5a.6.6 0 0 0 0-.6c0-.2-.7-1.7-1-2.3s-.5-.5-.7-.5h-.6a1.1 1.1 0 0 0-.8.4 3.3 3.3 0 0 0-1 2.5c0 1.5 1 2.9 1.2 3.1s2.1 3.3 5.2 4.6a17.9 17.9 0 0 0 1.7.6 4.1 4.1 0 0 0 1.9.1c.6-.1 1.8-.7 2-1.4s.3-1.3.2-1.5-.2-.2-.5-.4Z"/></svg>
+  <span class="wa__label">WhatsApp Us</span>
+</a>
+
+<script src="app.js"></script>
+<script>
+(function(){
+  const answers = {};
+  const QUESTIONS = ['density','daylight','acoustics','focus','collab'];
+
+  document.querySelectorAll('.audit-q').forEach(q => {
+    q.addEventListener('click', (e) => {
+      const btn = e.target.closest('button[data-v]'); if (!btn) return;
+      q.querySelectorAll('button').forEach(b => b.classList.remove('is-on'));
+      btn.classList.add('is-on');
+      answers[q.dataset.q] = parseInt(btn.dataset.v);
+      if (QUESTIONS.every(k => answers[k] != null)) {
+        const score = QUESTIONS.reduce((s, k) => s + answers[k], 0);
+        showResult(score, answers);
+      }
+    });
+  });
+
+  function showResult(score, a) {
+    const result = document.getElementById('auditResult');
+    result.style.display = '';
+    document.getElementById('scoreN').textContent = score;
+    const sn = document.getElementById('scoreTitle');
+    const sb = document.getElementById('scoreBody');
+    if (score <= 10) {
+      sn.innerHTML = 'Your workspace is <em class="italic">holding the team back.</em>';
+      sb.textContent = "Multiple dimensions are scoring low — a refresh won't be enough. We'd recommend a full re-plan against your headcount and growth.";
+    } else if (score <= 17) {
+      sn.innerHTML = "There's <em class=\"italic\">significant room to improve.</em>";
+      sb.textContent = "Most companies in your range get an outsized return from targeted upgrades — usually acoustics, daylight, or a third-space addition. We'd start there.";
+    } else if (score <= 22) {
+      sn.innerHTML = 'Your space is <em class="italic">working well.</em>';
+      sb.textContent = "You're outperforming our 80+ office benchmark median. The next move is usually fine-tuning specific zones for high-stakes use (client suite, focus rooms).";
+    } else {
+      sn.innerHTML = 'Exceptional — <em class="italic">top 10%.</em>';
+      sb.textContent = "Whoever designed this knows what they're doing. We'd love to see it — and to talk about how to keep it performing as the team grows.";
+    }
+    // Lowest-scoring dimension callout
+    const lowest = QUESTIONS.reduce((min, k) => a[k] < a[min] ? k : min, QUESTIONS[0]);
+    const names = { density:'density & layout', daylight:'daylight & lighting', acoustics:'acoustics', focus:'focus & privacy', collab:'collaboration' };
+    sb.textContent += ` Lowest score: ${names[lowest]} (${a[lowest]}/5).`;
+    result.scrollIntoView({behavior:'smooth', block:'start'});
+  }
+
+  document.getElementById('auditSend').addEventListener('click', (e) => {
+    e.preventDefault();
+    const email = document.getElementById('auditEmail').value.trim();
+    if (!email || !email.includes('@')) { document.getElementById('auditEmail').focus(); return; }
+    document.getElementById('auditSent').style.display = '';
+    document.getElementById('auditSend').textContent = 'Sent ✓';
+    document.getElementById('auditSend').disabled = true;
+  });
+})();
+</script>
+</body>
+</html>

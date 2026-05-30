@@ -1,0 +1,40 @@
+rules_version = '2';
+
+// TDI Workspace — Firestore Security Rules
+// Deploy with:  firebase deploy --only firestore:rules
+//
+// Security model:
+//  • Anyone (the public website) may SUBMIT an inquiry — create only.
+//  • Only a signed-in admin may READ, UPDATE or DELETE inquiries.
+//  • All other collections are admin-only.
+//
+// This is safe ONLY because you create admin accounts manually in the
+// Firebase console. DO NOT build a public "sign up" page — there is none —
+// so request.auth != null effectively means "a real admin you created".
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // ---- Public inquiry inbox ----
+    match /inquiries/{id} {
+      // Public form may create, with light validation to stop junk writes.
+      allow create: if request.resource.data.email is string
+                    && request.resource.data.email.size() < 200
+                    && request.resource.data.keys().size() < 40;
+      // Reading / managing inquiries requires login.
+      allow read, update, delete: if request.auth != null;
+    }
+
+    // ---- Public-readable site content (Phase 2) ----
+    // The public site reads these; only admins write them.
+    match /content/{doc} {
+      allow read:  if true;
+      allow write: if request.auth != null;
+    }
+
+    // ---- Everything else: admins only ----
+    match /{document=**} {
+      allow read, write: if request.auth != null;
+    }
+  }
+}
