@@ -169,9 +169,15 @@
   <span class="wa__label">WhatsApp Us</span>
 </a>
 
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+<script src="firebase-config.js"></script>
 <script src="journal-data.js"></script>
+<script src="tdi-store.js"></script>
+<script src="tdi-site.js"></script>
 <script>
 (function(){
+  function __run(){
   function qs(name) {
     const p = new URLSearchParams(location.search);
     return p.get(name);
@@ -255,6 +261,9 @@
       </article>`).join('');
     document.getElementById('related-section').hidden = false;
   }
+  }
+  // Wait for the shared content store (Firestore) before rendering.
+  if (window.TDIStore && window.TDIStore.ready) { window.TDIStore.ready.then(__run); } else { __run(); }
 })();
 </script>
 

@@ -55,7 +55,7 @@
       <div><h2 class="display" style="max-width: 22ch;">A practice led by <em class="italic">designers and builders</em>.</h2></div>
     </div>
 
-    <div class="teamgrid reveal-stagger">
+    <div class="teamgrid reveal-stagger" data-tdi-team="leadership">
       <article class="member">
         <div class="member__media">
           <img src="assets/zhang-yaosheng.jpg" alt="Zhang Yaosheng">
@@ -97,7 +97,7 @@
       <div><h2 class="display" style="max-width:24ch;">Designers, managers, makers — <em class="italic">all under one roof</em>.</h2></div>
     </div>
 
-    <div class="teamgrid reveal-stagger">
+    <div class="teamgrid reveal-stagger" data-tdi-team="studio">
       <article class="member">
         <div class="member__media"><img src="https://images.unsplash.com/photo-1488161628813-04466f872be2?auto=format&fit=crop&w=900&q=80" alt=""><span class="yrs">8 yrs</span></div>
         <h3 class="member__name">Rachel Lim</h3>
@@ -179,6 +179,12 @@
   <span class="wa__label">WhatsApp Us</span>
 </a>
 
+<!-- Firebase + shared content store (renders team from the admin) -->
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+<script src="firebase-config.js"></script>
+<script src="tdi-store.js"></script>
+<script src="tdi-site.js"></script>
 <script src="app.js"></script>
 </body>
 </html>

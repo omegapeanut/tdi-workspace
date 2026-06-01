@@ -575,6 +575,15 @@ const SEED_ARTICLES = [
 //   PUBLIC API
 // =============================================================
 function loadArticles() {
+  // Prefer the Firestore-backed shared store (populated by tdi-store.js) so
+  // the public journal reflects what the admin publishes from any device.
+  try {
+    if (window.TDIStore && window.TDIStore.isLoaded && window.TDIStore.isLoaded()) {
+      const j = window.TDIStore.get('journal');
+      if (j && Array.isArray(j.items) && j.items.length) return j.items;
+    }
+  } catch (e) {}
+  // Fallback: same-browser admin localStorage, then the built-in seed.
   try {
     const raw = localStorage.getItem(ADMIN_KEY);
     if (raw) {

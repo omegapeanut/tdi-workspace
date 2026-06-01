@@ -195,6 +195,61 @@ function loadData() {
 function persist() {
   try { localStorage.setItem(KEY, JSON.stringify(DATA)); }
   catch (e) { toast('Could not save — storage full.', 'err'); }
+  scheduleContentPush();
+}
+
+// =============================================================
+//   FIRESTORE CONTENT SYNC  (admin writes → public site reads)
+// =============================================================
+// One source of truth lives in Firestore (collection `content`, via
+// tdi-store.js). The admin pulls it on login and pushes it on every save,
+// so changes here show up on the live public website.
+let _contentPushTimer = null;
+let _contentSyncReady = false; // gate: don't push during the initial load
+
+function scheduleContentPush() {
+  if (!_contentSyncReady) return;
+  if (!(window.TDIStore && window.TDIFire && TDIFire.db)) return;
+  clearTimeout(_contentPushTimer);
+  _contentPushTimer = setTimeout(pushAllContent, 500);
+}
+
+function contentSnapshot() {
+  return {
+    team:     { members: DATA.team },
+    projects: { items: DATA.projects },
+    homepage: DATA.homepage,
+    about:    DATA.aboutPage,
+    contact:  DATA.contact,
+    settings: DATA.settings,
+    journal:  { items: DATA.articles }
+  };
+}
+
+function pushAllContent() {
+  if (!(window.TDIStore && window.TDIFire && TDIFire.db)) return;
+  const snap = contentSnapshot();
+  Object.keys(snap).forEach(function (k) { TDIStore.save(k, snap[k]); });
+}
+
+function applyStoreToData() {
+  const c = window.TDIStore && TDIStore.cache;
+  if (!c) return;
+  if (c.team && Array.isArray(c.team.members)) DATA.team = c.team.members;
+  if (c.projects && Array.isArray(c.projects.items)) DATA.projects = c.projects.items;
+  if (c.homepage) DATA.homepage = Object.assign({}, DATA.homepage, c.homepage);
+  if (c.about) DATA.aboutPage = Object.assign({}, DATA.aboutPage, c.about);
+  if (c.contact) DATA.contact = Object.assign({}, DATA.contact, c.contact);
+  if (c.settings) DATA.settings = Object.assign({}, DATA.settings, c.settings);
+  if (c.journal && Array.isArray(c.journal.items) && c.journal.items.length) DATA.articles = c.journal.items;
+}
+
+function seedMissingContent() {
+  if (!(window.TDIStore && window.TDIFire && TDIFire.db)) return;
+  const snap = contentSnapshot();
+  TDIStore.KEYS.forEach(function (k) {
+    if (!TDIStore.existed[k]) TDIStore.save(k, snap[k]);
+  });
 }
 
 let DATA = loadData();
@@ -461,9 +516,22 @@ function setupLogin() {
       DATA.user.email = user.email || DATA.user.email;
       if (user.displayName) DATA.user.name = user.displayName;
       toast('Welcome back, ' + DATA.user.name.split(' ')[0] + '.');
-      logActivity('signed in');
       startInquirySync();
-      renderAll();
+      // Pull shared content from Firestore, seed anything missing, then render.
+      const afterLoad = function () {
+        applyStoreToData();
+        seedMissingContent();
+        _contentSyncReady = true;
+        renderAll();
+        logActivity('signed in');
+      };
+      if (window.TDIStore && TDIStore.fetchAll) {
+        TDIStore.fetchAll().then(afterLoad).catch(afterLoad);
+      } else {
+        _contentSyncReady = true;
+        renderAll();
+        logActivity('signed in');
+      }
     } else {
       overlay.classList.remove('is-hidden');
       stopInquirySync();
