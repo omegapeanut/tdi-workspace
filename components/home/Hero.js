@@ -4,9 +4,10 @@ import Link from "next/link";
 import { useMode } from "@/lib/mode-context";
 import { hero } from "@/lib/content";
 import Header from "@/components/Header";
+import ModeToggle from "@/components/ModeToggle";
 
 export default function Hero() {
-  const { mode, isC, toC, toR } = useMode();
+  const { mode } = useMode();
   const data = hero[mode];
 
   return (
@@ -41,44 +42,8 @@ export default function Hero() {
 
         <div style={{ display: "flex", alignItems: "flex-end", justifyContent: "space-between", gap: "24px" }}>
           <div style={{ display: "flex", flexDirection: "column", gap: "12px" }}>
-            <div
-              style={{
-                display: "flex",
-                border: "1px solid rgba(239,231,218,.35)",
-                borderRadius: "2px",
-                font: "600 12px Manrope, sans-serif",
-                letterSpacing: ".1em",
-                alignSelf: "flex-start",
-              }}
-            >
-              <button
-                onClick={toC}
-                style={{
-                  border: 0,
-                  cursor: "pointer",
-                  padding: "13px 26px",
-                  background: isC ? "#EFE7DA" : "transparent",
-                  color: isC ? "#221C15" : "rgba(239,231,218,.8)",
-                  font: "inherit",
-                  letterSpacing: "inherit",
-                }}
-              >
-                COMMERCIAL
-              </button>
-              <button
-                onClick={toR}
-                style={{
-                  border: 0,
-                  cursor: "pointer",
-                  padding: "13px 26px",
-                  background: !isC ? "#EFE7DA" : "transparent",
-                  color: !isC ? "#221C15" : "rgba(239,231,218,.8)",
-                  font: "inherit",
-                  letterSpacing: "inherit",
-                }}
-              >
-                RESIDENTIAL
-              </button>
+            <div style={{ alignSelf: "flex-start" }}>
+              <ModeToggle />
             </div>
             <span style={{ font: "400 11px Manrope, sans-serif", letterSpacing: ".14em", color: "rgba(239,231,218,.4)" }}>
               YOUR CHOICE IS REMEMBERED ON YOUR NEXT VISIT
