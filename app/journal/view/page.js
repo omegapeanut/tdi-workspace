@@ -124,7 +124,7 @@ export default function ArticlePage() {
       <Suspense fallback={null}>
         <ArticleContent />
       </Suspense>
-      <SimpleFooter />
+      <SimpleFooter showAdmin />
     </div>
   );
 }
