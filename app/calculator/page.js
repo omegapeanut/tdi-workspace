@@ -138,7 +138,10 @@ export default function CalculatorPage() {
             )}
           </div>
           <div style={{ background: "#221C15", padding: "24px 34px 30px", display: "flex", flexDirection: "column", gap: "14px", borderTop: "1px solid rgba(239,231,218,.12)" }}>
-            <Link href="/contact" style={{ display: "block", textAlign: "center", background: "oklch(0.74 0.08 78)", color: "#221C15", borderRadius: "2px", padding: "15px 24px", font: "700 12px Manrope, sans-serif", letterSpacing: ".08em", textDecoration: "none" }}>
+            <Link
+              href={`/contact?source=calculator&range=${encodeURIComponent(totalLabel)}&summary=${encodeURIComponent(summaryLine)}`}
+              style={{ display: "block", textAlign: "center", background: "oklch(0.74 0.08 78)", color: "#221C15", borderRadius: "2px", padding: "15px 24px", font: "700 12px Manrope, sans-serif", letterSpacing: ".08em", textDecoration: "none" }}
+            >
               SEND THIS ESTIMATE — BOOK A CONSULTATION
             </Link>
             <button style={{ border: "1px solid rgba(239,231,218,.35)", background: "transparent", color: "#EFE7DA", borderRadius: "2px", padding: "14px 24px", font: "600 12px Manrope, sans-serif", letterSpacing: ".08em", cursor: "pointer" }}>
