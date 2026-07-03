@@ -1,0 +1,911 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet data-dc-atomics>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500;1,600&amp;family=Manrope:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet">
+<style>body{margin:0;background:#171310}</style>
+</helmet>
+
+<div style="font-family:Manrope,sans-serif;display:grid;grid-template-columns:248px 1fr;min-height:100vh;background:#F4F0E8" data-screen-label="Admin dashboard">
+
+  <!-- ============ SIDEBAR ============ -->
+  <div style="background:#171310;color:#EFE7DA;display:flex;flex-direction:column;padding:26px 0;position:sticky;top:0;height:100vh;box-sizing:border-box">
+    <div style="display:flex;align-items:baseline;gap:8px;padding:0 24px 24px">
+      <span style="font:500 22px 'Cormorant Garamond',serif">TDI</span>
+      <span style="font:600 9.5px Manrope,sans-serif;letter-spacing:.3em;color:oklch(0.74 0.08 78)">ADMIN</span>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:2px;padding:0 12px;overflow-y:auto;flex:1">
+      <sc-for list="{{ navItems }}" as="n" hint-placeholder-count="9">
+        <button onClick="{{ n.go }}" style="border:0;text-align:left;display:flex;justify-content:space-between;align-items:center;gap:10px;background:{{ n.bg }};color:{{ n.fg }};border-radius:3px;padding:11px 14px;font:600 12.5px Manrope,sans-serif;cursor:pointer">
+          <span>{{ n.label }}</span>
+          <span style="font:600 10px Manrope,sans-serif;color:oklch(0.74 0.08 78)">{{ n.badge }}</span>
+        </button>
+      </sc-for>
+    </div>
+    <div style="padding:18px 24px 0;display:flex;flex-direction:column;gap:12px;border-top:1px solid rgba(239,231,218,.12)">
+      <a href="TDI Home.dc.html" style="font:600 11.5px Manrope,sans-serif;letter-spacing:.06em;color:oklch(0.74 0.08 78);text-decoration:none">↗ VIEW LIVE SITE</a>
+      <span onClick="{{ resetCms }}" style="font:400 11px Manrope,sans-serif;color:rgba(239,231,218,.4);cursor:pointer" style-hover="color:rgba(239,231,218,.7)">Reset demo content</span>
+      <div style="display:flex;align-items:center;gap:10px">
+        <img src="admin/images/team-2.jpg" alt="Admin user" style="width:32px;height:32px;border-radius:99px;object-fit:cover">
+        <div style="display:flex;flex-direction:column">
+          <span style="font:700 12px Manrope,sans-serif">Studio Admin</span>
+          <a href="TDI Admin Login.dc.html" style="font:400 11px Manrope,sans-serif;color:rgba(239,231,218,.45);text-decoration:none">Sign out</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ CONTENT ============ -->
+  <div style="display:flex;flex-direction:column;color:#26221C">
+
+    <div style="display:flex;justify-content:space-between;align-items:center;padding:22px 40px;border-bottom:1px solid rgba(34,28,21,.12);background:#FBF8F2">
+      <div style="display:flex;flex-direction:column;gap:2px">
+        <span style="font:italic 500 26px 'Cormorant Garamond',serif">{{ sectionTitle }}</span>
+        <span style="font:400 12px Manrope,sans-serif;color:#8A8172">{{ sectionSub }}</span>
+      </div>
+      <div style="display:flex;gap:10px;align-items:center">
+        <span style="font:500 11px Manrope,sans-serif;color:#A89C88">All edits save &amp; go live automatically</span>
+        <a href="{{ liveLink }}" style="border:1px solid rgba(34,28,21,.3);color:#26221C;border-radius:2px;padding:11px 18px;font:600 11.5px Manrope,sans-serif;letter-spacing:.06em;text-decoration:none">VIEW LIVE PAGE ↗</a>
+      </div>
+    </div>
+
+    <!-- ===== DASHBOARD ===== -->
+    <sc-if value="{{ isDashboard }}" hint-placeholder-val="{{ true }}">
+      <div style="padding:32px 40px;display:flex;flex-direction:column;gap:28px">
+        <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:14px">
+          <div style="background:#FBF8F2;border:1px solid rgba(34,28,21,.1);border-radius:4px;padding:22px 24px;display:flex;flex-direction:column;gap:4px"><span style="font:400 34px 'Cormorant Garamond',serif;color:oklch(0.55 0.09 70)">14</span><span style="font:600 11px Manrope,sans-serif;letter-spacing:.1em;color:#8A8172">NEW LEADS THIS WEEK</span></div>
+          <div style="background:#FBF8F2;border:1px solid rgba(34,28,21,.1);border-radius:4px;padding:22px 24px;display:flex;flex-direction:column;gap:4px"><span style="font:400 34px 'Cormorant Garamond',serif;color:oklch(0.55 0.09 70)">5</span><span style="font:600 11px Manrope,sans-serif;letter-spacing:.1em;color:#8A8172">CONSULTATIONS BOOKED</span></div>
+          <div style="background:#FBF8F2;border:1px solid rgba(34,28,21,.1);border-radius:4px;padding:22px 24px;display:flex;flex-direction:column;gap:4px"><span style="font:400 34px 'Cormorant Garamond',serif;color:oklch(0.55 0.09 70)">3.2k</span><span style="font:600 11px Manrope,sans-serif;letter-spacing:.1em;color:#8A8172">VISITS · LAST 7 DAYS</span></div>
+          <div style="background:#FBF8F2;border:1px solid rgba(34,28,21,.1);border-radius:4px;padding:22px 24px;display:flex;flex-direction:column;gap:4px"><span style="font:400 34px 'Cormorant Garamond',serif;color:oklch(0.55 0.09 70)">61%</span><span style="font:600 11px Manrope,sans-serif;letter-spacing:.1em;color:#8A8172">TRAFFIC FROM JOURNAL / SEO</span></div>
+        </div>
+        <div style="display:grid;grid-template-columns:1.3fr 1fr;gap:14px">
+          <div style="background:#FBF8F2;border:1px solid rgba(34,28,21,.1);border-radius:4px;padding:24px 26px;display:flex;flex-direction:column;gap:16px">
+            <span style="font:600 11px Manrope,sans-serif;letter-spacing:.18em;color:#8A8172">LATEST LEADS — CLICK STATUS TO UPDATE</span>
+            <div style="display:flex;flex-direction:column">
+              <div style="display:grid;grid-template-columns:1.2fr 1fr .8fr .7fr;gap:12px;padding:10px 0;border-bottom:1px solid rgba(34,28,21,.15);font:600 10.5px Manrope,sans-serif;letter-spacing:.1em;color:#8A8172"><span>NAME</span><span>TYPE</span><span>BUDGET</span><span>STATUS</span></div>
+              <sc-for list="{{ dashLeads }}" as="l" hint-placeholder-count="4">
+                <div style="display:grid;grid-template-columns:1.2fr 1fr .8fr .7fr;gap:12px;padding:12px 0;border-bottom:1px solid rgba(34,28,21,.08);font:400 13px Manrope,sans-serif;align-items:center">
+                  <span style="font-weight:600">{{ l.name }}</span><span>{{ l.type }}</span><span>{{ l.budget }}</span>
+                  <span onClick="{{ l.cycle }}" style="color:{{ l.stColor }};font-weight:600;cursor:pointer" title="Click to change status">{{ l.status }}</span>
+                </div>
+              </sc-for>
+            </div>
+            <button onClick="{{ goLeads }}" style="border:1px solid rgba(34,28,21,.25);background:transparent;color:#26221C;border-radius:2px;padding:10px 16px;font:600 11px Manrope,sans-serif;letter-spacing:.08em;cursor:pointer;align-self:flex-start">VIEW ALL LEADS →</button>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:14px">
+            <div style="background:#FBF8F2;border:1px solid rgba(34,28,21,.1);border-radius:4px;padding:24px 26px;display:flex;flex-direction:column;gap:12px">
+              <span style="font:600 11px Manrope,sans-serif;letter-spacing:.18em;color:#8A8172">QUICK EDIT</span>
+              <div style="display:flex;flex-wrap:wrap;gap:8px">
+                <sc-for list="{{ quickLinks }}" as="q" hint-placeholder-count="6">
+                  <button onClick="{{ q.go }}" style="border:1px solid rgba(34,28,21,.25);background:transparent;color:#26221C;border-radius:99px;padding:8px 16px;font:600 12px Manrope,sans-serif;cursor:pointer">{{ q.label }}</button>
+                </sc-for>
+              </div>
+            </div>
+            <div style="background:#26221C;color:#EFE7DA;border-radius:4px;padding:24px 26px;display:flex;flex-direction:column;gap:10px">
+              <span style="font:600 11px Manrope,sans-serif;letter-spacing:.18em;color:oklch(0.74 0.08 78)">COMPANY HIATUS</span>
+              <span style="font:400 12.5px/1.6 Manrope,sans-serif;color:rgba(239,231,218,.65)">{{ hiatusText }}</span>
+              <sc-if value="{{ hiatusOpen }}" hint-placeholder-val="{{ false }}">
+                <div style="display:flex;flex-direction:column;gap:8px">
+                  <div style="display:flex;gap:8px">
+                    <input type="date" value="{{ hiatusFrom }}" onChange="{{ setHiatusFrom }}" style="flex:1;border:1px solid rgba(239,231,218,.3);background:rgba(20,16,11,.5);color:#EFE7DA;padding:10px 12px;font:400 12.5px Manrope,sans-serif;border-radius:2px;outline:none">
+                    <input type="date" value="{{ hiatusTo }}" onChange="{{ setHiatusTo }}" style="flex:1;border:1px solid rgba(239,231,218,.3);background:rgba(20,16,11,.5);color:#EFE7DA;padding:10px 12px;font:400 12.5px Manrope,sans-serif;border-radius:2px;outline:none">
+                  </div>
+                  <div style="display:flex;gap:8px">
+                    <button onClick="{{ saveHiatus }}" style="border:0;background:oklch(0.74 0.08 78);color:#221C15;border-radius:2px;padding:10px 16px;font:700 11px Manrope,sans-serif;letter-spacing:.08em;cursor:pointer">SAVE</button>
+                    <button onClick="{{ toggleHiatus }}" style="border:1px solid rgba(239,231,218,.35);background:transparent;color:#EFE7DA;border-radius:2px;padding:10px 16px;font:600 11px Manrope,sans-serif;letter-spacing:.08em;cursor:pointer">CANCEL</button>
+                  </div>
+                </div>
+              </sc-if>
+              <sc-if value="{{ hiatusClosed }}" hint-placeholder-val="{{ true }}">
+                <div style="display:flex;gap:8px">
+                  <button onClick="{{ toggleHiatus }}" style="border:1px solid rgba(239,231,218,.35);background:transparent;color:#EFE7DA;border-radius:2px;padding:10px 16px;font:600 11px Manrope,sans-serif;letter-spacing:.08em;cursor:pointer">{{ hiatusBtnLabel }}</button>
+                  <sc-if value="{{ hasHiatus }}" hint-placeholder-val="{{ false }}">
+                    <button onClick="{{ clearHiatus }}" style="border:1px solid rgba(239,231,218,.35);background:transparent;color:rgba(239,231,218,.6);border-radius:2px;padding:10px 16px;font:600 11px Manrope,sans-serif;letter-spacing:.08em;cursor:pointer">CLEAR</button>
+                  </sc-if>
+                </div>
+              </sc-if>
+              <span style="font:400 11px Manrope,sans-serif;color:rgba(239,231,218,.4)">While set, the homepage shows a notice bar automatically.</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </sc-if>
+
+    <!-- ===== HOMEPAGE ===== -->
+    <sc-if value="{{ isHome }}" hint-placeholder-val="{{ false }}">
+      <div style="padding:32px 40px;display:flex;flex-direction:column;gap:20px">
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px">
+          <div style="background:#FBF8F2;border:1px solid rgba(34,28,21,.1);border-radius:4px;padding:24px 26px;display:flex;flex-direction:column;gap:14px">
+            <span style="font:600 11px Manrope,sans-serif;letter-spacing:.18em;color:#8A8172">HERO — COMMERCIAL (DEFAULT)</span>
+            <img src="admin/images/hero-commercial.jpg" alt="Commercial hero" style="height:150px;width:100%;object-fit:cover;border-radius:3px">
+            <span style="font:400 11px Manrope,sans-serif;color:#A89C88">admin/images/hero-commercial.jpg — replace file to change</span>
+            <div style="display:flex;flex-direction:column;gap:6px">
+              <span style="font:600 10.5px Manrope,sans-serif;letter-spacing:.12em;color:#8A8172">HEADLINE — LIVE ON HOMEPAGE</span>
+              <input type="text" value="{{ heroCHeadline }}" onChange="{{ setHeroCHeadline }}" style="border:1px solid rgba(34,28,21,.2);background:#fff;color:#26221C;padding:12px 14px;font:400 13.5px Manrope,sans-serif;border-radius:2px;outline:none">
+            </div>
+            <div style="display:flex;flex-direction:column;gap:6px">
+              <span style="font:600 10.5px Manrope,sans-serif;letter-spacing:.12em;color:#8A8172">CTA BUTTON — LIVE ON HOMEPAGE</span>
+              <input type="text" value="{{ heroCCta }}" onChange="{{ setHeroCCta }}" style="border:1px solid rgba(34,28,21,.2);background:#fff;color:#26221C;padding:12px 14px;font:400 13.5px Manrope,sans-serif;border-radius:2px;outline:none">
+            </div>
+          </div>
+          <div style="background:#FBF8F2;border:1px solid rgba(34,28,21,.1);border-radius:4px;padding:24px 26px;display:flex;flex-direction:column;gap:14px">
+            <span style="font:600 11px Manrope,sans-serif;letter-spacing:.18em;color:#8A8172">HERO — RESIDENTIAL</span>
+            <img src="admin/images/hero-residential.jpg" alt="Residential hero" style="height:150px;width:100%;object-fit:cover;border-radius:3px">
+            <span style="font:400 11px Manrope,sans-serif;color:#A89C88">admin/images/hero-residential.jpg — replace file to change</span>
+            <div style="display:flex;flex-direction:column;gap:6px">
+              <span style="font:600 10.5px Manrope,sans-serif;letter-spacing:.12em;color:#8A8172">HEADLINE — LIVE ON HOMEPAGE</span>
+              <input type="text" value="{{ heroRHeadline }}" onChange="{{ setHeroRHeadline }}" style="border:1px solid rgba(34,28,21,.2);background:#fff;color:#26221C;padding:12px 14px;font:400 13.5px Manrope,sans-serif;border-radius:2px;outline:none">
+            </div>
+            <div style="display:flex;flex-direction:column;gap:6px">
+              <span style="font:600 10.5px Manrope,sans-serif;letter-spacing:.12em;color:#8A8172">ANNOUNCEMENT BAR (BLANK = HIDDEN) — LIVE ON HOMEPAGE</span>
+              <input type="text" value="{{ announcement }}" onChange="{{ setAnnouncement }}" placeholder="e.g. CNY closure 17–21 Feb — replies may be slower" style="border:1px solid rgba(34,28,21,.2);background:#fff;color:#26221C;padding:12px 14px;font:400 13.5px Manrope,sans-serif;border-radius:2px;outline:none">
+            </div>
+          </div>
+        </div>
+        <div style="background:#FBF8F2;border:1px solid rgba(34,28,21,.1);border-radius:4px;padding:24px 26px;display:flex;flex-direction:column;gap:14px">
+          <span style="font:600 11px Manrope,sans-serif;letter-spacing:.18em;color:#8A8172">FEATURED PROJECTS — CLICK ← → TO REORDER</span>
+          <div style="display:grid;grid-template-columns:repeat(6,1fr);gap:10px">
+            <sc-for list="{{ featuredImgs }}" as="f" hint-placeholder-count="6">
+              <div style="display:flex;flex-direction:column;gap:6px">
+                <img src="{{ f.img }}" alt="{{ f.name }}" style="height:90px;width:100%;object-fit:cover;border-radius:3px">
+                <div style="display:flex;justify-content:space-between;align-items:center;gap:4px">
+                  <span style="font:600 10.5px Manrope,sans-serif;color:#5C5546">{{ f.name }}</span>
+                  <span style="display:flex;gap:2px;font:600 11px Manrope,sans-serif;color:#8A8172">
+                    <span onClick="{{ f.left }}" style="cursor:pointer;padding:2px 5px;border:1px solid rgba(34,28,21,.2);border-radius:3px">←</span>
+                    <span onClick="{{ f.right }}" style="cursor:pointer;padding:2px 5px;border:1px solid rgba(34,28,21,.2);border-radius:3px">→</span>
+                  </span>
+                </div>
+              </div>
+            </sc-for>
+          </div>
+        </div>
+      </div>
+    </sc-if>
+
+    <!-- ===== PROJECTS ===== -->
+    <sc-if value="{{ isProjects }}" hint-placeholder-val="{{ false }}">
+      <div style="padding:32px 40px;display:flex;flex-direction:column;gap:16px">
+        <div style="display:flex;justify-content:space-between;align-items:center">
+          <input type="text" value="{{ projSearch }}" onChange="{{ setProjSearch }}" placeholder="Search projects…" style="border:1px solid rgba(34,28,21,.2);background:#fff;color:#26221C;padding:12px 16px;font:400 13px Manrope,sans-serif;border-radius:2px;outline:none;width:280px">
+          <button onClick="{{ addProject }}" style="border:0;background:oklch(0.55 0.09 70);color:#fff;border-radius:2px;padding:12px 20px;font:600 11.5px Manrope,sans-serif;letter-spacing:.06em;cursor:pointer">+ NEW PROJECT</button>
+        </div>
+        <div style="background:#FBF8F2;border:1px solid rgba(34,28,21,.1);border-radius:4px;overflow:hidden">
+          <div style="display:grid;grid-template-columns:70px 1.4fr .8fr .8fr .8fr 200px;gap:14px;padding:14px 22px;border-bottom:1px solid rgba(34,28,21,.15);font:600 10.5px Manrope,sans-serif;letter-spacing:.1em;color:#8A8172;align-items:center"><span>IMAGE</span><span>PROJECT</span><span>MODE</span><span>CATEGORY</span><span>STATUS</span><span>ACTIONS</span></div>
+          <sc-for list="{{ projectRows }}" as="p" hint-placeholder-count="6">
+            <div style="display:grid;grid-template-columns:70px 1.4fr .8fr .8fr .8fr 200px;gap:14px;padding:12px 22px;border-bottom:1px solid rgba(34,28,21,.07);font:400 13px Manrope,sans-serif;align-items:center;opacity:{{ p.opacity }}">
+              <img src="{{ p.img }}" alt="{{ p.name }}" style="width:56px;height:42px;object-fit:cover;border-radius:3px">
+              <span style="font-weight:600">{{ p.name }}</span>
+              <span>{{ p.mode }}</span>
+              <span>{{ p.cat }}</span>
+              <span onClick="{{ p.cycleStatus }}" style="color:{{ p.stColor }};font-weight:600;cursor:pointer" title="Click to change status">{{ p.status }}</span>
+              <div style="display:flex;gap:6px;font:600 11px Manrope,sans-serif">
+                <span onClick="{{ p.edit }}" style="border:1px solid rgba(34,28,21,.25);border-radius:99px;padding:5px 12px;cursor:pointer">Edit</span>
+                <span onClick="{{ p.duplicate }}" style="border:1px solid rgba(34,28,21,.25);border-radius:99px;padding:5px 12px;cursor:pointer">Duplicate</span>
+                <span onClick="{{ p.archive }}" style="border:1px solid rgba(34,28,21,.25);border-radius:99px;padding:5px 12px;cursor:pointer;color:#A0522D">{{ p.archiveLabel }}</span>
+              </div>
+            </div>
+          </sc-for>
+        </div>
+        <span style="font:400 12px Manrope,sans-serif;color:#A89C88">Live: only Published and Featured projects appear on the Projects page. Click a status to cycle Draft → Published → Featured. Renames go live instantly.</span>
+      </div>
+    </sc-if>
+
+    <!-- ===== JOURNAL ===== -->
+    <sc-if value="{{ isJournal }}" hint-placeholder-val="{{ false }}">
+      <div style="padding:32px 40px;display:flex;flex-direction:column;gap:16px">
+        <div style="display:flex;justify-content:space-between;align-items:center">
+          <div style="display:flex;gap:8px">
+            <sc-for list="{{ journalChips }}" as="c" hint-placeholder-count="4">
+              <span onClick="{{ c.go }}" style="border:1px solid {{ c.border }};background:{{ c.bg }};color:{{ c.fg }};border-radius:99px;padding:8px 16px;font:600 11.5px Manrope,sans-serif;cursor:pointer">{{ c.label }}</span>
+            </sc-for>
+          </div>
+          <button onClick="{{ addArticle }}" style="border:0;background:oklch(0.55 0.09 70);color:#fff;border-radius:2px;padding:12px 20px;font:600 11.5px Manrope,sans-serif;letter-spacing:.06em;cursor:pointer">+ NEW ARTICLE</button>
+        </div>
+        <div style="background:#FBF8F2;border:1px solid rgba(34,28,21,.1);border-radius:4px;overflow:hidden">
+          <div style="display:grid;grid-template-columns:70px 1.6fr .9fr .7fr .7fr 150px;gap:14px;padding:14px 22px;border-bottom:1px solid rgba(34,28,21,.15);font:600 10.5px Manrope,sans-serif;letter-spacing:.1em;color:#8A8172;align-items:center"><span>COVER</span><span>TITLE</span><span>CATEGORY</span><span>STATUS</span><span>SEO</span><span>ACTIONS</span></div>
+          <sc-for list="{{ journalRows }}" as="j" hint-placeholder-count="6">
+            <div style="display:grid;grid-template-columns:70px 1.6fr .9fr .7fr .7fr 150px;gap:14px;padding:12px 22px;border-bottom:1px solid rgba(34,28,21,.07);font:400 13px Manrope,sans-serif;align-items:center">
+              <img src="{{ j.img }}" alt="{{ j.title }}" style="width:56px;height:42px;object-fit:cover;border-radius:3px">
+              <span style="font-weight:600">{{ j.title }}</span>
+              <span>{{ j.cat }}</span>
+              <span onClick="{{ j.cycleStatus }}" style="color:{{ j.stColor }};font-weight:600;cursor:pointer" title="Click to change status">{{ j.status }}</span>
+              <span style="color:{{ j.seoColor }};font-weight:600">{{ j.seo }}</span>
+              <div style="display:flex;gap:6px;font:600 11px Manrope,sans-serif">
+                <span onClick="{{ j.edit }}" style="border:1px solid rgba(34,28,21,.25);border-radius:99px;padding:5px 12px;cursor:pointer">Edit</span>
+                <a href="TDI Article.dc.html" style="border:1px solid rgba(34,28,21,.25);border-radius:99px;padding:5px 12px;cursor:pointer;color:#26221C;text-decoration:none">Preview</a>
+              </div>
+            </div>
+          </sc-for>
+        </div>
+        <span style="font:400 12px Manrope,sans-serif;color:#A89C88">Live: only Published and Featured articles appear on the Journal page — set one to Draft or Scheduled and it disappears from the live site. Title edits go live instantly.</span>
+      </div>
+    </sc-if>
+
+    <!-- ===== MATERIALS ===== -->
+    <sc-if value="{{ isMaterials }}" hint-placeholder-val="{{ false }}">
+      <div style="padding:32px 40px;display:flex;flex-direction:column;gap:16px">
+        <div style="display:flex;justify-content:space-between;align-items:center">
+          <input type="text" value="{{ matSearch }}" onChange="{{ setMatSearch }}" placeholder="Search materials…" style="border:1px solid rgba(34,28,21,.2);background:#fff;color:#26221C;padding:12px 16px;font:400 13px Manrope,sans-serif;border-radius:2px;outline:none;width:280px">
+          <button onClick="{{ addMaterial }}" style="border:0;background:oklch(0.55 0.09 70);color:#fff;border-radius:2px;padding:12px 20px;font:600 11.5px Manrope,sans-serif;letter-spacing:.06em;cursor:pointer">+ NEW MATERIAL</button>
+        </div>
+        <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:14px">
+          <sc-for list="{{ materialCards }}" as="m" hint-placeholder-count="8">
+            <div style="background:#FBF8F2;border:1px solid rgba(34,28,21,.1);border-radius:4px;overflow:hidden;display:flex;flex-direction:column;opacity:{{ m.opacity }}">
+              <img src="{{ m.img }}" alt="{{ m.name }}" style="height:110px;width:100%;object-fit:cover">
+              <div style="padding:14px 16px;display:flex;flex-direction:column;gap:6px">
+                <span style="font:700 13px Manrope,sans-serif">{{ m.name }}</span>
+                <span style="font:400 11px Manrope,sans-serif;color:#8A8172">{{ m.file }}</span>
+                <div style="display:flex;gap:6px;font:600 10.5px Manrope,sans-serif;margin-top:4px">
+                  <span onClick="{{ m.edit }}" style="border:1px solid rgba(34,28,21,.25);border-radius:99px;padding:4px 11px;cursor:pointer">Edit</span>
+                  <span onClick="{{ m.hide }}" style="border:1px solid rgba(34,28,21,.25);border-radius:99px;padding:4px 11px;cursor:pointer;color:#A0522D">{{ m.hideLabel }}</span>
+                </div>
+              </div>
+            </div>
+          </sc-for>
+        </div>
+        <span style="font:400 12px Manrope,sans-serif;color:#A89C88">Hidden materials disappear from the live Materials page instantly; renames go live too.</span>
+      </div>
+    </sc-if>
+
+    <!-- ===== SERVICES ===== -->
+    <sc-if value="{{ isServices }}" hint-placeholder-val="{{ false }}">
+      <div style="padding:32px 40px;display:flex;flex-direction:column;gap:16px">
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px">
+          <div style="background:#FBF8F2;border:1px solid rgba(34,28,21,.1);border-radius:4px;padding:24px 26px;display:flex;flex-direction:column;gap:14px">
+            <span style="font:600 11px Manrope,sans-serif;letter-spacing:.18em;color:#8A8172">COMMERCIAL SERVICES ({{ commCount }})</span>
+            <sc-for list="{{ commServices }}" as="s" hint-placeholder-count="4">
+              <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;border:1px solid rgba(34,28,21,.12);border-radius:3px;padding:13px 16px">
+                <span style="font:600 13.5px Manrope,sans-serif">{{ s.name }}</span>
+                <div style="display:flex;gap:6px;font:600 11px Manrope,sans-serif;align-items:center">
+                  <span onClick="{{ s.edit }}" style="border:1px solid rgba(34,28,21,.25);border-radius:99px;padding:5px 12px;cursor:pointer">Edit</span>
+                  <span onClick="{{ s.up }}" style="cursor:pointer;color:#8A8172;padding:2px 6px" title="Move up">↑</span>
+                  <span onClick="{{ s.down }}" style="cursor:pointer;color:#8A8172;padding:2px 6px" title="Move down">↓</span>
+                </div>
+              </div>
+            </sc-for>
+          </div>
+          <div style="background:#FBF8F2;border:1px solid rgba(34,28,21,.1);border-radius:4px;padding:24px 26px;display:flex;flex-direction:column;gap:14px">
+            <span style="font:600 11px Manrope,sans-serif;letter-spacing:.18em;color:#8A8172">RESIDENTIAL SERVICES ({{ resCount }})</span>
+            <sc-for list="{{ resServices }}" as="s" hint-placeholder-count="4">
+              <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;border:1px solid rgba(34,28,21,.12);border-radius:3px;padding:13px 16px">
+                <span style="font:600 13.5px Manrope,sans-serif">{{ s.name }}</span>
+                <div style="display:flex;gap:6px;font:600 11px Manrope,sans-serif;align-items:center">
+                  <span onClick="{{ s.edit }}" style="border:1px solid rgba(34,28,21,.25);border-radius:99px;padding:5px 12px;cursor:pointer">Edit</span>
+                  <span onClick="{{ s.up }}" style="cursor:pointer;color:#8A8172;padding:2px 6px" title="Move up">↑</span>
+                  <span onClick="{{ s.down }}" style="cursor:pointer;color:#8A8172;padding:2px 6px" title="Move down">↓</span>
+                </div>
+              </div>
+            </sc-for>
+          </div>
+        </div>
+        <span style="font:400 12px Manrope,sans-serif;color:#A89C88">Renames and reordering go live on the Services page instantly. Order here = order on the live page.</span>
+      </div>
+    </sc-if>
+
+    <!-- ===== ABOUT / TEAM ===== -->
+    <sc-if value="{{ isAbout }}" hint-placeholder-val="{{ false }}">
+      <div style="padding:32px 40px;display:flex;flex-direction:column;gap:16px">
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px">
+          <div style="background:#FBF8F2;border:1px solid rgba(34,28,21,.1);border-radius:4px;padding:24px 26px;display:flex;flex-direction:column;gap:12px">
+            <span style="font:600 11px Manrope,sans-serif;letter-spacing:.18em;color:#8A8172">STUDIO STORY — LIVE ON ABOUT PAGE</span>
+            <textarea rows="6" value="{{ story }}" onChange="{{ setStory }}" style="border:1px solid rgba(34,28,21,.2);background:#fff;color:#26221C;padding:14px 16px;font:400 13.5px/1.7 Manrope,sans-serif;border-radius:2px;outline:none;resize:vertical"></textarea>
+            <span style="font:400 11px Manrope,sans-serif;color:#A89C88">Studio photo: admin/images/about-studio.jpg</span>
+          </div>
+          <div style="background:#FBF8F2;border:1px solid rgba(34,28,21,.1);border-radius:4px;padding:24px 26px;display:flex;flex-direction:column;gap:12px">
+            <div style="display:flex;justify-content:space-between;align-items:center">
+              <span style="font:600 11px Manrope,sans-serif;letter-spacing:.18em;color:#8A8172">TEAM MEMBERS ({{ teamCount }}) — NAMES LIVE ON ABOUT PAGE</span>
+            </div>
+            <sc-for list="{{ team }}" as="t" hint-placeholder-count="3">
+              <div style="display:flex;align-items:center;gap:14px;border:1px solid rgba(34,28,21,.12);border-radius:3px;padding:12px 16px">
+                <img src="{{ t.img }}" alt="{{ t.role }}" style="width:44px;height:44px;border-radius:99px;object-fit:cover">
+                <div style="display:flex;flex-direction:column;flex:1">
+                  <span style="font:700 13px Manrope,sans-serif">{{ t.name }}</span>
+                  <span style="font:400 11.5px Manrope,sans-serif;color:#8A8172">{{ t.role }} · {{ t.file }}</span>
+                </div>
+                <div style="display:flex;gap:6px;font:600 11px Manrope,sans-serif">
+                  <span onClick="{{ t.edit }}" style="border:1px solid rgba(34,28,21,.25);border-radius:99px;padding:5px 12px;cursor:pointer">Edit name</span>
+                </div>
+              </div>
+            </sc-for>
+          </div>
+        </div>
+        <div style="background:#FBF8F2;border:1px solid rgba(34,28,21,.1);border-radius:4px;padding:24px 26px;display:flex;flex-direction:column;gap:12px">
+          <span style="font:600 11px Manrope,sans-serif;letter-spacing:.18em;color:#8A8172">TESTIMONIALS (2)</span>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px">
+            <div style="border:1px solid rgba(34,28,21,.12);border-radius:3px;padding:16px 18px;display:flex;flex-direction:column;gap:8px">
+              <span style="font:italic 400 14px/1.5 'Cormorant Garamond',serif">"They treated our downtime like it cost money…"</span>
+              <span style="font:600 11.5px Manrope,sans-serif;color:#8A8172">Operations Director · Commercial · avatar-commercial.jpg</span>
+            </div>
+            <div style="border:1px solid rgba(34,28,21,.12);border-radius:3px;padding:16px 18px;display:flex;flex-direction:column;gap:8px">
+              <span style="font:italic 400 14px/1.5 'Cormorant Garamond',serif">"The quote we signed was the amount we paid…"</span>
+              <span style="font:600 11.5px Manrope,sans-serif;color:#8A8172">Homeowners, Tengah · Residential · avatar-residential.jpg</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </sc-if>
+
+    <!-- ===== MEDIA ===== -->
+    <sc-if value="{{ isMedia }}" hint-placeholder-val="{{ false }}">
+      <div style="padding:32px 40px;display:flex;flex-direction:column;gap:16px">
+        <div style="border:2px dashed rgba(34,28,21,.25);border-radius:4px;padding:34px;display:flex;flex-direction:column;align-items:center;gap:6px;background:#FBF8F2">
+          <span style="font:600 13px Manrope,sans-serif">Drop images here or click to upload</span>
+          <span style="font:400 12px Manrope,sans-serif;color:#8A8172">To swap a live image, upload with the same filename — it updates everywhere automatically.</span>
+        </div>
+        <div style="display:grid;grid-template-columns:repeat(6,1fr);gap:12px">
+          <sc-for list="{{ mediaFiles }}" as="f" hint-placeholder-count="12">
+            <div style="display:flex;flex-direction:column;gap:6px">
+              <img src="{{ f.path }}" alt="{{ f.name }}" style="height:90px;width:100%;object-fit:cover;border-radius:3px;border:1px solid rgba(34,28,21,.1)">
+              <span style="font:500 10px Manrope,sans-serif;color:#5C5546;word-break:break-all">{{ f.name }}</span>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+    </sc-if>
+
+    <!-- ===== SEO ===== -->
+    <sc-if value="{{ isSeo }}" hint-placeholder-val="{{ false }}">
+      <div style="padding:32px 40px;display:flex;flex-direction:column;gap:16px">
+        <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:14px">
+          <div style="background:#FBF8F2;border:1px solid rgba(34,28,21,.1);border-radius:4px;padding:22px 24px;display:flex;flex-direction:column;gap:4px"><span style="font:400 34px 'Cormorant Garamond',serif;color:oklch(0.55 0.09 70)">86</span><span style="font:600 11px Manrope,sans-serif;letter-spacing:.1em;color:#8A8172">SITE SEO SCORE</span></div>
+          <div style="background:#FBF8F2;border:1px solid rgba(34,28,21,.1);border-radius:4px;padding:22px 24px;display:flex;flex-direction:column;gap:4px"><span style="font:400 34px 'Cormorant Garamond',serif;color:#A0522D">3</span><span style="font:600 11px Manrope,sans-serif;letter-spacing:.1em;color:#8A8172">PAGES MISSING META</span></div>
+          <div style="background:#FBF8F2;border:1px solid rgba(34,28,21,.1);border-radius:4px;padding:22px 24px;display:flex;flex-direction:column;gap:4px"><span style="font:400 34px 'Cormorant Garamond',serif;color:#A0522D">5</span><span style="font:600 11px Manrope,sans-serif;letter-spacing:.1em;color:#8A8172">IMAGES MISSING ALT TEXT</span></div>
+          <div style="background:#FBF8F2;border:1px solid rgba(34,28,21,.1);border-radius:4px;padding:22px 24px;display:flex;flex-direction:column;gap:4px"><span style="font:400 34px 'Cormorant Garamond',serif;color:oklch(0.55 0.09 70)">0</span><span style="font:600 11px Manrope,sans-serif;letter-spacing:.1em;color:#8A8172">BROKEN LINKS / 404s</span></div>
+        </div>
+        <div style="background:#FBF8F2;border:1px solid rgba(34,28,21,.1);border-radius:4px;padding:24px 26px;display:flex;flex-direction:column;gap:14px">
+          <span style="font:600 11px Manrope,sans-serif;letter-spacing:.18em;color:#8A8172">KEYWORD RANKINGS — TRACKED</span>
+          <div style="display:grid;grid-template-columns:2fr .6fr .6fr .8fr;gap:12px;padding:8px 0;border-bottom:1px solid rgba(34,28,21,.15);font:600 10.5px Manrope,sans-serif;letter-spacing:.1em;color:#8A8172"><span>KEYWORD</span><span>POSITION</span><span>CHANGE</span><span>TARGET PAGE</span></div>
+          <div style="display:grid;grid-template-columns:2fr .6fr .6fr .8fr;gap:12px;font:400 13px Manrope,sans-serif;align-items:center"><span>commercial interior design singapore</span><span style="font-weight:700">8</span><span style="color:oklch(0.55 0.09 70);font-weight:600">▲ 3</span><span>Home</span></div>
+          <div style="display:grid;grid-template-columns:2fr .6fr .6fr .8fr;gap:12px;font:400 13px Manrope,sans-serif;align-items:center"><span>office renovation singapore</span><span style="font-weight:700">12</span><span style="color:oklch(0.55 0.09 70);font-weight:600">▲ 5</span><span>Services</span></div>
+          <div style="display:grid;grid-template-columns:2fr .6fr .6fr .8fr;gap:12px;font:400 13px Manrope,sans-serif;align-items:center"><span>hdb renovation cost</span><span style="font-weight:700">6</span><span style="color:oklch(0.55 0.09 70);font-weight:600">▲ 2</span><span>Journal — BTO budget</span></div>
+          <div style="display:grid;grid-template-columns:2fr .6fr .6fr .8fr;gap:12px;font:400 13px Manrope,sans-serif;align-items:center"><span>restaurant renovation singapore</span><span style="font-weight:700">15</span><span style="color:#A0522D;font-weight:600">▼ 1</span><span>Services — F&amp;B</span></div>
+        </div>
+        <span style="font:400 12px Manrope,sans-serif;color:#A89C88">Connected: Google Search Console · Google Analytics · Bing Webmaster. Sitemap.xml and robots.txt regenerate on publish; schema markup (Organization, LocalBusiness, Article, Breadcrumb, FAQ, Review) is applied automatically.</span>
+      </div>
+    </sc-if>
+
+    <!-- ===== LEADS ===== -->
+    <sc-if value="{{ isLeads }}" hint-placeholder-val="{{ false }}">
+      <div style="padding:32px 40px;display:flex;flex-direction:column;gap:16px">
+        <div style="display:flex;gap:8px">
+          <sc-for list="{{ leadChips }}" as="c" hint-placeholder-count="5">
+            <span onClick="{{ c.go }}" style="border:1px solid {{ c.border }};background:{{ c.bg }};color:{{ c.fg }};border-radius:99px;padding:8px 16px;font:600 11.5px Manrope,sans-serif;cursor:pointer">{{ c.label }}</span>
+          </sc-for>
+        </div>
+        <div style="background:#FBF8F2;border:1px solid rgba(34,28,21,.1);border-radius:4px;overflow:hidden">
+          <div style="display:grid;grid-template-columns:1.1fr 1fr .8fr .8fr .9fr .8fr;gap:12px;padding:14px 22px;border-bottom:1px solid rgba(34,28,21,.15);font:600 10.5px Manrope,sans-serif;letter-spacing:.1em;color:#8A8172"><span>NAME</span><span>PROJECT TYPE</span><span>BUDGET</span><span>SOURCE</span><span>ATTACHMENTS</span><span>STATUS</span></div>
+          <sc-for list="{{ leadRows }}" as="l" hint-placeholder-count="5">
+            <div style="display:grid;grid-template-columns:1.1fr 1fr .8fr .8fr .9fr .8fr;gap:12px;padding:13px 22px;border-bottom:1px solid rgba(34,28,21,.07);font:400 13px Manrope,sans-serif;align-items:center">
+              <span style="font-weight:600">{{ l.name }}</span><span>{{ l.type }}</span><span>{{ l.budget }}</span><span>{{ l.source }}</span><span>{{ l.attach }}</span>
+              <span onClick="{{ l.cycle }}" style="color:{{ l.stColor }};font-weight:600;cursor:pointer" title="Click to change status">{{ l.status }}</span>
+            </div>
+          </sc-for>
+        </div>
+        <span style="font:400 12px Manrope,sans-serif;color:#A89C88">Click a status to move a lead along the pipeline: New → Contacted → Proposal sent → Won. Every lead keeps its source (form, calculator, WhatsApp, journal article) so you can see which channel earns its keep.</span>
+      </div>
+    </sc-if>
+
+    <!-- ===== USERS ===== -->
+    <sc-if value="{{ isUsers }}" hint-placeholder-val="{{ false }}">
+      <div style="padding:32px 40px;display:flex;flex-direction:column;gap:16px">
+        <div style="display:flex;justify-content:space-between;align-items:center">
+          <span style="font:400 13px Manrope,sans-serif;color:#8A8172">Role-based access: Admin (all) · Manager (content + leads) · Editor (content) · Marketing (journal + promos) · Read-only.</span>
+          <button onClick="{{ inviteUser }}" style="border:0;background:oklch(0.55 0.09 70);color:#fff;border-radius:2px;padding:12px 20px;font:600 11.5px Manrope,sans-serif;letter-spacing:.06em;cursor:pointer">+ INVITE USER</button>
+        </div>
+        <div style="background:#FBF8F2;border:1px solid rgba(34,28,21,.1);border-radius:4px;overflow:hidden">
+          <div style="display:grid;grid-template-columns:1.4fr 1fr .7fr .7fr 150px;gap:12px;padding:14px 22px;border-bottom:1px solid rgba(34,28,21,.15);font:600 10.5px Manrope,sans-serif;letter-spacing:.1em;color:#8A8172"><span>USER</span><span>ROLE</span><span>2FA</span><span>STATUS</span><span>ACTIONS</span></div>
+          <sc-for list="{{ userRows }}" as="u" hint-placeholder-count="3">
+            <div style="display:grid;grid-template-columns:1.4fr 1fr .7fr .7fr 150px;gap:12px;padding:13px 22px;border-bottom:1px solid rgba(34,28,21,.07);font:400 13px Manrope,sans-serif;align-items:center">
+              <span style="font-weight:600">{{ u.email }}</span>
+              <span>{{ u.role }}</span>
+              <span style="color:{{ u.tfaColor }};font-weight:600">{{ u.tfa }}</span>
+              <span>{{ u.status }}</span>
+              <div style="display:flex;gap:6px;font:600 11px Manrope,sans-serif">
+                <span onClick="{{ u.edit }}" style="border:1px solid rgba(34,28,21,.25);border-radius:99px;padding:5px 12px;cursor:pointer">Edit</span>
+                <sc-if value="{{ u.canToggle }}" hint-placeholder-val="{{ false }}">
+                  <span onClick="{{ u.toggle }}" style="border:1px solid rgba(34,28,21,.25);border-radius:99px;padding:5px 12px;cursor:pointer;color:#A0522D">{{ u.toggleLabel }}</span>
+                </sc-if>
+                <sc-if value="{{ u.isInvited }}" hint-placeholder-val="{{ false }}">
+                  <span onClick="{{ u.resend }}" style="border:1px solid rgba(34,28,21,.25);border-radius:99px;padding:5px 12px;cursor:pointer">Resend</span>
+                </sc-if>
+              </div>
+            </div>
+          </sc-for>
+        </div>
+        <span style="font:400 12px Manrope,sans-serif;color:#A89C88">All changes are written to the audit log — who edited what, and when.</span>
+      </div>
+    </sc-if>
+
+  </div>
+
+  <!-- ===== EDIT MODAL ===== -->
+  <sc-if value="{{ isEditing }}" hint-placeholder-val="{{ false }}">
+    <div style="position:fixed;inset:0;background:rgba(23,19,16,.55);display:flex;align-items:center;justify-content:center;z-index:100">
+      <div style="background:#FBF8F2;border-radius:4px;padding:28px 30px;display:flex;flex-direction:column;gap:16px;width:440px;box-shadow:0 24px 60px rgba(0,0,0,.4)">
+        <span style="font:italic 500 24px 'Cormorant Garamond',serif;color:#26221C">{{ editTitle }}</span>
+        <input type="text" value="{{ editValue }}" onChange="{{ setEditValue }}" style="border:1px solid rgba(34,28,21,.25);background:#fff;color:#26221C;padding:13px 15px;font:400 14px Manrope,sans-serif;border-radius:2px;outline:none">
+        <div style="display:flex;gap:8px;justify-content:flex-end">
+          <button onClick="{{ cancelEdit }}" style="border:1px solid rgba(34,28,21,.3);background:transparent;color:#26221C;border-radius:2px;padding:11px 18px;font:600 11.5px Manrope,sans-serif;letter-spacing:.06em;cursor:pointer">CANCEL</button>
+          <button onClick="{{ saveEdit }}" style="border:0;background:#26221C;color:#EFE7DA;border-radius:2px;padding:11px 20px;font:600 11.5px Manrope,sans-serif;letter-spacing:.06em;cursor:pointer">SAVE &amp; GO LIVE</button>
+        </div>
+      </div>
+    </div>
+  </sc-if>
+
+  <!-- ===== TOAST ===== -->
+  <sc-if value="{{ hasToast }}" hint-placeholder-val="{{ false }}">
+    <div style="position:fixed;bottom:28px;left:50%;transform:translateX(-50%);background:#26221C;color:#EFE7DA;border-radius:99px;padding:13px 26px;font:600 12.5px Manrope,sans-serif;box-shadow:0 14px 36px rgba(0,0,0,.35);z-index:120">{{ toast }}</div>
+  </sc-if>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = this.initState();
+
+  defaults() {
+    return {
+      heroCHeadline: 'Where work finds its form.',
+      heroCCta: 'FREE CONSULTATION →',
+      heroRHeadline: 'Quiet luxury, made livable.',
+      announcement: '',
+      hiatus: null,
+      story: "TDI Workspace started on the contractor's side of the table — which is why our drawings survive contact with the site. Fifteen years on, we design and build commercial spaces first and homes with the same rigour: one contract, one accountable team, one number we stand behind.",
+      projects: [
+        { id: 'fintech', name: 'Fintech HQ, Raffles Place', mode: 'Commercial', cat: 'Office', catKey: 'office', status: 'Featured', img: 'admin/images/project-fintech.jpg' },
+        { id: 'izakaya', name: 'Izakaya, Duxton Hill', mode: 'Commercial', cat: 'F&B', catKey: 'fnb', status: 'Featured', img: 'admin/images/project-izakaya.jpg' },
+        { id: 'boutique', name: 'Flagship boutique, Orchard', mode: 'Commercial', cat: 'Retail', catKey: 'retail', status: 'Published', img: 'admin/images/project-boutique.jpg' },
+        { id: 'clinic', name: 'Dental studio, Novena', mode: 'Commercial', cat: 'Clinic', catKey: 'clinic', status: 'Published', img: 'admin/images/project-clinic.jpg' },
+        { id: 'coworking', name: 'Coworking loft, CBD', mode: 'Commercial', cat: 'Office', catKey: 'office', status: 'Published', img: 'admin/images/project-coworking.jpg' },
+        { id: 'restaurant', name: 'Heritage restaurant, Amoy St', mode: 'Commercial', cat: 'F&B', catKey: 'fnb', status: 'Published', img: 'admin/images/project-restaurant.jpg' },
+        { id: 'maisonette', name: 'Maisonette, Bukit Timah', mode: 'Residential', cat: 'Landed', catKey: 'landed', status: 'Featured', img: 'admin/images/project-maisonette.jpg' },
+        { id: 'bto', name: '4-room BTO, Tengah', mode: 'Residential', cat: 'HDB', catKey: 'hdb', status: 'Published', img: 'admin/images/project-bto.jpg' },
+        { id: 'penthouse', name: 'Penthouse, Newton', mode: 'Residential', cat: 'Condo', catKey: 'condo', status: 'Published', img: 'admin/images/project-penthouse.jpg' },
+        { id: 'condo-bedroom', name: 'Master suite, Holland Village', mode: 'Residential', cat: 'Condo', catKey: 'condo', status: 'Published', img: 'admin/images/project-condo-bedroom.jpg' },
+        { id: 'landed', name: 'Semi-detached, Serangoon', mode: 'Residential', cat: 'Landed', catKey: 'landed', status: 'Published', img: 'admin/images/project-landed.jpg' },
+        { id: 'hdb-kitchen', name: 'Resale kitchen, Bishan', mode: 'Residential', cat: 'HDB', catKey: 'hdb', status: 'Published', img: 'admin/images/project-hdb-kitchen.jpg' }
+      ],
+      articles: [
+        { id: 'office-costs', title: 'Office fit-out costs in Singapore: the 2026 guide', cat: 'Fit-out guides', status: 'Featured', seo: '92', img: 'admin/images/journal-office-costs.jpg' },
+        { id: 'cat-ab', title: 'CAT A vs CAT B: what office tenants actually need to know', cat: 'Tenant advice', status: 'Published', seo: '88', img: 'admin/images/journal-cat-ab.jpg' },
+        { id: 'downtime', title: 'How much downtime does an office renovation really take?', cat: 'Planning', status: 'Published', seo: '84', img: 'admin/images/journal-downtime.jpg' },
+        { id: 'hdb-permits', title: 'HDB renovation permits, explained in plain English', cat: 'HDB guides', status: 'Published', seo: '90', img: 'admin/images/journal-hdb-permits.jpg' },
+        { id: 'bto-budget', title: '4-room BTO renovation: where the money actually goes', cat: 'Budgeting', status: 'Published', seo: '85', img: 'admin/images/journal-bto-budget.jpg' },
+        { id: 'flooring', title: 'Vinyl vs engineered wood: the honest comparison', cat: 'Materials', status: 'Published', seo: '81', img: 'admin/images/journal-flooring.jpg' },
+        { id: 'materials-guide', title: 'Choosing surfaces that survive an F&B kitchen', cat: 'Materials', status: 'Published', seo: '83', img: 'admin/images/journal-materials-guide.jpg' },
+        { id: 'trends', title: 'Quiet luxury interiors: restraint as a design language', cat: 'Trends', status: 'Published', seo: '80', img: 'admin/images/journal-trends.jpg' },
+        { id: 'lighting', title: 'Lighting layers: the cheapest upgrade in interior design', cat: 'Trends', status: 'Published', seo: '79', img: 'admin/images/journal-lighting.jpg' }
+      ],
+      materials: [
+        { id: 'oak', name: 'Smoked oak veneer', file: 'material-wood.jpg', img: 'admin/images/material-wood.jpg', hidden: false },
+        { id: 'marble', name: 'Calacatta marble', file: 'material-marble.jpg', img: 'admin/images/material-marble.jpg', hidden: false },
+        { id: 'stone', name: 'Sandblasted granite', file: 'material-stone.jpg', img: 'admin/images/material-stone.jpg', hidden: false },
+        { id: 'tiles', name: 'Zellige-look tiles', file: 'material-tiles.jpg', img: 'admin/images/material-tiles.jpg', hidden: false },
+        { id: 'fabric', name: 'Bouclé upholstery', file: 'material-fabric.jpg', img: 'admin/images/material-fabric.jpg', hidden: false },
+        { id: 'metal', name: 'Brushed brass', file: 'material-metal.jpg', img: 'admin/images/material-metal.jpg', hidden: false },
+        { id: 'terrazzo', name: 'Porcelain terrazzo', file: 'material-terrazzo.jpg', img: 'admin/images/material-terrazzo.jpg', hidden: false },
+        { id: 'glass', name: 'Fluted glass', file: 'material-glass.jpg', img: 'admin/images/material-glass.jpg', hidden: false }
+      ],
+      comm: [
+        { id: 'office', name: 'Office design & fit-out' },
+        { id: 'fnb', name: 'F&B & hospitality' },
+        { id: 'retail', name: 'Retail & showroom' },
+        { id: 'clinic', name: 'Clinics & wellness' }
+      ],
+      res: [
+        { id: 'home', name: 'Whole-home renovation' },
+        { id: 'kitchen', name: 'Kitchens & wet works' },
+        { id: 'carpentry', name: 'Custom carpentry' },
+        { id: 'styling', name: 'Styling & lighting' }
+      ],
+      teamList: [
+        { name: '[ Name ]', role: 'Design Director', file: 'team-1.jpg', img: 'admin/images/team-1.jpg' },
+        { name: '[ Name ]', role: 'Projects Director', file: 'team-2.jpg', img: 'admin/images/team-2.jpg' },
+        { name: '[ Name ]', role: 'Client Director', file: 'team-3.jpg', img: 'admin/images/team-3.jpg' }
+      ],
+      featured: [
+        { name: 'Fintech HQ', img: 'admin/images/project-fintech.jpg' },
+        { name: 'Izakaya', img: 'admin/images/project-izakaya.jpg' },
+        { name: 'Boutique', img: 'admin/images/project-boutique.jpg' },
+        { name: 'Maisonette', img: 'admin/images/project-maisonette.jpg' },
+        { name: '4-room BTO', img: 'admin/images/project-bto.jpg' },
+        { name: 'Penthouse', img: 'admin/images/project-penthouse.jpg' }
+      ]
+    };
+  }
+
+  initState() {
+    const d = this.defaults();
+    let saved = {};
+    try { saved = JSON.parse(localStorage.getItem('tdi-cms')) || {}; } catch (e) {}
+    const CMS_KEYS = ['heroCHeadline','heroCCta','heroRHeadline','announcement','hiatus','story','projects','articles','materials','comm','res','featured'];
+    const content = {};
+    CMS_KEYS.forEach(k => { content[k] = saved[k] !== undefined ? saved[k] : d[k]; });
+    content.teamList = saved.team !== undefined ? saved.team : d.teamList;
+    return {
+      section: 'dashboard',
+      toast: '',
+      hiatusOpen: false, hiatusFrom: '', hiatusTo: '',
+      projSearch: '', matSearch: '',
+      journalFilter: 'All', leadFilter: 'All',
+      editing: null, editValue: '',
+      leads: [
+        { name: 'Melissa Tan', type: 'Office fit-out', budget: 'S$400–600k', source: 'Contact form', attach: 'Floor plan (PDF)', status: 'New' },
+        { name: 'Daniel Koh', type: '4-room HDB reno', budget: 'S$60–80k', source: 'Calculator', attach: 'Estimate attached', status: 'Contacted' },
+        { name: 'The Roast Room', type: 'Café build', budget: 'S$180–250k', source: 'WhatsApp', attach: '—', status: 'New' },
+        { name: 'Dr. S. Menon', type: 'Dental clinic', budget: 'S$300–400k', source: 'Google / Journal', attach: 'Photos (3)', status: 'Proposal sent' },
+        { name: 'J. & A. Lim', type: 'Condo full reno', budget: 'S$90–120k', source: 'Referral', attach: 'Floor plan (JPG)', status: 'Won ✓' }
+      ],
+      users: [
+        { email: 'studio@tdiworkspace.sg', role: 'Admin', tfa: 'On', status: 'Active', protected: true },
+        { email: 'design@tdiworkspace.sg', role: 'Editor', tfa: 'On', status: 'Active', protected: false },
+        { email: 'marketing@tdiworkspace.sg', role: 'Marketing', tfa: 'Off', status: 'Invited', protected: false }
+      ],
+      ...content
+    };
+  }
+
+  persist() {
+    const st = this.state;
+    const cms = {
+      heroCHeadline: st.heroCHeadline, heroCCta: st.heroCCta, heroRHeadline: st.heroRHeadline,
+      announcement: st.announcement, hiatus: st.hiatus, story: st.story,
+      projects: st.projects, articles: st.articles, materials: st.materials,
+      comm: st.comm, res: st.res, team: st.teamList, featured: st.featured
+    };
+    try { localStorage.setItem('tdi-cms', JSON.stringify(cms)); } catch (e) {}
+  }
+
+  setC(patch, toastMsg) {
+    this.setState(patch, () => this.persist());
+    if (toastMsg) this.showToast(toastMsg);
+  }
+
+  showToast(msg) {
+    clearTimeout(this._toastTimer);
+    this.setState({ toast: msg });
+    this._toastTimer = setTimeout(() => this.setState({ toast: '' }), 2600);
+  }
+
+  stColor(status) {
+    if (status === 'Featured' || status === 'New') return 'oklch(0.55 0.09 70)';
+    if (status === 'Draft' || status === 'Scheduled' || status === 'Archived') return '#A0522D';
+    return '#8A8172';
+  }
+
+  openEdit(listKey, idx, field, title) {
+    const item = this.state[listKey][idx];
+    this.setState({ editing: { listKey, idx, field, title }, editValue: item[field] });
+  }
+
+  cycle(listKey, idx, order, live) {
+    const list = this.state[listKey].slice();
+    const cur = order.indexOf(list[idx].status);
+    list[idx] = { ...list[idx], status: order[(cur + 1) % order.length] };
+    if (live) this.setC({ [listKey]: list }); else this.setState({ [listKey]: list });
+  }
+
+  moveItem(listKey, idx, dir, live) {
+    const list = this.state[listKey].slice();
+    const to = idx + dir;
+    if (to < 0 || to >= list.length) return;
+    const [it] = list.splice(idx, 1);
+    list.splice(to, 0, it);
+    if (live) this.setC({ [listKey]: list }); else this.setState({ [listKey]: list });
+  }
+
+  renderVals() {
+    const s = this.state.section;
+    const brass = 'oklch(0.55 0.09 70)';
+    const st = this.state;
+
+    const NAV = [
+      ['dashboard', 'Dashboard', ''],
+      ['home', 'Homepage', ''],
+      ['projects', 'Projects', String(st.projects.length)],
+      ['journal', 'Journal', String(st.articles.length)],
+      ['materials', 'Materials', String(st.materials.length)],
+      ['services', 'Services', ''],
+      ['about', 'About & Team', ''],
+      ['media', 'Media library', '36'],
+      ['seo', 'SEO', '3'],
+      ['leads', 'Leads', String(st.leads.filter(l => l.status === 'New').length)],
+      ['users', 'Users & roles', '']
+    ];
+    const TITLES = {
+      dashboard: ['Dashboard', 'This week at a glance', 'TDI Home.dc.html'],
+      home: ['Homepage editor', 'Hero headlines, CTA, announcement bar — edits go live instantly', 'TDI Home.dc.html'],
+      projects: ['Projects', 'Only Published / Featured projects show on the live site', 'TDI Projects.dc.html'],
+      journal: ['Journal', 'Only Published / Featured articles show on the live site', 'TDI Journal.dc.html'],
+      materials: ['Material library', 'Drives the live Materials page — hide or rename instantly', 'TDI Materials.dc.html'],
+      services: ['Services', 'Names and order drive the live Services page', 'TDI Services.dc.html'],
+      about: ['About & Team', 'Studio story and team names drive the live About page', 'TDI About.dc.html'],
+      media: ['Media library', 'All site images — replace a file to update it everywhere', 'TDI Home.dc.html'],
+      seo: ['SEO', 'Site health, metadata, keywords and integrations', 'TDI Home.dc.html'],
+      leads: ['Leads', 'Every enquiry with its source and status', 'TDI Home.dc.html'],
+      users: ['Users & roles', 'Access control, 2FA and audit log', 'TDI Admin Login.dc.html']
+    };
+
+    const navItems = NAV.map(([key, label, badge]) => ({
+      label, badge,
+      bg: key === s ? 'rgba(239,231,218,.12)' : 'transparent',
+      fg: key === s ? '#EFE7DA' : 'rgba(239,231,218,.6)',
+      go: () => this.setState({ section: key })
+    }));
+
+    const quickLinks = [
+      ['Homepage hero', 'home'], ['New journal article', 'journal'], ['Add project', 'projects'],
+      ['Materials', 'materials'], ['Team', 'about'], ['SEO check', 'seo']
+    ].map(([label, key]) => ({ label, go: () => this.setState({ section: key }) }));
+
+    // Leads
+    const LEAD_ORDER = ['New', 'Contacted', 'Proposal sent', 'Won ✓'];
+    const leadWithHandlers = (l, i) => ({
+      ...l, stColor: this.stColor(l.status),
+      cycle: () => { this.cycle('leads', i, LEAD_ORDER, false); this.showToast(l.name + ' → ' + LEAD_ORDER[(LEAD_ORDER.indexOf(l.status) + 1) % LEAD_ORDER.length]); }
+    });
+    const dashLeads = st.leads.slice(0, 4).map(leadWithHandlers);
+    const leadCounts = {
+      All: st.leads.length,
+      New: st.leads.filter(l => l.status === 'New').length,
+      Contacted: st.leads.filter(l => l.status === 'Contacted').length,
+      Proposal: st.leads.filter(l => l.status === 'Proposal sent').length,
+      Won: st.leads.filter(l => l.status === 'Won ✓').length
+    };
+    const leadChips = ['All', 'New', 'Contacted', 'Proposal', 'Won'].map(k => {
+      const active = st.leadFilter === k;
+      return {
+        label: k + ' (' + leadCounts[k] + ')',
+        border: active ? '#26221C' : 'rgba(34,28,21,.25)',
+        bg: active ? '#26221C' : 'transparent',
+        fg: active ? '#EFE7DA' : '#26221C',
+        go: () => this.setState({ leadFilter: k })
+      };
+    });
+    const LEAD_MATCH = { All: null, New: 'New', Contacted: 'Contacted', Proposal: 'Proposal sent', Won: 'Won ✓' };
+    const leadRows = st.leads
+      .map((l, i) => ({ l, i }))
+      .filter(({ l }) => !LEAD_MATCH[st.leadFilter] || l.status === LEAD_MATCH[st.leadFilter])
+      .map(({ l, i }) => leadWithHandlers(l, i));
+
+    // Projects (live-wired)
+    const PROJ_ORDER = ['Draft', 'Published', 'Featured'];
+    const q = st.projSearch.trim().toLowerCase();
+    const projectRows = st.projects
+      .map((p, i) => ({ p, i }))
+      .filter(({ p }) => !q || (p.name + p.mode + p.cat).toLowerCase().includes(q))
+      .map(({ p, i }) => ({
+        ...p,
+        stColor: this.stColor(p.status),
+        opacity: p.status === 'Archived' ? '0.45' : '1',
+        archiveLabel: p.status === 'Archived' ? 'Restore' : 'Archive',
+        cycleStatus: () => { if (p.status !== 'Archived') { this.cycle('projects', i, PROJ_ORDER, true); this.showToast('Live site updated'); } },
+        edit: () => this.openEdit('projects', i, 'name', 'Rename project'),
+        duplicate: () => {
+          const list = st.projects.slice();
+          list.splice(i + 1, 0, { ...p, id: 'p' + Date.now(), name: p.name + ' (copy)', status: 'Draft' });
+          this.setC({ projects: list }, 'Project duplicated as draft');
+        },
+        archive: () => {
+          const list = st.projects.slice();
+          list[i] = { ...p, status: p.status === 'Archived' ? 'Draft' : 'Archived' };
+          this.setC({ projects: list }, p.status === 'Archived' ? 'Project restored as draft' : 'Project archived — removed from live site');
+        }
+      }));
+
+    // Journal (live-wired)
+    const ART_ORDER = ['Draft', 'Scheduled', 'Published', 'Featured'];
+    const jCounts = {
+      All: st.articles.length,
+      Published: st.articles.filter(a => a.status === 'Published' || a.status === 'Featured').length,
+      Drafts: st.articles.filter(a => a.status === 'Draft').length,
+      Scheduled: st.articles.filter(a => a.status === 'Scheduled').length
+    };
+    const journalChips = ['All', 'Published', 'Drafts', 'Scheduled'].map(k => {
+      const active = st.journalFilter === k;
+      return {
+        label: k + ' (' + jCounts[k] + ')',
+        border: active ? '#26221C' : 'rgba(34,28,21,.25)',
+        bg: active ? '#26221C' : 'transparent',
+        fg: active ? '#EFE7DA' : '#26221C',
+        go: () => this.setState({ journalFilter: k })
+      };
+    });
+    const J_MATCH = { All: null, Published: ['Published', 'Featured'], Drafts: ['Draft'], Scheduled: ['Scheduled'] };
+    const journalRows = st.articles
+      .map((a, i) => ({ a, i }))
+      .filter(({ a }) => !J_MATCH[st.journalFilter] || J_MATCH[st.journalFilter].includes(a.status))
+      .map(({ a, i }) => ({
+        ...a,
+        stColor: this.stColor(a.status),
+        seoColor: a.seo === '—' ? '#8A8172' : brass,
+        cycleStatus: () => { this.cycle('articles', i, ART_ORDER, true); this.showToast('Live Journal updated'); },
+        edit: () => this.openEdit('articles', i, 'title', 'Edit article title')
+      }));
+
+    // Materials (live-wired)
+    const mq = st.matSearch.trim().toLowerCase();
+    const materialCards = st.materials
+      .map((m, i) => ({ m, i }))
+      .filter(({ m }) => !mq || m.name.toLowerCase().includes(mq))
+      .map(({ m, i }) => ({
+        ...m,
+        opacity: m.hidden ? '0.4' : '1',
+        hideLabel: m.hidden ? 'Show' : 'Hide',
+        edit: () => this.openEdit('materials', i, 'name', 'Rename material'),
+        hide: () => {
+          const list = st.materials.slice();
+          list[i] = { ...m, hidden: !m.hidden };
+          this.setC({ materials: list }, m.hidden ? m.name + ' is back on the live site' : m.name + ' hidden from live site');
+        }
+      }));
+
+    // Services (live-wired)
+    const svc = (listKey) => st[listKey].map((it, i) => ({
+      name: it.name,
+      edit: () => this.openEdit(listKey, i, 'name', 'Rename service'),
+      up: () => { this.moveItem(listKey, i, -1, true); this.showToast('Live Services order updated'); },
+      down: () => { this.moveItem(listKey, i, 1, true); this.showToast('Live Services order updated'); }
+    }));
+
+    // Team (live-wired)
+    const team = st.teamList.map((t, i) => ({
+      ...t,
+      edit: () => this.openEdit('teamList', i, 'name', 'Edit team member name')
+    }));
+
+    // Featured reorder (admin ordering)
+    const featuredImgs = st.featured.map((f, i) => ({
+      ...f,
+      left: () => this.moveItem('featured', i, -1, true),
+      right: () => this.moveItem('featured', i, 1, true)
+    }));
+
+    // Users
+    const userRows = st.users.map((u, i) => ({
+      ...u,
+      tfaColor: u.tfa === 'On' ? brass : '#A0522D',
+      canToggle: !u.protected && u.status !== 'Invited',
+      isInvited: u.status === 'Invited',
+      toggleLabel: u.status === 'Disabled' ? 'Enable' : 'Disable',
+      edit: () => this.openEdit('users', i, 'email', 'Edit user email'),
+      toggle: () => {
+        const list = st.users.slice();
+        list[i] = { ...u, status: u.status === 'Disabled' ? 'Active' : 'Disabled' };
+        this.setState({ users: list });
+        this.showToast(u.email + (u.status === 'Disabled' ? ' enabled' : ' disabled'));
+      },
+      resend: () => this.showToast('Invite re-sent to ' + u.email)
+    }));
+
+    // Hiatus
+    const h = st.hiatus;
+    const hiatusText = h
+      ? 'Hiatus live: ' + h.from + ' → ' + h.to + '. The homepage is showing the closure notice bar now.'
+      : 'No hiatus scheduled. Set one (e.g. CNY closure) and the homepage shows a notice bar between the dates.';
+
+    const editing = st.editing;
+
+    return {
+      navItems, quickLinks,
+      sectionTitle: TITLES[s][0], sectionSub: TITLES[s][1], liveLink: TITLES[s][2],
+      isDashboard: s === 'dashboard', isHome: s === 'home', isProjects: s === 'projects',
+      isJournal: s === 'journal', isMaterials: s === 'materials', isServices: s === 'services',
+      isAbout: s === 'about', isMedia: s === 'media', isSeo: s === 'seo',
+      isLeads: s === 'leads', isUsers: s === 'users',
+
+      hasToast: st.toast.length > 0, toast: st.toast,
+      goLeads: () => this.setState({ section: 'leads' }),
+      resetCms: () => {
+        try { localStorage.removeItem('tdi-cms'); } catch (e) {}
+        const d = this.defaults();
+        this.setState({ ...d, teamList: d.teamList });
+        this.showToast('Demo content reset to defaults');
+      },
+
+      // hiatus
+      hiatusText,
+      hiatusOpen: st.hiatusOpen, hiatusClosed: !st.hiatusOpen, hasHiatus: !!h,
+      hiatusBtnLabel: h ? 'EDIT HIATUS' : 'SCHEDULE HIATUS',
+      hiatusFrom: st.hiatusFrom, hiatusTo: st.hiatusTo,
+      setHiatusFrom: e => this.setState({ hiatusFrom: e.target.value }),
+      setHiatusTo: e => this.setState({ hiatusTo: e.target.value }),
+      toggleHiatus: () => this.setState({ hiatusOpen: !st.hiatusOpen, hiatusFrom: h ? h.from : st.hiatusFrom, hiatusTo: h ? h.to : st.hiatusTo }),
+      saveHiatus: () => {
+        if (!st.hiatusFrom || !st.hiatusTo) { this.showToast('Pick both dates first'); return; }
+        this.setC({ hiatus: { from: st.hiatusFrom, to: st.hiatusTo }, hiatusOpen: false }, 'Hiatus live — homepage notice bar is showing');
+      },
+      clearHiatus: () => this.setC({ hiatus: null, hiatusFrom: '', hiatusTo: '' }, 'Hiatus cleared — notice bar removed'),
+
+      // homepage editor (live-wired)
+      heroCHeadline: st.heroCHeadline,
+      setHeroCHeadline: e => this.setC({ heroCHeadline: e.target.value }),
+      heroCCta: st.heroCCta,
+      setHeroCCta: e => this.setC({ heroCCta: e.target.value }),
+      heroRHeadline: st.heroRHeadline,
+      setHeroRHeadline: e => this.setC({ heroRHeadline: e.target.value }),
+      announcement: st.announcement,
+      setAnnouncement: e => this.setC({ announcement: e.target.value }),
+
+      // about (live-wired)
+      story: st.story,
+      setStory: e => this.setC({ story: e.target.value }),
+      team, teamCount: String(st.teamList.length),
+
+      // dashboard / leads
+      dashLeads, leadChips, leadRows,
+
+      // projects
+      projSearch: st.projSearch,
+      setProjSearch: e => this.setState({ projSearch: e.target.value }),
+      addProject: () => {
+        this.setC({ projects: [{ id: 'p' + Date.now(), name: 'Untitled project', mode: 'Commercial', cat: 'Office', catKey: 'office', status: 'Draft', img: 'admin/images/project-coworking.jpg' }, ...st.projects] }, 'Draft created — set it to Published to show on the live site');
+      },
+      projectRows,
+
+      // journal
+      journalChips, journalRows,
+      addArticle: () => {
+        this.setC({ articles: [{ id: 'a' + Date.now(), title: 'Untitled article', cat: 'Trends', status: 'Draft', seo: '—', img: 'admin/images/journal-trends.jpg' }, ...st.articles], journalFilter: 'All' }, 'Draft created — set it to Published to show on the live site');
+      },
+
+      // materials
+      matSearch: st.matSearch,
+      setMatSearch: e => this.setState({ matSearch: e.target.value }),
+      addMaterial: () => {
+        this.setC({ materials: [{ id: 'm' + Date.now(), name: 'New material', file: '— upload image —', img: 'admin/images/material-terrazzo.jpg', hidden: false }, ...st.materials] }, 'Material added to live site — click Edit to name it');
+      },
+      materialCards,
+
+      // services
+      commServices: svc('comm'), resServices: svc('res'),
+      commCount: String(st.comm.length), resCount: String(st.res.length),
+
+      // homepage featured
+      featuredImgs,
+
+      // users
+      userRows,
+      inviteUser: () => {
+        this.setState({ users: [...st.users, { email: 'new.user@tdiworkspace.sg', role: 'Editor', tfa: 'Off', status: 'Invited', protected: false }] });
+        this.showToast('Invite sent — click Edit to set their email');
+      },
+
+      // media
+      mediaFiles: [
+        'hero-commercial.jpg','hero-residential.jpg','project-fintech.jpg','project-izakaya.jpg','project-boutique.jpg','project-clinic.jpg',
+        'project-coworking.jpg','project-restaurant.jpg','project-maisonette.jpg','project-bto.jpg','project-penthouse.jpg','project-condo-bedroom.jpg',
+        'project-landed.jpg','project-hdb-kitchen.jpg','journal-office-costs.jpg','journal-cat-ab.jpg','journal-downtime.jpg','journal-hdb-permits.jpg',
+        'journal-bto-budget.jpg','journal-flooring.jpg','journal-trends.jpg','journal-materials-guide.jpg','journal-lighting.jpg','material-wood.jpg',
+        'material-marble.jpg','material-stone.jpg','material-tiles.jpg','material-fabric.jpg','material-metal.jpg','material-terrazzo.jpg',
+        'material-glass.jpg','about-studio.jpg','team-1.jpg','team-2.jpg','team-3.jpg','avatar-commercial.jpg'
+      ].map(name => ({ name, path: 'admin/images/' + name })),
+
+      // edit modal
+      isEditing: !!editing,
+      editTitle: editing ? editing.title : '',
+      editValue: st.editValue,
+      setEditValue: e => this.setState({ editValue: e.target.value }),
+      cancelEdit: () => this.setState({ editing: null, editValue: '' }),
+      saveEdit: () => {
+        if (!editing) return;
+        const list = st[editing.listKey].slice();
+        list[editing.idx] = { ...list[editing.idx], [editing.field]: st.editValue };
+        const isLive = editing.listKey !== 'users' && editing.listKey !== 'leads';
+        if (isLive) this.setC({ [editing.listKey]: list, editing: null, editValue: '' }, 'Saved — live site updated');
+        else { this.setState({ [editing.listKey]: list, editing: null, editValue: '' }); this.showToast('Saved'); }
+      }
+    };
+  }
+}
+</script>
+</body>
+</html>

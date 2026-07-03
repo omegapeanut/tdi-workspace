@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet data-dc-atomics>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500;1,600&amp;family=Manrope:wght@300;400;500;600;700;800&amp;family=Noto+Serif+SC:wght@400;600&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#221C15}
+@keyframes fadeUp{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+</style>
+</helmet>
+
+<div style="font-family:Manrope,sans-serif;color:#EFE7DA;background:#221C15" data-screen-label="TDI Home — Ink and Timber">
+
+  <!-- ================= ANNOUNCEMENT (tweakable) ================= -->
+  <sc-if value="{{ hasAnnouncement }}" hint-placeholder-val="{{ false }}">
+    <div style="background:oklch(0.74 0.08 78);color:#221C15;text-align:center;padding:10px 24px;font:600 12px Manrope,sans-serif;letter-spacing:.06em">{{ announcement }}</div>
+  </sc-if>
+
+  <!-- ================= HERO ================= -->
+  <div style="position:relative;height:860px;display:flex;flex-direction:column">
+    <sc-if value="{{ isC }}" hint-placeholder-val="{{ true }}">
+      <img src="admin/images/hero-commercial.jpg" alt="Commercial interior — boardroom with timber slats" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover">
+    </sc-if>
+    <sc-if value="{{ isR }}" hint-placeholder-val="{{ false }}">
+      <img src="admin/images/hero-residential.jpg" alt="Residential interior — living room with warm lamps" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover">
+    </sc-if>
+    <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(20,16,11,.94) 0%,rgba(20,16,11,.25) 45%,rgba(20,16,11,.6) 100%)"></div>
+
+    <div style="position:relative;display:flex;align-items:center;justify-content:space-between;padding:26px 64px">
+      <div style="display:flex;align-items:baseline;gap:9px">
+        <span style="font:500 24px 'Cormorant Garamond',serif">TDI</span>
+        <span style="font:600 10px Manrope,sans-serif;letter-spacing:.3em;color:oklch(0.74 0.08 78)">WORKSPACE</span>
+      </div>
+      <nav style="display:flex;gap:32px;font:500 12.5px Manrope,sans-serif;color:rgba(239,231,218,.75)">
+        <a href="TDI Projects.dc.html" style="color:rgba(239,231,218,.75);text-decoration:none" style-hover="color:#EFE7DA">Projects</a>
+        <a href="TDI Services.dc.html" style="color:rgba(239,231,218,.75);text-decoration:none" style-hover="color:#EFE7DA">Services</a>
+        <a href="TDI Process.dc.html" style="color:rgba(239,231,218,.75);text-decoration:none" style-hover="color:#EFE7DA">Process</a>
+        <a href="TDI Journal.dc.html" style="color:rgba(239,231,218,.75);text-decoration:none" style-hover="color:#EFE7DA">Journal</a>
+        <a href="TDI Materials.dc.html" style="color:rgba(239,231,218,.75);text-decoration:none" style-hover="color:#EFE7DA">Materials</a>
+        <a href="TDI About.dc.html" style="color:rgba(239,231,218,.75);text-decoration:none" style-hover="color:#EFE7DA">About</a>
+        <a href="TDI Calculator.dc.html" style="color:rgba(239,231,218,.75);text-decoration:none" style-hover="color:#EFE7DA">Calculator</a>
+      </nav>
+      <a href="TDI Contact.dc.html" style="border:1px solid oklch(0.74 0.08 78);background:transparent;color:oklch(0.74 0.08 78);border-radius:2px;padding:11px 22px;font:600 11.5px Manrope,sans-serif;letter-spacing:.08em;text-decoration:none" style-hover="background:oklch(0.74 0.08 78);color:#221C15">BOOK A CONSULTATION</a>
+    </div>
+
+    <div style="position:relative;flex:1;display:flex;flex-direction:column;justify-content:flex-end;padding:0 64px 56px;gap:36px">
+      <sc-if value="{{ isC }}" hint-placeholder-val="{{ true }}">
+        <div style="display:flex;flex-direction:column;gap:18px">
+          <div style="font:600 11px Manrope,sans-serif;letter-spacing:.32em;color:oklch(0.74 0.08 78)">COMMERCIAL DESIGN &amp; BUILD — SINGAPORE · 匠心营造</div>
+          <h1 style="margin:0;font:italic 500 94px/1.02 'Cormorant Garamond',serif;letter-spacing:-.01em;max-width:920px">Where work finds its form.</h1>
+          <p style="margin:0;font:400 15.5px/1.7 Manrope,sans-serif;color:rgba(239,231,218,.72);max-width:520px">Offices, restaurants and flagship retail — designed, built and handed over by one accountable team.</p>
+        </div>
+      </sc-if>
+      <sc-if value="{{ isR }}" hint-placeholder-val="{{ false }}">
+        <div style="display:flex;flex-direction:column;gap:18px">
+          <div style="font:600 11px Manrope,sans-serif;letter-spacing:.32em;color:oklch(0.74 0.08 78)">RESIDENTIAL INTERIORS — HDB · CONDO · LANDED · 家的质感</div>
+          <h1 style="margin:0;font:italic 500 94px/1.02 'Cormorant Garamond',serif;letter-spacing:-.01em;max-width:920px">Quiet luxury, made livable.</h1>
+          <p style="margin:0;font:400 15.5px/1.7 Manrope,sans-serif;color:rgba(239,231,218,.72);max-width:520px">Homes composed with restraint — planned around how you actually live, priced before you commit.</p>
+        </div>
+      </sc-if>
+      <div style="display:flex;align-items:flex-end;justify-content:space-between;gap:24px">
+        <div style="display:flex;flex-direction:column;gap:12px">
+          <div style="display:flex;border:1px solid rgba(239,231,218,.35);border-radius:2px;font:600 12px Manrope,sans-serif;letter-spacing:.1em;align-self:flex-start">
+            <sc-if value="{{ isC }}" hint-placeholder-val="{{ true }}">
+              <div style="display:flex">
+                <button onClick="{{ toC }}" style="border:0;cursor:pointer;padding:13px 26px;background:#EFE7DA;color:#221C15;font:inherit;letter-spacing:inherit">COMMERCIAL</button>
+                <button onClick="{{ toR }}" style="border:0;cursor:pointer;padding:13px 26px;background:transparent;color:rgba(239,231,218,.8);font:inherit;letter-spacing:inherit" style-hover="color:#EFE7DA">RESIDENTIAL</button>
+              </div>
+            </sc-if>
+            <sc-if value="{{ isR }}" hint-placeholder-val="{{ false }}">
+              <div style="display:flex">
+                <button onClick="{{ toC }}" style="border:0;cursor:pointer;padding:13px 26px;background:transparent;color:rgba(239,231,218,.8);font:inherit;letter-spacing:inherit" style-hover="color:#EFE7DA">COMMERCIAL</button>
+                <button onClick="{{ toR }}" style="border:0;cursor:pointer;padding:13px 26px;background:#EFE7DA;color:#221C15;font:inherit;letter-spacing:inherit">RESIDENTIAL</button>
+              </div>
+            </sc-if>
+          </div>
+          <span style="font:400 11px Manrope,sans-serif;letter-spacing:.14em;color:rgba(239,231,218,.4)">YOUR CHOICE IS REMEMBERED ON YOUR NEXT VISIT</span>
+        </div>
+        <div style="background:rgba(20,16,11,.65);backdrop-filter:blur(8px);border:1px solid rgba(239,231,218,.14);border-radius:3px;padding:22px 24px;display:flex;flex-direction:column;gap:10px;max-width:330px">
+          <span style="font:italic 500 17px 'Cormorant Garamond',serif">A 30-minute conversation, no obligation.</span>
+          <span style="font:400 12.5px/1.6 Manrope,sans-serif;color:rgba(239,231,218,.65)">Walk us through your floor plan. We'll tell you what's possible — and what it should cost.</span>
+          <a href="TDI Contact.dc.html" style="display:inline-block;background:oklch(0.74 0.08 78);color:#221C15;border-radius:2px;padding:12px 18px;font:700 11.5px Manrope,sans-serif;letter-spacing:.08em;text-decoration:none;align-self:flex-start" style-hover="background:oklch(0.8 0.08 78)">FREE CONSULTATION →</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= SERVICES ================= -->
+  <div style="padding:110px 64px 100px;display:flex;flex-direction:column;gap:56px;border-top:1px solid rgba(239,231,218,.1)">
+    <div style="display:flex;justify-content:space-between;align-items:flex-end;gap:32px">
+      <div style="display:flex;flex-direction:column;gap:14px">
+        <span style="font:600 11px Manrope,sans-serif;letter-spacing:.32em;color:oklch(0.74 0.08 78)">WHAT WE DO</span>
+        <sc-if value="{{ isC }}" hint-placeholder-val="{{ true }}"><h2 style="margin:0;font:italic 500 54px/1.1 'Cormorant Garamond',serif">Design &amp; build, end to end.</h2></sc-if>
+        <sc-if value="{{ isR }}" hint-placeholder-val="{{ false }}"><h2 style="margin:0;font:italic 500 54px/1.1 'Cormorant Garamond',serif">One team, whole home.</h2></sc-if>
+      </div>
+      <a href="TDI Services.dc.html" style="font:500 13px Manrope,sans-serif;color:rgba(239,231,218,.6);border-bottom:1px solid rgba(239,231,218,.35);padding-bottom:4px;text-decoration:none" style-hover="color:#EFE7DA">All services →</a>
+    </div>
+    <sc-if value="{{ isC }}" hint-placeholder-val="{{ true }}">
+      <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:rgba(239,231,218,.12);border:1px solid rgba(239,231,218,.12)">
+        <div style="background:#221C15;padding:34px 28px 40px;display:flex;flex-direction:column;gap:14px;cursor:pointer" style-hover="background:#282116">
+          <span style="font:400 30px 'Cormorant Garamond',serif;color:oklch(0.74 0.08 78)">01</span>
+          <span style="font:700 16px Manrope,sans-serif">Office fit-out</span>
+          <span style="font:400 13px/1.65 Manrope,sans-serif;color:rgba(239,231,218,.6)">CAT B fit-outs and reinstatements — space planning, M&amp;E coordination, landlord approvals.</span>
+        </div>
+        <div style="background:#221C15;padding:34px 28px 40px;display:flex;flex-direction:column;gap:14px;cursor:pointer" style-hover="background:#282116">
+          <span style="font:400 30px 'Cormorant Garamond',serif;color:oklch(0.74 0.08 78)">02</span>
+          <span style="font:700 16px Manrope,sans-serif">F&amp;B &amp; hospitality</span>
+          <span style="font:400 13px/1.65 Manrope,sans-serif;color:rgba(239,231,218,.6)">Restaurants, cafés and bars built for service flow, licensing and opening day.</span>
+        </div>
+        <div style="background:#221C15;padding:34px 28px 40px;display:flex;flex-direction:column;gap:14px;cursor:pointer" style-hover="background:#282116">
+          <span style="font:400 30px 'Cormorant Garamond',serif;color:oklch(0.74 0.08 78)">03</span>
+          <span style="font:700 16px Manrope,sans-serif">Retail flagship</span>
+          <span style="font:400 13px/1.65 Manrope,sans-serif;color:rgba(239,231,218,.6)">Brand-first stores and showrooms — millwork, lighting and visual merchandising built in.</span>
+        </div>
+        <div style="background:#221C15;padding:34px 28px 40px;display:flex;flex-direction:column;gap:14px;cursor:pointer" style-hover="background:#282116">
+          <span style="font:400 30px 'Cormorant Garamond',serif;color:oklch(0.74 0.08 78)">04</span>
+          <span style="font:700 16px Manrope,sans-serif">Clinics &amp; wellness</span>
+          <span style="font:400 13px/1.65 Manrope,sans-serif;color:rgba(239,231,218,.6)">Compliant, calming healthcare spaces — from GP suites to aesthetic studios.</span>
+        </div>
+      </div>
+    </sc-if>
+    <sc-if value="{{ isR }}" hint-placeholder-val="{{ false }}">
+      <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:rgba(239,231,218,.12);border:1px solid rgba(239,231,218,.12)">
+        <div style="background:#221C15;padding:34px 28px 40px;display:flex;flex-direction:column;gap:14px;cursor:pointer" style-hover="background:#282116">
+          <span style="font:400 30px 'Cormorant Garamond',serif;color:oklch(0.74 0.08 78)">01</span>
+          <span style="font:700 16px Manrope,sans-serif">Whole-home renovation</span>
+          <span style="font:400 13px/1.65 Manrope,sans-serif;color:rgba(239,231,218,.6)">HDB, condo and landed — full design, permits and build under one contract.</span>
+        </div>
+        <div style="background:#221C15;padding:34px 28px 40px;display:flex;flex-direction:column;gap:14px;cursor:pointer" style-hover="background:#282116">
+          <span style="font:400 30px 'Cormorant Garamond',serif;color:oklch(0.74 0.08 78)">02</span>
+          <span style="font:700 16px Manrope,sans-serif">Kitchens &amp; wet works</span>
+          <span style="font:400 13px/1.65 Manrope,sans-serif;color:rgba(239,231,218,.6)">Hacking, tiling, plumbing and waterproofing done right the first time.</span>
+        </div>
+        <div style="background:#221C15;padding:34px 28px 40px;display:flex;flex-direction:column;gap:14px;cursor:pointer" style-hover="background:#282116">
+          <span style="font:400 30px 'Cormorant Garamond',serif;color:oklch(0.74 0.08 78)">03</span>
+          <span style="font:700 16px Manrope,sans-serif">Custom carpentry</span>
+          <span style="font:400 13px/1.65 Manrope,sans-serif;color:rgba(239,231,218,.6)">Built-in wardrobes, feature walls and storage measured to the millimetre.</span>
+        </div>
+        <div style="background:#221C15;padding:34px 28px 40px;display:flex;flex-direction:column;gap:14px;cursor:pointer" style-hover="background:#282116">
+          <span style="font:400 30px 'Cormorant Garamond',serif;color:oklch(0.74 0.08 78)">04</span>
+          <span style="font:700 16px Manrope,sans-serif">Styling &amp; lighting</span>
+          <span style="font:400 13px/1.65 Manrope,sans-serif;color:rgba(239,231,218,.6)">The last 10% that makes it feel finished — lighting plans, furniture and soft styling.</span>
+        </div>
+      </div>
+    </sc-if>
+  </div>
+
+  <!-- ================= FEATURED PROJECTS ================= -->
+  <div style="padding:0 64px 110px;display:flex;flex-direction:column;gap:48px">
+    <div style="display:flex;justify-content:space-between;align-items:flex-end;gap:32px">
+      <div style="display:flex;flex-direction:column;gap:14px">
+        <span style="font:600 11px Manrope,sans-serif;letter-spacing:.32em;color:oklch(0.74 0.08 78)">SELECTED WORK</span>
+        <h2 style="margin:0;font:italic 500 54px/1.1 'Cormorant Garamond',serif">Recent handovers.</h2>
+      </div>
+      <a href="TDI Projects.dc.html" style="font:500 13px Manrope,sans-serif;color:rgba(239,231,218,.6);border-bottom:1px solid rgba(239,231,218,.35);padding-bottom:4px;text-decoration:none" style-hover="color:#EFE7DA">All projects →</a>
+    </div>
+    <sc-if value="{{ isC }}" hint-placeholder-val="{{ true }}">
+      <div style="display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:22px">
+        <div style="display:flex;flex-direction:column;gap:16px;cursor:pointer">
+          <img src="admin/images/project-fintech.jpg" alt="Fintech HQ reception with timber slats" style="height:440px;width:100%;object-fit:cover;display:block">
+          <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px">
+            <span style="font:italic 500 22px 'Cormorant Garamond',serif">Fintech HQ, Raffles Place</span>
+            <span style="font:500 11px Manrope,sans-serif;letter-spacing:.14em;color:rgba(239,231,218,.5)">OFFICE · 12,400 SQFT · 14 WKS</span>
+          </div>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:16px;cursor:pointer">
+          <img src="admin/images/project-izakaya.jpg" alt="Izakaya bar counter in low light" style="height:440px;width:100%;object-fit:cover;display:block">
+          <div style="display:flex;flex-direction:column;gap:2px">
+            <span style="font:italic 500 22px 'Cormorant Garamond',serif">Izakaya, Duxton Hill</span>
+            <span style="font:500 11px Manrope,sans-serif;letter-spacing:.14em;color:rgba(239,231,218,.5)">F&amp;B · 2,100 SQFT · 9 WKS</span>
+          </div>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:16px;cursor:pointer">
+          <img src="admin/images/project-boutique.jpg" alt="Flagship boutique facade at night" style="height:440px;width:100%;object-fit:cover;display:block">
+          <div style="display:flex;flex-direction:column;gap:2px">
+            <span style="font:italic 500 22px 'Cormorant Garamond',serif">Flagship boutique, Orchard</span>
+            <span style="font:500 11px Manrope,sans-serif;letter-spacing:.14em;color:rgba(239,231,218,.5)">RETAIL · 3,800 SQFT · 11 WKS</span>
+          </div>
+        </div>
+      </div>
+    </sc-if>
+    <sc-if value="{{ isR }}" hint-placeholder-val="{{ false }}">
+      <div style="display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:22px">
+        <div style="display:flex;flex-direction:column;gap:16px;cursor:pointer">
+          <img src="admin/images/project-maisonette.jpg" alt="Maisonette stairwell in warm light" style="height:440px;width:100%;object-fit:cover;display:block">
+          <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px">
+            <span style="font:italic 500 22px 'Cormorant Garamond',serif">Maisonette, Bukit Timah</span>
+            <span style="font:500 11px Manrope,sans-serif;letter-spacing:.14em;color:rgba(239,231,218,.5)">LANDED FEEL · 1,650 SQFT · 10 WKS</span>
+          </div>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:16px;cursor:pointer">
+          <img src="admin/images/project-bto.jpg" alt="BTO living room with built-in bench" style="height:440px;width:100%;object-fit:cover;display:block">
+          <div style="display:flex;flex-direction:column;gap:2px">
+            <span style="font:italic 500 22px 'Cormorant Garamond',serif">4-room BTO, Tengah</span>
+            <span style="font:500 11px Manrope,sans-serif;letter-spacing:.14em;color:rgba(239,231,218,.5)">HDB · 990 SQFT · 8 WKS</span>
+          </div>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:16px;cursor:pointer">
+          <img src="admin/images/project-penthouse.jpg" alt="Penthouse dining area with pendant lights" style="height:440px;width:100%;object-fit:cover;display:block">
+          <div style="display:flex;flex-direction:column;gap:2px">
+            <span style="font:italic 500 22px 'Cormorant Garamond',serif">Penthouse, Newton</span>
+            <span style="font:500 11px Manrope,sans-serif;letter-spacing:.14em;color:rgba(239,231,218,.5)">CONDO · 2,300 SQFT · 12 WKS</span>
+          </div>
+        </div>
+      </div>
+    </sc-if>
+  </div>
+
+  <!-- ================= PROOF + TESTIMONIAL ================= -->
+  <div style="padding:90px 64px;border-top:1px solid rgba(239,231,218,.1);display:flex;flex-direction:column;gap:64px">
+    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:40px">
+      <sc-if value="{{ isC }}" hint-placeholder-val="{{ true }}">
+        <div style="display:grid;grid-template-columns:subgrid;grid-column:1 / 5;gap:40px">
+          <div style="display:flex;flex-direction:column;gap:6px"><span style="font:400 52px 'Cormorant Garamond',serif;color:oklch(0.74 0.08 78)">140+</span><span style="font:500 12px Manrope,sans-serif;letter-spacing:.12em;color:rgba(239,231,218,.55)">COMMERCIAL PROJECTS DELIVERED</span></div>
+          <div style="display:flex;flex-direction:column;gap:6px"><span style="font:400 52px 'Cormorant Garamond',serif;color:oklch(0.74 0.08 78)">15</span><span style="font:500 12px Manrope,sans-serif;letter-spacing:.12em;color:rgba(239,231,218,.55)">YEARS OF DESIGN &amp; BUILD</span></div>
+          <div style="display:flex;flex-direction:column;gap:6px"><span style="font:400 52px 'Cormorant Garamond',serif;color:oklch(0.74 0.08 78)">92%</span><span style="font:500 12px Manrope,sans-serif;letter-spacing:.12em;color:rgba(239,231,218,.55)">HANDED OVER ON OR AHEAD OF TIME</span></div>
+          <div style="display:flex;flex-direction:column;gap:6px"><span style="font:400 52px 'Cormorant Garamond',serif;color:oklch(0.74 0.08 78)">1</span><span style="font:500 12px Manrope,sans-serif;letter-spacing:.12em;color:rgba(239,231,218,.55)">CONTRACT, ONE ACCOUNTABLE TEAM</span></div>
+        </div>
+      </sc-if>
+      <sc-if value="{{ isR }}" hint-placeholder-val="{{ false }}">
+        <div style="display:grid;grid-template-columns:subgrid;grid-column:1 / 5;gap:40px">
+          <div style="display:flex;flex-direction:column;gap:6px"><span style="font:400 52px 'Cormorant Garamond',serif;color:oklch(0.74 0.08 78)">60+</span><span style="font:500 12px Manrope,sans-serif;letter-spacing:.12em;color:rgba(239,231,218,.55)">HOMES COMPLETED</span></div>
+          <div style="display:flex;flex-direction:column;gap:6px"><span style="font:400 52px 'Cormorant Garamond',serif;color:oklch(0.74 0.08 78)">4.9★</span><span style="font:500 12px Manrope,sans-serif;letter-spacing:.12em;color:rgba(239,231,218,.55)">AVERAGE CLIENT RATING</span></div>
+          <div style="display:flex;flex-direction:column;gap:6px"><span style="font:400 52px 'Cormorant Garamond',serif;color:oklch(0.74 0.08 78)">0</span><span style="font:500 12px Manrope,sans-serif;letter-spacing:.12em;color:rgba(239,231,218,.55)">HIDDEN COSTS — ITEMISED QUOTES</span></div>
+          <div style="display:flex;flex-direction:column;gap:6px"><span style="font:400 52px 'Cormorant Garamond',serif;color:oklch(0.74 0.08 78)">12mo</span><span style="font:500 12px Manrope,sans-serif;letter-spacing:.12em;color:rgba(239,231,218,.55)">DEFECTS CARE AFTER HANDOVER</span></div>
+        </div>
+      </sc-if>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 380px;gap:64px;align-items:center;border-top:1px solid rgba(239,231,218,.1);padding-top:64px">
+      <sc-if value="{{ isC }}" hint-placeholder-val="{{ true }}">
+        <div style="display:flex;flex-direction:column;gap:24px">
+          <span style="font:italic 400 36px/1.35 'Cormorant Garamond',serif">"They treated our downtime like it cost money — because it does. We moved back in a week early, and the space still stops visitors at the door."</span>
+          <div style="display:flex;align-items:center;gap:14px">
+            <img src="admin/images/avatar-commercial.jpg" alt="Client portrait" style="width:44px;height:44px;border-radius:99px;object-fit:cover;border:1px solid rgba(239,231,218,.2)">
+            <div style="display:flex;flex-direction:column"><span style="font:700 13.5px Manrope,sans-serif">Operations Director</span><span style="font:400 12px Manrope,sans-serif;color:rgba(239,231,218,.55)">Fintech HQ, Raffles Place</span></div>
+          </div>
+        </div>
+      </sc-if>
+      <sc-if value="{{ isR }}" hint-placeholder-val="{{ false }}">
+        <div style="display:flex;flex-direction:column;gap:24px">
+          <span style="font:italic 400 36px/1.35 'Cormorant Garamond',serif">"The quote we signed was the amount we paid. Ten weeks, one WhatsApp group, zero drama — and a home that finally feels like ours."</span>
+          <div style="display:flex;align-items:center;gap:14px">
+            <img src="admin/images/avatar-residential.jpg" alt="Client portrait" style="width:44px;height:44px;border-radius:99px;object-fit:cover;border:1px solid rgba(239,231,218,.2)">
+            <div style="display:flex;flex-direction:column"><span style="font:700 13.5px Manrope,sans-serif">Homeowners, Tengah</span><span style="font:400 12px Manrope,sans-serif;color:rgba(239,231,218,.55)">4-room BTO, full renovation</span></div>
+          </div>
+        </div>
+      </sc-if>
+      <div style="display:flex;flex-direction:column;gap:18px">
+        <sc-if value="{{ isC }}" hint-placeholder-val="{{ true }}">
+          <div style="display:flex;flex-direction:column;gap:18px">
+            <span style="font:500 11px Manrope,sans-serif;letter-spacing:.24em;color:rgba(239,231,218,.45)">TRUSTED BY TEAMS AT</span>
+            <div style="display:flex;flex-wrap:wrap;gap:12px 28px;font:600 15px Manrope,sans-serif;color:rgba(239,231,218,.4)">
+              <span>NOVA BANK</span><span>Herring &amp; Co.</span><span>KOPI CULTURE</span><span>Atlas Retail</span><span>MEDFIRST</span>
+            </div>
+          </div>
+        </sc-if>
+        <sc-if value="{{ isR }}" hint-placeholder-val="{{ false }}">
+          <div style="display:flex;flex-direction:column;gap:18px">
+            <span style="font:500 11px Manrope,sans-serif;letter-spacing:.24em;color:rgba(239,231,218,.45)">AS FEATURED ON</span>
+            <div style="display:flex;flex-wrap:wrap;gap:12px 28px;font:600 15px Manrope,sans-serif;color:rgba(239,231,218,.4)">
+              <span>Qanvast</span><span>RENONATION</span><span>Home &amp; Decor</span><span>STACKED</span>
+            </div>
+          </div>
+        </sc-if>
+        <span style="font:400 11.5px/1.7 Manrope,sans-serif;color:rgba(239,231,218,.4);border-top:1px solid rgba(239,231,218,.12);padding-top:14px">BCA-registered · bizSAFE Level 3 · HDB-licensed renovation contractor</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= PROCESS + JOURNAL (cream) ================= -->
+  <div style="background:#EFE7DA;color:#221C15;padding:110px 64px 100px;display:flex;flex-direction:column;gap:110px">
+    <div style="display:flex;flex-direction:column;gap:52px">
+      <div style="display:flex;flex-direction:column;gap:14px">
+        <span style="font:600 11px Manrope,sans-serif;letter-spacing:.32em;color:oklch(0.55 0.09 70)">HOW IT WORKS · 六步交付</span>
+        <h2 style="margin:0;font:italic 500 54px/1.1 'Cormorant Garamond',serif">Six steps, no surprises.</h2>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:rgba(34,28,21,.14);border:1px solid rgba(34,28,21,.14)">
+        <div style="background:#EFE7DA;padding:30px 28px 36px;display:flex;flex-direction:column;gap:10px"><span style="font:400 30px 'Cormorant Garamond',serif;color:oklch(0.55 0.09 70)">01</span><span style="font:700 15px Manrope,sans-serif">Consultation</span><span style="font:400 13px/1.6 Manrope,sans-serif;color:#5C5546">30 minutes, free. Bring a floor plan; leave with a realistic budget band.</span></div>
+        <div style="background:#EFE7DA;padding:30px 28px 36px;display:flex;flex-direction:column;gap:10px"><span style="font:400 30px 'Cormorant Garamond',serif;color:oklch(0.55 0.09 70)">02</span><span style="font:700 15px Manrope,sans-serif">Concept &amp; space plan</span><span style="font:400 13px/1.6 Manrope,sans-serif;color:#5C5546">Layouts, moodboards and a 3D view of the moments that matter.</span></div>
+        <div style="background:#EFE7DA;padding:30px 28px 36px;display:flex;flex-direction:column;gap:10px"><span style="font:400 30px 'Cormorant Garamond',serif;color:oklch(0.55 0.09 70)">03</span><span style="font:700 15px Manrope,sans-serif">Budget &amp; materials</span><span style="font:400 13px/1.6 Manrope,sans-serif;color:#5C5546">Itemised quote, line by line. Materials shortlisted from our library.</span></div>
+        <div style="background:#EFE7DA;padding:30px 28px 36px;display:flex;flex-direction:column;gap:10px"><span style="font:400 30px 'Cormorant Garamond',serif;color:oklch(0.55 0.09 70)">04</span><span style="font:700 15px Manrope,sans-serif">Permits &amp; approvals</span><span style="font:400 13px/1.6 Manrope,sans-serif;color:#5C5546">HDB permits or landlord and authority submissions — handled for you.</span></div>
+        <div style="background:#EFE7DA;padding:30px 28px 36px;display:flex;flex-direction:column;gap:10px"><span style="font:400 30px 'Cormorant Garamond',serif;color:oklch(0.55 0.09 70)">05</span><span style="font:700 15px Manrope,sans-serif">Build, with updates</span><span style="font:400 13px/1.6 Manrope,sans-serif;color:#5C5546">A weekly photo report and one WhatsApp group. You always know where things stand.</span></div>
+        <div style="background:#EFE7DA;padding:30px 28px 36px;display:flex;flex-direction:column;gap:10px"><span style="font:400 30px 'Cormorant Garamond',serif;color:oklch(0.55 0.09 70)">06</span><span style="font:700 15px Manrope,sans-serif">Handover &amp; care</span><span style="font:400 13px/1.6 Manrope,sans-serif;color:#5C5546">Joint inspection, then 12 months of defects care after you move in.</span></div>
+      </div>
+    </div>
+
+    <div style="display:flex;flex-direction:column;gap:44px">
+      <div style="display:flex;justify-content:space-between;align-items:flex-end;gap:32px">
+        <div style="display:flex;flex-direction:column;gap:14px">
+          <span style="font:600 11px Manrope,sans-serif;letter-spacing:.32em;color:oklch(0.55 0.09 70)">FROM THE JOURNAL</span>
+          <h2 style="margin:0;font:italic 500 54px/1.1 'Cormorant Garamond',serif">Know before you renovate.</h2>
+        </div>
+        <a href="TDI Journal.dc.html" style="font:500 13px Manrope,sans-serif;color:#5C5546;border-bottom:1px solid rgba(34,28,21,.4);padding-bottom:4px;text-decoration:none">All articles →</a>
+      </div>
+      <sc-if value="{{ isC }}" hint-placeholder-val="{{ true }}">
+        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:22px">
+          <div style="display:flex;flex-direction:column;gap:14px;cursor:pointer">
+            <img src="admin/images/journal-office-costs.jpg" alt="Office fit-out cost guide cover" style="height:220px;width:100%;object-fit:cover;display:block">
+            <span style="font:500 11px Manrope,sans-serif;letter-spacing:.14em;color:oklch(0.55 0.09 70)">FIT-OUT GUIDES · 8 MIN</span>
+            <span style="font:italic 500 22px/1.25 'Cormorant Garamond',serif">Office fit-out costs in Singapore: the 2026 guide</span>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:14px;cursor:pointer">
+            <img src="admin/images/journal-cat-ab.jpg" alt="CAT A vs CAT B article cover" style="height:220px;width:100%;object-fit:cover;display:block">
+            <span style="font:500 11px Manrope,sans-serif;letter-spacing:.14em;color:oklch(0.55 0.09 70)">TENANT ADVICE · 6 MIN</span>
+            <span style="font:italic 500 22px/1.25 'Cormorant Garamond',serif">CAT A vs CAT B: what office tenants actually need to know</span>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:14px;cursor:pointer">
+            <img src="admin/images/journal-downtime.jpg" alt="Office renovation downtime article cover" style="height:220px;width:100%;object-fit:cover;display:block">
+            <span style="font:500 11px Manrope,sans-serif;letter-spacing:.14em;color:oklch(0.55 0.09 70)">PLANNING · 5 MIN</span>
+            <span style="font:italic 500 22px/1.25 'Cormorant Garamond',serif">How much downtime does an office renovation really take?</span>
+          </div>
+        </div>
+      </sc-if>
+      <sc-if value="{{ isR }}" hint-placeholder-val="{{ false }}">
+        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:22px">
+          <div style="display:flex;flex-direction:column;gap:14px;cursor:pointer">
+            <img src="admin/images/journal-hdb-permits.jpg" alt="HDB renovation permits article cover" style="height:220px;width:100%;object-fit:cover;display:block">
+            <span style="font:500 11px Manrope,sans-serif;letter-spacing:.14em;color:oklch(0.55 0.09 70)">HDB GUIDES · 7 MIN</span>
+            <span style="font:italic 500 22px/1.25 'Cormorant Garamond',serif">HDB renovation permits, explained in plain English</span>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:14px;cursor:pointer">
+            <img src="admin/images/journal-bto-budget.jpg" alt="BTO renovation budget article cover" style="height:220px;width:100%;object-fit:cover;display:block">
+            <span style="font:500 11px Manrope,sans-serif;letter-spacing:.14em;color:oklch(0.55 0.09 70)">BUDGETING · 9 MIN</span>
+            <span style="font:italic 500 22px/1.25 'Cormorant Garamond',serif">4-room BTO renovation: where the money actually goes</span>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:14px;cursor:pointer">
+            <img src="admin/images/journal-flooring.jpg" alt="Vinyl vs engineered wood article cover" style="height:220px;width:100%;object-fit:cover;display:block">
+            <span style="font:500 11px Manrope,sans-serif;letter-spacing:.14em;color:oklch(0.55 0.09 70)">MATERIALS · 5 MIN</span>
+            <span style="font:italic 500 22px/1.25 'Cormorant Garamond',serif">Vinyl vs engineered wood: the honest comparison</span>
+          </div>
+        </div>
+      </sc-if>
+    </div>
+  </div>
+
+  <!-- ================= FINAL CTA ================= -->
+  <div style="padding:120px 64px;display:flex;flex-direction:column;align-items:center;gap:32px;text-align:center;border-bottom:1px solid rgba(239,231,218,.1)">
+    <sc-if value="{{ isC }}" hint-placeholder-val="{{ true }}">
+      <div style="display:flex;flex-direction:column;align-items:center;gap:32px">
+        <span style="font:600 11px Manrope,sans-serif;letter-spacing:.32em;color:oklch(0.74 0.08 78)">START A PROJECT</span>
+        <h2 style="margin:0;font:italic 500 68px/1.08 'Cormorant Garamond',serif;max-width:860px">Let's scope your space — proposal in 5 working days.</h2>
+        <p style="margin:0;font:400 15px/1.7 Manrope,sans-serif;color:rgba(239,231,218,.65);max-width:520px">Send us your floor plan and headcount. We'll return a space plan, timeline and budget band — before you commit to anything.</p>
+        <div style="display:flex;gap:16px">
+          <a href="TDI Contact.dc.html" style="display:inline-block;background:oklch(0.74 0.08 78);color:#221C15;border-radius:2px;padding:16px 30px;font:700 12px Manrope,sans-serif;letter-spacing:.08em;text-decoration:none" style-hover="background:oklch(0.8 0.08 78)">REQUEST A PROPOSAL</a>
+          <a href="TDI Contact.dc.html" style="display:inline-block;border:1px solid rgba(239,231,218,.4);background:transparent;color:#EFE7DA;border-radius:2px;padding:16px 30px;font:600 12px Manrope,sans-serif;letter-spacing:.08em;text-decoration:none" style-hover="border-color:#EFE7DA">DOWNLOAD COMPANY PROFILE</a>
+        </div>
+      </div>
+    </sc-if>
+    <sc-if value="{{ isR }}" hint-placeholder-val="{{ false }}">
+      <div style="display:flex;flex-direction:column;align-items:center;gap:32px">
+        <span style="font:600 11px Manrope,sans-serif;letter-spacing:.32em;color:oklch(0.74 0.08 78)">START YOUR RENOVATION</span>
+        <h2 style="margin:0;font:italic 500 68px/1.08 'Cormorant Garamond',serif;max-width:860px">Know your number before you commit.</h2>
+        <p style="margin:0;font:400 15px/1.7 Manrope,sans-serif;color:rgba(239,231,218,.65);max-width:520px">Two minutes, five questions — an honest cost range for your HDB, condo or landed renovation. Estimates only; your consultation makes it exact.</p>
+        <div style="display:flex;gap:16px">
+          <a href="TDI Calculator.dc.html" style="display:inline-block;background:oklch(0.74 0.08 78);color:#221C15;border-radius:2px;padding:16px 30px;font:700 12px Manrope,sans-serif;letter-spacing:.08em;cursor:pointer;text-decoration:none" style-hover="background:oklch(0.8 0.08 78)">ESTIMATE MY RENOVATION</a>
+          <a href="TDI Contact.dc.html" style="display:inline-block;border:1px solid rgba(239,231,218,.4);background:transparent;color:#EFE7DA;border-radius:2px;padding:16px 30px;font:600 12px Manrope,sans-serif;letter-spacing:.08em;text-decoration:none" style-hover="border-color:#EFE7DA">BOOK A CONSULTATION</a>
+        </div>
+      </div>
+    </sc-if>
+  </div>
+
+  <!-- ================= FOOTER ================= -->
+  <div style="background:#1A150F;padding:72px 64px 110px;display:flex;flex-direction:column;gap:56px">
+    <div style="display:grid;grid-template-columns:1.4fr 1fr 1fr 1.2fr;gap:48px">
+      <div style="display:flex;flex-direction:column;gap:16px">
+        <div style="display:flex;align-items:baseline;gap:9px">
+          <span style="font:500 24px 'Cormorant Garamond',serif">TDI</span>
+          <span style="font:600 10px Manrope,sans-serif;letter-spacing:.3em;color:oklch(0.74 0.08 78)">WORKSPACE</span>
+        </div>
+        <span style="font:400 13px/1.7 Manrope,sans-serif;color:rgba(239,231,218,.55);max-width:300px">Commercial-first interior design &amp; build in Singapore. Homes handled with the same rigour.</span>
+        <span style="font:400 12px 'Noto Serif SC',serif;color:rgba(239,231,218,.35)">匠心营造 · 家的质感</span>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:12px;font:400 13px Manrope,sans-serif;color:rgba(239,231,218,.6)">
+        <span style="font:600 11px Manrope,sans-serif;letter-spacing:.2em;color:rgba(239,231,218,.4)">EXPLORE</span>
+        <a href="TDI Projects.dc.html" style="color:rgba(239,231,218,.6);text-decoration:none">Projects</a><a href="TDI Services.dc.html" style="color:rgba(239,231,218,.6);text-decoration:none">Services</a><a href="TDI Process.dc.html" style="color:rgba(239,231,218,.6);text-decoration:none">Process</a><a href="TDI Journal.dc.html" style="color:rgba(239,231,218,.6);text-decoration:none">Journal</a><a href="TDI Materials.dc.html" style="color:rgba(239,231,218,.6);text-decoration:none">Material library</a><a href="TDI About.dc.html" style="color:rgba(239,231,218,.6);text-decoration:none">About</a>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:12px;font:400 13px Manrope,sans-serif;color:rgba(239,231,218,.6)">
+        <span style="font:600 11px Manrope,sans-serif;letter-spacing:.2em;color:rgba(239,231,218,.4)">START</span>
+        <a href="TDI Contact.dc.html" style="color:rgba(239,231,218,.6);text-decoration:none">Book a consultation</a><a href="TDI Contact.dc.html" style="color:rgba(239,231,218,.6);text-decoration:none">Request a proposal</a><a href="TDI Calculator.dc.html" style="color:rgba(239,231,218,.6);text-decoration:none;cursor:pointer">Renovation calculator</a><a href="TDI Contact.dc.html" style="color:rgba(239,231,218,.6);text-decoration:none">Download company profile</a>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:12px;font:400 13px/1.7 Manrope,sans-serif;color:rgba(239,231,218,.6)">
+        <span style="font:600 11px Manrope,sans-serif;letter-spacing:.2em;color:rgba(239,231,218,.4)">VISIT</span>
+        <span>[ studio address — to be provided ]</span>
+        <span>Mon–Fri 9.30am–6.30pm · Sat by appointment</span>
+        <span>hello@tdiworkspace.sg · +65 [ number ]</span>
+      </div>
+    </div>
+    <div style="display:flex;justify-content:space-between;align-items:center;border-top:1px solid rgba(239,231,218,.1);padding-top:24px;font:400 11.5px Manrope,sans-serif;color:rgba(239,231,218,.35)">
+      <span>© 2026 TDI Workspace Pte Ltd · BCA-registered · bizSAFE 3 · HDB-licensed</span>
+      <div style="display:flex;gap:24px"><span style="cursor:pointer">Instagram</span><span style="cursor:pointer">LinkedIn</span><span style="cursor:pointer">Privacy</span><a href="TDI Admin Login.dc.html" style="color:rgba(239,231,218,.35);text-decoration:none">Admin</a></div>
+    </div>
+  </div>
+
+  <!-- ================= STICKY WHATSAPP ================= -->
+  <sc-if value="{{ showWhatsApp }}" hint-placeholder-val="{{ true }}">
+    <div style="position:fixed;right:28px;bottom:28px;display:flex;align-items:center;gap:10px;background:#EFE7DA;color:#221C15;border-radius:99px;padding:14px 22px;font:700 13px Manrope,sans-serif;box-shadow:0 14px 36px rgba(0,0,0,.45);cursor:pointer;z-index:50" style-hover="background:#FFFDF6">
+      <span style="width:9px;height:9px;border-radius:99px;background:#1FA855"></span>WhatsApp us — replies within the hour
+    </div>
+  </sc-if>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{
+  &quot;defaultMode&quot;: { &quot;editor&quot;: &quot;enum&quot;, &quot;options&quot;: [&quot;commercial&quot;, &quot;residential&quot;], &quot;default&quot;: &quot;commercial&quot;, &quot;tsType&quot;: &quot;'commercial' | 'residential'&quot;, &quot;section&quot;: &quot;Mode&quot; },
+  &quot;showWhatsApp&quot;: { &quot;editor&quot;: &quot;boolean&quot;, &quot;default&quot;: true, &quot;tsType&quot;: &quot;boolean&quot;, &quot;section&quot;: &quot;Lead layer&quot; },
+  &quot;announcement&quot;: { &quot;editor&quot;: &quot;text&quot;, &quot;default&quot;: &quot;&quot;, &quot;tsType&quot;: &quot;string&quot;, &quot;section&quot;: &quot;Lead layer&quot; }
+}">
+class Component extends DCLogic {
+  state = { mode: ['C','R'].includes(localStorage.getItem('tdi-mode')) ? localStorage.getItem('tdi-mode') : null };
+
+  renderVals() {
+    const def = (this.props.defaultMode ?? 'commercial') === 'residential' ? 'R' : 'C';
+    const mode = this.state.mode ?? def;
+    const announcement = this.props.announcement ?? '';
+    return {
+      isC: mode === 'C',
+      isR: mode === 'R',
+      toC: () => { localStorage.setItem('tdi-mode', 'C'); this.setState({ mode: 'C' }); },
+      toR: () => { localStorage.setItem('tdi-mode', 'R'); this.setState({ mode: 'R' }); },
+      hasAnnouncement: announcement.trim().length > 0,
+      announcement,
+      showWhatsApp: this.props.showWhatsApp ?? true
+    };
+  }
+}
+</script>
+</body>
+</html>

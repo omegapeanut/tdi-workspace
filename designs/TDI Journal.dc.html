@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet data-dc-atomics>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500;1,600&amp;family=Manrope:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet">
+<style>body{margin:0;background:#221C15}</style>
+</helmet>
+
+<div style="font-family:Manrope,sans-serif;color:#EFE7DA;background:#221C15;min-height:100vh" data-screen-label="Journal">
+
+  <div style="display:flex;align-items:center;justify-content:space-between;padding:26px 64px;border-bottom:1px solid rgba(239,231,218,.1)">
+    <a href="TDI Home.dc.html" style="display:flex;align-items:baseline;gap:9px;text-decoration:none;color:#EFE7DA">
+      <span style="font:500 24px 'Cormorant Garamond',serif">TDI</span>
+      <span style="font:600 10px Manrope,sans-serif;letter-spacing:.3em;color:oklch(0.74 0.08 78)">WORKSPACE</span>
+    </a>
+    <nav style="display:flex;gap:32px;font:500 12.5px Manrope,sans-serif;color:rgba(239,231,218,.75)">
+      <a href="TDI Projects.dc.html" style="color:rgba(239,231,218,.75);text-decoration:none">Projects</a>
+      <a href="TDI Services.dc.html" style="color:rgba(239,231,218,.75);text-decoration:none">Services</a>
+      <a href="TDI Process.dc.html" style="color:rgba(239,231,218,.75);text-decoration:none">Process</a>
+      <a href="TDI Journal.dc.html" style="color:#EFE7DA;text-decoration:none;border-bottom:1px solid oklch(0.74 0.08 78);padding-bottom:3px">Journal</a>
+      <a href="TDI Materials.dc.html" style="color:rgba(239,231,218,.75);text-decoration:none">Materials</a>
+      <a href="TDI About.dc.html" style="color:rgba(239,231,218,.75);text-decoration:none">About</a>
+      <a href="TDI Calculator.dc.html" style="color:rgba(239,231,218,.75);text-decoration:none">Calculator</a>
+    </nav>
+    <a href="TDI Contact.dc.html" style="border:1px solid oklch(0.74 0.08 78);background:transparent;color:oklch(0.74 0.08 78);border-radius:2px;padding:11px 22px;font:600 11.5px Manrope,sans-serif;letter-spacing:.08em;text-decoration:none" style-hover="background:oklch(0.74 0.08 78);color:#221C15">BOOK A CONSULTATION</a>
+  </div>
+
+  <div style="padding:72px 64px 40px;display:flex;flex-direction:column;gap:26px">
+    <div style="display:flex;flex-direction:column;gap:14px">
+      <span style="font:600 11px Manrope,sans-serif;letter-spacing:.32em;color:oklch(0.74 0.08 78)">THE JOURNAL</span>
+      <h1 style="margin:0;font:italic 500 76px/1.05 'Cormorant Garamond',serif">Know before you renovate.</h1>
+      <p style="margin:0;font:400 15.5px/1.7 Manrope,sans-serif;color:rgba(239,231,218,.65);max-width:620px">Guides, costs and honest advice from the people who do the work — written to answer the questions clients actually ask.</p>
+    </div>
+    <div style="display:flex;gap:10px;flex-wrap:wrap">
+      <sc-for list="{{ cats }}" as="cat" hint-placeholder-count="6">
+        <button onClick="{{ cat.pick }}" style="border:1px solid {{ cat.bd }};background:{{ cat.bg }};color:{{ cat.fg }};border-radius:99px;padding:9px 20px;font:600 12px Manrope,sans-serif;letter-spacing:.06em;cursor:pointer">{{ cat.label }}</button>
+      </sc-for>
+    </div>
+  </div>
+
+  <!-- featured article -->
+  <div style="padding:16px 64px 40px">
+    <a href="TDI Article.dc.html" style="display:grid;grid-template-columns:1.4fr 1fr;text-decoration:none;color:#EFE7DA;border:1px solid rgba(239,231,218,.14);border-radius:3px;overflow:hidden;cursor:pointer">
+      <img src="admin/images/journal-office-costs.jpg" alt="Office fit-out costs featured article" style="height:400px;width:100%;object-fit:cover;display:block">
+      <div style="background:#1A150F;padding:44px 44px;display:flex;flex-direction:column;justify-content:center;gap:18px">
+        <span style="font:600 10.5px Manrope,sans-serif;letter-spacing:.2em;color:oklch(0.74 0.08 78)">FEATURED · FIT-OUT GUIDES · 8 MIN READ</span>
+        <span style="font:italic 500 38px/1.15 'Cormorant Garamond',serif">Office fit-out costs in Singapore: the 2026 guide</span>
+        <span style="font:400 14px/1.7 Manrope,sans-serif;color:rgba(239,231,218,.6)">Per-sqft benchmarks by grade, the line items that blow budgets, and where it's safe to save. Updated quarterly with live tender data.</span>
+        <span style="font:600 12px Manrope,sans-serif;letter-spacing:.08em;color:oklch(0.74 0.08 78)">READ THE GUIDE →</span>
+      </div>
+    </a>
+  </div>
+
+  <div style="padding:0 64px 90px">
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:40px 22px">
+      <sc-for list="{{ posts }}" as="p" hint-placeholder-count="6">
+        <a href="TDI Article.dc.html" style="display:flex;flex-direction:column;gap:14px;text-decoration:none;color:#EFE7DA;cursor:pointer">
+          <div style="overflow:hidden">
+            <img src="{{ p.img }}" alt="{{ p.title }}" style="height:230px;width:100%;object-fit:cover;display:block;transition:transform .6s ease" style-hover="transform:scale(1.04)">
+          </div>
+          <span style="font:600 10.5px Manrope,sans-serif;letter-spacing:.18em;color:oklch(0.74 0.08 78)">{{ p.kicker }}</span>
+          <span style="font:italic 500 24px/1.25 'Cormorant Garamond',serif">{{ p.title }}</span>
+          <span style="font:400 13px/1.65 Manrope,sans-serif;color:rgba(239,231,218,.55)">{{ p.excerpt }}</span>
+          <span style="font:500 11.5px Manrope,sans-serif;color:rgba(239,231,218,.4)">{{ p.meta }}</span>
+        </a>
+      </sc-for>
+    </div>
+  </div>
+
+  <div style="padding:72px 64px;border-top:1px solid rgba(239,231,218,.1);display:flex;justify-content:space-between;align-items:center;gap:32px;flex-wrap:wrap">
+    <div style="display:flex;flex-direction:column;gap:8px">
+      <span style="font:italic 500 32px 'Cormorant Garamond',serif">One useful email a month.</span>
+      <span style="font:400 14px Manrope,sans-serif;color:rgba(239,231,218,.6)">Cost benchmarks, new projects and renovation advice. No noise, unsubscribe anytime.</span>
+    </div>
+    <div style="display:flex;gap:0">
+      <input type="email" placeholder="your@email.com" style="border:1px solid rgba(239,231,218,.35);border-right:0;background:transparent;color:#EFE7DA;padding:15px 20px;font:400 13px Manrope,sans-serif;border-radius:2px 0 0 2px;width:260px;outline:none">
+      <button style="border:0;background:oklch(0.74 0.08 78);color:#221C15;border-radius:0 2px 2px 0;padding:15px 26px;font:700 12px Manrope,sans-serif;letter-spacing:.08em;cursor:pointer">SUBSCRIBE</button>
+    </div>
+  </div>
+
+  <div style="background:#1A150F;padding:28px 64px;display:flex;justify-content:space-between;font:400 11.5px Manrope,sans-serif;color:rgba(239,231,218,.35)">
+    <span>© 2026 TDI Workspace Pte Ltd</span>
+    <a href="TDI Home.dc.html" style="color:rgba(239,231,218,.55);text-decoration:none">← Back to home</a>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = { cat: 'all' };
+
+  renderVals() {
+    const POSTS = [
+      { cat: 'commercial', kicker: 'TENANT ADVICE · 6 MIN', title: 'CAT A vs CAT B: what office tenants actually need to know', excerpt: 'The two fit-out categories, who pays for what, and the reinstatement clause everyone forgets to read.', meta: 'Jun 2026 · TDI Studio', img: 'admin/images/journal-cat-ab.jpg' },
+      { cat: 'commercial', kicker: 'PLANNING · 5 MIN', title: 'How much downtime does an office renovation really take?', excerpt: 'Phasing, after-hours works and the honest answer to "can we keep working through it?"', meta: 'May 2026 · TDI Studio', img: 'admin/images/journal-downtime.jpg' },
+      { cat: 'residential', kicker: 'HDB GUIDES · 7 MIN', title: 'HDB renovation permits, explained in plain English', excerpt: 'Which works need a permit, how long approvals take, and what happens if you skip them.', meta: 'Jun 2026 · TDI Studio', img: 'admin/images/journal-hdb-permits.jpg' },
+      { cat: 'residential', kicker: 'BUDGETING · 9 MIN', title: '4-room BTO renovation: where the money actually goes', excerpt: 'A real cost breakdown across carpentry, wet works and flooring — with the ranges we quote today.', meta: 'May 2026 · TDI Studio', img: 'admin/images/journal-bto-budget.jpg' },
+      { cat: 'materials', kicker: 'MATERIALS · 5 MIN', title: 'Vinyl vs engineered wood: the honest comparison', excerpt: 'Cost, feel, water resistance and what each floor looks like after five years of real life.', meta: 'Apr 2026 · TDI Studio', img: 'admin/images/journal-flooring.jpg' },
+      { cat: 'materials', kicker: 'MATERIALS · 6 MIN', title: 'Choosing surfaces that survive an F&B kitchen', excerpt: 'Quartz, solid surface or stainless — what health inspections and hot pans demand.', meta: 'Apr 2026 · TDI Studio', img: 'admin/images/journal-materials-guide.jpg' },
+      { cat: 'trends', kicker: 'TRENDS · 4 MIN', title: 'Quiet luxury interiors: restraint as a design language', excerpt: 'Why the most expensive-looking spaces of 2026 have the fewest things in them.', meta: 'Mar 2026 · TDI Studio', img: 'admin/images/journal-trends.jpg' },
+      { cat: 'trends', kicker: 'LIGHTING · 5 MIN', title: 'Lighting layers: the cheapest upgrade in interior design', excerpt: 'Ambient, task, accent — how three circuits change a room more than any renovation.', meta: 'Feb 2026 · TDI Studio', img: 'admin/images/journal-lighting.jpg' }
+    ];
+    const CATS = [ ['all','ALL'], ['commercial','COMMERCIAL'], ['residential','RESIDENTIAL'], ['materials','MATERIALS'], ['trends','TRENDS & IDEAS'] ];
+    const cat = this.state.cat;
+    return {
+      cats: CATS.map(([key, label]) => ({
+        label,
+        bg: key === cat ? '#EFE7DA' : 'transparent',
+        fg: key === cat ? '#221C15' : 'rgba(239,231,218,.7)',
+        bd: key === cat ? '#EFE7DA' : 'rgba(239,231,218,.3)',
+        pick: () => this.setState({ cat: key })
+      })),
+      posts: POSTS.filter(p => cat === 'all' || p.cat === cat)
+    };
+  }
+}
+</script>
+</body>
+</html>

@@ -1,40 +1,45 @@
 rules_version = '2';
-
-// TDI Workspace — Firestore Security Rules
-// Deploy with:  firebase deploy --only firestore:rules
-//
-// Security model:
-//  • Anyone (the public website) may SUBMIT an inquiry — create only.
-//  • Only a signed-in admin may READ, UPDATE or DELETE inquiries.
-//  • All other collections are admin-only.
-//
-// This is safe ONLY because you create admin accounts manually in the
-// Firebase console. DO NOT build a public "sign up" page — there is none —
-// so request.auth != null effectively means "a real admin you created".
-
 service cloud.firestore {
   match /databases/{database}/documents {
 
-    // ---- Public inquiry inbox ----
-    match /inquiries/{id} {
-      // Public form may create, with light validation to stop junk writes.
-      allow create: if request.resource.data.email is string
-                    && request.resource.data.email.size() < 200
-                    && request.resource.data.keys().size() < 40;
-      // Reading / managing inquiries requires login.
-      allow read, update, delete: if request.auth != null;
+    function isAdmin() {
+      return request.auth != null
+        && exists(/databases/$(database)/documents/admins/$(request.auth.uid));
     }
 
-    // ---- Public-readable site content (Phase 2) ----
-    // The public site reads these; only admins write them.
-    match /content/{doc} {
-      allow read:  if true;
-      allow write: if request.auth != null;
+    // Public site content — world-readable, admin-writable
+    match /settings/{doc} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+    match /projects/{id} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+    match /articles/{id} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+    match /materials/{id} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+    match /media/{id} {
+      allow read: if true;
+      allow write: if isAdmin();
     }
 
-    // ---- Everything else: admins only ----
-    match /{document=**} {
-      allow read, write: if request.auth != null;
+    // Leads: anyone may create (contact form / calculator); only admin reads or updates
+    match /leads/{id} {
+      allow create: if request.resource.data.keys().hasAll(['name', 'source', 'createdAt'])
+        && request.resource.data.status == 'New';
+      allow read, update, delete: if isAdmin();
+    }
+
+    // Admin allow-list: create docs here manually in the console, keyed by Auth UID
+    match /admins/{uid} {
+      allow read: if request.auth != null && request.auth.uid == uid;
+      allow write: if false; // manage via Firebase console only
     }
   }
 }

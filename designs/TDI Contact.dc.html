@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet data-dc-atomics>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500;1,600&amp;family=Manrope:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet">
+<style>body{margin:0;background:#221C15}</style>
+</helmet>
+
+<div style="font-family:Manrope,sans-serif;color:#EFE7DA;background:#221C15;min-height:100vh" data-screen-label="Contact — book a consultation">
+
+  <div style="display:flex;align-items:center;justify-content:space-between;padding:26px 64px;border-bottom:1px solid rgba(239,231,218,.1)">
+    <a href="TDI Home.dc.html" style="display:flex;align-items:baseline;gap:9px;text-decoration:none;color:#EFE7DA">
+      <span style="font:500 24px 'Cormorant Garamond',serif">TDI</span>
+      <span style="font:600 10px Manrope,sans-serif;letter-spacing:.3em;color:oklch(0.74 0.08 78)">WORKSPACE</span>
+    </a>
+    <nav style="display:flex;gap:32px;font:500 12.5px Manrope,sans-serif;color:rgba(239,231,218,.75)">
+      <a href="TDI Projects.dc.html" style="color:rgba(239,231,218,.75);text-decoration:none">Projects</a>
+      <a href="TDI Services.dc.html" style="color:rgba(239,231,218,.75);text-decoration:none">Services</a>
+      <a href="TDI Process.dc.html" style="color:rgba(239,231,218,.75);text-decoration:none">Process</a>
+      <a href="TDI Journal.dc.html" style="color:rgba(239,231,218,.75);text-decoration:none">Journal</a>
+      <a href="TDI Materials.dc.html" style="color:rgba(239,231,218,.75);text-decoration:none">Materials</a>
+      <a href="TDI About.dc.html" style="color:rgba(239,231,218,.75);text-decoration:none">About</a>
+      <a href="TDI Calculator.dc.html" style="color:rgba(239,231,218,.75);text-decoration:none">Calculator</a>
+    </nav>
+    <a href="TDI Contact.dc.html" style="border:1px solid oklch(0.74 0.08 78);background:oklch(0.74 0.08 78);color:#221C15;border-radius:2px;padding:11px 22px;font:600 11.5px Manrope,sans-serif;letter-spacing:.08em;text-decoration:none">BOOK A CONSULTATION</a>
+  </div>
+
+  <sc-if value="{{ notSent }}" hint-placeholder-val="{{ true }}">
+    <div style="display:grid;grid-template-columns:1fr 1.15fr;gap:64px;padding:72px 64px 90px;align-items:start">
+
+      <div style="display:flex;flex-direction:column;gap:36px;position:sticky;top:24px">
+        <div style="display:flex;flex-direction:column;gap:16px">
+          <span style="font:600 11px Manrope,sans-serif;letter-spacing:.32em;color:oklch(0.74 0.08 78)">CONTACT · 联系我们</span>
+          <h1 style="margin:0;font:italic 500 68px/1.05 'Cormorant Garamond',serif">Start the conversation.</h1>
+          <p style="margin:0;font:400 15px/1.7 Manrope,sans-serif;color:rgba(239,231,218,.65)">30 minutes with a director, free, no obligation. Tell us about the space — we'll tell you what's possible and what it should cost.</p>
+        </div>
+
+        <a href="#" style="display:flex;align-items:center;gap:14px;background:rgba(20,16,11,.5);border:1px solid rgba(239,231,218,.14);border-radius:3px;padding:20px 22px;text-decoration:none;color:#EFE7DA" style-hover="border-color:oklch(0.74 0.08 78)">
+          <span style="width:12px;height:12px;border-radius:99px;background:#1FA855"></span>
+          <div style="display:flex;flex-direction:column;gap:2px;flex:1">
+            <span style="font:700 14px Manrope,sans-serif">WhatsApp us</span>
+            <span style="font:400 12px Manrope,sans-serif;color:rgba(239,231,218,.55)">+65 [ number ] — replies within the hour, Mon–Sat</span>
+          </div>
+          <span style="font:600 13px Manrope,sans-serif;color:oklch(0.74 0.08 78)">→</span>
+        </a>
+
+        <div style="display:flex;flex-direction:column;gap:14px;font:400 13.5px/1.7 Manrope,sans-serif;color:rgba(239,231,218,.65)">
+          <div style="display:flex;flex-direction:column;gap:2px">
+            <span style="font:600 10.5px Manrope,sans-serif;letter-spacing:.2em;color:rgba(239,231,218,.4)">STUDIO</span>
+            <span>[ studio address — to be provided ]</span>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:2px">
+            <span style="font:600 10.5px Manrope,sans-serif;letter-spacing:.2em;color:rgba(239,231,218,.4)">HOURS</span>
+            <span>Mon–Fri 9.30am–6.30pm · Sat by appointment</span>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:2px">
+            <span style="font:600 10.5px Manrope,sans-serif;letter-spacing:.2em;color:rgba(239,231,218,.4)">EMAIL / PHONE</span>
+            <span>hello@tdiworkspace.sg · +65 [ number ]</span>
+          </div>
+        </div>
+
+        <div style="height:220px;border:1px solid rgba(239,231,218,.14);border-radius:3px;background:#2A231A;background-image:repeating-linear-gradient(45deg,rgba(239,231,218,.03) 0 14px,transparent 14px 28px);display:flex;align-items:center;justify-content:center">
+          <span style="font:400 11px ui-monospace,monospace;letter-spacing:.1em;color:rgba(239,231,218,.35)">[ Google Map — studio location ]</span>
+        </div>
+      </div>
+
+      <div style="background:rgba(20,16,11,.5);border:1px solid rgba(239,231,218,.14);border-radius:3px;padding:38px 40px;display:flex;flex-direction:column;gap:24px">
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:18px">
+          <div style="display:flex;flex-direction:column;gap:7px">
+            <span style="font:600 11px Manrope,sans-serif;letter-spacing:.14em;color:rgba(239,231,218,.55)">NAME *</span>
+            <input type="text" placeholder="Your name" style="border:1px solid rgba(239,231,218,.25);background:transparent;color:#EFE7DA;padding:13px 15px;font:400 13.5px Manrope,sans-serif;border-radius:2px;outline:none">
+          </div>
+          <div style="display:flex;flex-direction:column;gap:7px">
+            <span style="font:600 11px Manrope,sans-serif;letter-spacing:.14em;color:rgba(239,231,218,.55)">PHONE / WHATSAPP *</span>
+            <input type="tel" placeholder="+65" style="border:1px solid rgba(239,231,218,.25);background:transparent;color:#EFE7DA;padding:13px 15px;font:400 13.5px Manrope,sans-serif;border-radius:2px;outline:none">
+          </div>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:7px">
+          <span style="font:600 11px Manrope,sans-serif;letter-spacing:.14em;color:rgba(239,231,218,.55)">EMAIL *</span>
+          <input type="email" placeholder="you@email.com" style="border:1px solid rgba(239,231,218,.25);background:transparent;color:#EFE7DA;padding:13px 15px;font:400 13.5px Manrope,sans-serif;border-radius:2px;outline:none">
+        </div>
+
+        <div style="display:flex;flex-direction:column;gap:10px">
+          <span style="font:600 11px Manrope,sans-serif;letter-spacing:.14em;color:rgba(239,231,218,.55)">PROJECT TYPE *</span>
+          <div style="display:flex;flex-wrap:wrap;gap:8px">
+            <sc-for list="{{ typeOpts }}" as="t" hint-placeholder-count="7">
+              <button onClick="{{ t.pick }}" style="border:1px solid {{ t.bd }};background:{{ t.bg }};color:{{ t.fg }};border-radius:99px;padding:9px 18px;font:600 12px Manrope,sans-serif;cursor:pointer">{{ t.label }}</button>
+            </sc-for>
+          </div>
+        </div>
+
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:18px">
+          <div style="display:flex;flex-direction:column;gap:10px">
+            <span style="font:600 11px Manrope,sans-serif;letter-spacing:.14em;color:rgba(239,231,218,.55)">BUDGET RANGE</span>
+            <div style="display:flex;flex-direction:column;gap:6px">
+              <sc-for list="{{ budgetOpts }}" as="b" hint-placeholder-count="4">
+                <button onClick="{{ b.pick }}" style="border:1px solid {{ b.bd }};background:{{ b.bg }};color:{{ b.fg }};border-radius:2px;padding:10px 14px;font:500 12.5px Manrope,sans-serif;cursor:pointer;text-align:left">{{ b.label }}</button>
+              </sc-for>
+            </div>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:10px">
+            <span style="font:600 11px Manrope,sans-serif;letter-spacing:.14em;color:rgba(239,231,218,.55)">TIMELINE</span>
+            <div style="display:flex;flex-direction:column;gap:6px">
+              <sc-for list="{{ timeOpts }}" as="t" hint-placeholder-count="4">
+                <button onClick="{{ t.pick }}" style="border:1px solid {{ t.bd }};background:{{ t.bg }};color:{{ t.fg }};border-radius:2px;padding:10px 14px;font:500 12.5px Manrope,sans-serif;cursor:pointer;text-align:left">{{ t.label }}</button>
+              </sc-for>
+            </div>
+          </div>
+        </div>
+
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:18px">
+          <div style="display:flex;flex-direction:column;gap:7px">
+            <span style="font:600 11px Manrope,sans-serif;letter-spacing:.14em;color:rgba(239,231,218,.55)">PREFERRED CONTACT TIME</span>
+            <select style="border:1px solid rgba(239,231,218,.25);background:#221C15;color:#EFE7DA;padding:13px 15px;font:400 13.5px Manrope,sans-serif;border-radius:2px;outline:none">
+              <option>Anytime</option><option>Morning (9–12)</option><option>Afternoon (12–6)</option><option>Evening (after 6)</option>
+            </select>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:7px">
+            <span style="font:600 11px Manrope,sans-serif;letter-spacing:.14em;color:rgba(239,231,218,.55)">HOW DID YOU HEAR ABOUT US?</span>
+            <select style="border:1px solid rgba(239,231,218,.25);background:#221C15;color:#EFE7DA;padding:13px 15px;font:400 13.5px Manrope,sans-serif;border-radius:2px;outline:none">
+              <option>Google search</option><option>Referral</option><option>Instagram</option><option>Walked past a project</option><option>Other</option>
+            </select>
+          </div>
+        </div>
+
+        <div style="display:flex;flex-direction:column;gap:7px">
+          <span style="font:600 11px Manrope,sans-serif;letter-spacing:.14em;color:rgba(239,231,218,.55)">TELL US ABOUT THE SPACE</span>
+          <textarea rows="4" placeholder="Location, size, what you want it to become…" style="border:1px solid rgba(239,231,218,.25);background:transparent;color:#EFE7DA;padding:13px 15px;font:400 13.5px/1.6 Manrope,sans-serif;border-radius:2px;outline:none;resize:vertical"></textarea>
+        </div>
+
+        <div style="border:1.5px dashed rgba(239,231,218,.25);border-radius:3px;padding:20px;display:flex;align-items:center;gap:14px;cursor:pointer" style-hover="border-color:oklch(0.74 0.08 78)">
+          <span style="font:400 20px 'Cormorant Garamond',serif;color:oklch(0.74 0.08 78)">↑</span>
+          <div style="display:flex;flex-direction:column;gap:2px">
+            <span style="font:600 13px Manrope,sans-serif">Attach floor plan or photos</span>
+            <span style="font:400 11.5px Manrope,sans-serif;color:rgba(239,231,218,.5)">PDF, JPG or PNG — up to 10MB. It makes the first call twice as useful.</span>
+          </div>
+        </div>
+
+        <div style="display:flex;align-items:center;justify-content:space-between;gap:16px;border-top:1px solid rgba(239,231,218,.12);padding-top:22px">
+          <span style="font:400 11px/1.6 Manrope,sans-serif;color:rgba(239,231,218,.4);max-width:280px">Protected by reCAPTCHA. We reply within one working day and never share your details.</span>
+          <button onClick="{{ send }}" style="border:0;background:oklch(0.74 0.08 78);color:#221C15;border-radius:2px;padding:16px 30px;font:700 12px Manrope,sans-serif;letter-spacing:.08em;cursor:pointer;white-space:nowrap" style-hover="background:oklch(0.8 0.08 78)">SEND ENQUIRY →</button>
+        </div>
+      </div>
+    </div>
+  </sc-if>
+
+  <sc-if value="{{ sent }}" hint-placeholder-val="{{ false }}">
+    <div style="display:flex;flex-direction:column;align-items:center;gap:24px;padding:140px 64px;text-align:center">
+      <span style="width:64px;height:64px;border-radius:99px;border:1px solid oklch(0.74 0.08 78);display:flex;align-items:center;justify-content:center;font:400 28px 'Cormorant Garamond',serif;color:oklch(0.74 0.08 78)">✓</span>
+      <h1 style="margin:0;font:italic 500 56px/1.1 'Cormorant Garamond',serif;max-width:700px">Received — we'll reply within one working day.</h1>
+      <p style="margin:0;font:400 15px/1.7 Manrope,sans-serif;color:rgba(239,231,218,.65);max-width:480px">A director will review your enquiry personally. If it's urgent, WhatsApp gets you an answer within the hour.</p>
+      <div style="display:flex;gap:14px">
+        <a href="TDI Projects.dc.html" style="border:1px solid rgba(239,231,218,.4);color:#EFE7DA;border-radius:2px;padding:15px 28px;font:600 12px Manrope,sans-serif;letter-spacing:.08em;text-decoration:none">BROWSE PROJECTS MEANWHILE</a>
+        <button onClick="{{ reset }}" style="border:0;background:transparent;color:rgba(239,231,218,.55);font:600 12px Manrope,sans-serif;letter-spacing:.08em;cursor:pointer;text-decoration:underline;text-underline-offset:4px">SEND ANOTHER ENQUIRY</button>
+      </div>
+    </div>
+  </sc-if>
+
+  <div style="background:#1A150F;padding:28px 64px;display:flex;justify-content:space-between;font:400 11.5px Manrope,sans-serif;color:rgba(239,231,218,.35)">
+    <span>© 2026 TDI Workspace Pte Ltd</span>
+    <div style="display:flex;gap:24px">
+      <a href="TDI Home.dc.html" style="color:rgba(239,231,218,.55);text-decoration:none">← Back to home</a>
+      <a href="TDI Admin Login.dc.html" style="color:rgba(239,231,218,.55);text-decoration:none">Admin</a>
+    </div>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = { type: 'Office', budget: '', time: '', sent: false };
+
+  renderVals() {
+    const s = this.state;
+    const on = { bg: '#EFE7DA', fg: '#221C15', bd: '#EFE7DA' };
+    const off = { bg: 'transparent', fg: 'rgba(239,231,218,.75)', bd: 'rgba(239,231,218,.28)' };
+    const opts = (list, key) => list.map(label => ({
+      label, ...(s[key] === label ? on : off),
+      pick: () => this.setState({ [key]: s[key] === label ? '' : label })
+    }));
+    return {
+      notSent: !s.sent,
+      sent: s.sent,
+      send: () => this.setState({ sent: true }),
+      reset: () => this.setState({ sent: false }),
+      typeOpts: opts(['Office', 'F&B', 'Retail', 'Clinic', 'HDB', 'Condo', 'Landed'], 'type'),
+      budgetOpts: opts(['Under S$50k', 'S$50k – 150k', 'S$150k – 500k', 'Above S$500k'], 'budget'),
+      timeOpts: opts(['ASAP', 'Within 3 months', '3–6 months', 'Just exploring'], 'time')
+    };
+  }
+}
+</script>
+</body>
+</html>

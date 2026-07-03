@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet data-dc-atomics>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500;1,600&amp;family=Manrope:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet">
+<style>body{margin:0;background:#221C15}</style>
+</helmet>
+
+<div style="font-family:Manrope,sans-serif;color:#EFE7DA;background:#221C15;min-height:100vh;display:grid;grid-template-columns:1fr 1fr" data-screen-label="Admin login">
+
+  <div style="position:relative;overflow:hidden">
+    <img src="admin/images/hero-commercial.jpg" alt="TDI project" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover">
+    <div style="position:absolute;inset:0;background:linear-gradient(to right,rgba(20,16,11,.4),rgba(20,16,11,.85))"></div>
+    <div style="position:absolute;left:52px;bottom:52px;display:flex;flex-direction:column;gap:12px">
+      <span style="font:italic 500 34px/1.2 'Cormorant Garamond',serif;max-width:400px">Everything on the site, editable from one desk.</span>
+      <span style="font:400 13px Manrope,sans-serif;color:rgba(239,231,218,.6)">TDI Workspace content management</span>
+    </div>
+  </div>
+
+  <div style="display:flex;flex-direction:column;justify-content:center;align-items:center;padding:64px">
+    <div style="width:380px;display:flex;flex-direction:column;gap:28px">
+      <div style="display:flex;flex-direction:column;gap:10px">
+        <div style="display:flex;align-items:baseline;gap:9px">
+          <span style="font:500 28px 'Cormorant Garamond',serif">TDI</span>
+          <span style="font:600 11px Manrope,sans-serif;letter-spacing:.3em;color:oklch(0.74 0.08 78)">ADMIN</span>
+        </div>
+        <span style="font:400 13.5px Manrope,sans-serif;color:rgba(239,231,218,.6)">Sign in to manage the website.</span>
+      </div>
+
+      <div style="display:flex;flex-direction:column;gap:14px">
+        <div style="display:flex;flex-direction:column;gap:7px">
+          <span style="font:600 11px Manrope,sans-serif;letter-spacing:.14em;color:rgba(239,231,218,.55)">EMAIL</span>
+          <input type="email" value="{{ email }}" onChange="{{ setEmail }}" placeholder="you@tdiworkspace.sg" style="border:1px solid rgba(239,231,218,.3);background:rgba(20,16,11,.5);color:#EFE7DA;padding:14px 16px;font:400 14px Manrope,sans-serif;border-radius:2px;outline:none">
+        </div>
+        <div style="display:flex;flex-direction:column;gap:7px">
+          <span style="font:600 11px Manrope,sans-serif;letter-spacing:.14em;color:rgba(239,231,218,.55)">PASSWORD</span>
+          <input type="password" value="{{ pw }}" onChange="{{ setPw }}" placeholder="••••••••" style="border:1px solid rgba(239,231,218,.3);background:rgba(20,16,11,.5);color:#EFE7DA;padding:14px 16px;font:400 14px Manrope,sans-serif;border-radius:2px;outline:none">
+        </div>
+        <sc-if value="{{ err }}" hint-placeholder-val="{{ false }}">
+          <span style="font:500 12.5px Manrope,sans-serif;color:#E08558">Enter any email and password to preview the dashboard.</span>
+        </sc-if>
+        <a href="TDI Admin.dc.html" style="display:block;text-align:center;border:0;background:oklch(0.74 0.08 78);color:#221C15;border-radius:2px;padding:15px 24px;font:700 12px Manrope,sans-serif;letter-spacing:.1em;cursor:pointer;text-decoration:none;margin-top:6px" style-hover="background:oklch(0.8 0.08 78)">SIGN IN →</a>
+        <div style="display:flex;justify-content:space-between;font:500 12px Manrope,sans-serif;color:rgba(239,231,218,.5)">
+          <span style="cursor:pointer" style-hover="color:#EFE7DA">Forgot password?</span>
+          <span style="cursor:pointer" style-hover="color:#EFE7DA">2FA enabled</span>
+        </div>
+      </div>
+
+      <div style="border-top:1px solid rgba(239,231,218,.12);padding-top:18px;display:flex;flex-direction:column;gap:8px">
+        <span style="font:600 10.5px Manrope,sans-serif;letter-spacing:.18em;color:rgba(239,231,218,.4)">ROLES</span>
+        <span style="font:400 12px/1.7 Manrope,sans-serif;color:rgba(239,231,218,.45)">Admin · Manager · Editor · Marketing · Read-only — access is role-based; editors see only content sections.</span>
+      </div>
+    </div>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = { email: '', pw: '', err: false };
+  renderVals() {
+    return {
+      email: this.state.email,
+      pw: this.state.pw,
+      err: this.state.err,
+      setEmail: (e) => this.setState({ email: e.target.value }),
+      setPw: (e) => this.setState({ pw: e.target.value })
+    };
+  }
+}
+</script>
+</body>
+</html>

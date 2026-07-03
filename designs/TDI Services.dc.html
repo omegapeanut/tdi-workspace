@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet data-dc-atomics>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500;1,600&amp;family=Manrope:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet">
+<style>body{margin:0;background:#221C15}</style>
+</helmet>
+
+<div style="font-family:Manrope,sans-serif;color:#EFE7DA;background:#221C15;min-height:100vh" data-screen-label="Services">
+
+  <div style="display:flex;align-items:center;justify-content:space-between;padding:26px 64px;border-bottom:1px solid rgba(239,231,218,.1)">
+    <a href="TDI Home.dc.html" style="display:flex;align-items:baseline;gap:9px;text-decoration:none;color:#EFE7DA">
+      <span style="font:500 24px 'Cormorant Garamond',serif">TDI</span>
+      <span style="font:600 10px Manrope,sans-serif;letter-spacing:.3em;color:oklch(0.74 0.08 78)">WORKSPACE</span>
+    </a>
+    <nav style="display:flex;gap:32px;font:500 12.5px Manrope,sans-serif;color:rgba(239,231,218,.75)">
+      <a href="TDI Projects.dc.html" style="color:rgba(239,231,218,.75);text-decoration:none">Projects</a>
+      <a href="TDI Services.dc.html" style="color:#EFE7DA;text-decoration:none;border-bottom:1px solid oklch(0.74 0.08 78);padding-bottom:3px">Services</a>
+      <a href="TDI Process.dc.html" style="color:rgba(239,231,218,.75);text-decoration:none">Process</a>
+      <a href="TDI Journal.dc.html" style="color:rgba(239,231,218,.75);text-decoration:none">Journal</a>
+      <a href="TDI Materials.dc.html" style="color:rgba(239,231,218,.75);text-decoration:none">Materials</a>
+      <a href="TDI About.dc.html" style="color:rgba(239,231,218,.75);text-decoration:none">About</a>
+      <a href="TDI Calculator.dc.html" style="color:rgba(239,231,218,.75);text-decoration:none">Calculator</a>
+    </nav>
+    <a href="TDI Contact.dc.html" style="border:1px solid oklch(0.74 0.08 78);background:transparent;color:oklch(0.74 0.08 78);border-radius:2px;padding:11px 22px;font:600 11.5px Manrope,sans-serif;letter-spacing:.08em;text-decoration:none" style-hover="background:oklch(0.74 0.08 78);color:#221C15">BOOK A CONSULTATION</a>
+  </div>
+
+  <div style="padding:72px 64px 44px;display:flex;justify-content:space-between;align-items:flex-end;gap:32px;flex-wrap:wrap">
+    <div style="display:flex;flex-direction:column;gap:14px">
+      <span style="font:600 11px Manrope,sans-serif;letter-spacing:.32em;color:oklch(0.74 0.08 78)">SERVICES</span>
+      <h1 style="margin:0;font:italic 500 76px/1.05 'Cormorant Garamond',serif">What we take on.</h1>
+    </div>
+    <div style="display:flex;border:1px solid rgba(239,231,218,.35);border-radius:2px;font:600 12px Manrope,sans-serif;letter-spacing:.1em">
+      <sc-if value="{{ isC }}" hint-placeholder-val="{{ true }}">
+        <div style="display:flex">
+          <button onClick="{{ toC }}" style="border:0;cursor:pointer;padding:13px 26px;background:#EFE7DA;color:#221C15;font:inherit;letter-spacing:inherit">COMMERCIAL</button>
+          <button onClick="{{ toR }}" style="border:0;cursor:pointer;padding:13px 26px;background:transparent;color:rgba(239,231,218,.8);font:inherit;letter-spacing:inherit" style-hover="color:#EFE7DA">RESIDENTIAL</button>
+        </div>
+      </sc-if>
+      <sc-if value="{{ isR }}" hint-placeholder-val="{{ false }}">
+        <div style="display:flex">
+          <button onClick="{{ toC }}" style="border:0;cursor:pointer;padding:13px 26px;background:transparent;color:rgba(239,231,218,.8);font:inherit;letter-spacing:inherit" style-hover="color:#EFE7DA">COMMERCIAL</button>
+          <button onClick="{{ toR }}" style="border:0;cursor:pointer;padding:13px 26px;background:#EFE7DA;color:#221C15;font:inherit;letter-spacing:inherit">RESIDENTIAL</button>
+        </div>
+      </sc-if>
+    </div>
+  </div>
+
+  <div style="padding:0 64px 90px;display:flex;flex-direction:column;gap:0">
+    <sc-for list="{{ services }}" as="s" hint-placeholder-count="4">
+      <div style="display:grid;grid-template-columns:80px 1.2fr 1fr 360px;gap:40px;padding:44px 0;border-top:1px solid rgba(239,231,218,.12);align-items:start">
+        <span style="font:400 40px 'Cormorant Garamond',serif;color:oklch(0.74 0.08 78)">{{ s.num }}</span>
+        <div style="display:flex;flex-direction:column;gap:12px">
+          <span style="font:italic 500 32px 'Cormorant Garamond',serif">{{ s.name }}</span>
+          <span style="font:400 14px/1.75 Manrope,sans-serif;color:rgba(239,231,218,.65)">{{ s.desc }}</span>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:9px;font:400 13px/1.5 Manrope,sans-serif;color:rgba(239,231,218,.6);padding-top:8px">
+          <sc-for list="{{ s.items }}" as="it" hint-placeholder-count="4">
+            <span>· {{ it }}</span>
+          </sc-for>
+        </div>
+        <img src="{{ s.img }}" alt="{{ s.name }}" style="height:220px;width:100%;object-fit:cover;display:block">
+      </div>
+    </sc-for>
+  </div>
+
+  <div style="padding:80px 64px;border-top:1px solid rgba(239,231,218,.1);display:flex;justify-content:space-between;align-items:center;gap:32px;flex-wrap:wrap">
+    <div style="display:flex;flex-direction:column;gap:10px">
+      <sc-if value="{{ isC }}" hint-placeholder-val="{{ true }}"><span style="font:italic 500 36px 'Cormorant Garamond',serif">Scoping a commercial project?</span></sc-if>
+      <sc-if value="{{ isR }}" hint-placeholder-val="{{ false }}"><span style="font:italic 500 36px 'Cormorant Garamond',serif">Planning your renovation?</span></sc-if>
+      <span style="font:400 14px Manrope,sans-serif;color:rgba(239,231,218,.6)">A 30-minute conversation tells you what's possible — and what it should cost.</span>
+    </div>
+    <div style="display:flex;gap:14px">
+      <a href="TDI Contact.dc.html" style="display:inline-block;background:oklch(0.74 0.08 78);color:#221C15;border-radius:2px;padding:16px 30px;font:700 12px Manrope,sans-serif;letter-spacing:.08em;text-decoration:none" style-hover="background:oklch(0.8 0.08 78)">BOOK A FREE CONSULTATION</a>
+      <sc-if value="{{ isR }}" hint-placeholder-val="{{ false }}">
+        <a href="TDI Calculator.dc.html" style="display:inline-block;border:1px solid rgba(239,231,218,.4);color:#EFE7DA;border-radius:2px;padding:16px 30px;font:600 12px Manrope,sans-serif;letter-spacing:.08em;cursor:pointer;text-decoration:none">ESTIMATE COSTS FIRST</a>
+      </sc-if>
+    </div>
+  </div>
+
+  <div style="background:#1A150F;padding:28px 64px;display:flex;justify-content:space-between;font:400 11.5px Manrope,sans-serif;color:rgba(239,231,218,.35)">
+    <span>© 2026 TDI Workspace Pte Ltd</span>
+    <a href="TDI Home.dc.html" style="color:rgba(239,231,218,.55);text-decoration:none">← Back to home</a>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = { mode: ['C','R'].includes(localStorage.getItem('tdi-mode')) ? localStorage.getItem('tdi-mode') : 'C' };
+
+  renderVals() {
+    const C = [
+      { num: '01', name: 'Office design & fit-out', img: 'admin/images/project-fintech.jpg',
+        desc: 'CAT B fit-outs, expansions and reinstatements — planned around headcount, hybrid work and your lease clock.',
+        items: ['Space planning & test fits', 'M&E coordination', 'Landlord & authority submissions', 'Custom joinery & acoustics'] },
+      { num: '02', name: 'F&B & hospitality', img: 'admin/images/project-izakaya.jpg',
+        desc: 'Restaurants, cafés and bars built for service flow, kitchen compliance and an opening date that holds.',
+        items: ['Concept & brand translation', 'Kitchen & bar layout', 'SFA / URA licensing support', 'Fast-track build programmes'] },
+      { num: '03', name: 'Retail & showroom', img: 'admin/images/project-boutique.jpg',
+        desc: 'Brand-first stores and showrooms where millwork, lighting and merchandising are designed as one.',
+        items: ['Flagship & chain rollouts', 'Custom display millwork', 'Lighting design', 'Mall & landlord approvals'] },
+      { num: '04', name: 'Clinics & wellness', img: 'admin/images/project-clinic.jpg',
+        desc: 'Compliant, calming healthcare environments — from GP suites to dental and aesthetic studios.',
+        items: ['MOH compliance planning', 'Infection-control detailing', 'Patient-flow layouts', 'Medical M&E provisions'] }
+    ];
+    const R = [
+      { num: '01', name: 'Whole-home renovation', img: 'admin/images/project-maisonette.jpg',
+        desc: 'HDB, condo and landed — full design, permits and build under one contract, one accountable team.',
+        items: ['Space planning & 3D views', 'HDB permit submissions', 'Hacking to handover', '12-month defects care'] },
+      { num: '02', name: 'Kitchens & wet works', img: 'admin/images/project-hdb-kitchen.jpg',
+        desc: 'Hacking, tiling, plumbing and waterproofing — the unglamorous work that decides whether a home lasts.',
+        items: ['Kitchen & bathroom overhauls', 'Waterproofing warranties', 'Tiling & stonework', 'Plumbing rerouting'] },
+      { num: '03', name: 'Custom carpentry', img: 'admin/images/project-bto.jpg',
+        desc: 'Built-in wardrobes, feature walls, study nooks and storage measured to the millimetre — made in our own workshop.',
+        items: ['Wardrobes & storage walls', 'TV consoles & feature walls', 'Study & vanity built-ins', 'Soft-close hardware as standard'] },
+      { num: '04', name: 'Styling & lighting', img: 'admin/images/project-penthouse.jpg',
+        desc: 'The last 10% that makes it feel finished — lighting plans, curtains, loose furniture and styling.',
+        items: ['Lighting plans & fittings', 'Curtains & blinds', 'Furniture sourcing', 'Move-in styling'] }
+    ];
+    return {
+      isC: this.state.mode === 'C',
+      isR: this.state.mode === 'R',
+      toC: () => { localStorage.setItem('tdi-mode', 'C'); this.setState({ mode: 'C' }); },
+      toR: () => { localStorage.setItem('tdi-mode', 'R'); this.setState({ mode: 'R' }); },
+      services: this.state.mode === 'C' ? C : R
+    };
+  }
+}
+</script>
+</body>
+</html>

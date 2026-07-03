@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet data-dc-atomics>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500;1,600&amp;family=Manrope:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet">
+<style>body{margin:0;background:#221C15}</style>
+</helmet>
+
+<div style="font-family:Manrope,sans-serif;color:#EFE7DA;background:#221C15;min-height:100vh" data-screen-label="Material library">
+
+  <div style="display:flex;align-items:center;justify-content:space-between;padding:26px 64px;border-bottom:1px solid rgba(239,231,218,.1)">
+    <a href="TDI Home.dc.html" style="display:flex;align-items:baseline;gap:9px;text-decoration:none;color:#EFE7DA">
+      <span style="font:500 24px 'Cormorant Garamond',serif">TDI</span>
+      <span style="font:600 10px Manrope,sans-serif;letter-spacing:.3em;color:oklch(0.74 0.08 78)">WORKSPACE</span>
+    </a>
+    <nav style="display:flex;gap:32px;font:500 12.5px Manrope,sans-serif;color:rgba(239,231,218,.75)">
+      <a href="TDI Projects.dc.html" style="color:rgba(239,231,218,.75);text-decoration:none">Projects</a>
+      <a href="TDI Services.dc.html" style="color:rgba(239,231,218,.75);text-decoration:none">Services</a>
+      <a href="TDI Process.dc.html" style="color:rgba(239,231,218,.75);text-decoration:none">Process</a>
+      <a href="TDI Journal.dc.html" style="color:rgba(239,231,218,.75);text-decoration:none">Journal</a>
+      <a href="TDI Materials.dc.html" style="color:#EFE7DA;text-decoration:none;border-bottom:1px solid oklch(0.74 0.08 78);padding-bottom:3px">Materials</a>
+      <a href="TDI About.dc.html" style="color:rgba(239,231,218,.75);text-decoration:none">About</a>
+      <a href="TDI Calculator.dc.html" style="color:rgba(239,231,218,.75);text-decoration:none">Calculator</a>
+    </nav>
+    <a href="TDI Contact.dc.html" style="border:1px solid oklch(0.74 0.08 78);background:transparent;color:oklch(0.74 0.08 78);border-radius:2px;padding:11px 22px;font:600 11.5px Manrope,sans-serif;letter-spacing:.08em;text-decoration:none" style-hover="background:oklch(0.74 0.08 78);color:#221C15">BOOK A CONSULTATION</a>
+  </div>
+
+  <div style="padding:72px 64px 40px;display:flex;flex-direction:column;gap:26px">
+    <div style="display:flex;justify-content:space-between;align-items:flex-end;gap:32px;flex-wrap:wrap">
+      <div style="display:flex;flex-direction:column;gap:14px">
+        <span style="font:600 11px Manrope,sans-serif;letter-spacing:.32em;color:oklch(0.74 0.08 78)">MATERIAL LIBRARY · 材料库</span>
+        <h1 style="margin:0;font:italic 500 76px/1.05 'Cormorant Garamond',serif">Touch before you choose.</h1>
+        <p style="margin:0;font:400 15.5px/1.7 Manrope,sans-serif;color:rgba(239,231,218,.65);max-width:600px">Every material we specify, in one place. Shortlist your favourites and bring the list to your consultation — the physical samples will be on the table.</p>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:8px;align-items:flex-end">
+        <input type="text" placeholder="Search materials…" value="{{ query }}" onChange="{{ setQuery }}" style="border:1px solid rgba(239,231,218,.3);background:transparent;color:#EFE7DA;padding:13px 18px;font:400 13px Manrope,sans-serif;border-radius:2px;width:280px;outline:none">
+        <span style="font:500 11.5px Manrope,sans-serif;color:oklch(0.74 0.08 78)">{{ favLine }}</span>
+      </div>
+    </div>
+    <div style="display:flex;gap:10px;flex-wrap:wrap">
+      <sc-for list="{{ cats }}" as="cat" hint-placeholder-count="8">
+        <button onClick="{{ cat.pick }}" style="border:1px solid {{ cat.bd }};background:{{ cat.bg }};color:{{ cat.fg }};border-radius:99px;padding:9px 20px;font:600 12px Manrope,sans-serif;letter-spacing:.06em;cursor:pointer">{{ cat.label }}</button>
+      </sc-for>
+    </div>
+  </div>
+
+  <div style="padding:0 64px 90px">
+    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:22px">
+      <sc-for list="{{ materials }}" as="m" hint-placeholder-count="8">
+        <div style="display:flex;flex-direction:column;border:1px solid rgba(239,231,218,.12);border-radius:3px;overflow:hidden">
+          <div style="position:relative">
+            <img src="{{ m.img }}" alt="{{ m.name }}" style="height:200px;width:100%;object-fit:cover;display:block">
+            <button onClick="{{ m.fav }}" title="Shortlist" style="position:absolute;top:12px;right:12px;border:0;background:rgba(20,16,11,.7);color:{{ m.favColor }};border-radius:99px;width:36px;height:36px;font:400 16px sans-serif;cursor:pointer;backdrop-filter:blur(4px)">{{ m.favMark }}</button>
+          </div>
+          <div style="padding:20px 22px 24px;display:flex;flex-direction:column;gap:10px;background:#1A150F;flex:1">
+            <div style="display:flex;justify-content:space-between;align-items:baseline;gap:10px">
+              <span style="font:italic 500 20px 'Cormorant Garamond',serif">{{ m.name }}</span>
+              <span style="font:600 9.5px Manrope,sans-serif;letter-spacing:.14em;color:oklch(0.74 0.08 78);white-space:nowrap">{{ m.tag }}</span>
+            </div>
+            <span style="font:400 12.5px/1.6 Manrope,sans-serif;color:rgba(239,231,218,.55)">{{ m.desc }}</span>
+            <div style="display:flex;justify-content:space-between;font:500 11px Manrope,sans-serif;color:rgba(239,231,218,.45);border-top:1px solid rgba(239,231,218,.1);padding-top:10px;margin-top:auto">
+              <span>{{ m.finish }}</span>
+              <span>{{ m.care }}</span>
+            </div>
+          </div>
+        </div>
+      </sc-for>
+    </div>
+    <sc-if value="{{ empty }}" hint-placeholder-val="{{ false }}">
+      <div style="padding:60px 0;text-align:center;font:400 14px Manrope,sans-serif;color:rgba(239,231,218,.45)">No materials match — try a different search or category.</div>
+    </sc-if>
+  </div>
+
+  <div style="padding:72px 64px;border-top:1px solid rgba(239,231,218,.1);display:flex;justify-content:space-between;align-items:center;gap:32px;flex-wrap:wrap">
+    <div style="display:flex;flex-direction:column;gap:8px">
+      <span style="font:italic 500 32px 'Cormorant Garamond',serif">{{ ctaLine }}</span>
+      <span style="font:400 14px Manrope,sans-serif;color:rgba(239,231,218,.6)">Bring your shortlist to a consultation — we'll have the physical samples ready.</span>
+    </div>
+    <a href="TDI Contact.dc.html" style="display:inline-block;background:oklch(0.74 0.08 78);color:#221C15;border-radius:2px;padding:16px 30px;font:700 12px Manrope,sans-serif;letter-spacing:.08em;text-decoration:none" style-hover="background:oklch(0.8 0.08 78)">BOOK A CONSULTATION</a>
+  </div>
+
+  <div style="background:#1A150F;padding:28px 64px;display:flex;justify-content:space-between;font:400 11.5px Manrope,sans-serif;color:rgba(239,231,218,.35)">
+    <span>© 2026 TDI Workspace Pte Ltd</span>
+    <a href="TDI Home.dc.html" style="color:rgba(239,231,218,.55);text-decoration:none">← Back to home</a>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = { cat: 'all', query: '', favs: {} };
+
+  renderVals() {
+    const MATS = [
+      { id: 'oak', name: 'Smoked oak veneer', tag: 'WOOD', cat: 'wood', desc: 'Warm mid-tone oak with visible grain. Feature walls, joinery fronts, ceilings.', finish: 'Matt lacquer', care: 'Low maintenance', img: 'admin/images/material-wood.jpg' },
+      { id: 'marble', name: 'Calacatta marble', tag: 'MARBLE', cat: 'stone', desc: 'Bold-veined statement stone. Reception counters, feature cladding, vanities.', finish: 'Honed / polished', care: 'Seal yearly', img: 'admin/images/material-marble.jpg' },
+      { id: 'stone', name: 'Sandblasted granite', tag: 'STONE', cat: 'stone', desc: 'Muted, durable natural stone. Flooring, external thresholds, wet areas.', finish: 'Sandblasted', care: 'Very durable', img: 'admin/images/material-stone.jpg' },
+      { id: 'tiles', name: 'Zellige-look tiles', tag: 'TILES', cat: 'tiles', desc: 'Handmade texture in glazed ceramic. Kitchen backsplashes, bathroom walls, F&B counters.', finish: 'Gloss glaze', care: 'Wipe clean', img: 'admin/images/material-tiles.jpg' },
+      { id: 'fabric', name: 'Bouclé upholstery', tag: 'FABRIC', cat: 'fabric', desc: 'Soft loop-pile textile. Banquettes, headboards, acoustic panels.', finish: 'Stain-guarded', care: 'Vacuum weekly', img: 'admin/images/material-fabric.jpg' },
+      { id: 'metal', name: 'Brushed brass', tag: 'METAL', cat: 'metal', desc: 'The house accent. Handles, trims, lighting, signage.', finish: 'Brushed, lacquered', care: 'Ages gracefully', img: 'admin/images/material-metal.jpg' },
+      { id: 'terrazzo', name: 'Porcelain terrazzo', tag: 'TILES', cat: 'tiles', desc: 'Terrazzo look with porcelain toughness. High-traffic floors, F&B and retail.', finish: 'Matt R10', care: 'Very durable', img: 'admin/images/material-terrazzo.jpg' },
+      { id: 'glass', name: 'Fluted glass', tag: 'GLASS', cat: 'glass', desc: 'Privacy with light. Partitions, shower screens, cabinet fronts.', finish: 'Clear / low-iron', care: 'Wipe clean', img: 'admin/images/material-glass.jpg' }
+    ];
+    const CATS = [ ['all','ALL'], ['wood','WOOD'], ['stone','STONE & MARBLE'], ['tiles','TILES'], ['fabric','FABRIC'], ['metal','METAL'], ['glass','GLASS'] ];
+    const { cat, query, favs } = this.state;
+    const q = query.trim().toLowerCase();
+
+    const materials = MATS
+      .filter(m => cat === 'all' || m.cat === cat)
+      .filter(m => !q || (m.name + ' ' + m.desc + ' ' + m.tag).toLowerCase().includes(q))
+      .map(m => ({
+        ...m,
+        favMark: favs[m.id] ? '♥' : '♡',
+        favColor: favs[m.id] ? 'oklch(0.74 0.08 78)' : 'rgba(239,231,218,.8)',
+        fav: () => this.setState(prev => ({ favs: { ...prev.favs, [m.id]: !prev.favs[m.id] } }))
+      }));
+
+    const favCount = Object.values(favs).filter(Boolean).length;
+    return {
+      query,
+      setQuery: (e) => this.setState({ query: e.target.value }),
+      cats: CATS.map(([key, label]) => ({
+        label,
+        bg: key === cat ? '#EFE7DA' : 'transparent',
+        fg: key === cat ? '#221C15' : 'rgba(239,231,218,.7)',
+        bd: key === cat ? '#EFE7DA' : 'rgba(239,231,218,.3)',
+        pick: () => this.setState({ cat: key })
+      })),
+      materials,
+      empty: materials.length === 0,
+      favLine: favCount ? '♥ ' + favCount + ' shortlisted' : 'Tap ♡ to shortlist materials',
+      ctaLine: favCount ? 'Your shortlist has ' + favCount + ' material' + (favCount === 1 ? '' : 's') + '.' : 'Seen something you like?'
+    };
+  }
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet data-dc-atomics>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500;1,600&amp;family=Manrope:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet">
+<style>body{margin:0;background:#221C15}
+input[type=range]{accent-color:#D6A860}
+</style>
+</helmet>
+
+<div style="font-family:Manrope,sans-serif;color:#EFE7DA;background:#221C15;min-height:100vh" data-screen-label="Residential renovation calculator">
+
+  <div style="display:flex;align-items:center;justify-content:space-between;padding:26px 64px;border-bottom:1px solid rgba(239,231,218,.1)">
+    <a href="TDI Home.dc.html" style="display:flex;align-items:baseline;gap:9px;text-decoration:none;color:#EFE7DA">
+      <span style="font:500 24px 'Cormorant Garamond',serif">TDI</span>
+      <span style="font:600 10px Manrope,sans-serif;letter-spacing:.3em;color:oklch(0.74 0.08 78)">WORKSPACE</span>
+    </a>
+    <nav style="display:flex;gap:32px;font:500 12.5px Manrope,sans-serif;color:rgba(239,231,218,.75)">
+      <a href="TDI Projects.dc.html" style="color:rgba(239,231,218,.75);text-decoration:none">Projects</a>
+      <a href="TDI Services.dc.html" style="color:rgba(239,231,218,.75);text-decoration:none">Services</a>
+      <a href="TDI Process.dc.html" style="color:rgba(239,231,218,.75);text-decoration:none">Process</a>
+      <a href="TDI Journal.dc.html" style="color:rgba(239,231,218,.75);text-decoration:none">Journal</a>
+      <a href="TDI Materials.dc.html" style="color:rgba(239,231,218,.75);text-decoration:none">Materials</a>
+      <a href="TDI About.dc.html" style="color:rgba(239,231,218,.75);text-decoration:none">About</a>
+      <a href="TDI Calculator.dc.html" style="color:#EFE7DA;text-decoration:none;border-bottom:1px solid oklch(0.74 0.08 78);padding-bottom:3px">Calculator</a>
+    </nav>
+    <a href="TDI Contact.dc.html" style="border:1px solid oklch(0.74 0.08 78);background:transparent;color:oklch(0.74 0.08 78);border-radius:2px;padding:11px 22px;font:600 11.5px Manrope,sans-serif;letter-spacing:.08em;text-decoration:none" style-hover="background:oklch(0.74 0.08 78);color:#221C15">BOOK A CONSULTATION</a>
+  </div>
+
+  <div style="padding:72px 64px 44px;display:flex;flex-direction:column;gap:16px;max-width:900px">
+    <span style="font:600 11px Manrope,sans-serif;letter-spacing:.32em;color:oklch(0.74 0.08 78)">RESIDENTIAL RENOVATION CALCULATOR · 预算估算</span>
+    <h1 style="margin:0;font:italic 500 72px/1.05 'Cormorant Garamond',serif">Know your number.</h1>
+    <p style="margin:0;font:400 15.5px/1.7 Manrope,sans-serif;color:rgba(239,231,218,.65);max-width:620px">Five questions, two minutes — an honest cost range for your renovation, based on prevailing Singapore market rates. Estimates only; your consultation makes it exact.</p>
+  </div>
+
+  <div style="display:grid;grid-template-columns:1.25fr 1fr;gap:32px;padding:0 64px 80px;align-items:start">
+
+    <!-- ============ FORM ============ -->
+    <div style="display:flex;flex-direction:column;gap:44px">
+
+      <div style="display:flex;flex-direction:column;gap:16px">
+        <span style="font:600 12px Manrope,sans-serif;letter-spacing:.22em;color:rgba(239,231,218,.55)">1 — PROPERTY TYPE</span>
+        <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px">
+          <sc-for list="{{ propOpts }}" as="o" hint-placeholder-count="4">
+            <button onClick="{{ o.pick }}" style="border:1px solid {{ o.bd }};background:{{ o.bg }};color:{{ o.fg }};border-radius:3px;padding:18px 12px;display:flex;flex-direction:column;align-items:center;gap:5px;cursor:pointer">
+              <span style="font:italic 500 19px 'Cormorant Garamond',serif">{{ o.label }}</span>
+              <span style="font:500 10.5px Manrope,sans-serif;letter-spacing:.08em;opacity:.65">{{ o.sub }}</span>
+            </button>
+          </sc-for>
+        </div>
+      </div>
+
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:32px">
+        <div style="display:flex;flex-direction:column;gap:16px">
+          <span style="font:600 12px Manrope,sans-serif;letter-spacing:.22em;color:rgba(239,231,218,.55)">2 — ROOMS</span>
+          <div style="display:flex;align-items:center;gap:18px;border:1px solid rgba(239,231,218,.25);border-radius:3px;padding:12px 18px;align-self:flex-start">
+            <button onClick="{{ decRooms }}" style="border:0;background:transparent;color:oklch(0.74 0.08 78);font:600 22px Manrope,sans-serif;cursor:pointer;padding:0 6px">−</button>
+            <span style="font:italic 500 26px 'Cormorant Garamond',serif;min-width:26px;text-align:center">{{ rooms }}</span>
+            <button onClick="{{ incRooms }}" style="border:0;background:transparent;color:oklch(0.74 0.08 78);font:600 22px Manrope,sans-serif;cursor:pointer;padding:0 6px">+</button>
+          </div>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:16px">
+          <span style="font:600 12px Manrope,sans-serif;letter-spacing:.22em;color:rgba(239,231,218,.55)">3 — FLOOR AREA · <span style="color:oklch(0.74 0.08 78)">{{ areaLabel }}</span></span>
+          <input type="range" min="300" max="4000" step="50" value="{{ area }}" onChange="{{ setArea }}" style="width:100%;cursor:pointer">
+          <div style="display:flex;justify-content:space-between;font:400 11px Manrope,sans-serif;color:rgba(239,231,218,.4)"><span>300 sqft</span><span>4,000 sqft</span></div>
+        </div>
+      </div>
+
+      <div style="display:flex;flex-direction:column;gap:16px">
+        <span style="font:600 12px Manrope,sans-serif;letter-spacing:.22em;color:rgba(239,231,218,.55)">4 — DESIGN TIER</span>
+        <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px">
+          <sc-for list="{{ styleOpts }}" as="o" hint-placeholder-count="4">
+            <button onClick="{{ o.pick }}" style="border:1px solid {{ o.bd }};background:{{ o.bg }};color:{{ o.fg }};border-radius:3px;padding:16px 12px;display:flex;flex-direction:column;align-items:center;gap:5px;cursor:pointer">
+              <span style="font:italic 500 19px 'Cormorant Garamond',serif">{{ o.label }}</span>
+              <span style="font:500 10.5px Manrope,sans-serif;letter-spacing:.08em;opacity:.65">{{ o.sub }}</span>
+            </button>
+          </sc-for>
+        </div>
+      </div>
+
+      <div style="display:flex;flex-direction:column;gap:16px">
+        <span style="font:600 12px Manrope,sans-serif;letter-spacing:.22em;color:rgba(239,231,218,.55)">5 — SCOPE OF WORK</span>
+        <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:10px">
+          <sc-for list="{{ scopeOpts }}" as="o" hint-placeholder-count="10">
+            <button onClick="{{ o.pick }}" style="border:1px solid {{ o.bd }};background:{{ o.bg }};color:{{ o.fg }};border-radius:3px;padding:14px 18px;display:flex;justify-content:space-between;align-items:center;gap:12px;cursor:pointer;text-align:left">
+              <span style="font:600 13.5px Manrope,sans-serif">{{ o.label }}</span>
+              <span style="font:400 12px Manrope,sans-serif;opacity:.6">{{ o.mark }}</span>
+            </button>
+          </sc-for>
+        </div>
+      </div>
+    </div>
+
+    <!-- ============ RESULT ============ -->
+    <div style="position:sticky;top:24px;display:flex;flex-direction:column;gap:0;border:1px solid rgba(239,231,218,.18);border-radius:3px;overflow:hidden">
+      <div style="background:#1A150F;padding:34px 34px 30px;display:flex;flex-direction:column;gap:14px">
+        <span style="font:600 11px Manrope,sans-serif;letter-spacing:.28em;color:oklch(0.74 0.08 78)">YOUR ESTIMATED RANGE</span>
+        <span style="font:italic 500 52px/1.05 'Cormorant Garamond',serif">{{ totalLabel }}</span>
+        <span style="font:400 12.5px/1.6 Manrope,sans-serif;color:rgba(239,231,218,.55)">{{ summaryLine }}</span>
+      </div>
+      <div style="background:#221C15;padding:26px 34px;display:flex;flex-direction:column;gap:13px;border-top:1px solid rgba(239,231,218,.12)">
+        <sc-if value="{{ hasScope }}" hint-placeholder-val="{{ true }}">
+          <div style="display:flex;flex-direction:column;gap:13px">
+            <sc-for list="{{ breakdown }}" as="row" hint-placeholder-count="4">
+              <div style="display:flex;justify-content:space-between;gap:16px;font:400 13px Manrope,sans-serif">
+                <span style="color:rgba(239,231,218,.7)">{{ row.label }}</span>
+                <span style="color:#EFE7DA;white-space:nowrap">{{ row.range }}</span>
+              </div>
+            </sc-for>
+          </div>
+        </sc-if>
+        <sc-if value="{{ noScope }}" hint-placeholder-val="{{ false }}">
+          <span style="font:400 13px/1.6 Manrope,sans-serif;color:rgba(239,231,218,.5)">Select at least one scope of work to see your estimate.</span>
+        </sc-if>
+      </div>
+      <div style="background:#221C15;padding:24px 34px 30px;display:flex;flex-direction:column;gap:14px;border-top:1px solid rgba(239,231,218,.12)">
+        <a href="TDI Contact.dc.html" style="display:block;text-align:center;background:oklch(0.74 0.08 78);color:#221C15;border-radius:2px;padding:15px 24px;font:700 12px Manrope,sans-serif;letter-spacing:.08em;text-decoration:none" style-hover="background:oklch(0.8 0.08 78)">SEND THIS ESTIMATE — BOOK A CONSULTATION</a>
+        <button style="border:1px solid rgba(239,231,218,.35);background:transparent;color:#EFE7DA;border-radius:2px;padding:14px 24px;font:600 12px Manrope,sans-serif;letter-spacing:.08em;cursor:pointer" style-hover="border-color:#EFE7DA">WHATSAPP US THIS RANGE</button>
+        <span style="font:400 11px/1.7 Manrope,sans-serif;color:rgba(239,231,218,.4)">Estimated ranges only, based on prevailing market rates and typical specifications. Not a quotation — final pricing depends on site condition, material selection and detailed scope. TDI Workspace never promises fixed prices before a site visit.</span>
+      </div>
+    </div>
+  </div>
+
+  <div style="padding:64px;border-top:1px solid rgba(239,231,218,.1);display:flex;justify-content:space-between;align-items:center;gap:32px;flex-wrap:wrap">
+    <div style="display:flex;flex-direction:column;gap:8px">
+      <span style="font:italic 500 32px 'Cormorant Garamond',serif">Renovating a business space instead?</span>
+      <span style="font:400 14px Manrope,sans-serif;color:rgba(239,231,218,.6)">Commercial projects are scoped personally — no calculators, just a proposal in 5 working days.</span>
+    </div>
+    <a href="TDI Contact.dc.html" style="display:inline-block;border:1px solid oklch(0.74 0.08 78);background:transparent;color:oklch(0.74 0.08 78);border-radius:2px;padding:15px 28px;font:600 12px Manrope,sans-serif;letter-spacing:.08em;text-decoration:none" style-hover="background:oklch(0.74 0.08 78);color:#221C15">REQUEST A COMMERCIAL PROPOSAL</a>
+  </div>
+
+  <div style="background:#1A150F;padding:28px 64px;display:flex;justify-content:space-between;font:400 11.5px Manrope,sans-serif;color:rgba(239,231,218,.35)">
+    <span>© 2026 TDI Workspace Pte Ltd</span>
+    <a href="TDI Home.dc.html" style="color:rgba(239,231,218,.55);text-decoration:none">← Back to home</a>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = {
+    prop: 'hdbResale',
+    rooms: 4,
+    area: 1000,
+    tier: 'modern',
+    scope: { kitchen: true, bathroom: true, flooring: true, painting: true, electrical: true, carpentry: true, ceiling: false, aircon: false, lighting: false, furniture: false }
+  };
+
+  renderVals() {
+    const s = this.state;
+    const brassOn = { bg: '#EFE7DA', fg: '#221C15', bd: '#EFE7DA' };
+    const off = { bg: 'transparent', fg: 'rgba(239,231,218,.75)', bd: 'rgba(239,231,218,.28)' };
+
+    const PROPS = [
+      ['hdbNew', 'HDB (new)', 'BTO / new flat', 1.0],
+      ['hdbResale', 'HDB (resale)', 'incl. hacking', 1.22],
+      ['condo', 'Condo', 'new or resale', 1.15],
+      ['landed', 'Landed', 'terrace to GCB', 1.45]
+    ];
+    const TIERS = [
+      ['basic', 'Essential', 'practical finishes', 0.8],
+      ['modern', 'Modern', 'popular choice', 1.0],
+      ['luxury', 'Luxury', 'premium materials', 1.4],
+      ['premium', 'Bespoke', 'fully custom', 1.85]
+    ];
+    // [key, label, lo, hi, perSqftLo, perSqftHi, perRoom]
+    const SCOPES = [
+      ['kitchen', 'Kitchen', 9000, 16000, 0, 0, 0],
+      ['bathroom', 'Bathrooms', 7000, 14000, 0, 0, 0],
+      ['flooring', 'Flooring', 0, 0, 5.5, 11, 0],
+      ['painting', 'Painting', 0, 0, 1.1, 1.9, 0],
+      ['electrical', 'Electrical & wiring', 2400, 4800, 0, 0, 260],
+      ['carpentry', 'Carpentry', 7500, 16000, 0, 0, 1300],
+      ['ceiling', 'False ceiling', 2200, 4800, 0, 0, 0],
+      ['aircon', 'Aircon', 1600, 2600, 0, 0, 950],
+      ['lighting', 'Lighting', 1500, 3800, 0, 0, 0],
+      ['furniture', 'Built-in furniture', 7000, 18000, 0, 0, 0]
+    ];
+
+    const propMult = PROPS.find(p => p[0] === s.prop)[3];
+    const tierMult = TIERS.find(t => t[0] === s.tier)[3];
+    const mult = propMult * tierMult;
+
+    const fmt = n => 'S$' + (Math.round(n / 500) * 500).toLocaleString('en-SG');
+
+    let lo = 0, hi = 0;
+    const breakdown = [];
+    SCOPES.forEach(([key, label, bLo, bHi, psLo, psHi, perRoom]) => {
+      if (!s.scope[key]) return;
+      const rLo = (bLo + psLo * s.area + perRoom * s.rooms) * mult;
+      const rHi = (bHi + psHi * s.area + perRoom * s.rooms) * mult;
+      lo += rLo; hi += rHi;
+      breakdown.push({ label, range: fmt(rLo) + ' – ' + fmt(rHi) });
+    });
+
+    const propOpts = PROPS.map(([key, label, sub]) => ({
+      label, sub, ...(s.prop === key ? brassOn : off),
+      pick: () => this.setState({ prop: key })
+    }));
+    const styleOpts = TIERS.map(([key, label, sub]) => ({
+      label, sub, ...(s.tier === key ? brassOn : off),
+      pick: () => this.setState({ tier: key })
+    }));
+    const scopeOpts = SCOPES.map(([key, label]) => {
+      const on = s.scope[key];
+      return {
+        label, mark: on ? '✓ included' : '+ add',
+        ...(on ? { bg: 'rgba(214,168,96,.14)', fg: '#EFE7DA', bd: 'oklch(0.74 0.08 78)' } : off),
+        pick: () => this.setState(prev => ({ scope: { ...prev.scope, [key]: !prev.scope[key] } }))
+      };
+    });
+
+    const propLabel = PROPS.find(p => p[0] === s.prop)[1];
+    const tierLabel = TIERS.find(t => t[0] === s.tier)[1];
+
+    return {
+      propOpts, styleOpts, scopeOpts,
+      rooms: s.rooms,
+      incRooms: () => this.setState({ rooms: Math.min(8, s.rooms + 1) }),
+      decRooms: () => this.setState({ rooms: Math.max(1, s.rooms - 1) }),
+      area: s.area,
+      areaLabel: s.area.toLocaleString('en-SG') + ' SQFT',
+      setArea: (e) => this.setState({ area: Number(e.target.value) }),
+      hasScope: breakdown.length > 0,
+      noScope: breakdown.length === 0,
+      breakdown,
+      totalLabel: breakdown.length ? fmt(lo) + ' – ' + fmt(hi) : '—',
+      summaryLine: propLabel + ' · ' + s.rooms + ' rooms · ' + s.area.toLocaleString('en-SG') + ' sqft · ' + tierLabel + ' tier · ' + breakdown.length + ' scope item' + (breakdown.length === 1 ? '' : 's')
+    };
+  }
+}
+</script>
+</body>
+</html>
