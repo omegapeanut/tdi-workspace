@@ -1,4 +1,7 @@
+"use client";
+
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 const navLinks = [
   { href: "/projects", label: "Projects" },
@@ -10,7 +13,9 @@ const navLinks = [
   { href: "/calculator", label: "Calculator" },
 ];
 
-export default function Header() {
+export default function Header({ bordered = true }) {
+  const pathname = usePathname();
+
   return (
     <div
       style={{
@@ -19,6 +24,7 @@ export default function Header() {
         alignItems: "center",
         justifyContent: "space-between",
         padding: "26px 64px",
+        borderBottom: bordered ? "1px solid rgba(239,231,218,.1)" : "none",
       }}
     >
       <Link href="/" style={{ display: "flex", alignItems: "baseline", gap: "9px", textDecoration: "none" }}>
@@ -28,11 +34,23 @@ export default function Header() {
         </span>
       </Link>
       <nav style={{ display: "flex", gap: "32px", font: "500 12.5px Manrope, sans-serif", color: "rgba(239,231,218,.75)" }}>
-        {navLinks.map((link) => (
-          <Link key={link.href} href={link.href} style={{ color: "rgba(239,231,218,.75)", textDecoration: "none" }}>
-            {link.label}
-          </Link>
-        ))}
+        {navLinks.map((link) => {
+          const active = pathname?.startsWith(link.href);
+          return (
+            <Link
+              key={link.href}
+              href={link.href}
+              style={{
+                color: active ? "#EFE7DA" : "rgba(239,231,218,.75)",
+                textDecoration: "none",
+                borderBottom: active ? "1px solid oklch(0.74 0.08 78)" : "1px solid transparent",
+                paddingBottom: "3px",
+              }}
+            >
+              {link.label}
+            </Link>
+          );
+        })}
       </nav>
       <Link
         href="/contact"

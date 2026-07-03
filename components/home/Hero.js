@@ -24,7 +24,7 @@ export default function Hero() {
           background: "linear-gradient(to top, rgba(20,16,11,.94) 0%, rgba(20,16,11,.25) 45%, rgba(20,16,11,.6) 100%)",
         }}
       />
-      <Header />
+      <Header bordered={false} />
 
       <div style={{ position: "relative", flex: 1, display: "flex", flexDirection: "column", justifyContent: "flex-end", padding: "0 64px 56px", gap: "36px" }}>
         <div style={{ display: "flex", flexDirection: "column", gap: "18px" }}>
