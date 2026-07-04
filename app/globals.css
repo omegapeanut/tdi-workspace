@@ -1,0 +1,207 @@
+/* Base reset — prevents any element from forcing horizontal scroll */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+img,
+video {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Fluid horizontal padding used across every page/section instead of a fixed 64px */
+.px-page {
+  padding-left: clamp(20px, 5vw, 64px) !important;
+  padding-right: clamp(20px, 5vw, 64px) !important;
+}
+
+/* Responsive grids — collapse progressively at tablet (1024px) then mobile (640px) */
+.grid-2,
+.grid-3,
+.grid-4 {
+  display: grid;
+}
+
+.grid-2 {
+  grid-template-columns: 1fr 1fr;
+}
+
+.grid-3 {
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.grid-4 {
+  grid-template-columns: repeat(4, 1fr);
+}
+
+@media (max-width: 1024px) {
+  .grid-3,
+  .grid-4 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 640px) {
+  .grid-2,
+  .grid-3,
+  .grid-4 {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+/* Row-based layouts (label | body | image, sidebar | content, etc.) that should stack on tablet/mobile */
+@media (max-width: 1024px) {
+  .stack-tablet {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+@media (max-width: 860px) {
+  .stack-mobile {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+  }
+
+  .stack-mobile.center-mobile {
+    align-items: center !important;
+  }
+}
+
+/* Sticky rails (calculator summary, contact info) shouldn't stay pinned once stacked on mobile */
+@media (max-width: 1024px) {
+  .sticky-tablet {
+    position: static !important;
+    top: auto !important;
+  }
+}
+
+/* Elements that carry a fixed maxWidth for desktop layout but should go full-width on phones */
+@media (max-width: 640px) {
+  .full-mobile {
+    max-width: 100% !important;
+  }
+}
+
+/* Named asymmetric grids used across specific sections — each collapses to fewer/1 column(s) */
+.grid-featured {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr 1fr;
+}
+@media (max-width: 1024px) {
+  .grid-featured {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media (max-width: 640px) {
+  .grid-featured {
+    grid-template-columns: 1fr;
+  }
+}
+
+.grid-testimonial {
+  display: grid;
+  grid-template-columns: 1fr 380px;
+}
+@media (max-width: 1024px) {
+  .grid-testimonial {
+    grid-template-columns: 1fr;
+  }
+}
+
+.grid-calculator {
+  display: grid;
+  grid-template-columns: 1.25fr 1fr;
+}
+@media (max-width: 1024px) {
+  .grid-calculator {
+    grid-template-columns: 1fr;
+  }
+}
+
+.grid-contact {
+  display: grid;
+  grid-template-columns: 1fr 1.15fr;
+}
+@media (max-width: 1024px) {
+  .grid-contact {
+    grid-template-columns: 1fr;
+  }
+}
+
+.grid-process-step {
+  display: grid;
+  grid-template-columns: 120px 1fr 1fr;
+}
+@media (max-width: 860px) {
+  .grid-process-step {
+    grid-template-columns: 1fr;
+  }
+}
+
+.grid-service-row {
+  display: grid;
+  grid-template-columns: 80px 1.2fr 1fr 360px;
+}
+@media (max-width: 1024px) {
+  .grid-service-row {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media (max-width: 640px) {
+  .grid-service-row {
+    grid-template-columns: 1fr;
+  }
+}
+
+.grid-journal-featured {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr;
+}
+@media (max-width: 860px) {
+  .grid-journal-featured {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 480px) {
+  .hide-mobile {
+    display: none !important;
+  }
+}
+
+/* Header nav: full nav on laptop, hamburger below */
+.nav-desktop {
+  display: flex;
+}
+
+.nav-toggle {
+  display: none;
+}
+
+@media (max-width: 860px) {
+  .nav-desktop {
+    display: none;
+  }
+
+  .nav-toggle {
+    display: flex;
+  }
+}
+
+.nav-mobile-panel {
+  display: none;
+}
+
+@media (max-width: 860px) {
+  .nav-mobile-panel.open {
+    display: flex;
+  }
+}

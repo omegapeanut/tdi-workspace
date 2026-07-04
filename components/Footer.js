@@ -2,8 +2,8 @@ import Link from "next/link";
 
 export default function Footer() {
   return (
-    <div style={{ background: "#1A150F", padding: "72px 64px 110px", display: "flex", flexDirection: "column", gap: "56px" }}>
-      <div style={{ display: "grid", gridTemplateColumns: "1.4fr 1fr 1fr 1.2fr", gap: "48px" }}>
+    <div className="px-page" style={{ background: "#1A150F", padding: "clamp(48px, 8vw, 72px) 0 clamp(56px, 10vw, 110px)", display: "flex", flexDirection: "column", gap: "56px" }}>
+      <div className="grid-4" style={{ gap: "40px 32px" }}>
         <div style={{ display: "flex", flexDirection: "column", gap: "16px" }}>
           <div style={{ display: "flex", alignItems: "baseline", gap: "9px" }}>
             <span style={{ font: "500 24px 'Cormorant Garamond', serif" }}>TDI</span>
@@ -38,10 +38,13 @@ export default function Footer() {
         </div>
       </div>
       <div
+        className="stack-mobile"
         style={{
           display: "flex",
           justifyContent: "space-between",
           alignItems: "center",
+          gap: "16px",
+          flexWrap: "wrap",
           borderTop: "1px solid rgba(239,231,218,.1)",
           paddingTop: "24px",
           font: "400 11.5px Manrope, sans-serif",

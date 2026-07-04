@@ -77,13 +77,13 @@ function ContactForm() {
 
   if (sent) {
     return (
-      <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "24px", padding: "140px 64px", textAlign: "center" }}>
+      <div className="px-page" style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "24px", padding: "clamp(64px, 14vw, 140px) 0", textAlign: "center" }}>
         <span style={{ width: "64px", height: "64px", borderRadius: "99px", border: "1px solid oklch(0.74 0.08 78)", display: "flex", alignItems: "center", justifyContent: "center", font: "400 28px 'Cormorant Garamond', serif", color: "oklch(0.74 0.08 78)" }}>✓</span>
-        <h1 style={{ margin: 0, font: "italic 500 56px/1.1 'Cormorant Garamond', serif", maxWidth: "700px" }}>Received — we&apos;ll reply within one working day.</h1>
+        <h1 style={{ margin: 0, font: "italic 500 clamp(1.875rem, 3.5vw + 1rem, 3.5rem)/1.1 'Cormorant Garamond', serif", maxWidth: "700px" }}>Received — we&apos;ll reply within one working day.</h1>
         <p style={{ margin: 0, font: "400 15px/1.7 Manrope, sans-serif", color: "rgba(239,231,218,.65)", maxWidth: "480px" }}>
           A director will review your enquiry personally. If it&apos;s urgent, WhatsApp gets you an answer within the hour.
         </p>
-        <div style={{ display: "flex", gap: "14px" }}>
+        <div style={{ display: "flex", gap: "14px", flexWrap: "wrap", justifyContent: "center" }}>
           <Link href="/projects" style={{ border: "1px solid rgba(239,231,218,.4)", color: "#EFE7DA", borderRadius: "2px", padding: "15px 28px", font: "600 12px Manrope, sans-serif", letterSpacing: ".08em", textDecoration: "none" }}>
             BROWSE PROJECTS MEANWHILE
           </Link>
@@ -96,11 +96,11 @@ function ContactForm() {
   }
 
   return (
-    <div style={{ display: "grid", gridTemplateColumns: "1fr 1.15fr", gap: "64px", padding: "72px 64px 90px", alignItems: "start" }}>
-      <div style={{ display: "flex", flexDirection: "column", gap: "36px", position: "sticky", top: "24px" }}>
+    <div className="px-page grid-contact" style={{ gap: "48px", padding: "clamp(48px, 8vw, 72px) 0 clamp(56px, 9vw, 90px)", alignItems: "start" }}>
+      <div className="sticky-tablet" style={{ display: "flex", flexDirection: "column", gap: "36px", position: "sticky", top: "24px" }}>
         <div style={{ display: "flex", flexDirection: "column", gap: "16px" }}>
           <span style={{ font: "600 11px Manrope, sans-serif", letterSpacing: ".32em", color: "oklch(0.74 0.08 78)" }}>CONTACT · 联系我们</span>
-          <h1 style={{ margin: 0, font: "italic 500 68px/1.05 'Cormorant Garamond', serif" }}>Start the conversation.</h1>
+          <h1 style={{ margin: 0, font: "italic 500 clamp(2.25rem, 3.5vw + 1rem, 4.25rem)/1.1 'Cormorant Garamond', serif" }}>Start the conversation.</h1>
           <p style={{ margin: 0, font: "400 15px/1.7 Manrope, sans-serif", color: "rgba(239,231,218,.65)" }}>
             30 minutes with a director, free, no obligation. Tell us about the space — we&apos;ll tell you what&apos;s possible and what it should cost.
           </p>
@@ -140,9 +140,9 @@ function ContactForm() {
 
       <form
         onSubmit={handleSend}
-        style={{ background: "rgba(20,16,11,.5)", border: "1px solid rgba(239,231,218,.14)", borderRadius: "3px", padding: "38px 40px", display: "flex", flexDirection: "column", gap: "24px" }}
+        style={{ background: "rgba(20,16,11,.5)", border: "1px solid rgba(239,231,218,.14)", borderRadius: "3px", padding: "clamp(22px, 5vw, 40px)", display: "flex", flexDirection: "column", gap: "24px" }}
       >
-        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "18px" }}>
+        <div className="grid-2" style={{ gap: "18px" }}>
           <div style={{ display: "flex", flexDirection: "column", gap: "7px" }}>
             <span style={{ font: "600 11px Manrope, sans-serif", letterSpacing: ".14em", color: "rgba(239,231,218,.55)" }}>NAME *</span>
             <input required name="name" type="text" placeholder="Your name" style={{ border: "1px solid rgba(239,231,218,.25)", background: "transparent", color: "#EFE7DA", padding: "13px 15px", font: "400 13.5px Manrope, sans-serif", borderRadius: "2px", outline: "none" }} />
@@ -166,7 +166,7 @@ function ContactForm() {
           </div>
         </div>
 
-        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "18px" }}>
+        <div className="grid-2" style={{ gap: "18px" }}>
           <div style={{ display: "flex", flexDirection: "column", gap: "10px" }}>
             <span style={{ font: "600 11px Manrope, sans-serif", letterSpacing: ".14em", color: "rgba(239,231,218,.55)" }}>BUDGET RANGE</span>
             <div style={{ display: "flex", flexDirection: "column", gap: "6px" }}>
@@ -185,7 +185,7 @@ function ContactForm() {
           </div>
         </div>
 
-        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "18px" }}>
+        <div className="grid-2" style={{ gap: "18px" }}>
           <div style={{ display: "flex", flexDirection: "column", gap: "7px" }}>
             <span style={{ font: "600 11px Manrope, sans-serif", letterSpacing: ".14em", color: "rgba(239,231,218,.55)" }}>PREFERRED CONTACT TIME</span>
             <select name="preferredTime" style={{ border: "1px solid rgba(239,231,218,.25)", background: "#221C15", color: "#EFE7DA", padding: "13px 15px", font: "400 13.5px Manrope, sans-serif", borderRadius: "2px", outline: "none" }}>
@@ -222,7 +222,7 @@ function ContactForm() {
 
         {error && <span style={{ font: "500 12.5px Manrope, sans-serif", color: "#A0522D" }}>{error}</span>}
 
-        <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: "16px", borderTop: "1px solid rgba(239,231,218,.12)", paddingTop: "22px" }}>
+        <div className="stack-mobile" style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: "16px", flexWrap: "wrap", borderTop: "1px solid rgba(239,231,218,.12)", paddingTop: "22px" }}>
           <span style={{ font: "400 11px/1.6 Manrope, sans-serif", color: "rgba(239,231,218,.4)", maxWidth: "280px" }}>Protected by reCAPTCHA. We reply within one working day and never share your details.</span>
           <button type="submit" disabled={sending} style={{ border: 0, background: "oklch(0.74 0.08 78)", color: "#221C15", borderRadius: "2px", padding: "16px 30px", font: "700 12px Manrope, sans-serif", letterSpacing: ".08em", cursor: sending ? "default" : "pointer", opacity: sending ? 0.6 : 1, whiteSpace: "nowrap" }}>
             {sending ? "SENDING…" : "SEND ENQUIRY →"}

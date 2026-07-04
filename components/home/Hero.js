@@ -12,7 +12,7 @@ export default function Hero() {
   const data = hero[mode];
 
   return (
-    <div style={{ position: "relative", height: "860px", display: "flex", flexDirection: "column" }}>
+    <div style={{ position: "relative", minHeight: "clamp(640px, 92vh, 860px)", display: "flex", flexDirection: "column" }}>
       {/* eslint-disable-next-line @next/next/no-img-element */}
       <img
         src={withBasePath(data.image)}
@@ -28,12 +28,12 @@ export default function Hero() {
       />
       <Header bordered={false} />
 
-      <div style={{ position: "relative", flex: 1, display: "flex", flexDirection: "column", justifyContent: "flex-end", padding: "0 64px 56px", gap: "36px" }}>
+      <div className="px-page" style={{ position: "relative", flex: 1, display: "flex", flexDirection: "column", justifyContent: "flex-end", padding: "0 0 clamp(32px, 6vw, 56px)", gap: "clamp(24px, 4vw, 36px)" }}>
         <div style={{ display: "flex", flexDirection: "column", gap: "18px" }}>
           <div style={{ font: "600 11px Manrope, sans-serif", letterSpacing: ".32em", color: "oklch(0.74 0.08 78)" }}>
             {data.kicker}
           </div>
-          <h1 style={{ margin: 0, font: "italic 500 94px/1.02 'Cormorant Garamond', serif", letterSpacing: "-.01em", maxWidth: "920px" }}>
+          <h1 style={{ margin: 0, font: "italic 500 clamp(2.5rem, 4vw + 1.5rem, 5.875rem)/1.05 'Cormorant Garamond', serif", letterSpacing: "-.01em", maxWidth: "920px" }}>
             {data.headline}
           </h1>
           <p style={{ margin: 0, font: "400 15.5px/1.7 Manrope, sans-serif", color: "rgba(239,231,218,.72)", maxWidth: "520px" }}>
@@ -41,7 +41,7 @@ export default function Hero() {
           </p>
         </div>
 
-        <div style={{ display: "flex", alignItems: "flex-end", justifyContent: "space-between", gap: "24px" }}>
+        <div className="stack-mobile" style={{ display: "flex", alignItems: "flex-end", justifyContent: "space-between", gap: "24px" }}>
           <div style={{ display: "flex", flexDirection: "column", gap: "12px" }}>
             <div style={{ alignSelf: "flex-start" }}>
               <ModeToggle />
@@ -51,6 +51,7 @@ export default function Hero() {
             </span>
           </div>
           <div
+            className="full-mobile"
             style={{
               background: "rgba(20,16,11,.65)",
               backdropFilter: "blur(8px)",

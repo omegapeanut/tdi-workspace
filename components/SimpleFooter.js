@@ -2,7 +2,7 @@ import Link from "next/link";
 
 export default function SimpleFooter({ showAdmin = false }) {
   return (
-    <div style={{ background: "#1A150F", padding: "28px 64px", display: "flex", justifyContent: "space-between", font: "400 11.5px Manrope, sans-serif", color: "rgba(239,231,218,.35)" }}>
+    <div className="px-page stack-mobile" style={{ background: "#1A150F", padding: "20px 0", display: "flex", justifyContent: "space-between", alignItems: "center", gap: "10px", flexWrap: "wrap", font: "400 11.5px Manrope, sans-serif", color: "rgba(239,231,218,.35)" }}>
       <span>© 2026 TDI Workspace Pte Ltd</span>
       {showAdmin ? (
         <div style={{ display: "flex", gap: "24px" }}>

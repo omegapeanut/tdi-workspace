@@ -17,17 +17,17 @@ export default function ServicesPage() {
     <div style={{ fontFamily: "Manrope, sans-serif", color: "#EFE7DA", background: "#221C15", minHeight: "100vh" }}>
       <Header />
 
-      <div style={{ padding: "72px 64px 44px", display: "flex", justifyContent: "space-between", alignItems: "flex-end", gap: "32px", flexWrap: "wrap" }}>
+      <div className="px-page" style={{ padding: "clamp(48px, 8vw, 72px) 0 clamp(28px, 5vw, 44px)", display: "flex", justifyContent: "space-between", alignItems: "flex-end", gap: "32px", flexWrap: "wrap" }}>
         <div style={{ display: "flex", flexDirection: "column", gap: "14px" }}>
           <span style={{ font: "600 11px Manrope, sans-serif", letterSpacing: ".32em", color: "oklch(0.74 0.08 78)" }}>SERVICES</span>
-          <h1 style={{ margin: 0, font: "italic 500 76px/1.05 'Cormorant Garamond', serif" }}>What we take on.</h1>
+          <h1 style={{ margin: 0, font: "italic 500 clamp(2.25rem, 4vw + 1rem, 4.75rem)/1.1 'Cormorant Garamond', serif" }}>What we take on.</h1>
         </div>
         <ModeToggle />
       </div>
 
-      <div style={{ padding: "0 64px 90px", display: "flex", flexDirection: "column" }}>
+      <div className="px-page" style={{ padding: "0 0 90px", display: "flex", flexDirection: "column" }}>
         {services.map((s) => (
-          <div key={s.num} style={{ display: "grid", gridTemplateColumns: "80px 1.2fr 1fr 360px", gap: "40px", padding: "44px 0", borderTop: "1px solid rgba(239,231,218,.12)", alignItems: "start" }}>
+          <div key={s.num} className="grid-service-row" style={{ gap: "32px", padding: "44px 0", borderTop: "1px solid rgba(239,231,218,.12)", alignItems: "start" }}>
             <span style={{ font: "400 40px 'Cormorant Garamond', serif", color: "oklch(0.74 0.08 78)" }}>{s.num}</span>
             <div style={{ display: "flex", flexDirection: "column", gap: "12px" }}>
               <span style={{ font: "italic 500 32px 'Cormorant Garamond', serif" }}>{s.name}</span>
@@ -44,7 +44,7 @@ export default function ServicesPage() {
         ))}
       </div>
 
-      <div style={{ padding: "80px 64px", borderTop: "1px solid rgba(239,231,218,.1)", display: "flex", justifyContent: "space-between", alignItems: "center", gap: "32px", flexWrap: "wrap" }}>
+      <div className="px-page stack-mobile" style={{ padding: "clamp(48px, 8vw, 80px) 0", borderTop: "1px solid rgba(239,231,218,.1)", display: "flex", justifyContent: "space-between", alignItems: "center", gap: "32px", flexWrap: "wrap" }}>
         <div style={{ display: "flex", flexDirection: "column", gap: "10px" }}>
           <span style={{ font: "italic 500 36px 'Cormorant Garamond', serif" }}>
             {isC ? "Scoping a commercial project?" : "Planning your renovation?"}
@@ -53,7 +53,7 @@ export default function ServicesPage() {
             A 30-minute conversation tells you what&apos;s possible — and what it should cost.
           </span>
         </div>
-        <div style={{ display: "flex", gap: "14px" }}>
+        <div style={{ display: "flex", gap: "14px", flexWrap: "wrap" }}>
           <Link href="/contact" style={{ display: "inline-block", background: "oklch(0.74 0.08 78)", color: "#221C15", borderRadius: "2px", padding: "16px 30px", font: "700 12px Manrope, sans-serif", letterSpacing: ".08em", textDecoration: "none" }}>
             BOOK A FREE CONSULTATION
           </Link>

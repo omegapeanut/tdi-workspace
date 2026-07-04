@@ -20,11 +20,11 @@ export default function ProjectsPage() {
     <div style={{ fontFamily: "Manrope, sans-serif", color: "#EFE7DA", background: "#221C15", minHeight: "100vh" }}>
       <Header />
 
-      <div style={{ padding: "72px 64px 40px", display: "flex", flexDirection: "column", gap: "34px" }}>
+      <div className="px-page" style={{ padding: "clamp(48px, 8vw, 72px) 0 clamp(28px, 5vw, 40px)", display: "flex", flexDirection: "column", gap: "34px" }}>
         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-end", gap: "32px", flexWrap: "wrap" }}>
           <div style={{ display: "flex", flexDirection: "column", gap: "14px" }}>
             <span style={{ font: "600 11px Manrope, sans-serif", letterSpacing: ".32em", color: "oklch(0.74 0.08 78)" }}>PORTFOLIO</span>
-            <h1 style={{ margin: 0, font: "italic 500 76px/1.05 'Cormorant Garamond', serif" }}>The work.</h1>
+            <h1 style={{ margin: 0, font: "italic 500 clamp(2.25rem, 4vw + 1rem, 4.75rem)/1.1 'Cormorant Garamond', serif" }}>The work.</h1>
           </div>
           <div style={{ display: "flex", border: "1px solid rgba(239,231,218,.35)", borderRadius: "2px", font: "600 12px Manrope, sans-serif", letterSpacing: ".1em" }}>
             <button
@@ -66,8 +66,8 @@ export default function ProjectsPage() {
         </div>
       </div>
 
-      <div style={{ padding: "0 64px 90px" }}>
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: "26px 22px" }}>
+      <div className="px-page" style={{ padding: "0 0 90px" }}>
+        <div className="grid-3" style={{ gap: "26px 22px" }}>
           {projects.map((p) => (
             <Link key={p.name} href="/projects/view" style={{ display: "flex", flexDirection: "column", gap: "14px", textDecoration: "none", color: "#EFE7DA", cursor: "pointer" }}>
               <div style={{ overflow: "hidden" }}>
@@ -86,7 +86,7 @@ export default function ProjectsPage() {
         </div>
       </div>
 
-      <div style={{ padding: "80px 64px", borderTop: "1px solid rgba(239,231,218,.1)", display: "flex", justifyContent: "space-between", alignItems: "center", gap: "32px", flexWrap: "wrap" }}>
+      <div className="px-page stack-mobile" style={{ padding: "clamp(48px, 8vw, 80px) 0", borderTop: "1px solid rgba(239,231,218,.1)", display: "flex", justifyContent: "space-between", alignItems: "center", gap: "32px", flexWrap: "wrap" }}>
         <div style={{ display: "flex", flexDirection: "column", gap: "10px" }}>
           <span style={{ font: "italic 500 36px 'Cormorant Garamond', serif" }}>Your project could be next.</span>
           <span style={{ font: "400 14px Manrope, sans-serif", color: "rgba(239,231,218,.6)" }}>Walk us through your space — 30 minutes, no obligation.</span>

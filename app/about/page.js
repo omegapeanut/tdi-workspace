@@ -28,10 +28,10 @@ export default function AboutPage() {
     <div style={{ fontFamily: "Manrope, sans-serif", color: "#EFE7DA", background: "#221C15", minHeight: "100vh" }}>
       <Header />
 
-      <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "64px", padding: "80px 64px", alignItems: "center" }}>
+      <div className="px-page grid-2 stack-tablet" style={{ gap: "40px", padding: "clamp(48px, 8vw, 80px) 0", alignItems: "center" }}>
         <div style={{ display: "flex", flexDirection: "column", gap: "22px" }}>
           <span style={{ font: "600 11px Manrope, sans-serif", letterSpacing: ".32em", color: "oklch(0.74 0.08 78)" }}>ABOUT THE STUDIO · EST. 2011</span>
-          <h1 style={{ margin: 0, font: "italic 500 68px/1.06 'Cormorant Garamond', serif" }}>Builders first, designers always.</h1>
+          <h1 style={{ margin: 0, font: "italic 500 clamp(2.25rem, 3vw + 1.5rem, 4.25rem)/1.1 'Cormorant Garamond', serif" }}>Builders first, designers always.</h1>
           <p style={{ margin: 0, font: "400 15.5px/1.8 Manrope, sans-serif", color: "rgba(239,231,218,.7)" }}>
             TDI Workspace started on the contractor&apos;s side of the table — which is why our drawings survive contact with the site. Fifteen years on, we design and build commercial spaces first and homes with the same rigour: one contract, one accountable team, one number we stand behind.
           </p>
@@ -40,28 +40,28 @@ export default function AboutPage() {
           </p>
         </div>
         {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src={withBasePath("/images/about-studio.jpg")} alt="TDI Workspace studio" style={{ height: "560px", width: "100%", objectFit: "cover", display: "block" }} />
+        <img src={withBasePath("/images/about-studio.jpg")} alt="TDI Workspace studio" style={{ height: "clamp(280px, 45vw, 560px)", width: "100%", objectFit: "cover", display: "block" }} />
       </div>
 
-      <div style={{ display: "grid", gridTemplateColumns: "repeat(4,1fr)", gap: "1px", background: "rgba(239,231,218,.12)", borderTop: "1px solid rgba(239,231,218,.12)", borderBottom: "1px solid rgba(239,231,218,.12)" }}>
+      <div className="grid-4" style={{ gap: "1px", background: "rgba(239,231,218,.12)", borderTop: "1px solid rgba(239,231,218,.12)", borderBottom: "1px solid rgba(239,231,218,.12)" }}>
         {stats.map((stat) => (
-          <div key={stat.label} style={{ background: "#221C15", padding: "34px 28px", display: "flex", flexDirection: "column", gap: "6px" }}>
-            <span style={{ font: "400 46px 'Cormorant Garamond', serif", color: "oklch(0.74 0.08 78)" }}>{stat.value}</span>
+          <div key={stat.label} style={{ background: "#221C15", padding: "28px 20px", display: "flex", flexDirection: "column", gap: "6px" }}>
+            <span style={{ font: "400 clamp(1.75rem, 1.5vw + 1.25rem, 2.875rem) 'Cormorant Garamond', serif", color: "oklch(0.74 0.08 78)" }}>{stat.value}</span>
             <span style={{ font: "500 11.5px Manrope, sans-serif", letterSpacing: ".12em", color: "rgba(239,231,218,.55)" }}>{stat.label}</span>
           </div>
         ))}
       </div>
 
-      <div style={{ padding: "90px 64px", display: "flex", flexDirection: "column", gap: "48px" }}>
+      <div className="px-page" style={{ padding: "clamp(48px, 8vw, 90px) 0", display: "flex", flexDirection: "column", gap: "48px" }}>
         <div style={{ display: "flex", flexDirection: "column", gap: "12px" }}>
           <span style={{ font: "600 11px Manrope, sans-serif", letterSpacing: ".32em", color: "oklch(0.74 0.08 78)" }}>THE PEOPLE</span>
-          <h2 style={{ margin: 0, font: "italic 500 50px/1.1 'Cormorant Garamond', serif" }}>Led by directors, not departments.</h2>
+          <h2 style={{ margin: 0, font: "italic 500 clamp(1.875rem, 2vw + 1.25rem, 3.125rem)/1.1 'Cormorant Garamond', serif" }}>Led by directors, not departments.</h2>
         </div>
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: "22px" }}>
+        <div className="grid-3" style={{ gap: "22px" }}>
           {team.map((member) => (
             <div key={member.role} style={{ display: "flex", flexDirection: "column", gap: "16px" }}>
               {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src={withBasePath(member.img)} alt={member.alt} style={{ height: "400px", width: "100%", objectFit: "cover", display: "block", filter: "grayscale(35%)" }} />
+              <img src={withBasePath(member.img)} alt={member.alt} style={{ height: "clamp(260px, 40vw, 400px)", width: "100%", objectFit: "cover", display: "block", filter: "grayscale(35%)" }} />
               <div style={{ display: "flex", flexDirection: "column", gap: "4px" }}>
                 <span style={{ font: "italic 500 24px 'Cormorant Garamond', serif" }}>{member.name}</span>
                 <span style={{ font: "600 11px Manrope, sans-serif", letterSpacing: ".16em", color: "oklch(0.74 0.08 78)" }}>{member.role}</span>
@@ -72,12 +72,12 @@ export default function AboutPage() {
         </div>
       </div>
 
-      <div style={{ background: "#EFE7DA", color: "#221C15", padding: "90px 64px", display: "flex", flexDirection: "column", gap: "44px" }}>
+      <div className="px-page" style={{ background: "#EFE7DA", color: "#221C15", padding: "clamp(48px, 8vw, 90px) 0", display: "flex", flexDirection: "column", gap: "44px" }}>
         <div style={{ display: "flex", flexDirection: "column", gap: "12px" }}>
           <span style={{ font: "600 11px Manrope, sans-serif", letterSpacing: ".32em", color: "oklch(0.55 0.09 70)" }}>CREDENTIALS</span>
-          <h2 style={{ margin: 0, font: "italic 500 50px/1.1 'Cormorant Garamond', serif" }}>Licensed, insured, accountable.</h2>
+          <h2 style={{ margin: 0, font: "italic 500 clamp(1.875rem, 2vw + 1.25rem, 3.125rem)/1.1 'Cormorant Garamond', serif" }}>Licensed, insured, accountable.</h2>
         </div>
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: "1px", background: "rgba(34,28,21,.14)", border: "1px solid rgba(34,28,21,.14)" }}>
+        <div className="grid-3" style={{ gap: "1px", background: "rgba(34,28,21,.14)", border: "1px solid rgba(34,28,21,.14)" }}>
           {credentials.map((c) => (
             <div key={c.title} style={{ background: "#EFE7DA", padding: "30px 28px", display: "flex", flexDirection: "column", gap: "8px" }}>
               <span style={{ font: "700 15px Manrope, sans-serif" }}>{c.title}</span>
@@ -93,7 +93,7 @@ export default function AboutPage() {
         </div>
       </div>
 
-      <div style={{ padding: "80px 64px", display: "flex", justifyContent: "space-between", alignItems: "center", gap: "32px", flexWrap: "wrap" }}>
+      <div className="px-page stack-mobile" style={{ padding: "clamp(48px, 8vw, 80px) 0", display: "flex", justifyContent: "space-between", alignItems: "center", gap: "32px", flexWrap: "wrap" }}>
         <div style={{ display: "flex", flexDirection: "column", gap: "10px" }}>
           <span style={{ font: "italic 500 36px 'Cormorant Garamond', serif" }}>Work with people who build what they draw.</span>
           <span style={{ font: "400 14px Manrope, sans-serif", color: "rgba(239,231,218,.6)" }}>30 minutes, free, with a director — not a salesperson.</span>
