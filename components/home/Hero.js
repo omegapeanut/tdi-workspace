@@ -5,6 +5,7 @@ import { useMode } from "@/lib/mode-context";
 import { hero } from "@/lib/content";
 import Header from "@/components/Header";
 import ModeToggle from "@/components/ModeToggle";
+import { withBasePath } from "@/lib/basePath";
 
 export default function Hero() {
   const { mode } = useMode();
@@ -14,7 +15,7 @@ export default function Hero() {
     <div style={{ position: "relative", height: "860px", display: "flex", flexDirection: "column" }}>
       {/* eslint-disable-next-line @next/next/no-img-element */}
       <img
-        src={data.image}
+        src={withBasePath(data.image)}
         alt={data.imageAlt}
         style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover" }}
       />

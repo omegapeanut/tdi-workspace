@@ -6,6 +6,7 @@ import Header from "@/components/Header";
 import SimpleFooter from "@/components/SimpleFooter";
 import WhatsAppButton from "@/components/WhatsAppButton";
 import { featuredArticle, journalPosts, journalCategories } from "@/lib/articles";
+import { withBasePath } from "@/lib/basePath";
 
 export default function JournalPage() {
   const [cat, setCat] = useState("all");
@@ -54,7 +55,7 @@ export default function JournalPage() {
           style={{ display: "grid", gridTemplateColumns: "1.4fr 1fr", textDecoration: "none", color: "#EFE7DA", border: "1px solid rgba(239,231,218,.14)", borderRadius: "3px", overflow: "hidden", cursor: "pointer" }}
         >
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src={featuredArticle.img} alt="Office fit-out costs featured article" style={{ height: "400px", width: "100%", objectFit: "cover", display: "block" }} />
+          <img src={withBasePath(featuredArticle.img)} alt="Office fit-out costs featured article" style={{ height: "400px", width: "100%", objectFit: "cover", display: "block" }} />
           <div style={{ background: "#1A150F", padding: "44px 44px", display: "flex", flexDirection: "column", justifyContent: "center", gap: "18px" }}>
             <span style={{ font: "600 10.5px Manrope, sans-serif", letterSpacing: ".2em", color: "oklch(0.74 0.08 78)" }}>{featuredArticle.kicker}</span>
             <span style={{ font: "italic 500 38px/1.15 'Cormorant Garamond', serif" }}>{featuredArticle.title}</span>
@@ -70,7 +71,7 @@ export default function JournalPage() {
             <Link key={p.slug} href={`/journal/view?slug=${p.slug}`} style={{ display: "flex", flexDirection: "column", gap: "14px", textDecoration: "none", color: "#EFE7DA", cursor: "pointer" }}>
               <div style={{ overflow: "hidden" }}>
                 {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src={p.img} alt={p.title} style={{ height: "230px", width: "100%", objectFit: "cover", display: "block" }} />
+                <img src={withBasePath(p.img)} alt={p.title} style={{ height: "230px", width: "100%", objectFit: "cover", display: "block" }} />
               </div>
               <span style={{ font: "600 10.5px Manrope, sans-serif", letterSpacing: ".18em", color: "oklch(0.74 0.08 78)" }}>{p.kicker}</span>
               <span style={{ font: "italic 500 24px/1.25 'Cormorant Garamond', serif" }}>{p.title}</span>

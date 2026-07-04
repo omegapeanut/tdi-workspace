@@ -2,6 +2,7 @@
 
 import { useMode } from "@/lib/mode-context";
 import { proofStats, testimonial, trustedBy } from "@/lib/content";
+import { withBasePath } from "@/lib/basePath";
 
 export default function ProofTestimonial() {
   const { mode } = useMode();
@@ -24,7 +25,7 @@ export default function ProofTestimonial() {
           <span style={{ font: "italic 400 36px/1.35 'Cormorant Garamond', serif" }}>&quot;{quote.quote}&quot;</span>
           <div style={{ display: "flex", alignItems: "center", gap: "14px" }}>
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src={quote.avatar} alt="Client portrait" style={{ width: "44px", height: "44px", borderRadius: "99px", objectFit: "cover", border: "1px solid rgba(239,231,218,.2)" }} />
+            <img src={withBasePath(quote.avatar)} alt="Client portrait" style={{ width: "44px", height: "44px", borderRadius: "99px", objectFit: "cover", border: "1px solid rgba(239,231,218,.2)" }} />
             <div style={{ display: "flex", flexDirection: "column" }}>
               <span style={{ font: "700 13.5px Manrope, sans-serif" }}>{quote.name}</span>
               <span style={{ font: "400 12px Manrope, sans-serif", color: "rgba(239,231,218,.55)" }}>{quote.role}</span>

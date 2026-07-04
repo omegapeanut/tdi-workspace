@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useMode } from "@/lib/mode-context";
 import { processSteps, journalPreview } from "@/lib/content";
+import { withBasePath } from "@/lib/basePath";
 
 export default function ProcessJournal() {
   const { mode } = useMode();
@@ -40,7 +41,7 @@ export default function ProcessJournal() {
           {articles.map((article) => (
             <div key={article.title} style={{ display: "flex", flexDirection: "column", gap: "14px", cursor: "pointer" }}>
               {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src={article.image} alt={article.alt} style={{ height: "220px", width: "100%", objectFit: "cover", display: "block" }} />
+              <img src={withBasePath(article.image)} alt={article.alt} style={{ height: "220px", width: "100%", objectFit: "cover", display: "block" }} />
               <span style={{ font: "500 11px Manrope, sans-serif", letterSpacing: ".14em", color: "oklch(0.55 0.09 70)" }}>{article.kicker}</span>
               <span style={{ font: "italic 500 22px/1.25 'Cormorant Garamond', serif" }}>{article.title}</span>
             </div>

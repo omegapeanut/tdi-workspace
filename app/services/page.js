@@ -7,6 +7,7 @@ import WhatsAppButton from "@/components/WhatsAppButton";
 import ModeToggle from "@/components/ModeToggle";
 import { useMode } from "@/lib/mode-context";
 import { servicesData } from "@/lib/services";
+import { withBasePath } from "@/lib/basePath";
 
 export default function ServicesPage() {
   const { mode, isC } = useMode();
@@ -38,7 +39,7 @@ export default function ServicesPage() {
               ))}
             </div>
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src={s.img} alt={s.name} style={{ height: "220px", width: "100%", objectFit: "cover", display: "block" }} />
+            <img src={withBasePath(s.img)} alt={s.name} style={{ height: "220px", width: "100%", objectFit: "cover", display: "block" }} />
           </div>
         ))}
       </div>

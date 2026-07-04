@@ -6,6 +6,7 @@ import Header from "@/components/Header";
 import SimpleFooter from "@/components/SimpleFooter";
 import WhatsAppButton from "@/components/WhatsAppButton";
 import { materialsData, materialCategories } from "@/lib/materials";
+import { withBasePath } from "@/lib/basePath";
 
 export default function MaterialsPage() {
   const [cat, setCat] = useState("all");
@@ -77,7 +78,7 @@ export default function MaterialsPage() {
             <div key={m.id} style={{ display: "flex", flexDirection: "column", border: "1px solid rgba(239,231,218,.12)", borderRadius: "3px", overflow: "hidden" }}>
               <div style={{ position: "relative" }}>
                 {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src={m.img} alt={m.name} style={{ height: "200px", width: "100%", objectFit: "cover", display: "block" }} />
+                <img src={withBasePath(m.img)} alt={m.name} style={{ height: "200px", width: "100%", objectFit: "cover", display: "block" }} />
                 <button
                   onClick={() => toggleFav(m.id)}
                   title="Shortlist"

@@ -6,6 +6,7 @@ import Link from "next/link";
 import Header from "@/components/Header";
 import SimpleFooter from "@/components/SimpleFooter";
 import { getArticleBySlug, featuredArticle, journalPosts } from "@/lib/articles";
+import { withBasePath } from "@/lib/basePath";
 
 function ArticleBlock({ block }) {
   if (block.type === "h2") {
@@ -69,7 +70,7 @@ function ArticleContent() {
         <h1 style={{ margin: 0, font: "italic 500 58px/1.1 'Cormorant Garamond', serif" }}>{article.title}</h1>
         <div style={{ display: "flex", alignItems: "center", gap: "16px", font: "500 12px Manrope, sans-serif", color: "rgba(239,231,218,.5)" }}>
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src={article.authorAvatar} alt="Author" style={{ width: "36px", height: "36px", borderRadius: "99px", objectFit: "cover" }} />
+          <img src={withBasePath(article.authorAvatar)} alt="Author" style={{ width: "36px", height: "36px", borderRadius: "99px", objectFit: "cover" }} />
           <span>{article.author}</span>
           <span>·</span>
           <span>{article.meta}</span>
@@ -82,7 +83,7 @@ function ArticleContent() {
 
       <div style={{ maxWidth: "1100px", margin: "0 auto", padding: "0 32px" }}>
         {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src={article.img} alt={article.title} style={{ width: "100%", height: "440px", objectFit: "cover", display: "block" }} />
+        <img src={withBasePath(article.img)} alt={article.title} style={{ width: "100%", height: "440px", objectFit: "cover", display: "block" }} />
       </div>
 
       <div style={{ maxWidth: "720px", margin: "0 auto", padding: "56px 32px 80px", display: "flex", flexDirection: "column", gap: "28px", font: "400 16px/1.9 Manrope, sans-serif", color: "rgba(239,231,218,.78)" }}>
@@ -107,7 +108,7 @@ function ArticleContent() {
           {related.map((r) => (
             <Link key={r.slug} href={`/journal/view?slug=${r.slug}`} style={{ display: "flex", flexDirection: "column", gap: "12px", textDecoration: "none", color: "#EFE7DA" }}>
               {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src={r.img} alt={r.title} style={{ height: "180px", width: "100%", objectFit: "cover", display: "block" }} />
+              <img src={withBasePath(r.img)} alt={r.title} style={{ height: "180px", width: "100%", objectFit: "cover", display: "block" }} />
               <span style={{ font: "italic 500 20px/1.3 'Cormorant Garamond', serif" }}>{r.title}</span>
             </Link>
           ))}

@@ -7,6 +7,7 @@ import SimpleFooter from "@/components/SimpleFooter";
 import WhatsAppButton from "@/components/WhatsAppButton";
 import { useMode } from "@/lib/mode-context";
 import { projectsData, projectCategories } from "@/lib/projects";
+import { withBasePath } from "@/lib/basePath";
 
 export default function ProjectsPage() {
   const { mode, isC, toC, toR } = useMode();
@@ -71,7 +72,7 @@ export default function ProjectsPage() {
             <Link key={p.name} href="/projects/view" style={{ display: "flex", flexDirection: "column", gap: "14px", textDecoration: "none", color: "#EFE7DA", cursor: "pointer" }}>
               <div style={{ overflow: "hidden" }}>
                 {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src={p.img} alt={p.name} style={{ height: "380px", width: "100%", objectFit: "cover", display: "block" }} />
+                <img src={withBasePath(p.img)} alt={p.name} style={{ height: "380px", width: "100%", objectFit: "cover", display: "block" }} />
               </div>
               <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline", gap: "12px" }}>
                 <span style={{ font: "italic 500 23px 'Cormorant Garamond', serif" }}>{p.name}</span>

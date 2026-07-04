@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useMode } from "@/lib/mode-context";
 import { featuredProjects } from "@/lib/content";
+import { withBasePath } from "@/lib/basePath";
 
 export default function FeaturedProjects() {
   const { mode } = useMode();
@@ -23,7 +24,7 @@ export default function FeaturedProjects() {
         {items.map((project) => (
           <div key={project.title} style={{ display: "flex", flexDirection: "column", gap: "16px", cursor: "pointer" }}>
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src={project.image} alt={project.alt} style={{ height: "440px", width: "100%", objectFit: "cover", display: "block" }} />
+            <img src={withBasePath(project.image)} alt={project.alt} style={{ height: "440px", width: "100%", objectFit: "cover", display: "block" }} />
             <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline", gap: "12px" }}>
               <span style={{ font: "italic 500 22px 'Cormorant Garamond', serif" }}>{project.title}</span>
               <span style={{ font: "500 11px Manrope, sans-serif", letterSpacing: ".14em", color: "rgba(239,231,218,.5)" }}>{project.meta}</span>

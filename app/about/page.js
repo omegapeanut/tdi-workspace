@@ -2,6 +2,7 @@ import Link from "next/link";
 import Header from "@/components/Header";
 import SimpleFooter from "@/components/SimpleFooter";
 import WhatsAppButton from "@/components/WhatsAppButton";
+import { withBasePath } from "@/lib/basePath";
 
 const stats = [
   { value: "200+", label: "PROJECTS ACROSS SINGAPORE" },
@@ -39,7 +40,7 @@ export default function AboutPage() {
           </p>
         </div>
         {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src="/images/about-studio.jpg" alt="TDI Workspace studio" style={{ height: "560px", width: "100%", objectFit: "cover", display: "block" }} />
+        <img src={withBasePath("/images/about-studio.jpg")} alt="TDI Workspace studio" style={{ height: "560px", width: "100%", objectFit: "cover", display: "block" }} />
       </div>
 
       <div style={{ display: "grid", gridTemplateColumns: "repeat(4,1fr)", gap: "1px", background: "rgba(239,231,218,.12)", borderTop: "1px solid rgba(239,231,218,.12)", borderBottom: "1px solid rgba(239,231,218,.12)" }}>
@@ -60,7 +61,7 @@ export default function AboutPage() {
           {team.map((member) => (
             <div key={member.role} style={{ display: "flex", flexDirection: "column", gap: "16px" }}>
               {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src={member.img} alt={member.alt} style={{ height: "400px", width: "100%", objectFit: "cover", display: "block", filter: "grayscale(35%)" }} />
+              <img src={withBasePath(member.img)} alt={member.alt} style={{ height: "400px", width: "100%", objectFit: "cover", display: "block", filter: "grayscale(35%)" }} />
               <div style={{ display: "flex", flexDirection: "column", gap: "4px" }}>
                 <span style={{ font: "italic 500 24px 'Cormorant Garamond', serif" }}>{member.name}</span>
                 <span style={{ font: "600 11px Manrope, sans-serif", letterSpacing: ".16em", color: "oklch(0.74 0.08 78)" }}>{member.role}</span>
