@@ -177,6 +177,23 @@ video {
   }
 }
 
+/* Admin login split layout — image panel drops out below tablet, form goes full width */
+.admin-login-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  min-height: 100vh;
+}
+
+@media (max-width: 860px) {
+  .admin-login-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .admin-login-image {
+    display: none;
+  }
+}
+
 /* Header nav: full nav on laptop, hamburger below */
 .nav-desktop {
   display: flex;
