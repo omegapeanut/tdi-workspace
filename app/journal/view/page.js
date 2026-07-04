@@ -1,11 +1,12 @@
 "use client";
 
-import { Suspense } from "react";
+import { Suspense, useEffect, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import Link from "next/link";
 import Header from "@/components/Header";
 import SimpleFooter from "@/components/SimpleFooter";
-import { getArticleBySlug, featuredArticle, journalPosts } from "@/lib/articles";
+import CmsLoading from "@/components/CmsLoading";
+import { getAllArticles, articlesLive } from "@/lib/cms";
 import { withBasePath } from "@/lib/basePath";
 
 function ArticleBlock({ block }) {
@@ -28,10 +29,10 @@ function ArticleBlock({ block }) {
           ))}
         </div>
         {block.rows.map((row) => (
-          <div key={row[0]} style={{ display: "grid", gridTemplateColumns: "1.2fr 1fr 1.6fr", gap: "14px", padding: "14px 20px", borderTop: "1px solid rgba(239,231,218,.08)" }}>
-            <span style={{ fontWeight: 600 }}>{row[0]}</span>
-            <span>{row[1]}</span>
-            <span style={{ color: "rgba(239,231,218,.6)" }}>{row[2]}</span>
+          <div key={row.cells[0]} style={{ display: "grid", gridTemplateColumns: "1.2fr 1fr 1.6fr", gap: "14px", padding: "14px 20px", borderTop: "1px solid rgba(239,231,218,.08)" }}>
+            <span style={{ fontWeight: 600 }}>{row.cells[0]}</span>
+            <span>{row.cells[1]}</span>
+            <span style={{ color: "rgba(239,231,218,.6)" }}>{row.cells[2]}</span>
           </div>
         ))}
       </div>
@@ -45,10 +46,11 @@ function ArticleBlock({ block }) {
   );
 }
 
-function ArticleContent() {
+function ArticleContent({ articles }) {
   const searchParams = useSearchParams();
-  const slug = searchParams.get("slug") || featuredArticle.slug;
-  const article = getArticleBySlug(slug);
+  const live = articlesLive(articles);
+  const slug = searchParams.get("slug") || (live.find((a) => a.status === "Featured") || live[0])?.slug;
+  const article = live.find((a) => a.slug === slug);
 
   if (!article) {
     return (
@@ -59,7 +61,7 @@ function ArticleContent() {
     );
   }
 
-  const related = journalPosts.filter((p) => p.slug !== article.slug).slice(0, 3);
+  const related = live.filter((p) => p.slug !== article.slug).slice(0, 3);
 
   return (
     <>
@@ -119,12 +121,22 @@ function ArticleContent() {
 }
 
 export default function ArticlePage() {
+  const [articles, setArticles] = useState(null);
+
+  useEffect(() => {
+    getAllArticles().then(setArticles);
+  }, []);
+
   return (
     <div style={{ fontFamily: "Manrope, sans-serif", color: "#EFE7DA", background: "#221C15", minHeight: "100vh" }}>
       <Header />
-      <Suspense fallback={null}>
-        <ArticleContent />
-      </Suspense>
+      {!articles ? (
+        <CmsLoading />
+      ) : (
+        <Suspense fallback={null}>
+          <ArticleContent articles={articles} />
+        </Suspense>
+      )}
       <SimpleFooter showAdmin />
     </div>
   );

@@ -4,13 +4,18 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
+    "prebuild": "node scripts/generate-media-manifest.mjs",
     "build": "next build",
-    "start": "next start"
+    "start": "next start",
+    "seed": "node scripts/seed.mjs"
   },
   "dependencies": {
     "firebase": "^12.15.0",
     "next": "16.2.10",
     "react": "19.0.0",
     "react-dom": "19.0.0"
+  },
+  "devDependencies": {
+    "firebase-admin": "^14.1.0"
   }
 }

@@ -125,6 +125,17 @@ Status color coding, brass accent `oklch(0.55 0.09 70)`, and all layout come fro
 5. Auth + admin login.
 6. Admin CMS sections + Cloudinary uploads.
 
+## Implementation status (what's actually built vs. this brief)
+
+All six build-order steps above are done. The actual Firestore schema and CMS scope differ from the brief above in a few places worth knowing about:
+
+- **Schema field names**: `settings/home` (not `settings/site`) holds `hero.C` / `hero.R` (not `heroCommercial`/`heroResidential`), plus `proofStats`, `testimonial`, `trustedBy`, `finalCta` per mode. `settings/about` holds `story`, `stats`, `team`, `credentials`, `trustedByLogos`. `settings/services` holds the full `C`/`R` service arrays (name/desc/items/img), not just names. `settings/seo` holds a `pages` map of `{ path: {title, description} }`. Projects use `mode: "C"|"R"` and `catKey` (not `category`). See `lib/cms.js` for the full read/write API and `scripts/seed.mjs` for the exact shape.
+- **Media library is local, not Cloudinary-first**: the site was already shipping images from `public/images` (not Cloudinary) by the time the CMS was built, so the Media library section shows a read-only manifest of those files (`scripts/generate-media-manifest.mjs`, regenerated on every build). If `NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME`/`NEXT_PUBLIC_CLOUDINARY_UPLOAD_PRESET` are set, an upload widget appears alongside it and records new assets to `media/`.
+- **SEO section** is an editable per-page title/description override table only — no Search Console, Analytics, or keyword-rank integration is connected, so the brief's dashboard-style SEO widgets weren't built (they'd otherwise show fabricated numbers).
+- **Dashboard** shows only real, computable numbers (total leads, new leads this week, featured project count, live article count) — no visits/traffic stats, since no analytics integration exists.
+- **Users & roles** is the v1 scope the brief itself allows: a read-only list of `admins/{uid}` docs. There's no invite flow or role editing (both need the Firebase Admin SDK, which doesn't run client-side in a static export).
+- **Seeding**: `npm run seed` runs `scripts/seed.mjs` against `GOOGLE_APPLICATION_CREDENTIALS` (a real service account). For local development, run the Firestore + Auth emulators (`npx firebase emulators:start --only firestore,auth`, config in `firebase.json`/`.firebaserc`) and set `NEXT_PUBLIC_USE_FIREBASE_EMULATOR=true` in `.env.local`, then run `FIRESTORE_EMULATOR_HOST=127.0.0.1:8080 FIREBASE_AUTH_EMULATOR_HOST=127.0.0.1:9099 node scripts/seed.mjs --with-demo-admin` to get a working admin login (`admin@tdiworkspace.sg` / `demo-password-123`) without touching production data.
+
 ## Files in this handoff
 
 - `README.md` — this brief

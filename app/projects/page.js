@@ -1,20 +1,27 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import Header from "@/components/Header";
 import SimpleFooter from "@/components/SimpleFooter";
 import WhatsAppButton from "@/components/WhatsAppButton";
+import CmsLoading from "@/components/CmsLoading";
 import { useMode } from "@/lib/mode-context";
-import { projectsData, projectCategories } from "@/lib/projects";
+import { projectCategories } from "@/lib/projects";
+import { getAllProjects, projectsForMode } from "@/lib/cms";
 import { withBasePath } from "@/lib/basePath";
 
 export default function ProjectsPage() {
   const { mode, isC, toC, toR } = useMode();
   const [cat, setCat] = useState("all");
+  const [allProjects, setAllProjects] = useState(null);
+
+  useEffect(() => {
+    getAllProjects().then(setAllProjects);
+  }, []);
 
   const cats = projectCategories[mode];
-  const projects = projectsData[mode].filter((p) => cat === "all" || p.cat === cat);
+  const projects = allProjects ? projectsForMode(allProjects, mode).filter((p) => cat === "all" || p.catKey === cat) : [];
 
   return (
     <div style={{ fontFamily: "Manrope, sans-serif", color: "#EFE7DA", background: "#221C15", minHeight: "100vh" }}>
@@ -66,25 +73,29 @@ export default function ProjectsPage() {
         </div>
       </div>
 
-      <div className="px-page" style={{ padding: "0 0 90px" }}>
-        <div className="grid-3" style={{ gap: "26px 22px" }}>
-          {projects.map((p) => (
-            <Link key={p.name} href="/projects/view" style={{ display: "flex", flexDirection: "column", gap: "14px", textDecoration: "none", color: "#EFE7DA", cursor: "pointer" }}>
-              <div style={{ overflow: "hidden" }}>
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src={withBasePath(p.img)} alt={p.name} style={{ height: "380px", width: "100%", objectFit: "cover", display: "block" }} />
-              </div>
-              <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline", gap: "12px" }}>
-                <span style={{ font: "italic 500 23px 'Cormorant Garamond', serif" }}>{p.name}</span>
-                <span style={{ font: "600 10px Manrope, sans-serif", letterSpacing: ".16em", color: "oklch(0.74 0.08 78)", border: "1px solid rgba(214,168,96,.4)", borderRadius: "99px", padding: "5px 12px", whiteSpace: "nowrap" }}>
-                  {p.tag}
-                </span>
-              </div>
-              <span style={{ font: "500 11.5px Manrope, sans-serif", letterSpacing: ".12em", color: "rgba(239,231,218,.5)" }}>{p.meta}</span>
-            </Link>
-          ))}
+      {!allProjects ? (
+        <CmsLoading />
+      ) : (
+        <div className="px-page" style={{ padding: "0 0 90px" }}>
+          <div className="grid-3" style={{ gap: "26px 22px" }}>
+            {projects.map((p) => (
+              <Link key={p.id} href="/projects/view" style={{ display: "flex", flexDirection: "column", gap: "14px", textDecoration: "none", color: "#EFE7DA", cursor: "pointer" }}>
+                <div style={{ overflow: "hidden" }}>
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img src={withBasePath(p.img)} alt={p.name} style={{ height: "380px", width: "100%", objectFit: "cover", display: "block" }} />
+                </div>
+                <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline", gap: "12px" }}>
+                  <span style={{ font: "italic 500 23px 'Cormorant Garamond', serif" }}>{p.name}</span>
+                  <span style={{ font: "600 10px Manrope, sans-serif", letterSpacing: ".16em", color: "oklch(0.74 0.08 78)", border: "1px solid rgba(214,168,96,.4)", borderRadius: "99px", padding: "5px 12px", whiteSpace: "nowrap" }}>
+                    {p.tag}
+                  </span>
+                </div>
+                <span style={{ font: "500 11.5px Manrope, sans-serif", letterSpacing: ".12em", color: "rgba(239,231,218,.5)" }}>{p.meta}</span>
+              </Link>
+            ))}
+          </div>
         </div>
-      </div>
+      )}
 
       <div className="px-page stack-mobile" style={{ padding: "clamp(48px, 8vw, 80px) 0", borderTop: "1px solid rgba(239,231,218,.1)", display: "flex", justifyContent: "space-between", alignItems: "center", gap: "32px", flexWrap: "wrap" }}>
         <div style={{ display: "flex", flexDirection: "column", gap: "10px" }}>

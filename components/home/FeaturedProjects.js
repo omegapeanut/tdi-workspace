@@ -2,12 +2,14 @@
 
 import Link from "next/link";
 import { useMode } from "@/lib/mode-context";
-import { featuredProjects } from "@/lib/content";
+import { useHomeCms } from "@/lib/home-cms-context";
+import { featuredProjectsForHome } from "@/lib/cms";
 import { withBasePath } from "@/lib/basePath";
 
 export default function FeaturedProjects() {
   const { mode } = useMode();
-  const items = featuredProjects[mode];
+  const { projects } = useHomeCms();
+  const items = featuredProjectsForHome(projects, mode);
 
   return (
     <div className="px-page" style={{ padding: "0 0 clamp(56px, 9vw, 110px)", display: "flex", flexDirection: "column", gap: "48px" }}>
