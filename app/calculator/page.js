@@ -31,19 +31,19 @@ export default function CalculatorPage() {
       <style>{`input[type=range]{accent-color:#D6A860}`}</style>
       <Header />
 
-      <div style={{ padding: "72px 64px 44px", display: "flex", flexDirection: "column", gap: "16px", maxWidth: "900px" }}>
+      <div className="px-page" style={{ padding: "clamp(48px, 8vw, 72px) 0 clamp(28px, 5vw, 44px)", display: "flex", flexDirection: "column", gap: "16px", maxWidth: "900px" }}>
         <span style={{ font: "600 11px Manrope, sans-serif", letterSpacing: ".32em", color: "oklch(0.74 0.08 78)" }}>RESIDENTIAL RENOVATION CALCULATOR · 预算估算</span>
-        <h1 style={{ margin: 0, font: "italic 500 72px/1.05 'Cormorant Garamond', serif" }}>Know your number.</h1>
+        <h1 style={{ margin: 0, font: "italic 500 clamp(2.25rem, 3.5vw + 1.25rem, 4.5rem)/1.1 'Cormorant Garamond', serif" }}>Know your number.</h1>
         <p style={{ margin: 0, font: "400 15.5px/1.7 Manrope, sans-serif", color: "rgba(239,231,218,.65)", maxWidth: "620px" }}>
           Five questions, two minutes — an honest cost range for your renovation, based on prevailing Singapore market rates. Estimates only; your consultation makes it exact.
         </p>
       </div>
 
-      <div style={{ display: "grid", gridTemplateColumns: "1.25fr 1fr", gap: "32px", padding: "0 64px 80px", alignItems: "start" }}>
+      <div className="px-page grid-calculator" style={{ gap: "32px", padding: "0 0 clamp(48px, 8vw, 80px)", alignItems: "start" }}>
         <div style={{ display: "flex", flexDirection: "column", gap: "44px" }}>
           <div style={{ display: "flex", flexDirection: "column", gap: "16px" }}>
             <span style={{ font: "600 12px Manrope, sans-serif", letterSpacing: ".22em", color: "rgba(239,231,218,.55)" }}>1 — PROPERTY TYPE</span>
-            <div style={{ display: "grid", gridTemplateColumns: "repeat(4,1fr)", gap: "10px" }}>
+            <div className="grid-4" style={{ gap: "10px" }}>
               {PROPERTY_TYPES.map(([key, label, sub]) => (
                 <button
                   key={key}
@@ -57,7 +57,7 @@ export default function CalculatorPage() {
             </div>
           </div>
 
-          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "32px" }}>
+          <div className="grid-2" style={{ gap: "32px" }}>
             <div style={{ display: "flex", flexDirection: "column", gap: "16px" }}>
               <span style={{ font: "600 12px Manrope, sans-serif", letterSpacing: ".22em", color: "rgba(239,231,218,.55)" }}>2 — ROOMS</span>
               <div style={{ display: "flex", alignItems: "center", gap: "18px", border: "1px solid rgba(239,231,218,.25)", borderRadius: "3px", padding: "12px 18px", alignSelf: "flex-start" }}>
@@ -84,7 +84,7 @@ export default function CalculatorPage() {
 
           <div style={{ display: "flex", flexDirection: "column", gap: "16px" }}>
             <span style={{ font: "600 12px Manrope, sans-serif", letterSpacing: ".22em", color: "rgba(239,231,218,.55)" }}>4 — DESIGN TIER</span>
-            <div style={{ display: "grid", gridTemplateColumns: "repeat(4,1fr)", gap: "10px" }}>
+            <div className="grid-4" style={{ gap: "10px" }}>
               {DESIGN_TIERS.map(([key, label, sub]) => (
                 <button
                   key={key}
@@ -100,7 +100,7 @@ export default function CalculatorPage() {
 
           <div style={{ display: "flex", flexDirection: "column", gap: "16px" }}>
             <span style={{ font: "600 12px Manrope, sans-serif", letterSpacing: ".22em", color: "rgba(239,231,218,.55)" }}>5 — SCOPE OF WORK</span>
-            <div style={{ display: "grid", gridTemplateColumns: "repeat(2,1fr)", gap: "10px" }}>
+            <div className="grid-2" style={{ gap: "10px" }}>
               {SCOPE_ITEMS.map(([key, label]) => {
                 const on = scope[key];
                 const style = on ? scopeOn : off;
@@ -119,10 +119,10 @@ export default function CalculatorPage() {
           </div>
         </div>
 
-        <div style={{ position: "sticky", top: "24px", display: "flex", flexDirection: "column", border: "1px solid rgba(239,231,218,.18)", borderRadius: "3px", overflow: "hidden" }}>
+        <div className="sticky-tablet" style={{ position: "sticky", top: "24px", display: "flex", flexDirection: "column", border: "1px solid rgba(239,231,218,.18)", borderRadius: "3px", overflow: "hidden" }}>
           <div style={{ background: "#1A150F", padding: "34px 34px 30px", display: "flex", flexDirection: "column", gap: "14px" }}>
             <span style={{ font: "600 11px Manrope, sans-serif", letterSpacing: ".28em", color: "oklch(0.74 0.08 78)" }}>YOUR ESTIMATED RANGE</span>
-            <span style={{ font: "italic 500 52px/1.05 'Cormorant Garamond', serif" }}>{totalLabel}</span>
+            <span style={{ font: "italic 500 clamp(1.75rem, 3vw + 1rem, 3.25rem)/1.15 'Cormorant Garamond', serif" }}>{totalLabel}</span>
             <span style={{ font: "400 12.5px/1.6 Manrope, sans-serif", color: "rgba(239,231,218,.55)" }}>{summaryLine}</span>
           </div>
           <div style={{ background: "#221C15", padding: "26px 34px", display: "flex", flexDirection: "column", gap: "13px", borderTop: "1px solid rgba(239,231,218,.12)" }}>
@@ -154,7 +154,7 @@ export default function CalculatorPage() {
         </div>
       </div>
 
-      <div style={{ padding: "64px", borderTop: "1px solid rgba(239,231,218,.1)", display: "flex", justifyContent: "space-between", alignItems: "center", gap: "32px", flexWrap: "wrap" }}>
+      <div className="px-page stack-mobile" style={{ padding: "clamp(40px, 7vw, 64px) 0", borderTop: "1px solid rgba(239,231,218,.1)", display: "flex", justifyContent: "space-between", alignItems: "center", gap: "32px", flexWrap: "wrap" }}>
         <div style={{ display: "flex", flexDirection: "column", gap: "8px" }}>
           <span style={{ font: "italic 500 32px 'Cormorant Garamond', serif" }}>Renovating a business space instead?</span>
           <span style={{ font: "400 14px Manrope, sans-serif", color: "rgba(239,231,218,.6)" }}>Commercial projects are scoped personally — no calculators, just a proposal in 5 working days.</span>

@@ -11,18 +11,18 @@ export default function ProofTestimonial() {
   const trust = trustedBy[mode];
 
   return (
-    <div style={{ padding: "90px 64px", borderTop: "1px solid rgba(239,231,218,.1)", display: "flex", flexDirection: "column", gap: "64px" }}>
-      <div style={{ display: "grid", gridTemplateColumns: "repeat(4,1fr)", gap: "40px" }}>
+    <div className="px-page" style={{ padding: "clamp(48px, 8vw, 90px) 0", borderTop: "1px solid rgba(239,231,218,.1)", display: "flex", flexDirection: "column", gap: "64px" }}>
+      <div className="grid-4" style={{ gap: "40px 24px" }}>
         {stats.map((stat) => (
           <div key={stat.label} style={{ display: "flex", flexDirection: "column", gap: "6px" }}>
-            <span style={{ font: "400 52px 'Cormorant Garamond', serif", color: "oklch(0.74 0.08 78)" }}>{stat.value}</span>
+            <span style={{ font: "400 clamp(2rem, 1.5vw + 1.5rem, 3.25rem) 'Cormorant Garamond', serif", color: "oklch(0.74 0.08 78)" }}>{stat.value}</span>
             <span style={{ font: "500 12px Manrope, sans-serif", letterSpacing: ".12em", color: "rgba(239,231,218,.55)" }}>{stat.label}</span>
           </div>
         ))}
       </div>
-      <div style={{ display: "grid", gridTemplateColumns: "1fr 380px", gap: "64px", alignItems: "center", borderTop: "1px solid rgba(239,231,218,.1)", paddingTop: "64px" }}>
+      <div className="grid-testimonial" style={{ gap: "48px", alignItems: "center", borderTop: "1px solid rgba(239,231,218,.1)", paddingTop: "64px" }}>
         <div style={{ display: "flex", flexDirection: "column", gap: "24px" }}>
-          <span style={{ font: "italic 400 36px/1.35 'Cormorant Garamond', serif" }}>&quot;{quote.quote}&quot;</span>
+          <span style={{ font: "italic 400 clamp(1.5rem, 1.5vw + 1rem, 2.25rem)/1.35 'Cormorant Garamond', serif" }}>&quot;{quote.quote}&quot;</span>
           <div style={{ display: "flex", alignItems: "center", gap: "14px" }}>
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img src={withBasePath(quote.avatar)} alt="Client portrait" style={{ width: "44px", height: "44px", borderRadius: "99px", objectFit: "cover", border: "1px solid rgba(239,231,218,.2)" }} />

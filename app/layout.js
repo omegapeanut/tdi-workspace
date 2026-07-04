@@ -1,8 +1,14 @@
 import { ModeProvider } from "@/lib/mode-context";
+import "./globals.css";
 
 export const metadata = {
   title: "TDI Workspace",
   description: "TDI Workspace — interior design studio",
+};
+
+export const viewport = {
+  width: "device-width",
+  initialScale: 1,
 };
 
 export default function RootLayout({ children }) {

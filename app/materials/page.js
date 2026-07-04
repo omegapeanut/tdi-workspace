@@ -25,22 +25,22 @@ export default function MaterialsPage() {
     <div style={{ fontFamily: "Manrope, sans-serif", color: "#EFE7DA", background: "#221C15", minHeight: "100vh" }}>
       <Header />
 
-      <div style={{ padding: "72px 64px 40px", display: "flex", flexDirection: "column", gap: "26px" }}>
+      <div className="px-page" style={{ padding: "clamp(48px, 8vw, 72px) 0 clamp(28px, 5vw, 40px)", display: "flex", flexDirection: "column", gap: "26px" }}>
         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-end", gap: "32px", flexWrap: "wrap" }}>
           <div style={{ display: "flex", flexDirection: "column", gap: "14px" }}>
             <span style={{ font: "600 11px Manrope, sans-serif", letterSpacing: ".32em", color: "oklch(0.74 0.08 78)" }}>MATERIAL LIBRARY · 材料库</span>
-            <h1 style={{ margin: 0, font: "italic 500 76px/1.05 'Cormorant Garamond', serif" }}>Touch before you choose.</h1>
+            <h1 style={{ margin: 0, font: "italic 500 clamp(2.25rem, 4vw + 1rem, 4.75rem)/1.1 'Cormorant Garamond', serif" }}>Touch before you choose.</h1>
             <p style={{ margin: 0, font: "400 15.5px/1.7 Manrope, sans-serif", color: "rgba(239,231,218,.65)", maxWidth: "600px" }}>
               Every material we specify, in one place. Shortlist your favourites and bring the list to your consultation — the physical samples will be on the table.
             </p>
           </div>
-          <div style={{ display: "flex", flexDirection: "column", gap: "8px", alignItems: "flex-end" }}>
+          <div style={{ display: "flex", flexDirection: "column", gap: "8px", alignItems: "flex-end", width: "100%", maxWidth: "280px" }}>
             <input
               type="text"
               placeholder="Search materials…"
               value={query}
               onChange={(e) => setQuery(e.target.value)}
-              style={{ border: "1px solid rgba(239,231,218,.3)", background: "transparent", color: "#EFE7DA", padding: "13px 18px", font: "400 13px Manrope, sans-serif", borderRadius: "2px", width: "280px", outline: "none" }}
+              style={{ border: "1px solid rgba(239,231,218,.3)", background: "transparent", color: "#EFE7DA", padding: "13px 18px", font: "400 13px Manrope, sans-serif", borderRadius: "2px", width: "100%", outline: "none" }}
             />
             <span style={{ font: "500 11.5px Manrope, sans-serif", color: "oklch(0.74 0.08 78)" }}>
               {favCount ? `♥ ${favCount} shortlisted` : "Tap ♡ to shortlist materials"}
@@ -72,8 +72,8 @@ export default function MaterialsPage() {
         </div>
       </div>
 
-      <div style={{ padding: "0 64px 90px" }}>
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(4,1fr)", gap: "22px" }}>
+      <div className="px-page" style={{ padding: "0 0 90px" }}>
+        <div className="grid-4" style={{ gap: "22px" }}>
           {materials.map((m) => (
             <div key={m.id} style={{ display: "flex", flexDirection: "column", border: "1px solid rgba(239,231,218,.12)", borderRadius: "3px", overflow: "hidden" }}>
               <div style={{ position: "relative" }}>
@@ -121,7 +121,7 @@ export default function MaterialsPage() {
         )}
       </div>
 
-      <div style={{ padding: "72px 64px", borderTop: "1px solid rgba(239,231,218,.1)", display: "flex", justifyContent: "space-between", alignItems: "center", gap: "32px", flexWrap: "wrap" }}>
+      <div className="px-page stack-mobile" style={{ padding: "clamp(48px, 8vw, 72px) 0", borderTop: "1px solid rgba(239,231,218,.1)", display: "flex", justifyContent: "space-between", alignItems: "center", gap: "32px", flexWrap: "wrap" }}>
         <div style={{ display: "flex", flexDirection: "column", gap: "8px" }}>
           <span style={{ font: "italic 500 32px 'Cormorant Garamond', serif" }}>
             {favCount ? `Your shortlist has ${favCount} material${favCount === 1 ? "" : "s"}.` : "Seen something you like?"}
