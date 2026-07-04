@@ -1,22 +1,31 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import Header from "@/components/Header";
 import SimpleFooter from "@/components/SimpleFooter";
 import WhatsAppButton from "@/components/WhatsAppButton";
-import { materialsData, materialCategories } from "@/lib/materials";
+import CmsLoading from "@/components/CmsLoading";
+import { materialCategories } from "@/lib/materials";
+import { getAllMaterials, materialsLive } from "@/lib/cms";
 import { withBasePath } from "@/lib/basePath";
 
 export default function MaterialsPage() {
   const [cat, setCat] = useState("all");
   const [query, setQuery] = useState("");
   const [favs, setFavs] = useState({});
+  const [allMaterials, setAllMaterials] = useState(null);
+
+  useEffect(() => {
+    getAllMaterials().then(setAllMaterials);
+  }, []);
 
   const q = query.trim().toLowerCase();
-  const materials = materialsData
-    .filter((m) => cat === "all" || m.cat === cat)
-    .filter((m) => !q || (m.name + " " + m.desc + " " + m.tag).toLowerCase().includes(q));
+  const materials = allMaterials
+    ? materialsLive(allMaterials)
+        .filter((m) => cat === "all" || m.cat === cat)
+        .filter((m) => !q || (m.name + " " + m.desc + " " + m.tag).toLowerCase().includes(q))
+    : [];
 
   const favCount = Object.values(favs).filter(Boolean).length;
   const toggleFav = (id) => setFavs((prev) => ({ ...prev, [id]: !prev[id] }));
@@ -72,6 +81,9 @@ export default function MaterialsPage() {
         </div>
       </div>
 
+      {!allMaterials ? (
+        <CmsLoading />
+      ) : (
       <div className="px-page" style={{ padding: "0 0 90px" }}>
         <div className="grid-4" style={{ gap: "22px" }}>
           {materials.map((m) => (
@@ -120,6 +132,7 @@ export default function MaterialsPage() {
           </div>
         )}
       </div>
+      )}
 
       <div className="px-page stack-mobile" style={{ padding: "clamp(48px, 8vw, 72px) 0", borderTop: "1px solid rgba(239,231,218,.1)", display: "flex", justifyContent: "space-between", alignItems: "center", gap: "32px", flexWrap: "wrap" }}>
         <div style={{ display: "flex", flexDirection: "column", gap: "8px" }}>

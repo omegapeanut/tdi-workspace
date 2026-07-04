@@ -2,14 +2,15 @@
 
 import Link from "next/link";
 import { useMode } from "@/lib/mode-context";
-import { hero } from "@/lib/content";
+import { useHomeCms } from "@/lib/home-cms-context";
 import Header from "@/components/Header";
 import ModeToggle from "@/components/ModeToggle";
 import { withBasePath } from "@/lib/basePath";
 
 export default function Hero() {
   const { mode } = useMode();
-  const data = hero[mode];
+  const { home } = useHomeCms();
+  const data = home.hero[mode];
 
   return (
     <div style={{ position: "relative", minHeight: "clamp(640px, 92vh, 860px)", display: "flex", flexDirection: "column" }}>
@@ -82,7 +83,7 @@ export default function Hero() {
                 alignSelf: "flex-start",
               }}
             >
-              FREE CONSULTATION →
+              {data.ctaLabel}
             </Link>
           </div>
         </div>

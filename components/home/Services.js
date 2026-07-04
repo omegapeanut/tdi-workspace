@@ -2,11 +2,13 @@
 
 import Link from "next/link";
 import { useMode } from "@/lib/mode-context";
-import { services, servicesHeadline } from "@/lib/content";
+import { servicesHeadline } from "@/lib/content";
+import { useHomeCms } from "@/lib/home-cms-context";
 
 export default function Services() {
   const { mode } = useMode();
-  const items = services[mode];
+  const { services } = useHomeCms();
+  const items = services[mode].slice(0, 4).map((s) => ({ n: s.num, title: s.name, body: s.desc }));
 
   return (
     <div className="px-page" style={{ padding: "clamp(56px, 9vw, 110px) 0 clamp(56px, 9vw, 100px)", display: "flex", flexDirection: "column", gap: "56px", borderTop: "1px solid rgba(239,231,218,.1)" }}>

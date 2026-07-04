@@ -1,14 +1,15 @@
 "use client";
 
 import { useMode } from "@/lib/mode-context";
-import { proofStats, testimonial, trustedBy } from "@/lib/content";
+import { useHomeCms } from "@/lib/home-cms-context";
 import { withBasePath } from "@/lib/basePath";
 
 export default function ProofTestimonial() {
   const { mode } = useMode();
-  const stats = proofStats[mode];
-  const quote = testimonial[mode];
-  const trust = trustedBy[mode];
+  const { home } = useHomeCms();
+  const stats = home.proofStats[mode];
+  const quote = home.testimonial[mode];
+  const trust = home.trustedBy[mode];
 
   return (
     <div className="px-page" style={{ padding: "clamp(48px, 8vw, 90px) 0", borderTop: "1px solid rgba(239,231,218,.1)", display: "flex", flexDirection: "column", gap: "64px" }}>

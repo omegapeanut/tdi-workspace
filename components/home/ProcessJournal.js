@@ -2,12 +2,15 @@
 
 import Link from "next/link";
 import { useMode } from "@/lib/mode-context";
-import { processSteps, journalPreview } from "@/lib/content";
+import { processSteps } from "@/lib/content";
+import { useHomeCms } from "@/lib/home-cms-context";
+import { journalPreviewForMode } from "@/lib/cms";
 import { withBasePath } from "@/lib/basePath";
 
 export default function ProcessJournal() {
   const { mode } = useMode();
-  const articles = journalPreview[mode];
+  const { articles: allArticles } = useHomeCms();
+  const articles = journalPreviewForMode(allArticles, mode);
 
   return (
     <div className="px-page" style={{ background: "#EFE7DA", color: "#221C15", padding: "clamp(56px, 9vw, 110px) 0 clamp(56px, 9vw, 100px)", display: "flex", flexDirection: "column", gap: "clamp(64px, 9vw, 110px)" }}>

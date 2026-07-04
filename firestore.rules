@@ -36,9 +36,11 @@ service cloud.firestore {
       allow read, update, delete: if isAdmin();
     }
 
-    // Admin allow-list: create docs here manually in the console, keyed by Auth UID
+    // Admin allow-list: create docs here manually in the console, keyed by Auth UID.
+    // Any signed-in admin may list all admin docs (Users & roles screen); writes stay console-only.
     match /admins/{uid} {
-      allow read: if request.auth != null && request.auth.uid == uid;
+      allow read: if request.auth != null
+        && (request.auth.uid == uid || isAdmin());
       allow write: if false; // manage via Firebase console only
     }
   }

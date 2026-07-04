@@ -2,11 +2,12 @@
 
 import Link from "next/link";
 import { useMode } from "@/lib/mode-context";
-import { finalCta } from "@/lib/content";
+import { useHomeCms } from "@/lib/home-cms-context";
 
 export default function FinalCta() {
   const { mode } = useMode();
-  const cta = finalCta[mode];
+  const { home } = useHomeCms();
+  const cta = home.finalCta[mode];
 
   return (
     <div className="px-page" style={{ padding: "clamp(64px, 10vw, 120px) 0", display: "flex", flexDirection: "column", alignItems: "center", gap: "32px", textAlign: "center", borderBottom: "1px solid rgba(239,231,218,.1)" }}>

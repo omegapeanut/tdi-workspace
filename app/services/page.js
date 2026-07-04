@@ -1,17 +1,34 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import Header from "@/components/Header";
 import SimpleFooter from "@/components/SimpleFooter";
 import WhatsAppButton from "@/components/WhatsAppButton";
 import ModeToggle from "@/components/ModeToggle";
+import CmsLoading from "@/components/CmsLoading";
 import { useMode } from "@/lib/mode-context";
-import { servicesData } from "@/lib/services";
+import { getServicesSettings } from "@/lib/cms";
 import { withBasePath } from "@/lib/basePath";
 
 export default function ServicesPage() {
   const { mode, isC } = useMode();
-  const services = servicesData[mode];
+  const [allServices, setAllServices] = useState(null);
+
+  useEffect(() => {
+    getServicesSettings().then(setAllServices);
+  }, []);
+
+  if (!allServices) {
+    return (
+      <div style={{ fontFamily: "Manrope, sans-serif", color: "#EFE7DA", background: "#221C15", minHeight: "100vh" }}>
+        <Header />
+        <CmsLoading />
+      </div>
+    );
+  }
+
+  const services = allServices[mode];
 
   return (
     <div style={{ fontFamily: "Manrope, sans-serif", color: "#EFE7DA", background: "#221C15", minHeight: "100vh" }}>
