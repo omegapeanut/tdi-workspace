@@ -6,6 +6,7 @@ import Header from "@/components/Header";
 import SimpleFooter from "@/components/SimpleFooter";
 import WhatsAppButton from "@/components/WhatsAppButton";
 import CmsLoading from "@/components/CmsLoading";
+import SeoHead from "@/components/SeoHead";
 import { getAboutSettings } from "@/lib/cms";
 import { withBasePath } from "@/lib/basePath";
 
@@ -19,7 +20,8 @@ export default function AboutPage() {
   if (!about) {
     return (
       <div style={{ fontFamily: "Manrope, sans-serif", color: "#EFE7DA", background: "#221C15", minHeight: "100vh" }}>
-        <Header />
+        <SeoHead />
+      <Header />
         <CmsLoading />
       </div>
     );
@@ -30,6 +32,7 @@ export default function AboutPage() {
 
   return (
     <div style={{ fontFamily: "Manrope, sans-serif", color: "#EFE7DA", background: "#221C15", minHeight: "100vh" }}>
+      <SeoHead />
       <Header />
 
       <div className="px-page grid-2 stack-tablet" style={{ gap: "40px", padding: "clamp(48px, 8vw, 80px) 0", alignItems: "center" }}>

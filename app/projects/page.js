@@ -6,6 +6,7 @@ import Header from "@/components/Header";
 import SimpleFooter from "@/components/SimpleFooter";
 import WhatsAppButton from "@/components/WhatsAppButton";
 import CmsLoading from "@/components/CmsLoading";
+import SeoHead from "@/components/SeoHead";
 import { useMode } from "@/lib/mode-context";
 import { projectCategories } from "@/lib/projects";
 import { getAllProjects, projectsForMode } from "@/lib/cms";
@@ -25,6 +26,7 @@ export default function ProjectsPage() {
 
   return (
     <div style={{ fontFamily: "Manrope, sans-serif", color: "#EFE7DA", background: "#221C15", minHeight: "100vh" }}>
+      <SeoHead />
       <Header />
 
       <div className="px-page" style={{ padding: "clamp(48px, 8vw, 72px) 0 clamp(28px, 5vw, 40px)", display: "flex", flexDirection: "column", gap: "34px" }}>

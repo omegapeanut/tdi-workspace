@@ -6,8 +6,10 @@ import Link from "next/link";
 import Header from "@/components/Header";
 import SimpleFooter from "@/components/SimpleFooter";
 import CmsLoading from "@/components/CmsLoading";
+import SeoHead from "@/components/SeoHead";
 import { getAllArticles, articlesLive } from "@/lib/cms";
 import { withBasePath } from "@/lib/basePath";
+import { articleSeo, SITE_URL, SITE_NAME } from "@/lib/seo";
 
 function ArticleBlock({ block }) {
   if (block.type === "h2") {
@@ -62,9 +64,20 @@ function ArticleContent({ articles }) {
   }
 
   const related = live.filter((p) => p.slug !== article.slug).slice(0, 3);
+  const articleJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    headline: article.title,
+    description: article.excerpt,
+    image: withBasePath(article.img),
+    author: { "@type": "Organization", name: article.author || SITE_NAME },
+    publisher: { "@type": "Organization", name: SITE_NAME },
+    url: `${SITE_URL}/journal/view/?slug=${article.slug}`,
+  };
 
   return (
     <>
+      <SeoHead dynamic={articleSeo(article)} articleJsonLd={articleJsonLd} />
       <div style={{ maxWidth: "820px", margin: "0 auto", padding: "72px 32px 40px", display: "flex", flexDirection: "column", gap: "22px" }}>
         <Link href="/journal" style={{ font: "600 11px Manrope, sans-serif", letterSpacing: ".2em", color: "rgba(239,231,218,.5)", textDecoration: "none" }}>
           {article.breadcrumb}

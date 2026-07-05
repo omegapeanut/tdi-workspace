@@ -2,11 +2,13 @@ import Link from "next/link";
 import Header from "@/components/Header";
 import SimpleFooter from "@/components/SimpleFooter";
 import WhatsAppButton from "@/components/WhatsAppButton";
+import SeoHead from "@/components/SeoHead";
 import { processDetailSteps, processFaqs } from "@/lib/process";
 
 export default function ProcessPage() {
   return (
     <div style={{ fontFamily: "Manrope, sans-serif", color: "#EFE7DA", background: "#221C15", minHeight: "100vh" }}>
+      <SeoHead />
       <Header />
 
       <div className="px-page" style={{ padding: "clamp(48px, 8vw, 72px) 0 clamp(32px, 6vw, 56px)", display: "flex", flexDirection: "column", gap: "16px", maxWidth: "900px" }}>

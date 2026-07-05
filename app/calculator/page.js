@@ -5,6 +5,7 @@ import Link from "next/link";
 import Header from "@/components/Header";
 import SimpleFooter from "@/components/SimpleFooter";
 import WhatsAppButton from "@/components/WhatsAppButton";
+import SeoHead from "@/components/SeoHead";
 import { PROPERTY_TYPES, DESIGN_TIERS, SCOPE_ITEMS, DEFAULT_SCOPE, formatSgd, computeEstimate } from "@/lib/calculator";
 
 const brassOn = { background: "#EFE7DA", color: "#221C15", borderColor: "#EFE7DA" };
@@ -29,6 +30,7 @@ export default function CalculatorPage() {
   return (
     <div style={{ fontFamily: "Manrope, sans-serif", color: "#EFE7DA", background: "#221C15", minHeight: "100vh" }}>
       <style>{`input[type=range]{accent-color:#D6A860}`}</style>
+      <SeoHead />
       <Header />
 
       <div className="px-page" style={{ padding: "clamp(48px, 8vw, 72px) 0 clamp(28px, 5vw, 44px)", display: "flex", flexDirection: "column", gap: "16px", maxWidth: "900px" }}>

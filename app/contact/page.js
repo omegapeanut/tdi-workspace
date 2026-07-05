@@ -7,6 +7,7 @@ import { collection, addDoc, serverTimestamp } from "firebase/firestore";
 import { db } from "@/lib/firebase";
 import Header from "@/components/Header";
 import SimpleFooter from "@/components/SimpleFooter";
+import SeoHead from "@/components/SeoHead";
 
 const TYPE_OPTS = ["Office", "F&B", "Retail", "Clinic", "HDB", "Condo", "Landed"];
 const BUDGET_OPTS = ["Under S$50k", "S$50k – 150k", "S$150k – 500k", "Above S$500k"];
@@ -236,6 +237,7 @@ function ContactForm() {
 export default function ContactPage() {
   return (
     <div style={{ fontFamily: "Manrope, sans-serif", color: "#EFE7DA", background: "#221C15", minHeight: "100vh" }}>
+      <SeoHead />
       <Header />
       <Suspense fallback={null}>
         <ContactForm />

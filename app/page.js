@@ -9,6 +9,7 @@ import FinalCta from "@/components/home/FinalCta";
 import Footer from "@/components/Footer";
 import WhatsAppButton from "@/components/WhatsAppButton";
 import CmsLoading from "@/components/CmsLoading";
+import SeoHead from "@/components/SeoHead";
 import { HomeCmsProvider, useHomeCms } from "@/lib/home-cms-context";
 
 function isHiatusActive(hiatus) {
@@ -43,6 +44,7 @@ function HomeContent() {
 
   return (
     <>
+      <SeoHead />
       <NoticeBar home={home} />
       <Hero />
       <Services />

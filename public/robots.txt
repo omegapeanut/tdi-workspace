@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /admin
+
+Sitemap: https://omegapeanut.github.io/tdi-workspace/sitemap.xml

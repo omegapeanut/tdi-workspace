@@ -7,6 +7,7 @@ import SimpleFooter from "@/components/SimpleFooter";
 import WhatsAppButton from "@/components/WhatsAppButton";
 import ModeToggle from "@/components/ModeToggle";
 import CmsLoading from "@/components/CmsLoading";
+import SeoHead from "@/components/SeoHead";
 import { useMode } from "@/lib/mode-context";
 import { getServicesSettings } from "@/lib/cms";
 import { withBasePath } from "@/lib/basePath";
@@ -22,7 +23,8 @@ export default function ServicesPage() {
   if (!allServices) {
     return (
       <div style={{ fontFamily: "Manrope, sans-serif", color: "#EFE7DA", background: "#221C15", minHeight: "100vh" }}>
-        <Header />
+        <SeoHead />
+      <Header />
         <CmsLoading />
       </div>
     );
@@ -32,6 +34,7 @@ export default function ServicesPage() {
 
   return (
     <div style={{ fontFamily: "Manrope, sans-serif", color: "#EFE7DA", background: "#221C15", minHeight: "100vh" }}>
+      <SeoHead />
       <Header />
 
       <div className="px-page" style={{ padding: "clamp(48px, 8vw, 72px) 0 clamp(28px, 5vw, 44px)", display: "flex", justifyContent: "space-between", alignItems: "flex-end", gap: "32px", flexWrap: "wrap" }}>
