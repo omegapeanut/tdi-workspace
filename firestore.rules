@@ -43,5 +43,30 @@ service cloud.firestore {
         && (request.auth.uid == uid || isAdmin());
       allow write: if false; // manage via Firebase console only
     }
+
+    // --- roadmap-tracker (separate internal app, same Firebase project) ---
+    // Fully private: every collection below requires a matching roadmapMembers/{uid}
+    // doc, created manually in the console for each of the 4 teammates.
+    function isRoadmapMember() {
+      return request.auth != null
+        && exists(/databases/$(database)/documents/roadmapMembers/$(request.auth.uid));
+    }
+    match /phases/{id} {
+      allow read, write: if isRoadmapMember();
+    }
+    match /kpis/{id} {
+      allow read, write: if isRoadmapMember();
+    }
+    match /discussionPoints/{id} {
+      allow read, write: if isRoadmapMember();
+    }
+    match /roadmapMeta/{id} {
+      allow read, write: if isRoadmapMember();
+    }
+    match /roadmapMembers/{uid} {
+      allow read: if request.auth != null
+        && (request.auth.uid == uid || isRoadmapMember());
+      allow write: if false; // manage via Firebase console only
+    }
   }
 }
