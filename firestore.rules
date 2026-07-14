@@ -46,22 +46,53 @@ service cloud.firestore {
 
     // --- roadmap-tracker (separate internal app, same Firebase project) ---
     // Fully private: every collection below requires a matching roadmapMembers/{uid}
-    // doc, created manually in the console for each of the 4 teammates.
+    // doc, created manually in the console for each of the 4 teammates, shaped
+    // { isAdmin: true|false }. Admins can restructure the roadmap (add/edit/delete
+    // phases, KPI targets, discussion points, the team roster). Any member can operate
+    // day-to-day: check off tasks, add/edit tasks within a phase, assign owners, bump
+    // KPI progress counters, resolve discussion points, and post photo/notes updates.
     function isRoadmapMember() {
       return request.auth != null
         && exists(/databases/$(database)/documents/roadmapMembers/$(request.auth.uid));
     }
+    function isRoadmapAdmin() {
+      return request.auth != null
+        && get(/databases/$(database)/documents/roadmapMembers/$(request.auth.uid)).data.isAdmin == true;
+    }
+    function onlyChanged(fields) {
+      return request.resource.data.diff(resource.data).affectedKeys().hasOnly(fields);
+    }
+
     match /phases/{id} {
-      allow read, write: if isRoadmapMember();
+      allow read: if isRoadmapMember();
+      allow create, delete: if isRoadmapAdmin();
+      // Members may freely manage the `tasks` map (add/edit/delete/check off tasks);
+      // renaming the phase or editing its timeframe/summary/kpi chips stays admin-only.
+      allow update: if isRoadmapAdmin() || (isRoadmapMember() && onlyChanged(['tasks']));
     }
     match /kpis/{id} {
-      allow read, write: if isRoadmapMember();
+      allow read: if isRoadmapMember();
+      allow create, delete: if isRoadmapAdmin();
+      // Members may bump the `current` counter; editing the label/target/unit is admin-only.
+      allow update: if isRoadmapAdmin() || (isRoadmapMember() && onlyChanged(['current']));
     }
     match /discussionPoints/{id} {
-      allow read, write: if isRoadmapMember();
+      allow read: if isRoadmapMember();
+      allow create, delete: if isRoadmapAdmin();
+      // Members may resolve a point and leave notes; the point's text is admin-only.
+      allow update: if isRoadmapAdmin() || (isRoadmapMember() && onlyChanged(['resolved', 'notes']));
     }
     match /roadmapMeta/{id} {
-      allow read, write: if isRoadmapMember();
+      allow read: if isRoadmapMember();
+      allow write: if isRoadmapAdmin();
+    }
+    match /updates/{id} {
+      // Photo/notes progress log — any member may post; only the author or an admin may delete.
+      allow read: if isRoadmapMember();
+      allow create: if isRoadmapMember() && request.resource.data.authorId == request.auth.uid;
+      allow delete: if isRoadmapAdmin()
+        || (isRoadmapMember() && resource.data.authorId == request.auth.uid);
+      allow update: if false;
     }
     match /roadmapMembers/{uid} {
       allow read: if request.auth != null

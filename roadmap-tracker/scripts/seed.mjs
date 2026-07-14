@@ -34,7 +34,7 @@ const db = getFirestore();
 function tasks(titles) {
   const out = {};
   titles.forEach((title, i) => {
-    out[`t${i + 1}`] = { title, status: "todo", ownerId: null, notes: "", order: i };
+    out[`t${i + 1}`] = { title, done: false, ownerId: null, notes: "", order: i };
   });
   return out;
 }
@@ -44,10 +44,10 @@ function tasks(titles) {
 // ---------------------------------------------------------------------------
 
 const team = [
-  { id: "m1", name: "Teammate 1", color: "#7c8a5c" },
-  { id: "m2", name: "Teammate 2", color: "#b08a4e" },
-  { id: "m3", name: "Teammate 3", color: "#5c7a8a" },
-  { id: "m4", name: "Teammate 4", color: "#a0522d" },
+  { id: "m1", name: "Teammate 1", color: "#8A9A7E" },
+  { id: "m2", name: "Teammate 2", color: "#BE8C5C" },
+  { id: "m3", name: "Teammate 3", color: "#7A8CA0" },
+  { id: "m4", name: "Teammate 4", color: "#B5533C" },
 ];
 
 // ---------------------------------------------------------------------------
@@ -350,8 +350,10 @@ async function run() {
       `${discussionPoints.length} discussion points, and ${team.length} placeholder team members.`
   );
   console.log(
-    "Next: add your 4 teammates as Firebase Auth users, create a matching roadmapMembers/{uid} doc for each " +
-      "(Firebase console → Firestore), then rename the placeholder teammates in the app's Team tab."
+    "Next: add your 4 teammates as Firebase Auth users, then for each create a roadmapMembers/{uid} doc " +
+      "(Firebase console → Firestore) shaped { isAdmin: true|false }. Give yourself isAdmin: true so you can " +
+      "add/edit phases, KPI targets and discussion points — the other three can check off tasks, bump KPI " +
+      "counters and post photo updates, but can't restructure the roadmap itself."
   );
 }
 
