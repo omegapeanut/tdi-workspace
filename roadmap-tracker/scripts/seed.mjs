@@ -14,7 +14,7 @@ import { initializeApp, applicationDefault } from "firebase-admin/app";
 import { getFirestore } from "firebase-admin/firestore";
 
 const usingEmulator = Boolean(process.env.FIRESTORE_EMULATOR_HOST);
-const projectId = process.env.FIREBASE_PROJECT_ID || (usingEmulator ? "tdi-workspace-preview" : undefined);
+const projectId = process.env.FIREBASE_PROJECT_ID || (usingEmulator ? "tdiworkspace-26492" : undefined);
 
 if (!usingEmulator && !process.env.GOOGLE_APPLICATION_CREDENTIALS) {
   console.error(
