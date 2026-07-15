@@ -115,23 +115,22 @@ iterating on a single static file.
 
 ## Deploying
 
-This is set up as a second **Firebase Hosting site** in the same project, so it gets its own
-URL and never touches the GitHub Pages deploy used by the main site.
+Live at **https://tdiworkspace-26492.web.app** — deployed to the project's default Firebase
+Hosting site, which the main site doesn't use (it deploys to GitHub Pages instead), so there's
+no conflict. No build step — `public/index.html` is served as-is.
 
 ```bash
-# one-time setup
-firebase hosting:sites:create modula-roadmap-tracker   # pick any available site id
-firebase target:apply hosting roadmap modula-roadmap-tracker
-
-# deploy (no build step — public/index.html is served as-is)
-firebase deploy --only hosting:roadmap
+# from the repo root, once logged in (`firebase login`)
+firebase deploy --only hosting
 ```
 
-The resulting URL (`https://modula-roadmap-tracker.web.app`) is not linked from anywhere
-public — treat it as a private link and share it only with the 4 teammates. There's no
-IP/password gate at the hosting layer (Firebase Hosting doesn't support that), so the Firebase
-Auth + `roadmapMembers` allow-list described above is what actually keeps the data private:
-without a matching login, the page loads to a sign-in screen and nothing else.
+That's it — re-run this any time `public/index.html` changes to push an update.
+
+The URL is not linked from anywhere public — treat it as a private link and share it only with
+the 4 teammates. There's no IP/password gate at the hosting layer (Firebase Hosting doesn't
+support that), so the Firebase Auth + `roadmapMembers` allow-list described above is what
+actually keeps the data private: without a matching login, the page loads to a sign-in screen
+and nothing else.
 
 ## Data model (Firestore)
 
