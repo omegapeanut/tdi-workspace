@@ -40,7 +40,7 @@ function tasks(titles) {
 }
 
 // ---------------------------------------------------------------------------
-// Team — placeholder names; rename in the app's Team tab once accounts exist.
+// Team
 // ---------------------------------------------------------------------------
 
 const team = [
@@ -49,6 +49,17 @@ const team = [
   { id: "m3", name: "YS", color: "#7A8CA0" },
   { id: "m4", name: "Jackie", color: "#B5533C" },
 ];
+
+// roadmapMembers allow-list, keyed by the real Firebase Auth UID for each of
+// the 4 accounts created via Firebase console → Authentication → Add user.
+// Terence is the only admin (can restructure phases/KPIs/discussion points);
+// the other three are regular members (day-to-day task/update work).
+const roadmapMembers = {
+  "yF1La8oiukZp4NSQE7giHsyVbRN2": { isAdmin: true }, // Terence
+  "bTGLtAwAb9Rl5Ox0snkWrPgI64K3": { isAdmin: false }, // YY
+  "MDA5tvnFE1WwR2NectlXMyVmvc12": { isAdmin: false }, // YS
+  "SU3MsagVBqdfMlANJXfInnzjYJv2": { isAdmin: false }, // Jackie
+};
 
 // ---------------------------------------------------------------------------
 // V Vision collaboration — 3 phases
@@ -344,17 +355,17 @@ async function run() {
     batch.set(db.doc(`discussionPoints/${id}`), data);
   }
 
+  for (const [uid, data] of Object.entries(roadmapMembers)) {
+    batch.set(db.doc(`roadmapMembers/${uid}`), data);
+  }
+
   await batch.commit();
   console.log(
     `Seeded ${vvisionPhases.length + modulaPhases.length} phases, ${modulaKpis.length} KPIs, ` +
-      `${discussionPoints.length} discussion points, and ${team.length} placeholder team members.`
+      `${discussionPoints.length} discussion points, ${team.length} team members, and ` +
+      `${Object.keys(roadmapMembers).length} roadmapMembers allow-list entries.`
   );
-  console.log(
-    "Next: add your 4 teammates as Firebase Auth users, then for each create a roadmapMembers/{uid} doc " +
-      "(Firebase console → Firestore) shaped { isAdmin: true|false }. Give yourself isAdmin: true so you can " +
-      "add/edit phases, KPI targets and discussion points — the other three can check off tasks, bump KPI " +
-      "counters and post photo updates, but can't restructure the roadmap itself."
-  );
+  console.log("Done — the app is ready to sign in with the 4 team logins.");
 }
 
 run().catch((err) => {

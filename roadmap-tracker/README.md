@@ -58,23 +58,21 @@ of `public/index.html`'s `<script>` tag. Create exactly these 4 accounts in Fire
 If you ever add a 5th teammate or change these emails, update the `TEAM_LOGINS` array in
 `public/index.html` to match — the dropdown is generated from that list.
 
-Then:
-
-2. **Allow-list + role**: for each of the 4 users, create a Firestore doc
-   `roadmapMembers/<their-uid>` (the UID is shown next to each user in the Authentication tab)
-   shaped `{ isAdmin: true }` or `{ isAdmin: false }`. Give yourself (Terence) `isAdmin: true`;
-   the other three `false` is fine — they can still do all the day-to-day work (checkboxes,
-   owners, photos, KPI counters, resolving discussion points), just not restructure the
-   roadmap. Without a `roadmapMembers` doc at all, a signed-in user sees "isn't on the team
-   list yet" and can't read any data.
-3. **Seed the content** (once, against the real project — this also creates the `roadmapMeta/team`
-   doc with the 4 real names already filled in, so no renaming step is needed):
+2. **Seed the content and the admin allow-list** (once, against the real project). The 4 real
+   UIDs and roles are already hardcoded in `scripts/seed.mjs`'s `roadmapMembers` object (Terence
+   is admin, the other three are regular members) — this single run creates
+   `roadmapMeta/team` (with the 4 real names), all the phases/KPIs/discussion points, **and**
+   the `roadmapMembers/{uid}` allow-list doc for each person, so there's no separate manual
+   Firestore step:
    ```bash
    cd roadmap-tracker
    npm install
    GOOGLE_APPLICATION_CREDENTIALS=/path/to/service-account.json \
      FIREBASE_PROJECT_ID=<your-project-id> npm run seed
    ```
+   Without a `roadmapMembers` doc, a signed-in user sees "isn't on the team list yet" and can't
+   read any data — if you ever add a 5th teammate, add their UID to `roadmapMembers` in
+   `scripts/seed.mjs` (or create the doc by hand in the Firestore console) and re-run the seed.
 
 Anyone can reset their own PIN later from a regular device by asking an admin to update their
 password in the Firebase console (there's no self-service "forgot PIN" flow in v1 — see
