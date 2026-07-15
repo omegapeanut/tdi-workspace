@@ -327,11 +327,11 @@
     <h1>Roadmap</h1>
     <p class="login-sub">Private workspace for the collaboration team.</p>
     <div id="loginError" class="form-error hidden"></div>
-    <label class="field">Email
-      <input type="email" id="loginEmail" autocomplete="email" required />
+    <label class="field">Who's this?
+      <select id="loginUser" required></select>
     </label>
-    <label class="field">Password
-      <input type="password" id="loginPassword" autocomplete="current-password" required />
+    <label class="field">PIN
+      <input type="password" id="loginPin" inputmode="numeric" pattern="[0-9]*" maxlength="4" autocomplete="off" required />
     </label>
     <button type="submit" class="btn btn-primary" id="loginSubmit" style="justify-content:center;">Sign in</button>
   </form>
@@ -502,6 +502,22 @@ const CONFIG = {
   },
 };
 
+// Firebase Auth has no "username" concept — under the hood each person is
+// still a real email/password account, but the login screen only shows a
+// name + a short PIN. See README "Team accounts" for the exact values used
+// to create each of these in the Firebase console.
+const TEAM_LOGINS = [
+  { name: "Terence", email: "terence@modulacollective.local" },
+  { name: "YY", email: "yy@modulacollective.local" },
+  { name: "YS", email: "ys@modulacollective.local" },
+  { name: "Jackie", email: "jackie@modulacollective.local" },
+];
+// The PIN typed on screen is padded with this prefix before being sent to
+// Firebase, since Firebase requires 6+ character passwords and a bare
+// 4-digit PIN doesn't meet that. Purely a technical detail — the human-facing
+// PIN stays 4 digits.
+const PIN_PREFIX = "mc-";
+
 const app = initializeApp(CONFIG.firebase);
 const auth = getAuth(app);
 const db = getFirestore(app);
@@ -509,6 +525,7 @@ const db = getFirestore(app);
 /* ---------- tiny helpers ---------- */
 const $ = (sel) => document.querySelector(sel);
 const esc = (s) => String(s ?? "").replace(/[&<>"']/g, (c) => ({ "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;" }[c]));
+const loginName = (email) => TEAM_LOGINS.find((p) => p.email === email)?.name || email;
 const byOrder = (a, b) => (a.order ?? 0) - (b.order ?? 0);
 
 function showToast(msg) {
@@ -575,7 +592,7 @@ onAuthStateChanged(auth, (user) => {
       state.isAdmin = false;
       $("#loginScreen").classList.add("hidden");
       $("#app").classList.add("hidden");
-      $("#deniedText").textContent = `${user.email} is signed in but isn't on the roadmap team list yet. Ask an admin to add your account.`;
+      $("#deniedText").textContent = `${loginName(user.email)} is signed in but isn't on the roadmap team list yet. Ask an admin to add your account.`;
       $("#deniedScreen").classList.remove("hidden");
       return;
     }
@@ -588,7 +605,7 @@ onAuthStateChanged(auth, (user) => {
   }, () => {
     $("#loginScreen").classList.add("hidden");
     $("#app").classList.add("hidden");
-    $("#deniedText").textContent = `${user.email} is signed in but isn't on the roadmap team list yet. Ask an admin to add your account.`;
+    $("#deniedText").textContent = `${loginName(user.email)} is signed in but isn't on the roadmap team list yet. Ask an admin to add your account.`;
     $("#deniedScreen").classList.remove("hidden");
   });
   unsubs.push(unsubMember);
@@ -603,18 +620,20 @@ onAuthStateChanged(auth, (user) => {
   }));
 });
 
+$("#loginUser").innerHTML = TEAM_LOGINS.map((p) => `<option value="${esc(p.email)}">${esc(p.name)}</option>`).join("");
+
 $("#loginForm").addEventListener("submit", async (e) => {
   e.preventDefault();
-  const email = $("#loginEmail").value.trim();
-  const password = $("#loginPassword").value;
+  const email = $("#loginUser").value;
+  const pin = $("#loginPin").value.trim();
   const errBox = $("#loginError");
   errBox.classList.add("hidden");
   $("#loginSubmit").disabled = true;
   $("#loginSubmit").textContent = "Signing in…";
   try {
-    await signInWithEmailAndPassword(auth, email, password);
+    await signInWithEmailAndPassword(auth, email, PIN_PREFIX + pin);
   } catch (err) {
-    errBox.textContent = "Couldn't sign in — check the email and password.";
+    errBox.textContent = "Couldn't sign in — check the PIN.";
     errBox.classList.remove("hidden");
   } finally {
     $("#loginSubmit").disabled = false;

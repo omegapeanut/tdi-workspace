@@ -1,6 +1,10 @@
+// Mirrors the real TEAM_LOGINS / PIN_PREFIX scheme in public/index.html —
+// Terence is the admin account, the other three are regular members.
 const USERS = {
-  "admin@modulacollective.sg": { uid: "admin-uid", email: "admin@modulacollective.sg", password: "demo-password-123" },
-  "member@modulacollective.sg": { uid: "member-uid", email: "member@modulacollective.sg", password: "demo-password-123" },
+  "terence@modulacollective.local": { uid: "admin-uid", email: "terence@modulacollective.local", password: "mc-0000" },
+  "yy@modulacollective.local": { uid: "yy-uid", email: "yy@modulacollective.local", password: "mc-0001" },
+  "ys@modulacollective.local": { uid: "ys-uid", email: "ys@modulacollective.local", password: "mc-0002" },
+  "jackie@modulacollective.local": { uid: "jackie-uid", email: "jackie@modulacollective.local", password: "mc-0003" },
 };
 
 let currentUser = null;

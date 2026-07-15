@@ -44,10 +44,10 @@ function tasks(titles) {
 // ---------------------------------------------------------------------------
 
 const team = [
-  { id: "m1", name: "Teammate 1", color: "#8A9A7E" },
-  { id: "m2", name: "Teammate 2", color: "#BE8C5C" },
-  { id: "m3", name: "Teammate 3", color: "#7A8CA0" },
-  { id: "m4", name: "Teammate 4", color: "#B5533C" },
+  { id: "m1", name: "Terence", color: "#8A9A7E" },
+  { id: "m2", name: "YY", color: "#BE8C5C" },
+  { id: "m3", name: "YS", color: "#7A8CA0" },
+  { id: "m4", name: "Jackie", color: "#B5533C" },
 ];
 
 // ---------------------------------------------------------------------------

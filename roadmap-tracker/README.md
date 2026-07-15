@@ -42,24 +42,43 @@ and it isn't here).
 
 ### 2. Create the 4 team accounts
 
-1. **Firebase Auth**: create 4 users (Firebase console → Authentication → Add user).
-2. **Allow-list + role**: for each user, create a Firestore doc `roadmapMembers/<their-uid>`
-   shaped `{ isAdmin: true }` or `{ isAdmin: false }`. Give yourself `isAdmin: true`; the other
-   three `false` is fine — they can still do all the day-to-day work (checkboxes, owners,
-   photos, KPI counters, resolving discussion points), just not restructure the roadmap.
-   Without a `roadmapMembers` doc at all, a signed-in user sees "isn't on the team list yet"
-   and can't read any data.
-3. **Seed the content** (once, against the real project):
+The login screen shows a **name picker + 4-digit PIN**, not an email/password form. Under the
+hood Firebase Auth still needs a real email + a 6+ character password per person — the app
+supplies both automatically from the `TEAM_LOGINS` list and `PIN_PREFIX` constant near the top
+of `public/index.html`'s `<script>` tag. Create exactly these 4 accounts in Firebase console →
+**Authentication** → **Add user**:
+
+| Name | Email (paste exactly) | Password (paste exactly) | PIN they'll actually type |
+|---|---|---|---|
+| Terence | `terence@modulacollective.local` | `mc-0000` | `0000` |
+| YY | `yy@modulacollective.local` | `mc-0001` | `0001` |
+| YS | `ys@modulacollective.local` | `mc-0002` | `0002` |
+| Jackie | `jackie@modulacollective.local` | `mc-0003` | `0003` |
+
+If you ever add a 5th teammate or change these emails, update the `TEAM_LOGINS` array in
+`public/index.html` to match — the dropdown is generated from that list.
+
+Then:
+
+2. **Allow-list + role**: for each of the 4 users, create a Firestore doc
+   `roadmapMembers/<their-uid>` (the UID is shown next to each user in the Authentication tab)
+   shaped `{ isAdmin: true }` or `{ isAdmin: false }`. Give yourself (Terence) `isAdmin: true`;
+   the other three `false` is fine — they can still do all the day-to-day work (checkboxes,
+   owners, photos, KPI counters, resolving discussion points), just not restructure the
+   roadmap. Without a `roadmapMembers` doc at all, a signed-in user sees "isn't on the team
+   list yet" and can't read any data.
+3. **Seed the content** (once, against the real project — this also creates the `roadmapMeta/team`
+   doc with the 4 real names already filled in, so no renaming step is needed):
    ```bash
    cd roadmap-tracker
    npm install
    GOOGLE_APPLICATION_CREDENTIALS=/path/to/service-account.json \
      FIREBASE_PROJECT_ID=<your-project-id> npm run seed
    ```
-4. Open the app, go to **Team**, and rename the 4 placeholder teammates (`Teammate 1`…
-   `Teammate 4`) to real names — this is the identity used for task ownership and for
-   "Posting as" on updates, independent of the login email, so it's fine if login accounts are
-   ever shared or rotated.
+
+Anyone can reset their own PIN later from a regular device by asking an admin to update their
+password in the Firebase console (there's no self-service "forgot PIN" flow in v1 — see
+"Out of scope" below).
 
 ### 3. Deploy the Firestore rules
 
@@ -143,6 +162,12 @@ testing aid, not part of the shipped product.
 ## What's deliberately out of scope for v1
 
 - No email invites/self-signup — accounts are provisioned manually (4 people, low churn).
+- No self-service "forgot PIN" — resetting a PIN means an admin updates that person's password
+  in the Firebase console (Authentication → user row → Reset password), to the new `mc-XXXX`
+  value. A 4-digit PIN is meaningfully weaker than a real password; acceptable here since this
+  is a private, unlisted URL for 4 trusted people and Firebase Auth throttles repeated failed
+  sign-ins automatically — revisit if that stops being true (e.g. the link leaks, or the team
+  grows).
 - No task/phase rename UI — delete and re-add if something needs restructuring.
 - No edit/delete on posted update notes — they're an append-only log; only removal is offered
   (by the author or an admin).

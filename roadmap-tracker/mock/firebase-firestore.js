@@ -44,7 +44,9 @@ const store = {
   updates: {},
   roadmapMembers: {
     "admin-uid": { isAdmin: true },
-    "member-uid": { isAdmin: false },
+    "yy-uid": { isAdmin: false },
+    "ys-uid": { isAdmin: false },
+    "jackie-uid": { isAdmin: false },
   },
 };
 
