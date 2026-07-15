@@ -6,20 +6,26 @@
 //   firebase emulators:start --only firestore,auth   (in one terminal, from repo root)
 //   FIRESTORE_EMULATOR_HOST=127.0.0.1:8080 node scripts/seed.mjs
 //
-// Real project use:
+// Real project use (local machine with a downloaded service account key):
 //   GOOGLE_APPLICATION_CREDENTIALS=/path/to/service-account.json \
 //     FIREBASE_PROJECT_ID=<your-project-id> node scripts/seed.mjs
+//
+// Real project use (Google Cloud Shell — no key file needed, Cloud Shell's own
+// ambient VM credentials are used automatically):
+//   FIREBASE_PROJECT_ID=<your-project-id> node scripts/seed.mjs
 
 import { initializeApp, applicationDefault } from "firebase-admin/app";
 import { getFirestore } from "firebase-admin/firestore";
 
 const usingEmulator = Boolean(process.env.FIRESTORE_EMULATOR_HOST);
+const usingAmbientCredentials = Boolean(process.env.CLOUD_SHELL) || Boolean(process.env.GOOGLE_APPLICATION_CREDENTIALS);
 const projectId = process.env.FIREBASE_PROJECT_ID || (usingEmulator ? "tdiworkspace-26492" : undefined);
 
-if (!usingEmulator && !process.env.GOOGLE_APPLICATION_CREDENTIALS) {
+if (!usingEmulator && !usingAmbientCredentials) {
   console.error(
-    "Refusing to run against a real Firebase project without GOOGLE_APPLICATION_CREDENTIALS set.\n" +
-      "Set FIRESTORE_EMULATOR_HOST to seed the local emulator instead."
+    "Refusing to run against a real Firebase project without credentials.\n" +
+      "Set GOOGLE_APPLICATION_CREDENTIALS (local key file), run this from Google Cloud Shell " +
+      "(ambient credentials, auto-detected), or set FIRESTORE_EMULATOR_HOST to seed the local emulator."
   );
   process.exit(1);
 }
