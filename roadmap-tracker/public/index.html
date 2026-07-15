@@ -4,7 +4,7 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <meta name="robots" content="noindex, nofollow" />
-<title>Modula Collective — Roadmap</title>
+<title>Modula — Roadmap</title>
 <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🗺️</text></svg>" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -323,7 +323,7 @@
   <div class="blob blob-1"></div>
   <div class="blob blob-2"></div>
   <form id="loginForm" class="login-card">
-    <div class="login-mark"><span class="mark">MC</span><div><div class="login-kicker">Modula Collective</div></div></div>
+    <div class="login-mark"><span class="mark">M</span><div><div class="login-kicker">Modula</div></div></div>
     <h1>Roadmap</h1>
     <p class="login-sub">Private workspace for the collaboration team.</p>
     <div id="loginError" class="form-error hidden"></div>
@@ -348,16 +348,16 @@
   <header class="app-header">
     <div class="header-inner">
       <div class="brand">
-        <span class="mark">MC</span>
+        <span class="mark">M</span>
         <div>
-          <div class="brand-name">Modula Collective</div>
+          <div class="brand-name">Modula</div>
           <div class="brand-sub">Roadmap</div>
         </div>
       </div>
       <nav class="tabs" id="tabs">
         <button class="tab" data-tab="overview">Overview</button>
         <button class="tab" data-tab="vvision">V Vision Collaboration</button>
-        <button class="tab" data-tab="modula">Modula Collective Roadmap</button>
+        <button class="tab" data-tab="modula">Modula Roadmap</button>
         <button class="tab" data-tab="gallery">Gallery</button>
         <button class="tab" data-tab="team">Team</button>
       </nav>
@@ -408,7 +408,7 @@
     <!-- Modula -->
     <section id="panel-modula" class="tab-panel">
       <div class="section-intro reveal">
-        <h2>Modula Collective Roadmap</h2>
+        <h2>Modula Roadmap</h2>
         <p>Showroom repositioning &amp; partner programme — 24-month brand roadmap.</p>
       </div>
       <div class="kpi-grid reveal" id="modulaKpiGrid"></div>
@@ -507,16 +507,16 @@ const CONFIG = {
 // name + a short PIN. See README "Team accounts" for the exact values used
 // to create each of these in the Firebase console.
 const TEAM_LOGINS = [
-  { name: "Terence", email: "terence@modulacollective.local" },
-  { name: "YY", email: "yy@modulacollective.local" },
-  { name: "YS", email: "ys@modulacollective.local" },
-  { name: "Jackie", email: "jackie@modulacollective.local" },
+  { name: "Terence", email: "terence@modula.local" },
+  { name: "YY", email: "yy@modula.local" },
+  { name: "YS", email: "ys@modula.local" },
+  { name: "Jackie", email: "jackie@modula.local" },
 ];
 // The PIN typed on screen is padded with this prefix before being sent to
 // Firebase, since Firebase requires 6+ character passwords and a bare
 // 4-digit PIN doesn't meet that. Purely a technical detail — the human-facing
 // PIN stays 4 digits.
-const PIN_PREFIX = "mc-";
+const PIN_PREFIX = "md-";
 
 const app = initializeApp(CONFIG.firebase);
 const auth = getAuth(app);
@@ -734,7 +734,7 @@ function renderOverview() {
 
   const tracks = [
     { key: "vvision", label: "V Vision Collaboration", tagline: "AI-powered design team — the new partnership, phases 0–24 months" },
-    { key: "modula", label: "Modula Collective Roadmap", tagline: "Showroom repositioning & partner programme — 24-month brand roadmap" },
+    { key: "modula", label: "Modula Roadmap", tagline: "Showroom repositioning & partner programme — 24-month brand roadmap" },
   ];
   $("#trackSummaryRow").innerHTML = tracks.map((t) => {
     const tt = tasks.filter((x) => x.track === t.key);

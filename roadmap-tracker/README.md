@@ -1,11 +1,11 @@
-# Roadmap Tracker — Modula Collective × V Vision
+# Roadmap Tracker — Modula × V Vision
 
 A single self-contained page (`public/index.html` — HTML, CSS and JS all in one file,
 no build step) so the 4-person team can track two roadmaps in one private, live-updating
 place:
 
 1. **V Vision Collaboration** — the new AI-powered design-team partnership (3 phases, 0–24 months)
-2. **Modula Collective Roadmap** — the 24-month showroom brand repositioning plan (10 phases)
+2. **Modula Roadmap** — the 24-month showroom brand repositioning plan (10 phases)
 
 It is a **standalone app**, deliberately separate from the public `tdi-workspace` marketing
 site: its own page, its own route, no link from the public nav, never part of the GitHub
@@ -50,10 +50,10 @@ of `public/index.html`'s `<script>` tag. Create exactly these 4 accounts in Fire
 
 | Name | Email (paste exactly) | Password (paste exactly) | PIN they'll actually type |
 |---|---|---|---|
-| Terence | `terence@modulacollective.local` | `mc-0000` | `0000` |
-| YY | `yy@modulacollective.local` | `mc-0001` | `0001` |
-| YS | `ys@modulacollective.local` | `mc-0002` | `0002` |
-| Jackie | `jackie@modulacollective.local` | `mc-0003` | `0003` |
+| Terence | `terence@modula.local` | `md-0000` | `0000` |
+| YY | `yy@modula.local` | `md-0001` | `0001` |
+| YS | `ys@modula.local` | `md-0002` | `0002` |
+| Jackie | `jackie@modula.local` | `md-0003` | `0003` |
 
 If you ever add a 5th teammate or change these emails, update the `TEAM_LOGINS` array in
 `public/index.html` to match — the dropdown is generated from that list.

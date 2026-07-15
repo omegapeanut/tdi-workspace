@@ -124,7 +124,7 @@ const discussionPoints = [
 ].map((text, i) => ({ id: `dp${i + 1}`, text, resolved: false, notes: "", order: i }));
 
 // ---------------------------------------------------------------------------
-// Modula Collective — 24-month brand roadmap, 10 phases
+// Modula — 24-month brand roadmap, 10 phases
 // ---------------------------------------------------------------------------
 
 const modulaPhases = [
