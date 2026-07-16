@@ -261,9 +261,10 @@
   .add-photo-frame svg{ width:26px; height:26px; opacity:.7; }
 
   /* ---------- Team ---------- */
-  .team-grid{ display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:14px; margin-top:16px; }
-  .team-row{ display:flex; align-items:center; gap:10px; }
-  .team-row input{ flex:1; padding:8px 11px; border:1px solid var(--line); border-radius:var(--radius-sm); background:#fff; }
+  .team-grid{ display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:12px; margin-top:16px; }
+  .team-row{ display:flex; align-items:center; gap:10px; padding:10px 12px; background:var(--bg-soft); border-radius:var(--radius-sm); min-width:0; }
+  .team-row input{ flex:1; min-width:0; padding:8px 11px; border:1px solid var(--line); border-radius:var(--radius-sm); background:#fff; }
+  .team-row .link{ flex-shrink:0; }
   .team-actions{ display:flex; gap:10px; margin-top:16px; }
 
   /* ---------- Modal ---------- */
