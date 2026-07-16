@@ -1,0 +1,13 @@
+{
+  "name": "roadmap-tracker",
+  "version": "0.2.0",
+  "private": true,
+  "type": "module",
+  "description": "Seeding/admin scripts for the single-file roadmap tracker at public/index.html — the site itself has no build step.",
+  "scripts": {
+    "seed": "node scripts/seed.mjs"
+  },
+  "devDependencies": {
+    "firebase-admin": "^14.1.0"
+  }
+}

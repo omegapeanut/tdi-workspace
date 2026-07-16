@@ -1,0 +1,1309 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="robots" content="noindex, nofollow" />
+<title>Modula — Roadmap</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🗺️</text></svg>" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500;1,600&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    --bg:#F6F1E9;
+    --bg-soft:#EEE5D6;
+    --paper:#FFFDF9;
+    --ink:#2B2620;
+    --muted:#8C7F6B;
+    --line: rgba(43,38,32,.12);
+    --line-soft: rgba(43,38,32,.07);
+    --sage:#8A9A7E;
+    --sage-dark:#5F7255;
+    --clay:#BE8C5C;
+    --clay-dark:#9C6E3F;
+    --danger:#B5533C;
+    --radius-lg:22px;
+    --radius-md:14px;
+    --radius-sm:9px;
+    --shadow-soft: 0 14px 40px -18px rgba(43,38,32,.28);
+    --shadow-lift: 0 20px 46px -16px rgba(43,38,32,.3);
+    --ease: cubic-bezier(.22,1,.36,1);
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:
+      radial-gradient(1200px 600px at 10% -10%, rgba(138,154,126,.10), transparent 60%),
+      radial-gradient(900px 500px at 110% 0%, rgba(190,140,92,.10), transparent 55%),
+      var(--bg);
+    color:var(--ink);
+    font-family:"Manrope", system-ui, -apple-system, sans-serif;
+    -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3,h4{ font-family:"Cormorant Garamond", Georgia, serif; font-weight:600; margin:0 0 6px; letter-spacing:.01em; }
+  em, .cap, .signature{ font-family:"Cormorant Garamond", Georgia, serif; font-style:italic; }
+  p{ margin:0; }
+  button{ font-family:inherit; cursor:pointer; border:none; background:none; color:inherit; }
+  input,textarea,select{ font-family:inherit; font-size:14px; color:var(--ink); }
+  a{ color:inherit; }
+  ::selection{ background:rgba(138,154,126,.35); }
+  .hidden{ display:none !important; }
+
+  /* ---------- Buttons ---------- */
+  .btn{
+    display:inline-flex; align-items:center; gap:8px;
+    padding:10px 18px; border-radius:999px; font-size:13px; font-weight:700;
+    transition: transform .25s var(--ease), box-shadow .25s var(--ease), background .25s var(--ease), opacity .2s;
+  }
+  .btn:active{ transform:scale(.97); }
+  .btn-primary{ background:var(--sage-dark); color:#fff; box-shadow:0 8px 20px -10px rgba(95,114,85,.7); }
+  .btn-primary:hover{ transform:translateY(-1px); box-shadow:0 12px 26px -10px rgba(95,114,85,.8); }
+  .btn-ghost{ background:var(--paper); border:1px solid var(--line); }
+  .btn-ghost:hover{ transform:translateY(-1px); box-shadow:var(--shadow-soft); }
+  .btn-danger{ color:var(--danger); }
+  .btn-sm{ padding:6px 12px; font-size:12px; border-radius:999px; }
+  .btn:disabled{ opacity:.55; cursor:default; transform:none !important; }
+  .link{ background:none; color:var(--sage-dark); font-weight:700; font-size:13px; text-decoration:underline; text-underline-offset:3px; }
+
+  .copy-btn{
+    display:inline-flex; align-items:center; gap:6px;
+    padding:5px 11px; border-radius:999px; font-size:11px; font-weight:700;
+    letter-spacing:.03em; text-transform:uppercase;
+    background:rgba(138,154,126,.12); color:var(--sage-dark);
+    border:1px solid rgba(138,154,126,.25);
+    transition: background .25s var(--ease), transform .2s var(--ease);
+    flex-shrink:0;
+  }
+  .copy-btn:hover{ background:rgba(138,154,126,.22); transform:translateY(-1px); }
+  .copy-btn.is-copied{ background:var(--sage-dark); color:#fff; border-color:var(--sage-dark); }
+  .copy-btn svg{ width:12px; height:12px; }
+
+  /* ---------- Login ---------- */
+  .login-screen{
+    min-height:100vh; display:flex; align-items:center; justify-content:center; padding:24px;
+    position:relative; overflow:hidden;
+  }
+  .blob{ position:absolute; border-radius:50%; filter:blur(60px); opacity:.5; pointer-events:none; }
+  .blob-1{ width:420px; height:420px; background:var(--sage); top:-140px; left:-120px; animation:drift 22s ease-in-out infinite alternate; }
+  .blob-2{ width:360px; height:360px; background:var(--clay); bottom:-140px; right:-100px; animation:drift 26s ease-in-out infinite alternate-reverse; }
+  @keyframes drift{ from{ transform:translate(0,0) scale(1);} to{ transform:translate(30px,20px) scale(1.08);} }
+
+  .login-card{
+    position:relative; z-index:1;
+    background:var(--paper); border:1px solid var(--line); border-radius:var(--radius-lg);
+    padding:44px 40px; width:100%; max-width:400px;
+    display:flex; flex-direction:column; gap:16px;
+    box-shadow:var(--shadow-lift);
+    animation: fadeInUp .7s var(--ease);
+  }
+  .login-mark{ display:flex; align-items:center; gap:10px; margin-bottom:6px; }
+  .login-mark .mark{ width:38px; height:38px; border-radius:10px; background:linear-gradient(135deg,var(--sage-dark),var(--sage)); color:#fff; display:flex; align-items:center; justify-content:center; font-weight:800; font-size:13px; }
+  .login-kicker{ font-size:11px; letter-spacing:.22em; color:var(--muted); font-weight:700; text-transform:uppercase; }
+  .login-card h1{ font-size:30px; margin:0; }
+  .login-sub{ color:var(--muted); font-size:14px; margin-bottom:6px; }
+  .field{ display:flex; flex-direction:column; gap:6px; font-size:12px; color:var(--muted); font-weight:600; }
+  .field input, .field textarea, .field select{
+    padding:11px 13px; border:1px solid var(--line); border-radius:var(--radius-sm); background:#fff;
+    transition:border-color .2s var(--ease), box-shadow .2s var(--ease);
+  }
+  .field input:focus, .field textarea:focus, .field select:focus{ outline:none; border-color:var(--sage); box-shadow:0 0 0 3px rgba(138,154,126,.18); }
+  .form-error{ color:var(--danger); font-size:13px; }
+  .center-note{ min-height:100vh; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:14px; text-align:center; padding:24px; color:var(--muted); }
+
+  /* ---------- Shell ---------- */
+  .app-header{
+    position:sticky; top:0; z-index:20;
+    background:rgba(246,241,233,.86); backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--line);
+    padding:14px 26px;
+  }
+  .header-inner{ max-width:1180px; margin:0 auto; display:flex; align-items:center; gap:22px; flex-wrap:wrap; }
+  .brand{ display:flex; align-items:center; gap:10px; }
+  .brand .mark{ width:38px; height:38px; border-radius:10px; background:linear-gradient(135deg,var(--sage-dark),var(--sage)); color:#fff; display:flex; align-items:center; justify-content:center; font-weight:800; font-size:13px; }
+  .brand-name{ font-family:"Cormorant Garamond",serif; font-weight:700; font-size:17px; line-height:1.1; }
+  .brand-sub{ font-size:10px; letter-spacing:.18em; color:var(--muted); text-transform:uppercase; }
+
+  .tabs{ display:flex; gap:4px; flex:1; flex-wrap:wrap; }
+  .tab{ padding:9px 16px; border-radius:999px; font-size:13px; font-weight:700; color:var(--muted); transition: all .25s var(--ease); }
+  .tab:hover{ background:var(--bg-soft); }
+  .tab.active{ background:var(--sage-dark); color:#fff; }
+
+  .header-right{ display:flex; align-items:center; gap:12px; font-size:12px; color:var(--muted); }
+  .posting-as{ display:flex; align-items:center; gap:6px; }
+  .posting-as select{ border:1px solid var(--line); border-radius:999px; padding:6px 10px; background:#fff; font-size:12px; }
+  .admin-badge{ background:var(--clay); color:#fff; font-size:10px; font-weight:800; letter-spacing:.06em; padding:3px 9px; border-radius:999px; text-transform:uppercase; }
+  .nav-toggle{ display:none; }
+
+  .app-main{ max-width:1180px; margin:0 auto; padding:34px 26px 90px; }
+  .tab-panel{ display:none; }
+  .tab-panel.active{ display:block; animation: fadeIn .45s var(--ease); }
+  @keyframes fadeIn{ from{opacity:0; transform:translateY(8px);} to{opacity:1; transform:none;} }
+  @keyframes fadeInUp{ from{opacity:0; transform:translateY(20px);} to{opacity:1; transform:none;} }
+
+  .reveal{ opacity:0; transform:translateY(18px); transition:opacity .7s var(--ease), transform .7s var(--ease); }
+  .reveal.in-view{ opacity:1; transform:none; }
+
+  .section-intro{ margin-bottom:24px; }
+  .section-intro p{ color:var(--muted); margin-top:4px; }
+
+  .dash-hero{ margin-bottom:28px; }
+  .dash-hero h1{ font-size:36px; }
+  .dash-hero p{ color:var(--muted); margin-top:6px; }
+
+  /* ---------- Cards / grids ---------- */
+  .card{ background:var(--paper); border:1px solid var(--line); border-radius:var(--radius-lg); padding:20px 22px; transition: box-shadow .3s var(--ease), transform .3s var(--ease); }
+  .card:hover{ box-shadow:var(--shadow-soft); }
+
+  .stat-row{ display:grid; grid-template-columns:repeat(4,1fr); gap:14px; margin-bottom:30px; }
+  .stat-card{ text-align:center; }
+  .stat-value{ font-size:34px; font-weight:700; color:var(--sage-dark); }
+  .stat-label{ font-size:11px; color:var(--muted); text-transform:uppercase; letter-spacing:.06em; margin-top:4px; }
+
+  h3{ font-size:17px; margin-bottom:14px; }
+
+  /* ---------- My tasks (Dashboard) ---------- */
+  .mytasks-grid{ display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:14px; margin-bottom:30px; }
+  .mytasks-col h4{ display:flex; justify-content:space-between; align-items:center; font-size:12px; text-transform:uppercase; letter-spacing:.06em; color:var(--muted); font-weight:800; border-bottom:1px dashed var(--line); padding-bottom:9px; margin:0 0 10px; }
+  .col-count{ background:var(--bg-soft); color:var(--ink); font-size:11px; font-weight:700; padding:2px 9px; border-radius:999px; }
+  .mini-task{ display:flex; align-items:center; gap:9px; padding:8px 0; border-top:1px solid var(--line-soft); }
+  .mini-task:first-child{ border-top:none; }
+  .mini-task-body{ flex:1; min-width:0; }
+  .mini-task-title{ font-size:13px; font-weight:600; display:block; line-height:1.3; }
+  .mini-task-phase{ font-size:11px; color:var(--muted); }
+  .mini-empty{ font-size:13px; color:var(--muted); font-style:italic; font-family:"Cormorant Garamond",serif; padding:4px 0; }
+
+  .track-row{ display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-bottom:30px; }
+  .track-card{ text-align:left; display:flex; flex-direction:column; gap:10px; cursor:pointer; }
+  .track-card p{ color:var(--muted); font-size:13px; }
+  .track-card .meta{ font-size:12px; color:var(--muted); }
+
+  .progress-track{ height:7px; background:var(--bg-soft); border-radius:5px; overflow:hidden; }
+  .progress-fill{ height:100%; background:linear-gradient(90deg,var(--sage),var(--sage-dark)); border-radius:5px; transition:width .6s var(--ease); }
+
+  .workload{ margin-bottom:10px; }
+  .workload-grid{ display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:14px; }
+  .workload-name{ display:flex; align-items:center; gap:8px; font-weight:700; font-size:14px; padding-bottom:8px; border-bottom:1px dashed var(--line); margin-bottom:8px; }
+  .dot{ width:10px; height:10px; border-radius:50%; flex-shrink:0; }
+  .workload-count{ font-size:12px; color:var(--muted); margin-bottom:8px; }
+  .workload-card ul{ margin:0; padding-left:18px; font-size:13px; }
+  .workload-card li{ margin-bottom:4px; }
+  .all-clear{ list-style:none; margin-left:-18px; color:var(--sage-dark); font-style:italic; font-family:"Cormorant Garamond",serif; }
+
+  .kpi-grid{ display:grid; grid-template-columns:repeat(auto-fit,minmax(210px,1fr)); gap:12px; margin-bottom:26px; }
+  .kpi-card{ padding:16px 18px; }
+  .kpi-top{ display:flex; justify-content:space-between; align-items:flex-start; gap:8px; margin-bottom:8px; }
+  .kpi-label{ font-size:12px; color:var(--muted); font-weight:600; line-height:1.3; }
+  .kpi-value{ display:flex; align-items:baseline; gap:8px; font-size:24px; font-weight:700; color:var(--sage-dark); font-family:"Cormorant Garamond",serif; }
+  .kpi-value small{ font-size:12px; color:var(--muted); font-weight:500; font-family:"Manrope",sans-serif; }
+  .kpi-steps{ display:flex; gap:6px; margin-top:10px; }
+  .step-btn{ width:24px; height:24px; border-radius:50%; border:1px solid var(--line); background:#fff; font-size:14px; line-height:1; transition:transform .2s var(--ease); }
+  .step-btn:hover{ transform:scale(1.1); background:var(--bg-soft); }
+  .kpi-admin{ display:flex; gap:6px; margin-top:10px; }
+  .kpi-admin input{ width:70px; padding:4px 8px; border:1px solid var(--line); border-radius:6px; }
+
+  /* ---------- Roadmap: filters, discussion, phases ---------- */
+  .filter-pills{ display:flex; gap:8px; margin-bottom:24px; flex-wrap:wrap; }
+  .filter-pill{ padding:8px 18px; border-radius:999px; font-size:13px; font-weight:700; color:var(--muted); background:var(--paper); border:1px solid var(--line); transition:all .25s var(--ease); }
+  .filter-pill:hover{ background:var(--bg-soft); }
+  .filter-pill.active{ background:var(--sage-dark); color:#fff; border-color:var(--sage-dark); }
+
+  .track-section-title{ font-size:12px; letter-spacing:.14em; text-transform:uppercase; color:var(--clay-dark); font-weight:800; margin:30px 0 14px; }
+  .phase-list .track-section-title:first-child{ margin-top:0; }
+  .track-tag{ font-size:10px; font-weight:800; letter-spacing:.05em; text-transform:uppercase; padding:3px 9px; border-radius:999px; background:rgba(122,140,160,.16); color:#4C6478; }
+  .track-tag.tag-modula{ background:rgba(190,140,92,.16); color:var(--clay-dark); }
+  .track-tag.tag-vvision{ background:rgba(138,154,126,.18); color:var(--sage-dark); }
+
+  .discussion-card{ margin-bottom:26px; }
+  .discussion-header{ display:flex; justify-content:space-between; align-items:baseline; }
+  .discussion-count{ font-size:12px; color:var(--clay-dark); font-weight:700; }
+  .discussion-list{ display:flex; flex-direction:column; gap:10px; margin-top:14px; }
+  .discussion-item{ display:flex; align-items:center; gap:12px; flex-wrap:wrap; padding-top:10px; border-top:1px solid var(--line-soft); }
+  .discussion-item:first-child{ border-top:none; padding-top:0; }
+  .discussion-check{ display:flex; align-items:center; gap:10px; font-size:14px; flex:1; min-width:220px; }
+  .discussion-check input[type=checkbox]{ width:18px; height:18px; accent-color:var(--sage-dark); }
+  .discussion-item.resolved .discussion-check span{ text-decoration:line-through; color:var(--muted); }
+  .discussion-notes{ flex:1; min-width:200px; border:1px solid var(--line); border-radius:var(--radius-sm); padding:7px 11px; background:#fff; }
+  .discussion-add{ display:flex; gap:8px; margin-top:14px; }
+  .discussion-add input{ flex:1; padding:8px 12px; border:1px solid var(--line); border-radius:var(--radius-sm); background:#fff; }
+
+  .phase-list{ display:flex; flex-direction:column; gap:18px; }
+  .phase-card{ padding:22px 24px; }
+  .phase-header{ display:flex; justify-content:space-between; gap:18px; flex-wrap:wrap; margin-bottom:12px; }
+  .phase-heading{ display:flex; align-items:flex-start; gap:10px; flex-wrap:wrap; }
+  .phase-tags{ display:flex; align-items:center; gap:8px; margin-bottom:4px; flex-wrap:wrap; }
+  .phase-timeframe{ display:inline-block; font-size:11px; text-transform:uppercase; letter-spacing:.08em; color:var(--clay-dark); font-weight:700; }
+  .phase-header h3{ font-size:21px; margin:0; }
+  .phase-summary{ color:var(--muted); font-size:13px; margin-top:4px; max-width:480px; }
+  .phase-progress{ min-width:150px; display:flex; flex-direction:column; gap:5px; align-items:flex-end; }
+  .phase-progress span{ font-size:12px; color:var(--muted); }
+  .phase-kpis{ display:flex; gap:6px; flex-wrap:wrap; margin-bottom:14px; }
+  .phase-kpi-chip{ background:rgba(190,140,92,.14); color:var(--clay-dark); font-size:11px; padding:4px 11px; border-radius:999px; }
+  .phase-admin-del{ align-self:flex-start; }
+
+  /* ---------- Task cards ---------- */
+  .task-list{ display:flex; flex-direction:column; }
+  .task-card{ display:flex; align-items:flex-start; gap:12px; padding:13px 0; border-top:1px solid var(--line-soft); }
+  .task-card:first-child{ border-top:none; }
+  .task-check{ width:21px; height:21px; margin-top:2px; accent-color:var(--sage-dark); flex-shrink:0; cursor:pointer; }
+  .task-body{ flex:1; min-width:0; }
+  .task-top{ display:flex; align-items:center; gap:8px; flex-wrap:wrap; }
+  .task-title{ font-size:14px; font-weight:600; }
+  .task-card.done .task-title{ text-decoration:line-through; color:var(--muted); }
+  .badge{ font-size:10px; font-weight:800; letter-spacing:.04em; text-transform:uppercase; padding:3px 9px; border-radius:999px; }
+  .badge-progress{ background:rgba(190,140,92,.16); color:var(--clay-dark); }
+  .badge-done{ background:rgba(138,154,126,.2); color:var(--sage-dark); }
+  .task-meta-row{ display:flex; align-items:center; gap:8px; margin-top:7px; flex-wrap:wrap; }
+  .avatar{ width:26px; height:26px; border-radius:50%; display:inline-flex; align-items:center; justify-content:center; color:#fff; font-size:11px; font-weight:800; flex-shrink:0; box-shadow:0 2px 6px -2px rgba(43,38,32,.4); cursor:pointer; transition:transform .2s var(--ease); }
+  .avatar:hover{ transform:scale(1.1); }
+  .avatar.avatar-empty{ background:var(--bg-soft); color:var(--muted); box-shadow:none; border:1px dashed var(--line); }
+  .task-note-chip{ font-size:11px; color:var(--muted); background:var(--bg-soft); padding:4px 9px; border-radius:8px; max-width:180px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+  .task-quick-actions{ display:flex; align-items:center; gap:6px; flex-shrink:0; margin-top:2px; }
+  .kebab-btn{ width:26px; height:26px; border-radius:50%; border:1px solid var(--line); background:#fff; font-size:14px; color:var(--muted); transition:all .2s var(--ease); flex-shrink:0; }
+  .kebab-btn:hover{ background:var(--bg-soft); color:var(--ink); }
+  .task-actions-panel{ margin-top:10px; padding:12px; background:var(--bg-soft); border-radius:var(--radius-sm); display:flex; flex-direction:column; gap:9px; animation: fadeIn .3s var(--ease); }
+  .task-actions-panel .row{ display:flex; align-items:center; gap:10px; flex-wrap:wrap; }
+  .owner-select{ border:1px solid var(--line); border-radius:999px; padding:4px 10px; background:#fff; font-size:12px; }
+  .task-notes{ width:100%; border:1px solid var(--line); border-radius:var(--radius-sm); padding:8px 11px; background:#fff; resize:vertical; font-size:13px; }
+  .task-thumbs{ display:flex; gap:6px; flex-wrap:wrap; }
+  .task-thumb{ width:40px; height:40px; border-radius:8px; object-fit:cover; border:1px solid var(--line); }
+
+  .add-task-row{ display:flex; gap:8px; margin-top:12px; padding-top:12px; border-top:1px dashed var(--line); }
+  .add-task-row input{ flex:1; padding:8px 12px; border:1px solid var(--line); border-radius:var(--radius-sm); background:#fff; font-size:13px; }
+
+  .admin-add-phase{ margin-top:18px; }
+  .admin-add-phase .grid2{ display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-bottom:10px; }
+  .admin-add-phase select{ width:100%; padding:9px 12px; border:1px solid var(--line); border-radius:var(--radius-sm); background:#fff; margin-bottom:10px; }
+  .admin-add-phase textarea{ width:100%; min-height:60px; padding:9px 12px; border:1px solid var(--line); border-radius:var(--radius-sm); background:#fff; margin-bottom:10px; }
+
+  /* ---------- Gallery ---------- */
+  .gallery-grid{ display:grid; grid-template-columns:repeat(auto-fill,minmax(240px,1fr)); gap:22px; }
+  .frame{
+    background:var(--paper); border-radius:var(--radius-md); padding:12px 12px 18px;
+    box-shadow:var(--shadow-soft); border:1px solid var(--line);
+    transition: transform .35s var(--ease), box-shadow .35s var(--ease);
+  }
+  .frame:hover{ transform:translateY(-4px) rotate(-.3deg); box-shadow:var(--shadow-lift); }
+  .frame-photo{ width:100%; aspect-ratio:4/3; border-radius:8px; object-fit:cover; display:block; background:var(--bg-soft); }
+  .frame-photo-empty{ width:100%; aspect-ratio:4/3; border-radius:8px; display:flex; align-items:center; justify-content:center; background:var(--bg-soft); color:var(--muted); font-family:"Cormorant Garamond",serif; font-style:italic; font-size:14px; text-align:center; padding:14px; }
+  .frame-cap{ text-align:center; padding-top:12px; }
+  .frame-cap .cap{ font-size:16px; line-height:1.35; }
+  .frame-meta{ font-size:11px; color:var(--muted); margin-top:6px; text-transform:uppercase; letter-spacing:.05em; }
+  .frame-task{ font-size:11px; color:var(--sage-dark); margin-top:2px; font-weight:700; }
+  .frame-del{ display:block; margin:8px auto 0; font-size:11px; color:var(--danger); }
+  .add-photo-frame{
+    aspect-ratio:4/3.6; border:1.5px dashed var(--line); border-radius:var(--radius-md);
+    display:flex; flex-direction:column; align-items:center; justify-content:center; gap:8px;
+    color:var(--muted); font-size:13px; transition: all .3s var(--ease); width:100%;
+  }
+  .add-photo-frame:hover{ border-color:var(--sage); color:var(--sage-dark); background:rgba(138,154,126,.06); }
+  .add-photo-frame svg{ width:26px; height:26px; opacity:.7; }
+
+  /* ---------- Team ---------- */
+  .team-grid{ display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:12px; margin-top:16px; }
+  .team-row{ display:flex; align-items:center; gap:10px; padding:10px 12px; background:var(--bg-soft); border-radius:var(--radius-sm); min-width:0; }
+  .team-row input{ flex:1; min-width:0; padding:8px 11px; border:1px solid var(--line); border-radius:var(--radius-sm); background:#fff; }
+  .team-row .link{ flex-shrink:0; }
+  .team-actions{ display:flex; gap:10px; margin-top:16px; }
+
+  /* ---------- Modal ---------- */
+  .modal{
+    position:fixed; inset:0; background:rgba(43,38,32,.4); backdrop-filter:blur(2px);
+    display:flex; align-items:center; justify-content:center; padding:20px; z-index:50;
+    opacity:0; pointer-events:none; transition:opacity .3s var(--ease);
+  }
+  .modal.open{ opacity:1; pointer-events:auto; }
+  .modal-card{
+    background:var(--paper); border-radius:var(--radius-lg); padding:28px 26px; width:100%; max-width:440px;
+    box-shadow:var(--shadow-lift); transform:scale(.94) translateY(10px); transition:transform .35s var(--ease);
+    max-height:88vh; overflow-y:auto;
+  }
+  .modal.open .modal-card{ transform:scale(1) translateY(0); }
+  .modal-header{ display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:14px; }
+  .modal-header h3{ font-size:20px; }
+  .modal-close{ font-size:20px; color:var(--muted); line-height:1; }
+  .modal-task{ font-size:12px; color:var(--sage-dark); font-weight:700; margin-bottom:16px; }
+  .modal-card .field{ margin-bottom:14px; }
+  .modal-actions{ display:flex; justify-content:flex-end; gap:10px; margin-top:6px; }
+  .file-drop{ border:1.5px dashed var(--line); border-radius:var(--radius-sm); padding:16px; text-align:center; font-size:12px; color:var(--muted); }
+  .file-drop input{ width:100%; margin-top:8px; }
+  .checkbox-line{ display:flex; align-items:center; gap:8px; font-size:13px; }
+  .checkbox-line input{ width:16px; height:16px; accent-color:var(--sage-dark); }
+
+  /* ---------- Toast ---------- */
+  #toast{
+    position:fixed; left:50%; bottom:28px; transform:translate(-50%,14px); z-index:100;
+    background:var(--ink); color:#F6F1E9; padding:11px 20px; border-radius:999px; font-size:13px; font-weight:600;
+    opacity:0; pointer-events:none; transition:opacity .35s var(--ease), transform .35s var(--ease);
+    box-shadow:var(--shadow-lift);
+  }
+  #toast.show{ opacity:1; transform:translate(-50%,0); }
+
+  /* ---------- Responsive ---------- */
+  @media (max-width:900px){
+    .stat-row{ grid-template-columns:repeat(2,1fr); }
+    .track-row{ grid-template-columns:1fr; }
+  }
+  @media (max-width:720px){
+    .tabs{ display:none; flex-direction:column; width:100%; order:3; }
+    .tabs.open{ display:flex; }
+    .nav-toggle{ display:inline-flex; margin-left:auto; }
+    .header-inner{ position:relative; }
+    .phase-progress{ align-items:flex-start; }
+    .app-main{ padding:26px 16px 70px; }
+    .task-card{ flex-wrap:wrap; }
+    .task-quick-actions{ margin-left:33px; margin-top:4px; }
+  }
+</style>
+</head>
+<body>
+
+<div id="toast"></div>
+
+<!-- ============== LOGIN ============== -->
+<section id="loginScreen" class="login-screen">
+  <div class="blob blob-1"></div>
+  <div class="blob blob-2"></div>
+  <form id="loginForm" class="login-card">
+    <div class="login-mark"><span class="mark">M</span><div><div class="login-kicker">Modula</div></div></div>
+    <h1>Roadmap</h1>
+    <p class="login-sub">Private workspace for the collaboration team.</p>
+    <div id="loginError" class="form-error hidden"></div>
+    <label class="field">Who's this?
+      <select id="loginUser" required></select>
+    </label>
+    <label class="field">PIN
+      <input type="password" id="loginPin" inputmode="numeric" pattern="[0-9]*" maxlength="4" autocomplete="off" required />
+    </label>
+    <button type="submit" class="btn btn-primary" id="loginSubmit" style="justify-content:center;">Sign in</button>
+  </form>
+</section>
+
+<!-- ============== NOT A MEMBER ============== -->
+<section id="deniedScreen" class="center-note hidden">
+  <p id="deniedText"></p>
+  <button type="button" class="btn btn-ghost" id="deniedSignOut">Sign out</button>
+</section>
+
+<!-- ============== APP ============== -->
+<div id="app" class="hidden">
+  <header class="app-header">
+    <div class="header-inner">
+      <div class="brand">
+        <span class="mark">M</span>
+        <div>
+          <div class="brand-name">Modula</div>
+          <div class="brand-sub">Roadmap</div>
+        </div>
+      </div>
+      <nav class="tabs" id="tabs">
+        <button class="tab" data-tab="dashboard">Dashboard</button>
+        <button class="tab" data-tab="roadmap">Roadmap</button>
+        <button class="tab" data-tab="gallery">Gallery</button>
+        <button class="tab" data-tab="team">Team</button>
+      </nav>
+      <button class="btn btn-ghost btn-sm nav-toggle" id="navToggle">Menu</button>
+      <div class="header-right">
+        <div class="posting-as">
+          <span>Posting as</span>
+          <select id="postingAs"></select>
+        </div>
+        <span id="adminBadge" class="admin-badge hidden">Admin</span>
+        <button type="button" class="link" id="signOutBtn">Sign out</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="app-main">
+
+    <!-- Dashboard -->
+    <section id="panel-dashboard" class="tab-panel">
+      <div class="dash-hero reveal">
+        <div class="login-kicker">Welcome back</div>
+        <h1 id="dashGreetName">Team</h1>
+        <p>Here's where the two roadmaps stand today.</p>
+      </div>
+
+      <div class="stat-row">
+        <div class="card stat-card reveal"><div class="stat-value" id="statPct">0%</div><div class="stat-label">Overall complete</div></div>
+        <div class="card stat-card reveal"><div class="stat-value" id="statProgress">0</div><div class="stat-label">In progress</div></div>
+        <div class="card stat-card reveal"><div class="stat-value" id="statTodo">0</div><div class="stat-label">Not started</div></div>
+        <div class="card stat-card reveal"><div class="stat-value" id="statDiscuss">0</div><div class="stat-label">Open discussion points</div></div>
+      </div>
+
+      <h3>My tasks</h3>
+      <div class="mytasks-grid" id="myTasksGrid"></div>
+
+      <div class="track-row" id="trackSummaryRow"></div>
+
+      <div class="workload">
+        <h3>Who's on what</h3>
+        <div class="workload-grid" id="workloadGrid"></div>
+      </div>
+    </section>
+
+    <!-- Roadmap (unified) -->
+    <section id="panel-roadmap" class="tab-panel">
+      <div class="section-intro reveal">
+        <h2>Roadmap</h2>
+        <p>V Vision Collaboration and the Modula brand roadmap, together in one place. Each track counts its own timeframe independently — use the filters to focus on one at a time.</p>
+      </div>
+      <div class="filter-pills reveal">
+        <button type="button" class="filter-pill active" data-track-filter="all">All</button>
+        <button type="button" class="filter-pill" data-track-filter="vvision">V Vision Collaboration</button>
+        <button type="button" class="filter-pill" data-track-filter="modula">Modula Roadmap</button>
+      </div>
+      <div class="card discussion-card reveal hidden" id="discussionCard"></div>
+      <div class="phase-list" id="roadmapPhaseList"></div>
+      <div id="roadmapAdminAdd"></div>
+      <div id="roadmapKpiSection" style="margin-top:34px;">
+        <h3>12-month KPI targets</h3>
+        <div class="kpi-grid" id="roadmapKpiGrid"></div>
+        <div id="roadmapAdminKpi"></div>
+      </div>
+    </section>
+
+    <!-- Gallery -->
+    <section id="panel-gallery" class="tab-panel">
+      <div class="section-intro reveal">
+        <h2>Gallery</h2>
+        <p>Every photo and note the team has logged against a task, in one wall.</p>
+      </div>
+      <div class="gallery-grid" id="galleryGrid"></div>
+    </section>
+
+    <!-- Team -->
+    <section id="panel-team" class="tab-panel">
+      <div class="section-intro reveal">
+        <h2>Team</h2>
+        <p id="teamHint">These are the people tasks can be assigned to and updates are posted as.</p>
+      </div>
+      <div class="card reveal" style="max-width:560px;">
+        <div class="team-grid" id="teamGrid"></div>
+        <div class="team-actions hidden" id="teamActions">
+          <button type="button" class="btn btn-ghost btn-sm" id="addTeammateBtn">+ Add teammate</button>
+          <button type="button" class="btn btn-primary btn-sm" id="saveTeamBtn">Save changes</button>
+        </div>
+      </div>
+    </section>
+
+  </main>
+</div>
+
+<!-- ============== UPDATE MODAL ============== -->
+<div id="updateModal" class="modal">
+  <div class="modal-card">
+    <div class="modal-header">
+      <h3>Post an update</h3>
+      <button type="button" class="modal-close" id="modalClose">&times;</button>
+    </div>
+    <div class="modal-task" id="modalTaskLabel"></div>
+    <div class="field">
+      <span>Note</span>
+      <textarea id="updateNote" rows="3" placeholder="What happened, what changed…"></textarea>
+    </div>
+    <div class="field">
+      <span>Photo (optional)</span>
+      <div class="file-drop">
+        Drop a photo in, or choose one below.
+        <input type="file" id="updatePhoto" accept="image/*" />
+      </div>
+    </div>
+    <label class="checkbox-line" style="margin-bottom:16px;">
+      <input type="checkbox" id="markDone" />
+      <span>Also mark this task as done</span>
+    </label>
+    <div class="modal-actions">
+      <button type="button" class="btn btn-ghost btn-sm" id="modalCancel">Cancel</button>
+      <button type="button" class="btn btn-primary btn-sm" id="modalSubmit">Post update</button>
+    </div>
+  </div>
+</div>
+
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js";
+import {
+  getAuth, onAuthStateChanged, signInWithEmailAndPassword, signOut,
+} from "https://www.gstatic.com/firebasejs/10.14.1/firebase-auth.js";
+import {
+  getFirestore, collection, doc, onSnapshot, updateDoc, setDoc, addDoc, deleteDoc, deleteField,
+} from "https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore.js";
+
+/* =========================================================================
+   CONFIG — fill these in before deploying. Same Firebase project as the
+   main tdi-workspace site (see roadmap-tracker/README.md for setup steps).
+   ========================================================================= */
+const CONFIG = {
+  firebase: {
+    apiKey: "AIzaSyALSGTJOCcMWTBO9AIS-jK0y3ipccSlRMA",
+    authDomain: "tdiworkspace-26492.firebaseapp.com",
+    projectId: "tdiworkspace-26492",
+    storageBucket: "tdiworkspace-26492.firebasestorage.app",
+    messagingSenderId: "226713671401",
+    appId: "1:226713671401:web:571c2d8ad1e0af3d63c278",
+  },
+  cloudinary: {
+    cloudName: "du3f8jjrp",
+    uploadPreset: "tdiworkspace",
+  },
+};
+
+// Firebase Auth has no "username" concept — under the hood each person is
+// still a real email/password account, but the login screen only shows a
+// name + a short PIN. See README "Team accounts" for the exact values used
+// to create each of these in the Firebase console.
+const TEAM_LOGINS = [
+  { name: "Terence", email: "terence@modula.local" },
+  { name: "YY", email: "yy@modula.local" },
+  { name: "YS", email: "ys@modula.local" },
+  { name: "Jackie", email: "jackie@modula.local" },
+];
+// The PIN typed on screen is padded with this prefix before being sent to
+// Firebase, since Firebase requires 6+ character passwords and a bare
+// 4-digit PIN doesn't meet that. Purely a technical detail — the human-facing
+// PIN stays 4 digits.
+const PIN_PREFIX = "md-";
+
+const app = initializeApp(CONFIG.firebase);
+const auth = getAuth(app);
+const db = getFirestore(app);
+
+/* ---------- tiny helpers ---------- */
+const $ = (sel) => document.querySelector(sel);
+const esc = (s) => String(s ?? "").replace(/[&<>"']/g, (c) => ({ "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;" }[c]));
+const loginName = (email) => TEAM_LOGINS.find((p) => p.email === email)?.name || email;
+const byOrder = (a, b) => (a.order ?? 0) - (b.order ?? 0);
+
+function showToast(msg) {
+  const t = $("#toast");
+  t.textContent = msg;
+  t.classList.add("show");
+  clearTimeout(showToast._t);
+  showToast._t = setTimeout(() => t.classList.remove("show"), 2000);
+}
+
+function copyToClipboard(text, btn) {
+  navigator.clipboard.writeText(text).then(() => {
+    showToast("Copied to clipboard");
+    if (!btn) return;
+    const original = btn.innerHTML;
+    btn.classList.add("is-copied");
+    btn.innerHTML = "Copied ✓";
+    clearTimeout(btn._revertTimer);
+    btn._revertTimer = setTimeout(() => {
+      btn.classList.remove("is-copied");
+      btn.innerHTML = original;
+    }, 1400);
+  }).catch(() => showToast("Couldn't copy — copy manually"));
+}
+
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach((e) => { if (e.isIntersecting) { e.target.classList.add("in-view"); observer.unobserve(e.target); } });
+}, { threshold: 0.12 });
+function observeReveals(root = document) { root.querySelectorAll(".reveal:not(.in-view)").forEach((el) => observer.observe(el)); }
+
+/* ---------- state ---------- */
+const state = {
+  user: null,
+  isAdmin: false,
+  phases: [],
+  kpis: [],
+  discussionPoints: [],
+  team: [],
+  updates: [],
+  activeTab: "dashboard",
+  trackFilter: "all",
+};
+let unsubs = [];
+// Which tasks' action panels are manually expanded. Tracked outside `state`
+// (in JS, not from Firestore) so an unrelated re-render doesn't silently
+// collapse a panel the user just opened — a plain DOM class toggle would get
+// wiped on every re-render.
+const openTaskPanels = new Set();
+
+/* ---------- auth ---------- */
+onAuthStateChanged(auth, (user) => {
+  unsubs.forEach((u) => u());
+  unsubs = [];
+  state.user = user;
+
+  if (!user) {
+    $("#app").classList.add("hidden");
+    $("#deniedScreen").classList.add("hidden");
+    $("#loginScreen").classList.remove("hidden");
+    return;
+  }
+
+  const memberRef = doc(db, "roadmapMembers", user.uid);
+  const unsubMember = onSnapshot(memberRef, (snap) => {
+    if (!snap.exists()) {
+      state.isAdmin = false;
+      $("#loginScreen").classList.add("hidden");
+      $("#app").classList.add("hidden");
+      $("#deniedText").textContent = `${loginName(user.email)} is signed in but isn't on the roadmap team list yet. Ask an admin to add your account.`;
+      $("#deniedScreen").classList.remove("hidden");
+      return;
+    }
+    state.isAdmin = snap.data().isAdmin === true;
+    $("#adminBadge").classList.toggle("hidden", !state.isAdmin);
+    $("#loginScreen").classList.add("hidden");
+    $("#deniedScreen").classList.add("hidden");
+    $("#app").classList.remove("hidden");
+    renderAll();
+  }, () => {
+    $("#loginScreen").classList.add("hidden");
+    $("#app").classList.add("hidden");
+    $("#deniedText").textContent = `${loginName(user.email)} is signed in but isn't on the roadmap team list yet. Ask an admin to add your account.`;
+    $("#deniedScreen").classList.remove("hidden");
+  });
+  unsubs.push(unsubMember);
+
+  unsubs.push(onSnapshot(collection(db, "phases"), (s) => { state.phases = s.docs.map((d) => ({ id: d.id, ...d.data() })); renderAll(); }));
+  unsubs.push(onSnapshot(collection(db, "kpis"), (s) => { state.kpis = s.docs.map((d) => ({ id: d.id, ...d.data() })); renderAll(); }));
+  unsubs.push(onSnapshot(collection(db, "discussionPoints"), (s) => { state.discussionPoints = s.docs.map((d) => ({ id: d.id, ...d.data() })); renderAll(); }));
+  unsubs.push(onSnapshot(doc(db, "roadmapMeta", "team"), (s) => { state.team = s.exists() ? (s.data().members || []) : []; renderAll(); }));
+  unsubs.push(onSnapshot(collection(db, "updates"), (s) => {
+    state.updates = s.docs.map((d) => ({ id: d.id, ...d.data() })).sort((a, b) => (b.createdAt || 0) - (a.createdAt || 0));
+    renderAll();
+  }));
+});
+
+$("#loginUser").innerHTML = TEAM_LOGINS.map((p) => `<option value="${esc(p.email)}">${esc(p.name)}</option>`).join("");
+
+$("#loginForm").addEventListener("submit", async (e) => {
+  e.preventDefault();
+  const email = $("#loginUser").value;
+  const pin = $("#loginPin").value.trim();
+  const errBox = $("#loginError");
+  errBox.classList.add("hidden");
+  $("#loginSubmit").disabled = true;
+  $("#loginSubmit").textContent = "Signing in…";
+  try {
+    await signInWithEmailAndPassword(auth, email, PIN_PREFIX + pin);
+  } catch (err) {
+    errBox.textContent = "Couldn't sign in — check the PIN.";
+    errBox.classList.remove("hidden");
+  } finally {
+    $("#loginSubmit").disabled = false;
+    $("#loginSubmit").textContent = "Sign in";
+  }
+});
+$("#signOutBtn").addEventListener("click", () => signOut(auth));
+$("#deniedSignOut").addEventListener("click", () => signOut(auth));
+
+/* ---------- tabs ---------- */
+document.querySelectorAll(".tab").forEach((btn) => {
+  btn.addEventListener("click", () => setTab(btn.dataset.tab));
+});
+function setTab(tab) {
+  state.activeTab = tab;
+  document.querySelectorAll(".tab").forEach((b) => b.classList.toggle("active", b.dataset.tab === tab));
+  document.querySelectorAll(".tab-panel").forEach((p) => p.classList.toggle("active", p.id === `panel-${tab}`));
+  $("#tabs").classList.remove("open");
+  observeReveals();
+}
+$("#navToggle").addEventListener("click", () => $("#tabs").classList.toggle("open"));
+
+/* ---------- roadmap track filter pills (static markup, wired once) ---------- */
+document.querySelectorAll("[data-track-filter]").forEach((b) => {
+  b.addEventListener("click", () => { state.trackFilter = b.dataset.trackFilter; renderRoadmap(); });
+});
+
+/* ---------- data helpers ---------- */
+function allTasks() {
+  const out = [];
+  for (const phase of state.phases) {
+    for (const [taskId, task] of Object.entries(phase.tasks || {})) {
+      out.push({ ...task, taskId, phaseId: phase.id, phaseName: phase.name, track: phase.track });
+    }
+  }
+  return out;
+}
+function memberName(id) { return state.team.find((m) => m.id === id)?.name || "Unassigned"; }
+function taskUpdates(phaseId, taskId) { return state.updates.filter((u) => u.phaseId === phaseId && u.taskId === taskId); }
+// "My tasks" on the Dashboard is keyed off the person's real login identity
+// (matched by name against the team roster), not the "posting as" picker —
+// that picker is only for who authored a given update.
+function currentMemberId() {
+  const name = loginName(state.user?.email);
+  return state.team.find((m) => m.name === name)?.id || null;
+}
+
+/* ---------- render ---------- */
+// Every Firestore snapshot (from any of the 4 teammates) triggers a full
+// re-render, so without this, typing in a notes field or an admin's "add
+// phase" form would get wiped by someone else's unrelated update elsewhere
+// in the app. Capture whatever's focused before re-rendering and restore it
+// (value, selection, focus) after — keyed on the element's stable data-*
+// attribute or id, since re-render always regenerates fresh DOM nodes.
+function captureFocus() {
+  const el = document.activeElement;
+  if (!el || !["INPUT", "TEXTAREA", "SELECT"].includes(el.tagName)) return null;
+  const dataAttrs = [...el.attributes].filter((a) => a.name.startsWith("data-"));
+  let selector = null;
+  if (dataAttrs.length) selector = el.tagName.toLowerCase() + dataAttrs.map((a) => `[${a.name}="${CSS.escape(a.value)}"]`).join("");
+  else if (el.id) selector = `#${CSS.escape(el.id)}`;
+  if (!selector) return null;
+  return { selector, value: el.value, start: el.selectionStart, end: el.selectionEnd };
+}
+function restoreFocus(snap) {
+  if (!snap) return;
+  const el = document.querySelector(snap.selector);
+  if (!el) return;
+  el.value = snap.value;
+  el.focus();
+  if (typeof snap.start === "number" && el.setSelectionRange) {
+    try { el.setSelectionRange(snap.start, snap.end); } catch { /* not a text-selectable input */ }
+  }
+}
+
+function renderAll() {
+  const focusSnap = captureFocus();
+  renderPostingAs();
+  renderDashboard();
+  renderRoadmap();
+  renderGallery();
+  renderTeam();
+  document.querySelectorAll(".tab-panel").forEach((p) => p.classList.toggle("active", p.id === `panel-${state.activeTab}`));
+  document.querySelectorAll(".tab").forEach((b) => b.classList.toggle("active", b.dataset.tab === state.activeTab));
+  restoreFocus(focusSnap);
+  observeReveals();
+}
+
+function renderPostingAs() {
+  const sel = $("#postingAs");
+  const current = localStorage.getItem("roadmapPostingAs") || sel.value;
+  sel.innerHTML = state.team.map((m) => `<option value="${esc(m.id)}">${esc(m.name)}</option>`).join("");
+  if (current && state.team.some((m) => m.id === current)) sel.value = current;
+  sel.onchange = () => localStorage.setItem("roadmapPostingAs", sel.value);
+}
+
+/* ---------- Dashboard ---------- */
+function renderDashboard() {
+  const tasks = allTasks();
+  const doneTasks = tasks.filter((t) => t.done);
+  const inProgressTasks = tasks.filter((t) => !t.done && taskUpdates(t.phaseId, t.taskId).length > 0);
+  const todoCount = tasks.length - doneTasks.length - inProgressTasks.length;
+  $("#statPct").textContent = tasks.length ? `${Math.round((doneTasks.length / tasks.length) * 100)}%` : "0%";
+  $("#statProgress").textContent = inProgressTasks.length;
+  $("#statTodo").textContent = todoCount;
+  $("#statDiscuss").textContent = state.discussionPoints.filter((p) => !p.resolved).length;
+
+  const meId = currentMemberId();
+  const me = state.team.find((m) => m.id === meId);
+  $("#dashGreetName").textContent = me ? me.name : (loginName(state.user?.email) || "there");
+
+  if (!meId) {
+    $("#myTasksGrid").innerHTML = `<div class="card reveal"><p style="color:var(--muted); font-size:13px;">We couldn't match your login to a teammate on the roster — check the <em>Team</em> tab has a member named exactly "${esc(loginName(state.user?.email))}".</p></div>`;
+  } else {
+    const mine = tasks.filter((t) => t.ownerId === meId);
+    const mineInProgress = mine.filter((t) => !t.done && taskUpdates(t.phaseId, t.taskId).length > 0);
+    const mineTodo = mine.filter((t) => !t.done && taskUpdates(t.phaseId, t.taskId).length === 0);
+    const mineDone = mine.filter((t) => t.done).slice(-5).reverse();
+    const cols = [
+      { title: "In progress", items: mineInProgress, empty: "Nothing in progress" },
+      { title: "Not started", items: mineTodo, empty: "All caught up" },
+      { title: "Recently done", items: mineDone, empty: "Nothing marked done yet" },
+    ];
+    $("#myTasksGrid").innerHTML = cols.map((c) => `
+      <div class="card mytasks-col reveal">
+        <h4>${c.title}<span class="col-count">${c.items.length}</span></h4>
+        ${c.items.length ? c.items.map(miniTaskHtml).join("") : `<div class="mini-empty">${c.empty}</div>`}
+      </div>`).join("");
+  }
+
+  const tracks = [
+    { key: "vvision", label: "V Vision Collaboration", tagline: "AI-powered design team — the new partnership, phases 0–24 months" },
+    { key: "modula", label: "Modula Roadmap", tagline: "Showroom repositioning & partner programme — 24-month brand roadmap" },
+  ];
+  $("#trackSummaryRow").innerHTML = tracks.map((t) => {
+    const tt = tasks.filter((x) => x.track === t.key);
+    const td = tt.filter((x) => x.done).length;
+    const pct = tt.length ? Math.round((td / tt.length) * 100) : 0;
+    return `<button type="button" class="card track-card reveal" data-goto="${t.key}">
+      <h3>${esc(t.label)}</h3><p>${esc(t.tagline)}</p>
+      <div class="progress-track"><div class="progress-fill" style="width:${pct}%"></div></div>
+      <span class="meta">${td}/${tt.length} tasks done</span>
+    </button>`;
+  }).join("");
+  $("#trackSummaryRow").querySelectorAll("[data-goto]").forEach((b) => b.addEventListener("click", () => {
+    state.trackFilter = b.dataset.goto;
+    setTab("roadmap");
+    renderRoadmap();
+  }));
+
+  $("#workloadGrid").innerHTML = state.team.map((m) => {
+    const mine = tasks.filter((t) => t.ownerId === m.id);
+    const mineDoneCount = mine.filter((t) => t.done).length;
+    const outstanding = mine.filter((t) => !t.done);
+    return `<div class="card workload-card reveal">
+      <div class="workload-name"><span class="dot" style="background:${esc(m.color)}"></span>${esc(m.name)}</div>
+      <div class="workload-count">${mineDoneCount}/${mine.length} done</div>
+      <ul>
+        ${outstanding.slice(0, 5).map((t) => `<li>${esc(t.title)}</li>`).join("")}
+        ${outstanding.length === 0 && mine.length > 0 ? `<li class="all-clear">All caught up</li>` : ""}
+        ${mine.length === 0 ? `<li class="all-clear">Nothing assigned yet</li>` : ""}
+      </ul>
+    </div>`;
+  }).join("");
+}
+
+function miniTaskHtml(t) {
+  return `<div class="mini-task">
+    <input type="checkbox" class="task-check" data-task-done="${t.phaseId}|${t.taskId}" ${t.done ? "checked" : ""} />
+    <div class="mini-task-body">
+      <span class="mini-task-title">${esc(t.title)}</span>
+      <span class="mini-task-phase">${esc(t.phaseName)}</span>
+    </div>
+    <button type="button" class="link" data-open-update="${t.phaseId}|${t.taskId}|${encodeURIComponent(t.title)}">Update</button>
+  </div>`;
+}
+
+function kpiCardHtml(k) {
+  const pct = k.target ? Math.min(100, Math.round(((k.current || 0) / k.target) * 100)) : 0;
+  const copyText = `${k.label}: ${k.current || 0}/${k.target}${k.unit ? " " + k.unit : ""}`;
+  return `<div class="card kpi-card reveal">
+    <div class="kpi-top">
+      <div class="kpi-label">${esc(k.label)}</div>
+      <button type="button" class="copy-btn" data-copy="${esc(copyText)}" title="Copy target">${copyIcon()}Copy</button>
+    </div>
+    <div class="kpi-value">${k.current || 0}<small>/ ${k.target}${k.unit ? " " + esc(k.unit) : ""}</small></div>
+    <div class="progress-track" style="margin-top:8px;"><div class="progress-fill" style="width:${pct}%"></div></div>
+    <div class="kpi-steps">
+      <button type="button" class="step-btn" data-kpi-step="${k.id}" data-delta="-1">−</button>
+      <button type="button" class="step-btn" data-kpi-step="${k.id}" data-delta="1">+</button>
+      ${state.isAdmin ? `<button type="button" class="btn btn-danger btn-sm" style="margin-left:auto;" data-kpi-del="${k.id}">Delete</button>` : ""}
+    </div>
+    ${state.isAdmin ? `<div class="kpi-admin">
+      <input type="number" data-kpi-target="${k.id}" value="${k.target}" placeholder="target" />
+      <button type="button" class="btn btn-ghost btn-sm" data-kpi-save="${k.id}">Save target</button>
+    </div>` : ""}
+  </div>`;
+}
+function copyIcon() { return `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="8" y="8" width="12" height="12" rx="2"/><path d="M4 16V4h12"/></svg>`; }
+
+/* ---------- Roadmap (unified) ---------- */
+function discussionInnerHtml() {
+  const points = state.discussionPoints.sort(byOrder);
+  const open = points.filter((p) => !p.resolved).length;
+  return `
+    <div class="discussion-header">
+      <h3>Open discussion points</h3>
+      <span class="discussion-count">${open} open</span>
+    </div>
+    <p style="color:var(--muted); font-size:13px; margin-top:2px;">Items to align on with the partner before/while executing.</p>
+    <div class="discussion-list">
+      ${points.map((p) => `<div class="discussion-item ${p.resolved ? "resolved" : ""}">
+        <label class="discussion-check">
+          <input type="checkbox" data-discuss-toggle="${p.id}" ${p.resolved ? "checked" : ""} />
+          <span>${esc(p.text)}</span>
+        </label>
+        <input class="discussion-notes" data-discuss-notes="${p.id}" placeholder="Outcome / notes…" value="${esc(p.notes || "")}" />
+        ${state.isAdmin ? `<button type="button" class="btn btn-danger btn-sm" data-discuss-del="${p.id}">Delete</button>` : ""}
+      </div>`).join("")}
+    </div>
+    ${state.isAdmin ? `<div class="discussion-add">
+      <input type="text" id="newDiscussionText" placeholder="Add a discussion point…" />
+      <button type="button" class="btn btn-ghost btn-sm" id="addDiscussionBtn">Add</button>
+    </div>` : ""}
+  `;
+}
+
+function trackTagHtml(track) {
+  return track === "modula" ? `<span class="track-tag tag-modula">Modula</span>` : `<span class="track-tag tag-vvision">V Vision</span>`;
+}
+
+function taskCardHtml(phase, taskId, task) {
+  const owner = state.team.find((m) => m.id === task.ownerId);
+  const upds = taskUpdates(phase.id, taskId);
+  const inProgress = !task.done && upds.length > 0;
+  const key = `${phase.id}|${taskId}`;
+  const panelOpen = openTaskPanels.has(key);
+  const initial = owner ? (owner.name.trim()[0] || "?").toUpperCase() : "+";
+  return `<div class="task-card ${task.done ? "done" : ""}">
+    <input type="checkbox" class="task-check" data-task-done="${key}" ${task.done ? "checked" : ""} />
+    <div class="task-body">
+      <div class="task-top">
+        <span class="task-title">${esc(task.title)}</span>
+        ${task.done ? `<span class="badge badge-done">Done</span>` : inProgress ? `<span class="badge badge-progress">In progress</span>` : ""}
+      </div>
+      <div class="task-meta-row">
+        <span class="avatar ${owner ? "" : "avatar-empty"}" style="${owner ? `background:${esc(owner.color)}` : ""}" data-toggle-actions="${key}" title="${owner ? esc(owner.name) : "Unassigned — click to assign"}">${esc(initial)}</span>
+        ${upds.length ? `<span class="task-note-chip">${upds.length} update${upds.length > 1 ? "s" : ""}</span>` : ""}
+      </div>
+      <div class="task-actions-panel ${panelOpen ? "" : "hidden"}" data-task-actions="${key}">
+        <div class="row">
+          <select class="owner-select" data-task-owner="${key}">
+            <option value="">Unassigned</option>
+            ${state.team.map((m) => `<option value="${m.id}" ${m.id === task.ownerId ? "selected" : ""}>${esc(m.name)}</option>`).join("")}
+          </select>
+          <button type="button" class="link" style="color:var(--danger);" data-task-del="${key}">Remove task</button>
+        </div>
+        <textarea class="task-notes" data-task-notes="${key}" placeholder="Notes…" rows="2">${esc(task.notes || "")}</textarea>
+        ${upds.length ? `<div class="task-thumbs">${upds.slice(0, 6).map((u) => u.photoUrl ? `<img class="task-thumb" src="${esc(u.photoUrl)}" alt="" title="${esc(u.note || "")}" />` : "").join("")}</div>` : ""}
+      </div>
+    </div>
+    <div class="task-quick-actions">
+      <button type="button" class="link" data-open-update="${phase.id}|${taskId}|${encodeURIComponent(task.title)}">+ Update</button>
+      <button type="button" class="kebab-btn" data-toggle-actions="${key}" title="More">⋯</button>
+    </div>
+  </div>`;
+}
+
+function phaseCardHtml(phase) {
+  const tasks = Object.entries(phase.tasks || {}).sort((a, b) => (a[1].order || 0) - (b[1].order || 0));
+  const total = tasks.length;
+  const done = tasks.filter(([, t]) => t.done).length;
+  const pct = total ? Math.round((done / total) * 100) : 0;
+  const copyText = `${phase.name} (${phase.timeframe})${phase.summary ? ": " + phase.summary : ""}`;
+  return `<div class="card phase-card reveal">
+    <div class="phase-header">
+      <div class="phase-heading">
+        <div>
+          <div class="phase-tags">
+            ${trackTagHtml(phase.track)}
+            <span class="phase-timeframe">${esc(phase.timeframe)}</span>
+          </div>
+          <h3>${esc(phase.name)}</h3>
+          ${phase.summary ? `<p class="phase-summary">${esc(phase.summary)}</p>` : ""}
+        </div>
+      </div>
+      <div class="phase-progress">
+        <button type="button" class="copy-btn" data-copy="${esc(copyText)}" title="Copy milestone">${copyIcon()}Copy</button>
+        <div class="progress-track" style="width:150px;"><div class="progress-fill" style="width:${pct}%"></div></div>
+        <span>${done}/${total} done</span>
+        ${state.isAdmin ? `<button type="button" class="btn btn-danger btn-sm phase-admin-del" data-phase-del="${phase.id}">Delete phase</button>` : ""}
+      </div>
+    </div>
+    ${phase.kpis?.length ? `<div class="phase-kpis">${phase.kpis.map((k) => `<span class="phase-kpi-chip">${esc(k)}</span>`).join("")}</div>` : ""}
+    <div class="task-list">${tasks.map(([taskId, task]) => taskCardHtml(phase, taskId, task)).join("")}</div>
+    <div class="add-task-row">
+      <input type="text" placeholder="Add a task…" data-new-task="${phase.id}" />
+      <button type="button" class="btn btn-ghost btn-sm" data-add-task="${phase.id}">Add</button>
+    </div>
+  </div>`;
+}
+
+function renderRoadmap() {
+  const filter = state.trackFilter || "all";
+  document.querySelectorAll("[data-track-filter]").forEach((b) => b.classList.toggle("active", b.dataset.trackFilter === filter));
+
+  const showVvision = filter === "all" || filter === "vvision";
+  const showModula = filter === "all" || filter === "modula";
+
+  $("#discussionCard").classList.toggle("hidden", !showVvision);
+  if (showVvision) $("#discussionCard").innerHTML = discussionInnerHtml();
+
+  let html = "";
+  if (showVvision) {
+    const vv = state.phases.filter((p) => p.track === "vvision").sort(byOrder);
+    if (vv.length) html += `<div class="track-section-title">V Vision Collaboration</div>` + vv.map(phaseCardHtml).join("");
+  }
+  if (showModula) {
+    const mc = state.phases.filter((p) => p.track === "modula").sort(byOrder);
+    if (mc.length) html += `<div class="track-section-title">Modula Roadmap</div>` + mc.map(phaseCardHtml).join("");
+  }
+  $("#roadmapPhaseList").innerHTML = html;
+
+  $("#roadmapKpiSection").classList.toggle("hidden", !showModula);
+  const modulaKpis = state.kpis.filter((k) => k.track === "modula").sort(byOrder);
+  $("#roadmapKpiGrid").innerHTML = modulaKpis.map(kpiCardHtml).join("");
+
+  renderAdminForms();
+}
+
+function renderGallery() {
+  const items = state.updates.slice(0, 60).map((u) => `
+    <div class="frame reveal">
+      ${u.photoUrl ? `<img class="frame-photo" src="${esc(u.photoUrl)}" alt="${esc(u.note || "")}" />` : `<div class="frame-photo-empty">${esc(u.note || "Update logged")}</div>`}
+      <div class="frame-cap">
+        ${u.note ? `<p class="cap">"${esc(u.note)}"</p>` : ""}
+        <div class="frame-task">${esc(u.taskTitle || "")}</div>
+        <div class="frame-meta">${esc(u.authorName || "")} · ${timeAgo(u.createdAt)}</div>
+      </div>
+      ${(state.isAdmin || u.authorId === state.user?.uid) ? `<button type="button" class="frame-del" data-update-del="${u.id}">Remove</button>` : ""}
+    </div>`).join("");
+  const placeholders = items ? "" : Array.from({ length: 3 }).map(() => `
+    <div class="add-photo-frame reveal">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="5" width="18" height="14" rx="2"/><circle cx="9" cy="11" r="2"/><path d="M21 16l-5-5-4 4-3-3-6 6"/></svg>
+      <span>A photo spot, waiting</span>
+    </div>`).join("");
+  $("#galleryGrid").innerHTML = items + placeholders;
+}
+
+function renderTeam() {
+  $("#teamHint").textContent = state.isAdmin
+    ? "These are the people tasks can be assigned to and updates are posted as. Renaming here updates everywhere instantly."
+    : "These are the people tasks can be assigned to and updates are posted as. Ask an admin to edit the roster.";
+  $("#teamActions").classList.toggle("hidden", !state.isAdmin);
+  $("#teamGrid").innerHTML = state.team.map((m) => `
+    <div class="team-row">
+      <span class="dot" style="background:${esc(m.color)}"></span>
+      <input value="${esc(m.name)}" data-team-name="${m.id}" ${state.isAdmin ? "" : "disabled"} />
+      ${state.isAdmin ? `<button type="button" class="link" style="color:var(--danger);" data-team-del="${m.id}">Remove</button>` : ""}
+    </div>`).join("");
+}
+
+function renderAdminForms() {
+  $("#roadmapAdminAdd").innerHTML = state.isAdmin ? `
+    <div class="card admin-add-phase reveal">
+      <h3 style="font-size:16px;">Add a phase</h3>
+      <div class="grid2">
+        <input type="text" placeholder="Name" id="newPhaseName" />
+        <input type="text" placeholder="Timeframe (e.g. Month 1–2)" id="newPhaseTime" />
+      </div>
+      <select id="newPhaseTrack">
+        <option value="vvision">V Vision Collaboration</option>
+        <option value="modula">Modula Roadmap</option>
+      </select>
+      <textarea placeholder="Summary (optional)" id="newPhaseSummary"></textarea>
+      <button type="button" class="btn btn-primary btn-sm" id="addPhaseBtn">Add phase</button>
+    </div>` : "";
+  $("#roadmapAdminKpi").innerHTML = state.isAdmin ? `
+    <div class="card admin-add-phase reveal" style="margin-top:20px;">
+      <h3 style="font-size:16px;">Add a KPI target</h3>
+      <div class="grid2">
+        <input type="text" placeholder="Label" id="newKpiLabel" />
+        <input type="number" placeholder="Target number" id="newKpiTarget" />
+      </div>
+      <input type="text" placeholder="Unit (optional)" id="newKpiUnit" style="width:100%; padding:9px 12px; border:1px solid var(--line); border-radius:9px; margin-bottom:10px;" />
+      <button type="button" class="btn btn-primary btn-sm" data-add-kpi="modula">Add KPI</button>
+    </div>` : "";
+}
+
+function timeAgo(ms) {
+  if (!ms) return "just now";
+  const s = Math.round((Date.now() - ms) / 1000);
+  if (s < 60) return "just now";
+  if (s < 3600) return `${Math.round(s / 60)}m ago`;
+  if (s < 86400) return `${Math.round(s / 3600)}h ago`;
+  return `${Math.round(s / 86400)}d ago`;
+}
+
+/* ---------- event delegation ---------- */
+document.body.addEventListener("click", async (e) => {
+  const t = e.target.closest("[data-copy]");
+  if (t) return copyToClipboard(t.dataset.copy, t);
+
+  const del = e.target.closest("[data-task-del]");
+  if (del) {
+    const [phaseId, taskId] = del.dataset.taskDel.split("|");
+    if (confirm("Remove this task?")) await updateDoc(doc(db, "phases", phaseId), { [`tasks.${taskId}`]: deleteField() });
+    return;
+  }
+
+  const addTask = e.target.closest("[data-add-task]");
+  if (addTask) {
+    const phaseId = addTask.dataset.addTask;
+    const input = document.querySelector(`[data-new-task="${phaseId}"]`);
+    const title = input.value.trim();
+    if (!title) return;
+    const phase = state.phases.find((p) => p.id === phaseId);
+    const nextOrder = Object.keys(phase.tasks || {}).length;
+    const taskId = `t${Date.now()}`;
+    await updateDoc(doc(db, "phases", phaseId), { [`tasks.${taskId}`]: { title, done: false, ownerId: null, notes: "", order: nextOrder } });
+    input.value = "";
+    return;
+  }
+
+  const toggleActions = e.target.closest("[data-toggle-actions]");
+  if (toggleActions) {
+    const key = toggleActions.dataset.toggleActions;
+    const panel = document.querySelector(`[data-task-actions="${key}"]`);
+    const nowHidden = panel?.classList.toggle("hidden");
+    if (nowHidden) openTaskPanels.delete(key); else openTaskPanels.add(key);
+    return;
+  }
+
+  const openUpdate = e.target.closest("[data-open-update]");
+  if (openUpdate) {
+    const [phaseId, taskId, encTitle] = openUpdate.dataset.openUpdate.split("|");
+    openUpdateModal(phaseId, taskId, decodeURIComponent(encTitle));
+    return;
+  }
+
+  const kpiStep = e.target.closest("[data-kpi-step]");
+  if (kpiStep) {
+    const id = kpiStep.dataset.kpiStep;
+    const delta = Number(kpiStep.dataset.delta);
+    const kpi = state.kpis.find((k) => k.id === id);
+    await updateDoc(doc(db, "kpis", id), { current: Math.max(0, (kpi?.current || 0) + delta) });
+    return;
+  }
+  const kpiSave = e.target.closest("[data-kpi-save]");
+  if (kpiSave) {
+    const id = kpiSave.dataset.kpiSave;
+    const val = Number(document.querySelector(`[data-kpi-target="${id}"]`).value) || 0;
+    await updateDoc(doc(db, "kpis", id), { target: val });
+    showToast("Target updated");
+    return;
+  }
+  const kpiDel = e.target.closest("[data-kpi-del]");
+  if (kpiDel && confirm("Delete this KPI?")) { await deleteDoc(doc(db, "kpis", kpiDel.dataset.kpiDel)); return; }
+
+  const addKpi = e.target.closest("[data-add-kpi]");
+  if (addKpi) {
+    const track = addKpi.dataset.addKpi;
+    const label = document.getElementById("newKpiLabel").value.trim();
+    const target = Number(document.getElementById("newKpiTarget").value) || 0;
+    const unit = document.getElementById("newKpiUnit").value.trim();
+    if (!label) return;
+    const nextOrder = state.kpis.filter((k) => k.track === track).length;
+    await addDoc(collection(db, "kpis"), { track, order: nextOrder, label, target, current: 0, unit });
+    return;
+  }
+
+  const discussToggleBtn = e.target.closest("[data-discuss-del]");
+  if (discussToggleBtn && confirm("Delete this discussion point?")) { await deleteDoc(doc(db, "discussionPoints", discussToggleBtn.dataset.discussDel)); return; }
+
+  const addDiscuss = e.target.closest("#addDiscussionBtn");
+  if (addDiscuss) {
+    const input = document.getElementById("newDiscussionText");
+    const text = input.value.trim();
+    if (!text) return;
+    await addDoc(collection(db, "discussionPoints"), { text, resolved: false, notes: "", order: state.discussionPoints.length });
+    input.value = "";
+    return;
+  }
+
+  const addPhase = e.target.closest("#addPhaseBtn");
+  if (addPhase) {
+    const track = document.getElementById("newPhaseTrack").value;
+    const name = document.getElementById("newPhaseName").value.trim();
+    const timeframe = document.getElementById("newPhaseTime").value.trim();
+    const summary = document.getElementById("newPhaseSummary").value.trim();
+    if (!name || !timeframe) return showToast("Name and timeframe are required");
+    const nextOrder = state.phases.filter((p) => p.track === track).length;
+    await addDoc(collection(db, "phases"), { track, order: nextOrder, name, timeframe, summary, tasks: {}, kpis: [] });
+    document.getElementById("newPhaseName").value = "";
+    document.getElementById("newPhaseTime").value = "";
+    document.getElementById("newPhaseSummary").value = "";
+    return;
+  }
+  const delPhase = e.target.closest("[data-phase-del]");
+  if (delPhase && confirm("Delete this whole phase? This can't be undone.")) { await deleteDoc(doc(db, "phases", delPhase.dataset.phaseDel)); return; }
+
+  const teamDel = e.target.closest("[data-team-del]");
+  if (teamDel) { state.team = state.team.filter((m) => m.id !== teamDel.dataset.teamDel); renderTeam(); return; }
+  const addTeammate = e.target.closest("#addTeammateBtn");
+  if (addTeammate) {
+    const palette = ["#8A9A7E", "#BE8C5C", "#7A8CA0", "#B5533C", "#6E5A8C", "#5F8A6F"];
+    state.team = [...state.team, { id: `m${Date.now()}`, name: "New teammate", color: palette[state.team.length % palette.length] }];
+    renderTeam();
+    return;
+  }
+  const saveTeam = e.target.closest("#saveTeamBtn");
+  if (saveTeam) {
+    const names = document.querySelectorAll("[data-team-name]");
+    const updated = state.team.map((m) => {
+      const input = [...names].find((n) => n.dataset.teamName === m.id);
+      return { ...m, name: input ? input.value.trim() || m.name : m.name };
+    });
+    await setDoc(doc(db, "roadmapMeta", "team"), { members: updated });
+    showToast("Team saved");
+    return;
+  }
+
+  const updateDel = e.target.closest("[data-update-del]");
+  if (updateDel && confirm("Remove this update?")) { await deleteDoc(doc(db, "updates", updateDel.dataset.updateDel)); return; }
+});
+
+document.body.addEventListener("change", async (e) => {
+  const done = e.target.closest("[data-task-done]");
+  if (done) {
+    const [phaseId, taskId] = done.dataset.taskDone.split("|");
+    await updateDoc(doc(db, "phases", phaseId), { [`tasks.${taskId}.done`]: done.checked });
+    return;
+  }
+  const owner = e.target.closest("[data-task-owner]");
+  if (owner) {
+    const [phaseId, taskId] = owner.dataset.taskOwner.split("|");
+    await updateDoc(doc(db, "phases", phaseId), { [`tasks.${taskId}.ownerId`]: owner.value || null });
+    return;
+  }
+  const discussCheck = e.target.closest("[data-discuss-toggle]");
+  if (discussCheck) { await updateDoc(doc(db, "discussionPoints", discussCheck.dataset.discussToggle), { resolved: discussCheck.checked }); return; }
+});
+
+document.body.addEventListener("blur", async (e) => {
+  const notes = e.target.closest("[data-task-notes]");
+  if (notes) {
+    const [phaseId, taskId] = notes.dataset.taskNotes.split("|");
+    const phase = state.phases.find((p) => p.id === phaseId);
+    const existing = phase?.tasks?.[taskId]?.notes || "";
+    if (notes.value !== existing) await updateDoc(doc(db, "phases", phaseId), { [`tasks.${taskId}.notes`]: notes.value });
+    return;
+  }
+  const dNotes = e.target.closest("[data-discuss-notes]");
+  if (dNotes) {
+    const point = state.discussionPoints.find((p) => p.id === dNotes.dataset.discussNotes);
+    if (point && dNotes.value !== (point.notes || "")) await updateDoc(doc(db, "discussionPoints", point.id), { notes: dNotes.value });
+    return;
+  }
+}, true);
+
+/* ---------- update modal ---------- */
+let modalContext = null;
+function openUpdateModal(phaseId, taskId, title) {
+  modalContext = { phaseId, taskId, title };
+  $("#modalTaskLabel").textContent = title;
+  $("#updateNote").value = "";
+  $("#updatePhoto").value = "";
+  $("#markDone").checked = false;
+  $("#updateModal").classList.add("open");
+}
+function closeModal() { $("#updateModal").classList.remove("open"); modalContext = null; }
+$("#modalClose").addEventListener("click", closeModal);
+$("#modalCancel").addEventListener("click", closeModal);
+$("#updateModal").addEventListener("click", (e) => { if (e.target.id === "updateModal") closeModal(); });
+
+async function uploadPhoto(file) {
+  if (!CONFIG.cloudinary.cloudName) throw new Error("Cloudinary cloud name not configured yet");
+  const fd = new FormData();
+  fd.append("file", file);
+  fd.append("upload_preset", CONFIG.cloudinary.uploadPreset);
+  const res = await fetch(`https://api.cloudinary.com/v1_1/${CONFIG.cloudinary.cloudName}/image/upload`, { method: "POST", body: fd });
+  if (!res.ok) throw new Error("Upload failed");
+  const data = await res.json();
+  return data.secure_url;
+}
+
+$("#modalSubmit").addEventListener("click", async () => {
+  if (!modalContext || !state.user) return;
+  const note = $("#updateNote").value.trim();
+  const file = $("#updatePhoto").files[0];
+  const markDone = $("#markDone").checked;
+  const submitBtn = $("#modalSubmit");
+  submitBtn.disabled = true;
+  submitBtn.textContent = file ? "Uploading…" : "Posting…";
+  try {
+    let photoUrl = null;
+    if (file) photoUrl = await uploadPhoto(file);
+    const postingAsId = $("#postingAs").value;
+    await addDoc(collection(db, "updates"), {
+      phaseId: modalContext.phaseId,
+      taskId: modalContext.taskId,
+      taskTitle: modalContext.title,
+      authorId: state.user.uid,
+      authorName: memberName(postingAsId),
+      note,
+      photoUrl,
+      createdAt: Date.now(),
+    });
+    if (markDone) await updateDoc(doc(db, "phases", modalContext.phaseId), { [`tasks.${modalContext.taskId}.done`]: true });
+    showToast("Update posted");
+    closeModal();
+  } catch (err) {
+    showToast(err.message || "Couldn't post update");
+  } finally {
+    submitBtn.disabled = false;
+    submitBtn.textContent = "Post update";
+  }
+});
+
+/* ---------- init ---------- */
+setTab("dashboard");
+</script>
+</body>
+</html>

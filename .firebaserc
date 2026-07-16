@@ -1,1 +1,14 @@
-{"projects":{"default":"tdi-workspace-preview"}}
+{
+  "projects": {
+    "default": "tdiworkspace-26492"
+  },
+  "targets": {
+    "tdiworkspace-26492": {
+      "hosting": {
+        "roadmap": [
+          "modula-roadmap"
+        ]
+      }
+    }
+  }
+}
