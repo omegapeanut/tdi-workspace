@@ -7,6 +7,9 @@
       "hosting": {
         "roadmap": [
           "modula-roadmap"
+        ],
+        "hq": [
+          "modula-hq"
         ]
       }
     }

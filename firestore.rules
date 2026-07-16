@@ -99,5 +99,85 @@ service cloud.firestore {
         && (request.auth.uid == uid || isRoadmapMember());
       allow write: if false; // manage via Firebase console only
     }
+
+    // --- BusinessHQ (separate internal app, same Firebase project) ---
+    // The `hqUsers/{uid}` doc IS the allow-list — its existence grants access,
+    // and its `role` field (owner|admin|manager|employee) drives permissions,
+    // matching the spec's simple model: Owner/Admin manage everything, a
+    // Manager is scoped to their own department, an Employee to their own
+    // work. Accounts are still provisioned by an Owner/Admin (Firebase
+    // console for the Auth account + the in-app Settings page for the
+    // profile doc) — there is no self-signup.
+    function hqUser() {
+      return get(/databases/$(database)/documents/hqUsers/$(request.auth.uid)).data;
+    }
+    function isHqMember() {
+      return request.auth != null
+        && exists(/databases/$(database)/documents/hqUsers/$(request.auth.uid));
+    }
+    function isHqAdmin() {
+      return isHqMember() && hqUser().role in ['owner', 'admin'];
+    }
+    function isHqManagerOfDept(departmentId) {
+      return isHqMember() && hqUser().role == 'manager' && hqUser().departmentId == departmentId;
+    }
+
+    match /hqUsers/{uid} {
+      allow read: if isHqMember();
+      // Admins manage the roster; anyone may update their own availability.
+      allow create, delete: if isHqAdmin();
+      allow update: if isHqAdmin()
+        || (request.auth != null && request.auth.uid == uid && onlyChanged(['availability', 'updatedBy', 'updatedAt']));
+    }
+    match /hqDepartments/{id} {
+      allow read: if isHqMember();
+      allow write: if isHqAdmin();
+    }
+    match /hqGoals/{id} {
+      allow read: if isHqMember();
+      // Company-level goals are admin-only; department goals may also be
+      // managed by that department's manager.
+      allow create: if isHqAdmin() || isHqManagerOfDept(request.resource.data.departmentId);
+      allow update, delete: if isHqAdmin() || isHqManagerOfDept(resource.data.departmentId);
+    }
+    match /hqProjects/{id} {
+      allow read: if isHqMember();
+      // Day-to-day project work (status, membership, milestones/tasks inside
+      // it) is open to any signed-in teammate on purpose, same rationale as
+      // the roadmap tracker: small trusted team, optimize for collaboration
+      // over gatekeeping routine updates.
+      allow create, update: if isHqMember();
+      allow delete: if isHqAdmin();
+    }
+    match /hqMilestones/{id} {
+      allow read: if isHqMember();
+      allow write: if isHqMember();
+    }
+    match /hqTasks/{id} {
+      allow read: if isHqMember();
+      allow write: if isHqMember();
+    }
+    match /hqComments/{id} {
+      allow read: if isHqMember();
+      allow create: if isHqMember() && request.resource.data.authorId == request.auth.uid;
+      allow delete: if isHqAdmin() || (isHqMember() && resource.data.authorId == request.auth.uid);
+      allow update: if false; // append-only
+    }
+    match /hqActivity/{id} {
+      allow read: if isHqMember();
+      allow create: if isHqMember() && request.resource.data.actorId == request.auth.uid;
+      allow update, delete: if false; // immutable log
+    }
+    match /hqKpis/{id} {
+      allow read: if isHqMember();
+      // Assigning/retargeting KPIs is admin-only; any member may bump their
+      // own progress numbers day-to-day.
+      allow create, delete: if isHqAdmin();
+      allow update: if isHqAdmin() || (isHqMember() && onlyChanged(['current', 'history', 'updatedBy', 'updatedAt']));
+    }
+    match /hqAnnouncements/{id} {
+      allow read: if isHqMember();
+      allow write: if isHqAdmin();
+    }
   }
 }
