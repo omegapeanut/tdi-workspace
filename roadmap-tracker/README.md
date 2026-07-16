@@ -13,6 +13,22 @@ Pages export. It reuses the **same Firebase project** as the main site (so there
 Firestore/Auth to manage) through entirely separate collections and its own auth allow-list,
 so it stays fully private.
 
+## Layout
+
+Four sections, reached from the top nav:
+
+- **Dashboard** — the landing view. "My tasks" (matched to your login by name) grouped into
+  In progress / Not started / Recently done, plus overall stats, a per-track progress card for
+  each roadmap (click one to jump into Roadmap pre-filtered), and a "who's on what" workload
+  grid.
+- **Roadmap** — both roadmaps in one filterable view (`All` / `V Vision Collaboration` /
+  `Modula Roadmap` pills), instead of separate tabs. Task rows are compact cards: an avatar chip
+  shows the owner, and clicking the avatar or the "⋯" button reveals reassign/notes/remove
+  controls instead of showing them all the time. KPI targets live only here (previously they
+  were duplicated between Overview and the Modula tab).
+- **Gallery** — every photo/note update, in one wall.
+- **Team** — the roster tasks are assigned against; admins can rename or add/remove people here.
+
 ## Who can do what
 
 Everyone who's signed in and on the team list can check tasks off, add/remove tasks within a
@@ -115,16 +131,51 @@ iterating on a single static file.
 
 ## Deploying
 
-Live at **https://tdiworkspace-26492.web.app** — deployed to the project's default Firebase
-Hosting site, which the main site doesn't use (it deploys to GitHub Pages instead), so there's
-no conflict. No build step — `public/index.html` is served as-is.
+Live at **https://modula-roadmap.web.app** — a second, named Firebase Hosting site on the same
+project (`tdiworkspace-26492`), so the URL says "Modula" instead of the project ID. The main
+public site doesn't use Firebase Hosting at all (it deploys to GitHub Pages), so there's no
+conflict. No build step — `public/index.html` is served as-is. The `firebase.json` hosting block
+and `.firebaserc` `targets` mapping in the repo root already point at this site, so a plain
+`firebase deploy --only hosting:roadmap` from a fresh clone works with no extra setup.
 
 ```bash
 # from the repo root, once logged in (`firebase login`)
-firebase deploy --only hosting
+firebase deploy --only hosting:roadmap --project tdiworkspace-26492
 ```
 
 That's it — re-run this any time `public/index.html` changes to push an update.
+
+### Recommended: git-based deploys from Cloud Shell
+
+The fastest, least error-prone way to deploy updates (avoids ever hand-pasting file contents,
+which is how a corrupted API key made it into a previous deploy): clone this repo directly in
+Google Cloud Shell and deploy from the real checkout.
+
+**One-time setup, per Cloud Shell environment:**
+
+1. Open [Cloud Shell](https://console.cloud.google.com) and make sure it's on the
+   `tdiworkspace-26492` project (`gcloud config set project tdiworkspace-26492` if not).
+2. Generate a GitHub **Personal Access Token** (GitHub → Settings → Developer settings →
+   Personal access tokens → Fine-grained tokens → scope it to just this repo, Contents:
+   Read-only is enough for pulling).
+3. Clone the repo using the token as the password when prompted (or embed it in the URL —
+   either way, paste the token directly into Cloud Shell yourself; never relay a token through
+   a chat message, since long secret-shaped strings can get corrupted in transit):
+   ```bash
+   git clone https://github.com/omegapeanut/tdi-workspace.git
+   cd tdi-workspace
+   ```
+
+**Every time you want to push an update after that:**
+
+```bash
+cd ~/tdi-workspace
+git pull
+npx firebase-tools@latest deploy --only hosting:roadmap --project tdiworkspace-26492
+```
+
+If Cloud Shell ever asks you to log in to Firebase again, run `npx firebase-tools@latest login --no-localhost`
+once and follow the printed URL/code flow.
 
 The URL is not linked from anywhere public — treat it as a private link and share it only with
 the 4 teammates. There's no IP/password gate at the hosting layer (Firebase Hosting doesn't
@@ -160,7 +211,7 @@ testing aid, not part of the shipped product.
 
 - No email invites/self-signup — accounts are provisioned manually (4 people, low churn).
 - No self-service "forgot PIN" — resetting a PIN means an admin updates that person's password
-  in the Firebase console (Authentication → user row → Reset password), to the new `mc-XXXX`
+  in the Firebase console (Authentication → user row → Reset password), to the new `md-XXXX`
   value. A 4-digit PIN is meaningfully weaker than a real password; acceptable here since this
   is a private, unlisted URL for 4 trusted people and Firebase Auth throttles repeated failed
   sign-ins automatically — revisit if that stops being true (e.g. the link leaks, or the team
