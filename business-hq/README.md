@@ -92,7 +92,7 @@ firebase deploy --only firestore:rules
 ### 3. Create the Hosting site (one-time)
 
 ```bash
-firebase hosting:sites:create modula-hq --project tdiworkspace-26492
+firebase hosting:sites:create modula --project tdiworkspace-26492
 ```
 
 `.firebaserc`/`firebase.json` already map the `hq` hosting target to this site, so no
@@ -121,7 +121,7 @@ VITE_USE_EMULATOR=true npm run dev
 
 ## Deploying
 
-Live at **https://modula-hq.web.app**.
+Live at **https://modula.web.app**.
 
 ```bash
 # from the repo root, once logged in (`firebase login`)
