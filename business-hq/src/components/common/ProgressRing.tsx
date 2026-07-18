@@ -34,9 +34,9 @@ export function ProgressRing({
           style={{ transition: "stroke-dashoffset .6s cubic-bezier(.22,1,.36,1)" }}
         />
       </svg>
-      <div className="absolute flex flex-col items-center justify-center">
+      <div className="absolute inset-0 flex flex-col items-center justify-center px-2 text-center">
         <span className="font-display text-xl font-semibold leading-none text-ink">{label ?? `${Math.round(pct)}%`}</span>
-        {sublabel && <span className="mt-1 text-[10px] font-semibold uppercase tracking-wide text-muted">{sublabel}</span>}
+        {sublabel && <span className="mt-1 text-[9px] font-semibold uppercase leading-tight tracking-wide text-muted">{sublabel}</span>}
       </div>
     </div>
   );
