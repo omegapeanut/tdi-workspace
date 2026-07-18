@@ -1,0 +1,90 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Manrope", system-ui, -apple-system, sans-serif;
+  --font-display: "Cormorant Garamond", Georgia, serif;
+
+  --color-bg: #F7F3EC;
+  --color-surface: #FFFFFF;
+  --color-surface-soft: #F1EBE0;
+  --color-ink: #2B2620;
+  --color-ink-soft: #5B5347;
+  --color-muted: #8C7F6B;
+  --color-line: #E6DECE;
+
+  --color-sage-50: #F1F4EE;
+  --color-sage-100: #DEE6D8;
+  --color-sage-400: #8A9A7E;
+  --color-sage-500: #6E8562;
+  --color-sage-600: #5F7255;
+  --color-sage-700: #4A5A42;
+
+  --color-clay-50: #FBF2E8;
+  --color-clay-100: #F2DCC0;
+  --color-clay-400: #BE8C5C;
+  --color-clay-500: #A97B4C;
+  --color-clay-600: #9C6E3F;
+
+  --color-danger-50: #FBEDE9;
+  --color-danger-400: #C4523A;
+  --color-danger-500: #B5533C;
+
+  --color-warning-50: #FBF3E4;
+  --color-warning-400: #D6A445;
+  --color-warning-500: #C08F2E;
+
+  --color-info-50: #EDF2F5;
+  --color-info-400: #7A93A8;
+  --color-info-500: #5E7A90;
+
+  --color-violet-50: #F1EEF6;
+  --color-violet-400: #8B7CB0;
+  --color-violet-500: #73629B;
+
+  --shadow-soft: 0 1px 2px rgba(43, 38, 32, 0.05), 0 8px 24px -12px rgba(43, 38, 32, 0.12);
+  --shadow-lift: 0 4px 10px rgba(43, 38, 32, 0.06), 0 20px 40px -18px rgba(43, 38, 32, 0.22);
+  --radius-card: 16px;
+}
+
+html {
+  -webkit-font-smoothing: antialiased;
+}
+
+body {
+  background: var(--color-bg);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+}
+
+::selection {
+  background: rgba(138, 154, 126, 0.35);
+}
+
+/* Thin, unobtrusive scrollbars for panels */
+.scroll-thin::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+.scroll-thin::-webkit-scrollbar-thumb {
+  background: var(--color-line);
+  border-radius: 999px;
+}
+.scroll-thin::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+@keyframes fade-in {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: none; }
+}
+.animate-fade-in {
+  animation: fade-in 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@keyframes pop-in {
+  from { opacity: 0; transform: scale(0.97) translateY(4px); }
+  to { opacity: 1; transform: none; }
+}
+.animate-pop-in {
+  animation: pop-in 0.22s cubic-bezier(0.22, 1, 0.36, 1);
+}
